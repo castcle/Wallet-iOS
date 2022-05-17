@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="159" id="KGk-i7-Jjw" customClass="BalanceTableViewCell" customModule="Wallet" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="159"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="159"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="040-GC-1uj" customClass="GTProgressBar" customModule="GTProgressBar">
+                        <rect key="frame" x="20" y="10" width="280" height="15"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="rec-lF-bnS"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Balance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IRq-ic-0AJ">
+                        <rect key="frame" x="20" y="45" width="97" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.000 CAST" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rN2-6j-fgH">
+                        <rect key="frame" x="212.5" y="45" width="87.5" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.000 CAST" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kit-LN-gi2">
+                        <rect key="frame" x="212.5" y="83.5" width="87.5" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.000 CAST" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8rh-op-Meb">
+                        <rect key="frame" x="212.5" y="118" width="87.5" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Farm Balance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zKK-uV-hYx">
+                        <rect key="frame" x="45" y="84.5" width="87.5" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Avail. Balance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dkf-hl-R6j">
+                        <rect key="frame" x="45" y="116.5" width="89" height="22.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bJt-gr-Zo1">
+                        <rect key="frame" x="20" y="85.5" width="15" height="15"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="15" id="QqS-0n-Zua"/>
+                            <constraint firstAttribute="height" constant="15" id="cB2-rr-aWa"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ai-Mx-2K7">
+                        <rect key="frame" x="20" y="120.5" width="15" height="15"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="KbD-fC-EpP"/>
+                            <constraint firstAttribute="width" constant="15" id="LRK-8Z-ked"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Dkf-hl-R6j" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="45" id="5aC-us-0ON"/>
+                    <constraint firstItem="kit-LN-gi2" firstAttribute="centerY" secondItem="zKK-uV-hYx" secondAttribute="centerY" id="60r-cn-sXy"/>
+                    <constraint firstItem="bJt-gr-Zo1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="6tx-F7-VuV"/>
+                    <constraint firstAttribute="trailing" secondItem="8rh-op-Meb" secondAttribute="trailing" constant="20" id="A0S-Dc-nmO"/>
+                    <constraint firstAttribute="trailing" secondItem="040-GC-1uj" secondAttribute="trailing" constant="20" id="AMN-c1-mjc"/>
+                    <constraint firstItem="bJt-gr-Zo1" firstAttribute="centerY" secondItem="zKK-uV-hYx" secondAttribute="centerY" id="Bgb-CY-uEj"/>
+                    <constraint firstAttribute="trailing" secondItem="rN2-6j-fgH" secondAttribute="trailing" constant="20" id="CRk-VP-Q2x"/>
+                    <constraint firstItem="9ai-Mx-2K7" firstAttribute="centerY" secondItem="Dkf-hl-R6j" secondAttribute="centerY" id="Nsg-tQ-yn7"/>
+                    <constraint firstItem="8rh-op-Meb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Dkf-hl-R6j" secondAttribute="trailing" constant="10" id="STa-kP-MEy"/>
+                    <constraint firstItem="zKK-uV-hYx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="45" id="TLs-KV-sCw"/>
+                    <constraint firstItem="IRq-ic-0AJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Ut5-GT-wJw"/>
+                    <constraint firstItem="IRq-ic-0AJ" firstAttribute="top" secondItem="040-GC-1uj" secondAttribute="bottom" constant="20" id="VKX-0t-op0"/>
+                    <constraint firstItem="040-GC-1uj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="XRj-iw-Pac"/>
+                    <constraint firstItem="zKK-uV-hYx" firstAttribute="top" secondItem="IRq-ic-0AJ" secondAttribute="bottom" constant="20" id="b3K-Fv-PHY"/>
+                    <constraint firstItem="8rh-op-Meb" firstAttribute="centerY" secondItem="Dkf-hl-R6j" secondAttribute="centerY" id="bs1-VR-9FY"/>
+                    <constraint firstItem="Dkf-hl-R6j" firstAttribute="top" secondItem="zKK-uV-hYx" secondAttribute="bottom" constant="15" id="dJ8-rs-qO8"/>
+                    <constraint firstItem="rN2-6j-fgH" firstAttribute="centerY" secondItem="IRq-ic-0AJ" secondAttribute="centerY" id="h2T-oV-WPS"/>
+                    <constraint firstItem="kit-LN-gi2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="zKK-uV-hYx" secondAttribute="trailing" constant="10" id="hh2-MH-bG6"/>
+                    <constraint firstItem="rN2-6j-fgH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="IRq-ic-0AJ" secondAttribute="trailing" constant="10" id="iC5-Nm-N6n"/>
+                    <constraint firstItem="9ai-Mx-2K7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="iQt-Zp-mmW"/>
+                    <constraint firstAttribute="trailing" secondItem="kit-LN-gi2" secondAttribute="trailing" constant="20" id="ibi-d6-QpV"/>
+                    <constraint firstItem="040-GC-1uj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="mj7-Ax-34i"/>
+                    <constraint firstAttribute="bottom" secondItem="Dkf-hl-R6j" secondAttribute="bottom" constant="20" id="nE0-dS-Pxm"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="availBalance" destination="8rh-op-Meb" id="sAd-Gi-Ia7"/>
+                <outlet property="availBalanceTitle" destination="Dkf-hl-R6j" id="Afb-TA-jyP"/>
+                <outlet property="availView" destination="9ai-Mx-2K7" id="qbG-Ux-02b"/>
+                <outlet property="barView" destination="040-GC-1uj" id="NrS-KW-HYi"/>
+                <outlet property="farmBalance" destination="kit-LN-gi2" id="Ycu-Yn-h9B"/>
+                <outlet property="farmBalanceTitle" destination="zKK-uV-hYx" id="Z8t-fX-Frr"/>
+                <outlet property="farmView" destination="bJt-gr-Zo1" id="GzX-ys-OUG"/>
+                <outlet property="totalBalance" destination="rN2-6j-fgH" id="KP7-Cc-m8D"/>
+                <outlet property="totalBalanceTitle" destination="IRq-ic-0AJ" id="fpu-5r-s3F"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="138.95089285714286"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

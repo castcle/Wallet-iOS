@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="103" id="KGk-i7-Jjw" customClass="WalletNoDataTableViewCell" customModule="Wallet" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="103"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="103"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No history" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YL0-Jw-tNP">
+                        <rect key="frame" x="20" y="20" width="280" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Wallet Balance history will be displayed here" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BE6-KV-o9j">
+                        <rect key="frame" x="20" y="49.5" width="280" height="33.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="BE6-KV-o9j" secondAttribute="trailing" constant="20" id="6ew-Hy-8SW"/>
+                    <constraint firstItem="BE6-KV-o9j" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="PYl-lr-BN0"/>
+                    <constraint firstItem="BE6-KV-o9j" firstAttribute="top" secondItem="YL0-Jw-tNP" secondAttribute="bottom" constant="10" id="Qda-id-k1T"/>
+                    <constraint firstAttribute="trailing" secondItem="YL0-Jw-tNP" secondAttribute="trailing" constant="20" id="Tfa-yf-0YD"/>
+                    <constraint firstItem="YL0-Jw-tNP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="crg-bG-yJT"/>
+                    <constraint firstItem="YL0-Jw-tNP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="joU-kg-AuR"/>
+                    <constraint firstAttribute="bottom" secondItem="BE6-KV-o9j" secondAttribute="bottom" constant="20" id="la8-Uw-soq"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="descriptionLabel" destination="BE6-KV-o9j" id="64N-Bb-AvZ"/>
+                <outlet property="titleLabel" destination="YL0-Jw-tNP" id="IzM-xo-8s3"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="121.54017857142857"/>
+        </tableViewCell>
+    </objects>
+</document>

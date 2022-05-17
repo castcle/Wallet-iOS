@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="100" id="KGk-i7-Jjw" customClass="BannerTableViewCell" customModule="Wallet" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="airdrop-banner" translatesAutoresizingMaskIntoConstraints="NO" id="mth-OZ-TNd">
+                        <rect key="frame" x="20" y="15" width="280" height="70"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="mth-OZ-TNd" secondAttribute="height" multiplier="4:1" id="JV3-i2-4I4"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Airdrop" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7a-p5-C3t">
+                        <rect key="frame" x="226" y="40" width="54" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fCx-Wc-o1D">
+                        <rect key="frame" x="20" y="15" width="280" height="70"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <connections>
+                            <action selector="airdropAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="s3I-GL-RaQ"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="fCx-Wc-o1D" firstAttribute="top" secondItem="mth-OZ-TNd" secondAttribute="top" id="33w-S5-Chq"/>
+                    <constraint firstAttribute="trailing" secondItem="h7a-p5-C3t" secondAttribute="trailing" constant="40" id="DPo-k3-qaY"/>
+                    <constraint firstItem="fCx-Wc-o1D" firstAttribute="leading" secondItem="mth-OZ-TNd" secondAttribute="leading" id="MCh-O1-NHw"/>
+                    <constraint firstItem="mth-OZ-TNd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="U86-FX-ZgN"/>
+                    <constraint firstAttribute="bottom" secondItem="mth-OZ-TNd" secondAttribute="bottom" constant="15" id="aft-cx-rtp"/>
+                    <constraint firstItem="fCx-Wc-o1D" firstAttribute="trailing" secondItem="mth-OZ-TNd" secondAttribute="trailing" id="ga1-S2-lox"/>
+                    <constraint firstItem="h7a-p5-C3t" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="gnU-cm-5ce"/>
+                    <constraint firstAttribute="trailing" secondItem="mth-OZ-TNd" secondAttribute="trailing" constant="20" id="jkY-Fi-pmH"/>
+                    <constraint firstItem="mth-OZ-TNd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="kNC-Nq-TQ8"/>
+                    <constraint firstItem="fCx-Wc-o1D" firstAttribute="bottom" secondItem="mth-OZ-TNd" secondAttribute="bottom" id="sF0-2a-jMp"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="airdropLabel" destination="h7a-p5-C3t" id="F2N-qD-OPU"/>
+                <outlet property="bannerImage" destination="mth-OZ-TNd" id="cah-5M-oOy"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="119.53125"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="airdrop-banner" width="380.5" height="92"/>
+    </resources>
+</document>
