@@ -27,6 +27,7 @@
 
 import UIKit
 import Core
+import Component
 
 class BannerTableViewCell: UITableViewCell {
 
@@ -45,5 +46,6 @@ class BannerTableViewCell: UITableViewCell {
     }
 
     @IBAction func airdropAction(_ sender: Any) {
+        Utility.currentViewController().navigationController?.pushViewController(ComponentOpener.open(.internalWebView(URL(string: "\(Environment.airdropUrl)?token=\(UserManager.shared.accessToken)&src=mobile")!)), animated: true)
     }
 }
