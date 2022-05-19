@@ -36,6 +36,9 @@ class TransactionTableViewCell: UITableViewCell {
     @IBOutlet weak var sendLabel: UILabel!
     @IBOutlet weak var depositLabel: UILabel!
     @IBOutlet weak var buyLabel: UILabel!
+    @IBOutlet weak var sendIcon: UIImageView!
+    @IBOutlet weak var depositIcon: UIImageView!
+    @IBOutlet weak var buyIcon: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -48,9 +51,21 @@ class TransactionTableViewCell: UITableViewCell {
         self.sendView.custom(color: UIColor.Asset.lightBlue, cornerRadius: 5)
         self.depositView.custom(color: UIColor.Asset.lightBlue, cornerRadius: 5)
         self.buyView.custom(color: UIColor.Asset.lightBlue, cornerRadius: 5)
+        self.sendIcon.image = UIImage.init(icon: .castcle(.send), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.white)
+        self.depositIcon.image = UIImage.init(icon: .castcle(.deposit), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.white)
+        self.buyIcon.image = UIImage.init(icon: .castcle(.buy), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.white)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+
+    @IBAction func depositAction(_ sender: Any) {
+    }
+
+    @IBAction func sendAction(_ sender: Any) {
+    }
+
+    @IBAction func buyAction(_ sender: Any) {
     }
 }
