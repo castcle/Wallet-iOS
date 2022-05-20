@@ -30,8 +30,10 @@ import RealmSwift
 
 public final class SelectPageViewModel {
     var pages: [Page] = []
+    var selectPage: Page = Page()
 
-    public init() {
+    public init(selectPage: Page = Page()) {
+        self.selectPage = selectPage
         self.pages.append(Page().initCustom(id: UserManager.shared.id, displayName: UserManager.shared.displayName, castcleId: UserManager.shared.rawCastcleId, avatar: UserManager.shared.avatar, cover: UserManager.shared.cover, overview: UserManager.shared.overview, official: UserManager.shared.official))
         do {
             let realm = try Realm()

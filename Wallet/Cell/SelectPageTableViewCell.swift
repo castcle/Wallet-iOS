@@ -34,6 +34,7 @@ class SelectPageTableViewCell: UITableViewCell {
     @IBOutlet var displayNameLabel: UILabel!
     @IBOutlet var typeLabel: UILabel!
     @IBOutlet var avatarImage: UIImageView!
+    @IBOutlet var selectIcon: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -42,6 +43,7 @@ class SelectPageTableViewCell: UITableViewCell {
         self.displayNameLabel.textColor = UIColor.Asset.white
         self.typeLabel.font = UIFont.asset(.regular, fontSize: .small)
         self.typeLabel.textColor = UIColor.Asset.white
+        self.selectIcon.image = UIImage.init(icon: .castcle(.checkmark), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.lightBlue)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -30,7 +30,7 @@ import Core
 
 public enum WalletScene {
     case wallet
-    case selectPage
+    case selectPage(SelectPageViewModel)
 }
 
 public struct WalletOpener {
@@ -40,10 +40,11 @@ public struct WalletOpener {
             let storyboard: UIStoryboard = UIStoryboard(name: WalletNibVars.Storyboard.wallet, bundle: ConfigBundle.wallet)
             let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.wallet)
             return viewController
-        case .selectPage:
+        case .selectPage(let viewModel):
             let storyboard: UIStoryboard = UIStoryboard(name: WalletNibVars.Storyboard.wallet, bundle: ConfigBundle.wallet)
-            let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.selectPage)
-            return viewController
+            let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.selectPage) as? SelectPageViewController
+            viewController?.viewModel = viewModel
+            return viewController ?? SelectPageViewController()
         }
     }
 }

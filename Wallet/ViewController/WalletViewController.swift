@@ -29,6 +29,7 @@ import UIKit
 import Core
 import Defaults
 import FirebaseRemoteConfig
+import PanModal
 
 class WalletViewController: UIViewController {
 
@@ -133,10 +134,9 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension WalletViewController: DisplayNameTableViewCellDelegate {
     func didChoosePage(_ cell: DisplayNameTableViewCell) {
-        let viewController = WalletOpener.open(.selectPage) as? SelectPageViewController
+        let viewController = WalletOpener.open(.selectPage(SelectPageViewModel(selectPage: self.viewModel.page))) as? SelectPageViewController
         viewController?.delegate = self
-        let selectPageNani: UINavigationController = UINavigationController(rootViewController: viewController ?? SelectPageViewController())
-        self.present(selectPageNani, animated: true)
+        Utility.currentViewController().presentPanModal(viewController ?? SelectPageViewController())
     }
 }
 

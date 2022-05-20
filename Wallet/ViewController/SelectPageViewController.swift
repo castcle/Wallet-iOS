@@ -27,7 +27,9 @@
 
 import UIKit
 import Core
+import Networking
 import Defaults
+import PanModal
 
 protocol SelectPageViewControllerDelegate: AnyObject {
     func didChoosePage(_ view: SelectPageViewController, page: Page)
@@ -39,6 +41,7 @@ class SelectPageViewController: UIViewController {
 
     var delegate: SelectPageViewControllerDelegate?
     var viewModel = SelectPageViewModel()
+    var maxHeight = (UIScreen.main.bounds.height - 365)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,12 +51,7 @@ class SelectPageViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.setupNavBar()
         Defaults[.screenId] = ""
-    }
-
-    func setupNavBar() {
-        self.customNavigationBar(.primary, title: "Select Profile or Page")
     }
 
     func configureTableView() {
@@ -76,8 +74,14 @@ extension SelectPageViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.selectPage, for: indexPath as IndexPath) as? SelectPageTableViewCell
-        cell?.configCell(page: self.viewModel.pages[indexPath.section])
+        let page = self.viewModel.pages[indexPath.section]
+        cell?.configCell(page: page)
         cell?.backgroundColor = UIColor.Asset.darkGray
+        if page.castcleId == self.viewModel.selectPage.castcleId {
+            cell?.selectIcon.isHidden = false
+        } else {
+            cell?.selectIcon.isHidden = true
+        }
         return cell ?? SelectPageTableViewCell()
     }
 
@@ -94,5 +98,23 @@ extension SelectPageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.delegate?.didChoosePage(self, page: self.viewModel.pages[indexPath.section])
         self.dismiss(animated: true)
+    }
+}
+
+extension SelectPageViewController: PanModalPresentable {
+    public override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
+    public var panScrollable: UIScrollView? {
+        return nil
+    }
+
+    public var longFormHeight: PanModalHeight {
+        return .maxHeightWithTopInset(self.maxHeight)
+    }
+
+    public var anchorModalToLongForm: Bool {
+        return false
     }
 }
