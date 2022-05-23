@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B7117028283B836500FF985A /* MyQRCode.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7117027283B836500FF985A /* MyQRCode.xib */; };
+		B711702A283B846900FF985A /* MyQRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7117029283B846900FF985A /* MyQRCode.swift */; };
 		B72FDEB42833978A00748D13 /* Wallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B72FDEB32833978A00748D13 /* Wallet.storyboard */; };
 		B72FDEBB2833986100748D13 /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72FDEBA2833986100748D13 /* WalletViewController.swift */; };
 		B72FDEBD2833989C00748D13 /* WalletNibVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72FDEBC2833989C00748D13 /* WalletNibVars.swift */; };
@@ -43,6 +45,8 @@
 		8E1FF3686C48A8E2C8323EBD /* Pods_Wallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9657DB77AD00DE85F92BE87 /* Pods-Wallet.release (staging).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wallet.release (staging).xcconfig"; path = "Target Support Files/Pods-Wallet/Pods-Wallet.release (staging).xcconfig"; sourceTree = "<group>"; };
 		B64023A181614786618CCA62 /* Pods-Wallet.release (development).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wallet.release (development).xcconfig"; path = "Target Support Files/Pods-Wallet/Pods-Wallet.release (development).xcconfig"; sourceTree = "<group>"; };
+		B7117027283B836500FF985A /* MyQRCode.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyQRCode.xib; sourceTree = "<group>"; };
+		B7117029283B846900FF985A /* MyQRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyQRCode.swift; sourceTree = "<group>"; };
 		B72FDEB32833978A00748D13 /* Wallet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Wallet.storyboard; sourceTree = "<group>"; };
 		B72FDEBA2833986100748D13 /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		B72FDEBC2833989C00748D13 /* WalletNibVars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletNibVars.swift; sourceTree = "<group>"; };
@@ -111,6 +115,15 @@
 			);
 			name = Pods;
 			path = ../Pods;
+			sourceTree = "<group>";
+		};
+		B7117026283B831B00FF985A /* Image Rendering */ = {
+			isa = PBXGroup;
+			children = (
+				B7117027283B836500FF985A /* MyQRCode.xib */,
+				B7117029283B846900FF985A /* MyQRCode.swift */,
+			);
+			path = "Image Rendering";
 			sourceTree = "<group>";
 		};
 		B72FDEB52833981400748D13 /* Utilities */ = {
@@ -192,6 +205,7 @@
 			children = (
 				B7F0D317282B5C9900BA9764 /* Wallet.h */,
 				B72FDEB32833978A00748D13 /* Wallet.storyboard */,
+				B7117026283B831B00FF985A /* Image Rendering */,
 				B72FDEB92833984000748D13 /* Assets */,
 				B72FDEB82833983A00748D13 /* Cell */,
 				B72FDEB72833982F00748D13 /* ViewModel */,
@@ -279,6 +293,7 @@
 				B72FDEC828339F5700748D13 /* Assets.xcassets in Resources */,
 				B72FDEE22833BE6F00748D13 /* WalletHistoryHeaderTableViewCell.xib in Resources */,
 				B72FDED22833A48600748D13 /* BalanceTableViewCell.xib in Resources */,
+				B7117028283B836500FF985A /* MyQRCode.xib in Resources */,
 				B72FDEB42833978A00748D13 /* Wallet.storyboard in Resources */,
 				B72FDEDA2833B6E000748D13 /* BannerTableViewCell.xib in Resources */,
 			);
@@ -321,6 +336,7 @@
 				B72FDED52833B38200748D13 /* TransactionTableViewCell.swift in Sources */,
 				B72FDEBF283398B300748D13 /* WalletOpener.swift in Sources */,
 				B72FDEDD2833BA9300748D13 /* WalletNoDataTableViewCell.swift in Sources */,
+				B711702A283B846900FF985A /* MyQRCode.swift in Sources */,
 				B72FDEF42833C4F800748D13 /* SelectPageViewModel.swift in Sources */,
 				B72FDED12833A48600748D13 /* BalanceTableViewCell.swift in Sources */,
 				B72FDECE28339FC500748D13 /* WalletViewModel.swift in Sources */,
