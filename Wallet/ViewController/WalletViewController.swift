@@ -60,6 +60,15 @@ class WalletViewController: UIViewController {
 
     func setupNavBar() {
         self.customNavigationBar(.secondary, title: "Wallet")
+        var rightButton: [UIBarButtonItem] = []
+        let scanIcon = NavBarButtonType.airdrop.barButton
+        scanIcon.addTarget(self, action: #selector(self.scanAction), for: .touchUpInside)
+        rightButton.append(UIBarButtonItem(customView: scanIcon))
+        self.navigationItem.rightBarButtonItems = rightButton
+    }
+
+    @objc private func scanAction() {
+        self.navigationController?.pushViewController(WalletOpener.open(.scanQrCode), animated: true)
     }
 
     func configureTableView() {

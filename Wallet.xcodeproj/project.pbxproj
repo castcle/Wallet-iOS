@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B7117028283B836500FF985A /* MyQRCode.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7117027283B836500FF985A /* MyQRCode.xib */; };
 		B711702A283B846900FF985A /* MyQRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7117029283B846900FF985A /* MyQRCode.swift */; };
+		B71170572840AD7700FF985A /* ScanQrCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71170562840AD7700FF985A /* ScanQrCodeViewController.swift */; };
 		B72FDEB42833978A00748D13 /* Wallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B72FDEB32833978A00748D13 /* Wallet.storyboard */; };
 		B72FDEBB2833986100748D13 /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72FDEBA2833986100748D13 /* WalletViewController.swift */; };
 		B72FDEBD2833989C00748D13 /* WalletNibVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72FDEBC2833989C00748D13 /* WalletNibVars.swift */; };
@@ -47,6 +48,7 @@
 		B64023A181614786618CCA62 /* Pods-Wallet.release (development).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wallet.release (development).xcconfig"; path = "Target Support Files/Pods-Wallet/Pods-Wallet.release (development).xcconfig"; sourceTree = "<group>"; };
 		B7117027283B836500FF985A /* MyQRCode.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyQRCode.xib; sourceTree = "<group>"; };
 		B7117029283B846900FF985A /* MyQRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyQRCode.swift; sourceTree = "<group>"; };
+		B71170562840AD7700FF985A /* ScanQrCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQrCodeViewController.swift; sourceTree = "<group>"; };
 		B72FDEB32833978A00748D13 /* Wallet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Wallet.storyboard; sourceTree = "<group>"; };
 		B72FDEBA2833986100748D13 /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		B72FDEBC2833989C00748D13 /* WalletNibVars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletNibVars.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 			children = (
 				B72FDEBA2833986100748D13 /* WalletViewController.swift */,
 				B72FDEE72833C38500748D13 /* SelectPageViewController.swift */,
+				B71170562840AD7700FF985A /* ScanQrCodeViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 			files = (
 				B72FDEBD2833989C00748D13 /* WalletNibVars.swift in Sources */,
 				B72FDEF12833C47F00748D13 /* SelectPageTableViewCell.swift in Sources */,
+				B71170572840AD7700FF985A /* ScanQrCodeViewController.swift in Sources */,
 				B72FDED52833B38200748D13 /* TransactionTableViewCell.swift in Sources */,
 				B72FDEBF283398B300748D13 /* WalletOpener.swift in Sources */,
 				B72FDEDD2833BA9300748D13 /* WalletNoDataTableViewCell.swift in Sources */,

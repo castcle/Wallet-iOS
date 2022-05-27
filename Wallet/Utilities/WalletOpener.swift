@@ -31,6 +31,7 @@ import Core
 public enum WalletScene {
     case wallet
     case selectPage(SelectPageViewModel)
+    case scanQrCode
 }
 
 public struct WalletOpener {
@@ -45,6 +46,10 @@ public struct WalletOpener {
             let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.selectPage) as? SelectPageViewController
             viewController?.viewModel = viewModel
             return viewController ?? SelectPageViewController()
+        case .scanQrCode:
+            let storyboard: UIStoryboard = UIStoryboard(name: WalletNibVars.Storyboard.wallet, bundle: ConfigBundle.wallet)
+            let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.scanQrCode)
+            return viewController
         }
     }
 }

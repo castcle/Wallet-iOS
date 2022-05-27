@@ -30,6 +30,7 @@ public struct WalletNibVars {
     public struct ViewController {
         public static let wallet = "WalletViewController"
         public static let selectPage = "SelectPageViewController"
+        public static let scanQrCode = "ScanQrCodeViewController"
     }
 
     // MARK: - View

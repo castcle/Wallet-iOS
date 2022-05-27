@@ -71,6 +71,47 @@
             </objects>
             <point key="canvasLocation" x="765" y="83"/>
         </scene>
+        <!--Scan Qr Code View Controller-->
+        <scene sceneID="BRJ-cm-K1Z">
+            <objects>
+                <viewController storyboardIdentifier="ScanQrCodeViewController" id="sdg-UQ-ASb" customClass="ScanQrCodeViewController" customModule="Wallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nQV-9Y-22u">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aKB-9g-rKy">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="368"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XYV-mx-f8l">
+                                <rect key="frame" x="0.0" y="368" width="320" height="200"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="VpP-hV-VMV"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="2La-eS-nh1"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="aKB-9g-rKy" firstAttribute="top" secondItem="nQV-9Y-22u" secondAttribute="top" id="8tF-q9-yKl"/>
+                            <constraint firstAttribute="bottom" secondItem="XYV-mx-f8l" secondAttribute="bottom" id="Imi-9C-Krh"/>
+                            <constraint firstItem="XYV-mx-f8l" firstAttribute="leading" secondItem="nQV-9Y-22u" secondAttribute="leading" id="Jjn-ZP-sS9"/>
+                            <constraint firstItem="aKB-9g-rKy" firstAttribute="leading" secondItem="nQV-9Y-22u" secondAttribute="leading" id="aae-pQ-2n7"/>
+                            <constraint firstItem="XYV-mx-f8l" firstAttribute="top" secondItem="aKB-9g-rKy" secondAttribute="bottom" id="ce8-VE-eg5"/>
+                            <constraint firstAttribute="trailing" secondItem="XYV-mx-f8l" secondAttribute="trailing" id="gRH-RU-kR4"/>
+                            <constraint firstAttribute="trailing" secondItem="aKB-9g-rKy" secondAttribute="trailing" id="ruH-Yu-MAW"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="detailView" destination="XYV-mx-f8l" id="o9e-oc-qgO"/>
+                        <outlet property="scanView" destination="aKB-9g-rKy" id="Dfg-B0-Fhe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b0E-LC-6ZI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1451.25" y="81.338028169014081"/>
+        </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">
