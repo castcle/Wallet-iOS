@@ -10,6 +10,10 @@
 		B7117028283B836500FF985A /* MyQRCode.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7117027283B836500FF985A /* MyQRCode.xib */; };
 		B711702A283B846900FF985A /* MyQRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7117029283B846900FF985A /* MyQRCode.swift */; };
 		B71170572840AD7700FF985A /* ScanQrCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71170562840AD7700FF985A /* ScanQrCodeViewController.swift */; };
+		B728FE552844ACCC00CF03DA /* MyQrCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B728FE542844ACCC00CF03DA /* MyQrCodeViewController.swift */; };
+		B728FE572844AD9C00CF03DA /* CastcleQrCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B728FE562844AD9C00CF03DA /* CastcleQrCodeViewController.swift */; };
+		B728FE5C2844B17C00CF03DA /* CastcleQrCodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B728FE5A2844B17C00CF03DA /* CastcleQrCodeTableViewCell.swift */; };
+		B728FE5D2844B17D00CF03DA /* CastcleQrCodeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B728FE5B2844B17C00CF03DA /* CastcleQrCodeTableViewCell.xib */; };
 		B72FDEB42833978A00748D13 /* Wallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B72FDEB32833978A00748D13 /* Wallet.storyboard */; };
 		B72FDEBB2833986100748D13 /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72FDEBA2833986100748D13 /* WalletViewController.swift */; };
 		B72FDEBD2833989C00748D13 /* WalletNibVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72FDEBC2833989C00748D13 /* WalletNibVars.swift */; };
@@ -49,6 +53,10 @@
 		B7117027283B836500FF985A /* MyQRCode.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyQRCode.xib; sourceTree = "<group>"; };
 		B7117029283B846900FF985A /* MyQRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyQRCode.swift; sourceTree = "<group>"; };
 		B71170562840AD7700FF985A /* ScanQrCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQrCodeViewController.swift; sourceTree = "<group>"; };
+		B728FE542844ACCC00CF03DA /* MyQrCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyQrCodeViewController.swift; sourceTree = "<group>"; };
+		B728FE562844AD9C00CF03DA /* CastcleQrCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastcleQrCodeViewController.swift; sourceTree = "<group>"; };
+		B728FE5A2844B17C00CF03DA /* CastcleQrCodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastcleQrCodeTableViewCell.swift; sourceTree = "<group>"; };
+		B728FE5B2844B17C00CF03DA /* CastcleQrCodeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CastcleQrCodeTableViewCell.xib; sourceTree = "<group>"; };
 		B72FDEB32833978A00748D13 /* Wallet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Wallet.storyboard; sourceTree = "<group>"; };
 		B72FDEBA2833986100748D13 /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		B72FDEBC2833989C00748D13 /* WalletNibVars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletNibVars.swift; sourceTree = "<group>"; };
@@ -128,35 +136,7 @@
 			path = "Image Rendering";
 			sourceTree = "<group>";
 		};
-		B72FDEB52833981400748D13 /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				B72FDEBC2833989C00748D13 /* WalletNibVars.swift */,
-				B72FDEBE283398B300748D13 /* WalletOpener.swift */,
-			);
-			path = Utilities;
-			sourceTree = "<group>";
-		};
-		B72FDEB62833982000748D13 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				B72FDEBA2833986100748D13 /* WalletViewController.swift */,
-				B72FDEE72833C38500748D13 /* SelectPageViewController.swift */,
-				B71170562840AD7700FF985A /* ScanQrCodeViewController.swift */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		B72FDEB72833982F00748D13 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				B72FDECD28339FC500748D13 /* WalletViewModel.swift */,
-				B72FDEF32833C4F800748D13 /* SelectPageViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		B72FDEB82833983A00748D13 /* Cell */ = {
+		B728FE582844B14400CF03DA /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
 				B72FDEC928339F7A00748D13 /* DisplayNameTableViewCell.swift */,
@@ -173,6 +153,54 @@
 				B72FDEDC2833BA9300748D13 /* WalletNoDataTableViewCell.xib */,
 				B72FDEEF2833C47F00748D13 /* SelectPageTableViewCell.swift */,
 				B72FDEF02833C47F00748D13 /* SelectPageTableViewCell.xib */,
+			);
+			path = Wallet;
+			sourceTree = "<group>";
+		};
+		B728FE592844B15900CF03DA /* Qr Code */ = {
+			isa = PBXGroup;
+			children = (
+				B728FE5A2844B17C00CF03DA /* CastcleQrCodeTableViewCell.swift */,
+				B728FE5B2844B17C00CF03DA /* CastcleQrCodeTableViewCell.xib */,
+			);
+			path = "Qr Code";
+			sourceTree = "<group>";
+		};
+		B72FDEB52833981400748D13 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				B72FDEBC2833989C00748D13 /* WalletNibVars.swift */,
+				B72FDEBE283398B300748D13 /* WalletOpener.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		B72FDEB62833982000748D13 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B72FDEBA2833986100748D13 /* WalletViewController.swift */,
+				B72FDEE72833C38500748D13 /* SelectPageViewController.swift */,
+				B71170562840AD7700FF985A /* ScanQrCodeViewController.swift */,
+				B728FE542844ACCC00CF03DA /* MyQrCodeViewController.swift */,
+				B728FE562844AD9C00CF03DA /* CastcleQrCodeViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		B72FDEB72833982F00748D13 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B72FDECD28339FC500748D13 /* WalletViewModel.swift */,
+				B72FDEF32833C4F800748D13 /* SelectPageViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B72FDEB82833983A00748D13 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				B728FE592844B15900CF03DA /* Qr Code */,
+				B728FE582844B14400CF03DA /* Wallet */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -292,6 +320,7 @@
 				B72FDEF22833C47F00748D13 /* SelectPageTableViewCell.xib in Resources */,
 				B72FDEDE2833BA9300748D13 /* WalletNoDataTableViewCell.xib in Resources */,
 				B72FDED62833B38200748D13 /* TransactionTableViewCell.xib in Resources */,
+				B728FE5D2844B17D00CF03DA /* CastcleQrCodeTableViewCell.xib in Resources */,
 				B72FDECC28339F7A00748D13 /* DisplayNameTableViewCell.xib in Resources */,
 				B72FDEC828339F5700748D13 /* Assets.xcassets in Resources */,
 				B72FDEE22833BE6F00748D13 /* WalletHistoryHeaderTableViewCell.xib in Resources */,
@@ -336,14 +365,17 @@
 			files = (
 				B72FDEBD2833989C00748D13 /* WalletNibVars.swift in Sources */,
 				B72FDEF12833C47F00748D13 /* SelectPageTableViewCell.swift in Sources */,
+				B728FE5C2844B17C00CF03DA /* CastcleQrCodeTableViewCell.swift in Sources */,
 				B71170572840AD7700FF985A /* ScanQrCodeViewController.swift in Sources */,
 				B72FDED52833B38200748D13 /* TransactionTableViewCell.swift in Sources */,
 				B72FDEBF283398B300748D13 /* WalletOpener.swift in Sources */,
 				B72FDEDD2833BA9300748D13 /* WalletNoDataTableViewCell.swift in Sources */,
 				B711702A283B846900FF985A /* MyQRCode.swift in Sources */,
 				B72FDEF42833C4F800748D13 /* SelectPageViewModel.swift in Sources */,
+				B728FE572844AD9C00CF03DA /* CastcleQrCodeViewController.swift in Sources */,
 				B72FDED12833A48600748D13 /* BalanceTableViewCell.swift in Sources */,
 				B72FDECE28339FC500748D13 /* WalletViewModel.swift in Sources */,
+				B728FE552844ACCC00CF03DA /* MyQrCodeViewController.swift in Sources */,
 				B72FDEE92833C38500748D13 /* SelectPageViewController.swift in Sources */,
 				B72FDEE12833BE6F00748D13 /* WalletHistoryHeaderTableViewCell.swift in Sources */,
 				B72FDED92833B6E000748D13 /* BannerTableViewCell.swift in Sources */,

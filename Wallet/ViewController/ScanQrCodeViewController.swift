@@ -27,18 +27,46 @@
 
 import UIKit
 import AVFoundation
+import Core
+import Component
 import Defaults
 
 class ScanQrCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
 
     @IBOutlet weak var scanView: UIView!
     @IBOutlet weak var detailView: UIView!
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var myQrButton: UIButton!
+    @IBOutlet weak var detailTitleLabel: UILabel!
+    @IBOutlet weak var dataLabel: UILabel!
+    @IBOutlet weak var copyButton: UIButton!
+    @IBOutlet weak var dataView: UIView!
 
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.titleLabel.font = UIFont.asset(.regular, fontSize: .head4)
+        self.titleLabel.textColor = UIColor.Asset.white
+        self.detailTitleLabel.font = UIFont.asset(.regular, fontSize: .overline)
+        self.detailTitleLabel.textColor = UIColor.Asset.white
+        self.dataLabel.font = UIFont.asset(.regular, fontSize: .overline)
+        self.dataLabel.textColor = UIColor.Asset.white
+        self.backButton.setImage(UIImage.init(icon: .castcle(.back), size: CGSize(width: 20, height: 20), textColor: UIColor.Asset.white).withRenderingMode(.alwaysOriginal), for: .normal)
+        self.copyButton.setImage(UIImage.init(icon: .castcle(.coin), size: CGSize(width: 20, height: 20), textColor: UIColor.Asset.white).withRenderingMode(.alwaysOriginal), for: .normal)
+
+        self.myQrButton.titleLabel?.font = UIFont.asset(.regular, fontSize: .overline)
+        self.myQrButton.setIcon(prefixText: "", prefixTextColor: UIColor.Asset.white, icon: .castcle(.airdropBox), iconColor: UIColor.Asset.white, postfixText: "  My QR Code", postfixTextColor: UIColor.Asset.white, forState: .normal, textSize: 14, iconSize: 14)
+        self.myQrButton.capsule(color: UIColor.Asset.lightBlue, borderWidth: 1, borderColor: UIColor.Asset.lightBlue)
+        self.dataView.custom(color: UIColor.Asset.darkGray, cornerRadius: 5)
+        self.dataView.isHidden = true
+        self.detailView.backgroundColor = UIColor.Asset.darkGraphiteBlue
+        self.setupScanCamera()
+    }
+
+    private func setupScanCamera() {
         self.captureSession = AVCaptureSession()
         guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
         let videoInput: AVCaptureDeviceInput
@@ -64,7 +92,6 @@ class ScanQrCodeViewController: UIViewController, AVCaptureMetadataOutputObjects
             self.failed()
             return
         }
-
         self.previewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
         self.previewLayer.frame = view.layer.bounds
         self.previewLayer.videoGravity = .resizeAspectFill
@@ -102,16 +129,34 @@ class ScanQrCodeViewController: UIViewController, AVCaptureMetadataOutputObjects
             guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
             guard let stringValue = readableObject.stringValue else { return }
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-            found(code: stringValue)
+            self.foundData(code: stringValue)
         }
-        self.dismiss(animated: true)
     }
 
-    func found(code: String) {
-        print(code)
+    private func foundData(code: String) {
+        if code.isUrl, let url = URL(string: code) {
+            self.navigationController?.popViewController(animated: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                Utility.currentViewController().navigationController?.pushViewController(ComponentOpener.open(.internalWebView(url)), animated: true)
+            }
+        } else {
+            self.dataLabel.text = code
+            self.dataView.isHidden = false
+        }
     }
 
-    override var prefersStatusBarHidden: Bool {
-        return true
+    @IBAction func backAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+
+    @IBAction func myQrAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.myQrCode), animated: true)
+        }
+    }
+
+    @IBAction func copyAction(_ sender: Any) {
+        UIPasteboard.general.string = self.dataLabel.text
     }
 }
