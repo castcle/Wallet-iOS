@@ -19,17 +19,17 @@
 //  Thailand 10160, or visit www.castcle.com if you need additional information
 //  or have any questions.
 //
-//  CastcleQrCodeTableViewCell.swift
+//  OtherChainTableViewCell.swift
 //  Wallet
 //
-//  Created by Castcle Co., Ltd. on 30/5/2565 BE.
+//  Created by Castcle Co., Ltd. on 31/5/2565 BE.
 //
 
 import UIKit
 import Core
 import JGProgressHUD
 
-class CastcleQrCodeTableViewCell: UITableViewCell {
+class OtherChainTableViewCell: UITableViewCell {
 
     @IBOutlet weak var qrCodeImage: UIImageView!
     @IBOutlet weak var shareView: UIView!
@@ -38,12 +38,17 @@ class CastcleQrCodeTableViewCell: UITableViewCell {
     @IBOutlet weak var saveLabel: UILabel!
     @IBOutlet weak var shareIcon: UIImageView!
     @IBOutlet weak var saveIcon: UIImageView!
-    @IBOutlet weak var castcleIdTitleLabel: UILabel!
-    @IBOutlet weak var castcleIdLabel: UILabel!
+    @IBOutlet weak var addressTitleLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var copyButton: UIButton!
-    @IBOutlet weak var castcleIdView: UIView!
+    @IBOutlet weak var networkTitleLabel: UILabel!
+    @IBOutlet weak var networkLabel: UILabel!
+    @IBOutlet weak var changeNetworkButton: UIButton!
+    @IBOutlet weak var addressView: UIView!
 
     private let hud = JGProgressHUD()
+    private let address: String = "ajshkjsdgUUSUjsdfjajsgaSdasdf8hdfghaer0asie9rhgwerhgaefbkb8fu4t8IAihsdbviohisdgaknlOAUSifisvnkcvoo0"
+    private let memo: String = "1234567890"
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -55,14 +60,19 @@ class CastcleQrCodeTableViewCell: UITableViewCell {
         self.saveView.custom(color: UIColor.Asset.lightBlue, cornerRadius: 5)
         self.shareIcon.image = UIImage.init(icon: .castcle(.remind), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.white)
         self.saveIcon.image = UIImage.init(icon: .castcle(.remind), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.white)
-        self.castcleIdTitleLabel.font = UIFont.asset(.bold, fontSize: .body)
-        self.castcleIdTitleLabel.textColor = UIColor.Asset.white
-        self.castcleIdLabel.font = UIFont.asset(.regular, fontSize: .overline)
-        self.castcleIdLabel.textColor = UIColor.Asset.white
+        self.networkTitleLabel.font = UIFont.asset(.bold, fontSize: .body)
+        self.networkTitleLabel.textColor = UIColor.Asset.white
+        self.networkLabel.font = UIFont.asset(.bold, fontSize: .body)
+        self.networkLabel.textColor = UIColor.Asset.lightBlue
+        self.addressTitleLabel.font = UIFont.asset(.bold, fontSize: .body)
+        self.addressTitleLabel.textColor = UIColor.Asset.white
+        self.addressLabel.font = UIFont.asset(.regular, fontSize: .overline)
+        self.addressLabel.textColor = UIColor.Asset.white
         self.copyButton.setImage(UIImage.init(icon: .castcle(.coin), size: CGSize(width: 20, height: 20), textColor: UIColor.Asset.white).withRenderingMode(.alwaysOriginal), for: .normal)
-        self.castcleIdView.custom(color: UIColor.Asset.darkGray, cornerRadius: 5)
-        self.castcleIdLabel.text = UserManager.shared.castcleId
-        if let myQrCodeImage = Utility.generateQRCode(from: UserManager.shared.rawCastcleId) {
+        self.changeNetworkButton.setImage(UIImage.init(icon: .castcle(.remind), size: CGSize(width: 20, height: 20), textColor: UIColor.Asset.white).withRenderingMode(.alwaysOriginal), for: .normal)
+        self.addressView.custom(color: UIColor.Asset.darkGray, cornerRadius: 5)
+        self.addressLabel.text = self.address
+        if let myQrCodeImage = Utility.generateQRCode(from: self.address) {
             self.qrCodeImage.image = myQrCodeImage
         }
     }
@@ -71,23 +81,26 @@ class CastcleQrCodeTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
+    @IBAction func changeNetworkAction(_ sender: Any) {
+    }
+
     @IBAction func copyAction(_ sender: Any) {
-        UIPasteboard.general.string = UserManager.shared.rawCastcleId
+        UIPasteboard.general.string = self.address
         UINotificationFeedbackGenerator().notificationOccurred(.success)
     }
 
     @IBAction func shareAction(_ sender: Any) {
-        if let myQrCodeImage = Utility.generateQRCode(from: UserManager.shared.rawCastcleId) {
-            let myQRCode: MyQRCode = MyQRCode(castcleId: UserManager.shared.castcleId, qrCodeImage: myQrCodeImage)
-            let activityView = UIActivityViewController(activityItems: [myQRCode.asImage()], applicationActivities: [])
+        if let addressQrCodeImage = Utility.generateQRCode(from: self.address), let memoQrCodeImage = Utility.generateQRCode(from: self.memo) {
+            let otherChainQRCode: OtherChainQRCode = OtherChainQRCode(casecleId: UserManager.shared.castcleId, address: self.address, addressQrCode: addressQrCodeImage, memo: self.memo, memoQrCode: memoQrCodeImage)
+            let activityView = UIActivityViewController(activityItems: [otherChainQRCode.asImage()], applicationActivities: [])
             Utility.currentViewController().present(activityView, animated: true)
         }
     }
 
     @IBAction func saveAction(_ sender: Any) {
-        if let myQrCodeImage = Utility.generateQRCode(from: UserManager.shared.rawCastcleId) {
-            let myQRCode: MyQRCode = MyQRCode(castcleId: UserManager.shared.castcleId, qrCodeImage: myQrCodeImage)
-            UIImageWriteToSavedPhotosAlbum(myQRCode.asImage(), self, nil, nil)
+        if let addressQrCodeImage = Utility.generateQRCode(from: self.address), let memoQrCodeImage = Utility.generateQRCode(from: self.memo) {
+            let otherChainQRCode: OtherChainQRCode = OtherChainQRCode(casecleId: UserManager.shared.castcleId, address: self.address, addressQrCode: addressQrCodeImage, memo: self.memo, memoQrCode: memoQrCodeImage)
+            UIImageWriteToSavedPhotosAlbum(otherChainQRCode.asImage(), self, nil, nil)
             UINotificationFeedbackGenerator().notificationOccurred(.success)
             self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
             self.hud.show(in: Utility.currentViewController().view)

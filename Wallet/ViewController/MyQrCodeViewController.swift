@@ -75,11 +75,11 @@ class MyQrCodeViewController: ButtonBarPagerTabStripViewController {
         vc1?.pageTitle = "Castcle ID"
         let castcleQrView = vc1 ?? CastcleQrCodeViewController()
 
-//        let vc2 = ComponentOpener.open(.userReactionList(UserReactionListViewModel(content: self.content, type: .recast))) as? UserReactionListViewController
-//        vc2?.pageIndex = 1
-//        vc2?.pageTitle = "Recasts"
-//        let recastViewController = vc2 ?? UserReactionListViewController()
+        let vc2 = WalletOpener.open(.otherChain) as? OtherChainViewController
+        vc2?.pageIndex = 1
+        vc2?.pageTitle = "Other Chain"
+        let otherChainView = vc2 ?? OtherChainViewController()
 
-        return [castcleQrView]
+        return [castcleQrView, otherChainView]
     }
 }

@@ -34,6 +34,7 @@ public enum WalletScene {
     case scanQrCode
     case myQrCode
     case castcleQrCode
+    case otherChain
 }
 
 public struct WalletOpener {
@@ -59,6 +60,10 @@ public struct WalletOpener {
         case .castcleQrCode:
             let storyboard: UIStoryboard = UIStoryboard(name: WalletNibVars.Storyboard.wallet, bundle: ConfigBundle.wallet)
             let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.castcleQrCode)
+            return viewController
+        case .otherChain:
+            let storyboard: UIStoryboard = UIStoryboard(name: WalletNibVars.Storyboard.wallet, bundle: ConfigBundle.wallet)
+            let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.otherChain)
             return viewController
         }
     }

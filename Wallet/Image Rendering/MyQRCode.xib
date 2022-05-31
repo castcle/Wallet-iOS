@@ -55,7 +55,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bY6-4v-RDl">
-                    <rect key="frame" x="222.5" y="126.5" width="156.5" height="53"/>
+                    <rect key="frame" x="222.5" y="129" width="156.5" height="48"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Castcle ID" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p1w-Qy-uNR">
                             <rect key="frame" x="0.0" y="0.0" width="156.5" height="21.5"/>
@@ -63,8 +63,8 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@CastcleID" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XtV-eA-UDz">
-                            <rect key="frame" x="0.0" y="31.5" width="156.5" height="21.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@CastcleID" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XtV-eA-UDz">
+                            <rect key="frame" x="0.0" y="26.5" width="156.5" height="21.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -72,7 +72,7 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="XtV-eA-UDz" firstAttribute="top" secondItem="p1w-Qy-uNR" secondAttribute="bottom" constant="10" id="5f2-am-4V9"/>
+                        <constraint firstItem="XtV-eA-UDz" firstAttribute="top" secondItem="p1w-Qy-uNR" secondAttribute="bottom" constant="5" id="5f2-am-4V9"/>
                         <constraint firstAttribute="trailing" secondItem="XtV-eA-UDz" secondAttribute="trailing" id="ALd-fo-b7Z"/>
                         <constraint firstItem="XtV-eA-UDz" firstAttribute="leading" secondItem="bY6-4v-RDl" secondAttribute="leading" id="EL0-lb-74b"/>
                         <constraint firstItem="p1w-Qy-uNR" firstAttribute="leading" secondItem="bY6-4v-RDl" secondAttribute="leading" id="FjQ-9D-0Px"/>

@@ -38,14 +38,21 @@ class MyQRCode: UIView {
     @IBOutlet weak var qrCodeImage: UIImageView!
     @IBOutlet weak var qrCodeView: UIView!
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    private var qrCode: UIImage = UIImage()
+    private var castcleId: String = ""
+
+    required init(castcleId: String, qrCodeImage: UIImage) {
+        self.castcleId = castcleId
+        self.qrCode = qrCodeImage
+        super.init(frame: CGRect(x: 0, y: 0, width: 414, height: 264))
         self.commonInit()
+        self.layoutIfNeeded()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.commonInit()
+        self.layoutIfNeeded()
     }
 
     private func commonInit() {
@@ -61,6 +68,8 @@ class MyQRCode: UIView {
         self.castcleIdLabel.font = UIFont.asset(.regular, fontSize: .head4)
         self.castcleIdLabel.textColor = UIColor.Asset.lightBlue
         self.castcleImage.image = UIImage.init(icon: .castcle(.logo), size: CGSize(width: 30, height: 30), textColor: UIColor.Asset.white)
+        self.qrCodeImage.image = self.qrCode
+        self.castcleIdLabel.text = self.castcleId
         self.contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
 }
