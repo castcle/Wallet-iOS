@@ -52,6 +52,8 @@ class MyQrCodeViewController: ButtonBarPagerTabStripViewController {
         }
     }
 
+    var qrCodeType: QrCodeType = .wallet
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.layoutIfNeeded()
@@ -65,7 +67,7 @@ class MyQrCodeViewController: ButtonBarPagerTabStripViewController {
     }
 
     func setupNavBar() {
-        self.customNavigationBar(.secondary, title: "My QR Code")
+        self.customNavigationBar(.secondary, title: self.qrCodeType.display)
     }
 
     // MARK: - PagerTabStripDataSource

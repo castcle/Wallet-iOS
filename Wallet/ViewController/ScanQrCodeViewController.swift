@@ -100,9 +100,7 @@ class ScanQrCodeViewController: UIViewController, AVCaptureMetadataOutputObjects
     }
 
     func failed() {
-        let alert = UIAlertController(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
+        ApiHelper.displayMessage(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.")
         self.captureSession = nil
     }
 
@@ -152,7 +150,7 @@ class ScanQrCodeViewController: UIViewController, AVCaptureMetadataOutputObjects
     @IBAction func myQrAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.myQrCode), animated: true)
+            Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.myQrCode(.wallet)), animated: true)
         }
     }
 
