@@ -37,6 +37,9 @@
 		B72FDEF12833C47F00748D13 /* SelectPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72FDEEF2833C47F00748D13 /* SelectPageTableViewCell.swift */; };
 		B72FDEF22833C47F00748D13 /* SelectPageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B72FDEF02833C47F00748D13 /* SelectPageTableViewCell.xib */; };
 		B72FDEF42833C4F800748D13 /* SelectPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72FDEF32833C4F800748D13 /* SelectPageViewModel.swift */; };
+		B7476E7F2847681C00331614 /* SelectNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7476E7E2847681C00331614 /* SelectNetworkViewController.swift */; };
+		B7476E8228476A7C00331614 /* SelectNetworkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7476E8028476A7C00331614 /* SelectNetworkTableViewCell.swift */; };
+		B7476E8328476A7C00331614 /* SelectNetworkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7476E8128476A7C00331614 /* SelectNetworkTableViewCell.xib */; };
 		B767A7622845CD0200E4381F /* OtherChainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B767A7612845CD0200E4381F /* OtherChainViewController.swift */; };
 		B767A7652845CE2C00E4381F /* OtherChainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B767A7632845CE2C00E4381F /* OtherChainTableViewCell.swift */; };
 		B767A7662845CE2C00E4381F /* OtherChainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B767A7642845CE2C00E4381F /* OtherChainTableViewCell.xib */; };
@@ -87,6 +90,9 @@
 		B72FDEEF2833C47F00748D13 /* SelectPageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPageTableViewCell.swift; sourceTree = "<group>"; };
 		B72FDEF02833C47F00748D13 /* SelectPageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectPageTableViewCell.xib; sourceTree = "<group>"; };
 		B72FDEF32833C4F800748D13 /* SelectPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPageViewModel.swift; sourceTree = "<group>"; };
+		B7476E7E2847681C00331614 /* SelectNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectNetworkViewController.swift; sourceTree = "<group>"; };
+		B7476E8028476A7C00331614 /* SelectNetworkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectNetworkTableViewCell.swift; sourceTree = "<group>"; };
+		B7476E8128476A7C00331614 /* SelectNetworkTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectNetworkTableViewCell.xib; sourceTree = "<group>"; };
 		B767A7612845CD0200E4381F /* OtherChainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherChainViewController.swift; sourceTree = "<group>"; };
 		B767A7632845CE2C00E4381F /* OtherChainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherChainTableViewCell.swift; sourceTree = "<group>"; };
 		B767A7642845CE2C00E4381F /* OtherChainTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OtherChainTableViewCell.xib; sourceTree = "<group>"; };
@@ -182,6 +188,8 @@
 				B767A7642845CE2C00E4381F /* OtherChainTableViewCell.xib */,
 				B767A7672845CE3F00E4381F /* MemoTableViewCell.swift */,
 				B767A7682845CE3F00E4381F /* MemoTableViewCell.xib */,
+				B7476E8028476A7C00331614 /* SelectNetworkTableViewCell.swift */,
+				B7476E8128476A7C00331614 /* SelectNetworkTableViewCell.xib */,
 			);
 			path = "Qr Code";
 			sourceTree = "<group>";
@@ -204,6 +212,7 @@
 				B728FE542844ACCC00CF03DA /* MyQrCodeViewController.swift */,
 				B728FE562844AD9C00CF03DA /* CastcleQrCodeViewController.swift */,
 				B767A7612845CD0200E4381F /* OtherChainViewController.swift */,
+				B7476E7E2847681C00331614 /* SelectNetworkViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -341,6 +350,7 @@
 				B767A7662845CE2C00E4381F /* OtherChainTableViewCell.xib in Resources */,
 				B72FDEF22833C47F00748D13 /* SelectPageTableViewCell.xib in Resources */,
 				B72FDEDE2833BA9300748D13 /* WalletNoDataTableViewCell.xib in Resources */,
+				B7476E8328476A7C00331614 /* SelectNetworkTableViewCell.xib in Resources */,
 				B72FDED62833B38200748D13 /* TransactionTableViewCell.xib in Resources */,
 				B728FE5D2844B17D00CF03DA /* CastcleQrCodeTableViewCell.xib in Resources */,
 				B767A76A2845CE3F00E4381F /* MemoTableViewCell.xib in Resources */,
@@ -387,7 +397,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7476E8228476A7C00331614 /* SelectNetworkTableViewCell.swift in Sources */,
 				B72FDEBD2833989C00748D13 /* WalletNibVars.swift in Sources */,
+				B7476E7F2847681C00331614 /* SelectNetworkViewController.swift in Sources */,
 				B72FDEF12833C47F00748D13 /* SelectPageTableViewCell.swift in Sources */,
 				B728FE5C2844B17C00CF03DA /* CastcleQrCodeTableViewCell.swift in Sources */,
 				B71170572840AD7700FF985A /* ScanQrCodeViewController.swift in Sources */,

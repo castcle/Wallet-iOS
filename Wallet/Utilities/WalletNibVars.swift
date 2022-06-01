@@ -34,6 +34,7 @@ public struct WalletNibVars {
         public static let myQrCode = "MyQrCodeViewController"
         public static let castcleQrCode = "CastcleQrCodeViewController"
         public static let otherChain = "OtherChainViewController"
+        public static let selectNetwork = "SelectNetworkViewController"
     }
 
     // MARK: - View
@@ -58,6 +59,7 @@ public struct WalletNibVars {
         public static let castcleQrCode = "CastcleQrCodeTableViewCell"
         public static let otherChain = "OtherChainTableViewCell"
         public static let memo = "MemoTableViewCell"
+        public static let selectNetwork = "SelectNetworkTableViewCell"
     }
 
     // MARK: - CollectionViewCell

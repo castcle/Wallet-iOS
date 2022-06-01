@@ -365,6 +365,38 @@
             </objects>
             <point key="canvasLocation" x="1451" y="771"/>
         </scene>
+        <!--Select Network View Controller-->
+        <scene sceneID="XuK-mq-pgp">
+            <objects>
+                <viewController storyboardIdentifier="SelectNetworkViewController" hidesBottomBarWhenPushed="YES" id="fWF-qo-qIc" customClass="SelectNetworkViewController" customModule="Wallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7HI-7c-G1s">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rzV-Al-fWE">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="LmS-qk-y0s"/>
+                                </constraints>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="HHj-eZ-9eG"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="rzV-Al-fWE" firstAttribute="leading" secondItem="7HI-7c-G1s" secondAttribute="leading" id="CW2-CH-35h"/>
+                            <constraint firstItem="rzV-Al-fWE" firstAttribute="top" secondItem="7HI-7c-G1s" secondAttribute="top" id="VDD-bU-dp3"/>
+                            <constraint firstAttribute="trailing" secondItem="rzV-Al-fWE" secondAttribute="trailing" id="p3R-yX-85t"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="rzV-Al-fWE" id="dSR-7s-74C"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MCi-17-CJU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2147" y="770"/>
+        </scene>
     </scenes>
     <resources>
         <image name="overlay" width="4.5" height="4.5"/>

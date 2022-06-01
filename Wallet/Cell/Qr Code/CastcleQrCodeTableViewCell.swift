@@ -53,13 +53,13 @@ class CastcleQrCodeTableViewCell: UITableViewCell {
         self.saveLabel.textColor = UIColor.Asset.white
         self.shareView.custom(color: UIColor.Asset.lightBlue, cornerRadius: 5)
         self.saveView.custom(color: UIColor.Asset.lightBlue, cornerRadius: 5)
-        self.shareIcon.image = UIImage.init(icon: .castcle(.remind), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.white)
-        self.saveIcon.image = UIImage.init(icon: .castcle(.remind), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.white)
+        self.shareIcon.image = UIImage.init(icon: .castcle(.share), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.white)
+        self.saveIcon.image = UIImage.init(icon: .castcle(.save), size: CGSize(width: 30, height: 30), textColor: UIColor.Asset.white)
         self.castcleIdTitleLabel.font = UIFont.asset(.bold, fontSize: .body)
         self.castcleIdTitleLabel.textColor = UIColor.Asset.white
         self.castcleIdLabel.font = UIFont.asset(.regular, fontSize: .overline)
         self.castcleIdLabel.textColor = UIColor.Asset.white
-        self.copyButton.setImage(UIImage.init(icon: .castcle(.coin), size: CGSize(width: 20, height: 20), textColor: UIColor.Asset.white).withRenderingMode(.alwaysOriginal), for: .normal)
+        self.copyButton.setImage(UIImage.init(icon: .castcle(.copy), size: CGSize(width: 20, height: 20), textColor: UIColor.Asset.white).withRenderingMode(.alwaysOriginal), for: .normal)
         self.castcleIdView.custom(color: UIColor.Asset.darkGray, cornerRadius: 5)
         self.castcleIdLabel.text = UserManager.shared.castcleId
         if let myQrCodeImage = Utility.generateQRCode(from: UserManager.shared.rawCastcleId) {

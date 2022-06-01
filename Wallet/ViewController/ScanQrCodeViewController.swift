@@ -55,10 +55,10 @@ class ScanQrCodeViewController: UIViewController, AVCaptureMetadataOutputObjects
         self.dataLabel.font = UIFont.asset(.regular, fontSize: .overline)
         self.dataLabel.textColor = UIColor.Asset.white
         self.backButton.setImage(UIImage.init(icon: .castcle(.back), size: CGSize(width: 20, height: 20), textColor: UIColor.Asset.white).withRenderingMode(.alwaysOriginal), for: .normal)
-        self.copyButton.setImage(UIImage.init(icon: .castcle(.coin), size: CGSize(width: 20, height: 20), textColor: UIColor.Asset.white).withRenderingMode(.alwaysOriginal), for: .normal)
+        self.copyButton.setImage(UIImage.init(icon: .castcle(.copy), size: CGSize(width: 20, height: 20), textColor: UIColor.Asset.white).withRenderingMode(.alwaysOriginal), for: .normal)
 
         self.myQrButton.titleLabel?.font = UIFont.asset(.regular, fontSize: .overline)
-        self.myQrButton.setIcon(prefixText: "", prefixTextColor: UIColor.Asset.white, icon: .castcle(.airdropBox), iconColor: UIColor.Asset.white, postfixText: "  My QR Code", postfixTextColor: UIColor.Asset.white, forState: .normal, textSize: 14, iconSize: 14)
+        self.myQrButton.setIcon(prefixText: "", prefixTextColor: UIColor.Asset.white, icon: .castcle(.qrCode), iconColor: UIColor.Asset.white, postfixText: "  My QR Code", postfixTextColor: UIColor.Asset.white, forState: .normal, textSize: 14, iconSize: 14)
         self.myQrButton.capsule(color: UIColor.Asset.lightBlue, borderWidth: 1, borderColor: UIColor.Asset.lightBlue)
         self.dataView.custom(color: UIColor.Asset.darkGray, cornerRadius: 5)
         self.dataView.isHidden = true
@@ -156,5 +156,6 @@ class ScanQrCodeViewController: UIViewController, AVCaptureMetadataOutputObjects
 
     @IBAction func copyAction(_ sender: Any) {
         UIPasteboard.general.string = self.dataLabel.text
+        UINotificationFeedbackGenerator().notificationOccurred(.success)
     }
 }

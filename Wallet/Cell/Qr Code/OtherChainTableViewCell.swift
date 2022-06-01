@@ -28,6 +28,7 @@
 import UIKit
 import Core
 import JGProgressHUD
+import PanModal
 
 class OtherChainTableViewCell: UITableViewCell {
 
@@ -58,8 +59,8 @@ class OtherChainTableViewCell: UITableViewCell {
         self.saveLabel.textColor = UIColor.Asset.white
         self.shareView.custom(color: UIColor.Asset.lightBlue, cornerRadius: 5)
         self.saveView.custom(color: UIColor.Asset.lightBlue, cornerRadius: 5)
-        self.shareIcon.image = UIImage.init(icon: .castcle(.remind), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.white)
-        self.saveIcon.image = UIImage.init(icon: .castcle(.remind), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.white)
+        self.shareIcon.image = UIImage.init(icon: .castcle(.share), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.white)
+        self.saveIcon.image = UIImage.init(icon: .castcle(.save), size: CGSize(width: 30, height: 30), textColor: UIColor.Asset.white)
         self.networkTitleLabel.font = UIFont.asset(.bold, fontSize: .body)
         self.networkTitleLabel.textColor = UIColor.Asset.white
         self.networkLabel.font = UIFont.asset(.bold, fontSize: .body)
@@ -68,8 +69,8 @@ class OtherChainTableViewCell: UITableViewCell {
         self.addressTitleLabel.textColor = UIColor.Asset.white
         self.addressLabel.font = UIFont.asset(.regular, fontSize: .overline)
         self.addressLabel.textColor = UIColor.Asset.white
-        self.copyButton.setImage(UIImage.init(icon: .castcle(.coin), size: CGSize(width: 20, height: 20), textColor: UIColor.Asset.white).withRenderingMode(.alwaysOriginal), for: .normal)
-        self.changeNetworkButton.setImage(UIImage.init(icon: .castcle(.remind), size: CGSize(width: 20, height: 20), textColor: UIColor.Asset.white).withRenderingMode(.alwaysOriginal), for: .normal)
+        self.copyButton.setImage(UIImage.init(icon: .castcle(.copy), size: CGSize(width: 20, height: 20), textColor: UIColor.Asset.white).withRenderingMode(.alwaysOriginal), for: .normal)
+        self.changeNetworkButton.setImage(UIImage.init(icon: .castcle(.exchange), size: CGSize(width: 20, height: 20), textColor: UIColor.Asset.white).withRenderingMode(.alwaysOriginal), for: .normal)
         self.addressView.custom(color: UIColor.Asset.darkGray, cornerRadius: 5)
         self.addressLabel.text = self.address
         if let myQrCodeImage = Utility.generateQRCode(from: self.address) {
@@ -82,6 +83,9 @@ class OtherChainTableViewCell: UITableViewCell {
     }
 
     @IBAction func changeNetworkAction(_ sender: Any) {
+        let viewController = WalletOpener.open(.selectNetwork) as? SelectNetworkViewController
+        viewController?.delegate = self
+        Utility.currentViewController().presentPanModal(viewController ?? SelectPageViewController())
     }
 
     @IBAction func copyAction(_ sender: Any) {
@@ -106,5 +110,11 @@ class OtherChainTableViewCell: UITableViewCell {
             self.hud.show(in: Utility.currentViewController().view)
             self.hud.dismiss(afterDelay: 1.5)
         }
+    }
+}
+
+extension OtherChainTableViewCell: SelectNetworkViewControllerDelegate {
+    func didChooseNetwork(_ view: SelectNetworkViewController, network: String) {
+        self.networkLabel.text = network
     }
 }
