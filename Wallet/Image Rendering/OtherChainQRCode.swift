@@ -30,19 +30,19 @@ import Core
 
 class OtherChainQRCode: UIView {
 
-    @IBOutlet var contentView: UIView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var castcleIdLabel: UILabel!
-    @IBOutlet weak var dateTimeLabel: UILabel!
-    @IBOutlet weak var addressTitleLabel: UILabel!
-    @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var memoTitleLabel: UILabel!
-    @IBOutlet weak var memoLabel: UILabel!
-    @IBOutlet weak var castcleImage: UIImageView!
-    @IBOutlet weak var qrCodeAddressImage: UIImageView!
-    @IBOutlet weak var qrCodeAddressView: UIView!
-    @IBOutlet weak var qrCodeMemoImage: UIImageView!
-    @IBOutlet weak var qrCodeMemoView: UIView!
+    @IBOutlet private var contentView: UIView!
+    @IBOutlet private var titleLabel: UILabel!
+    @IBOutlet private var castcleIdLabel: UILabel!
+    @IBOutlet private var dateTimeLabel: UILabel!
+    @IBOutlet private var addressTitleLabel: UILabel!
+    @IBOutlet private var addressLabel: UILabel!
+    @IBOutlet private var memoTitleLabel: UILabel!
+    @IBOutlet private var memoLabel: UILabel!
+    @IBOutlet private var castcleImage: UIImageView!
+    @IBOutlet private var qrCodeAddressImage: UIImageView!
+    @IBOutlet private var qrCodeAddressView: UIView!
+    @IBOutlet private var qrCodeMemoImage: UIImageView!
+    @IBOutlet private var qrCodeMemoView: UIView!
 
     private var casecleId: String = ""
     private var address: String = ""

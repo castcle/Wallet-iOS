@@ -39,10 +39,10 @@
                     </constraints>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8XJ-CG-bIT">
-                    <rect key="frame" x="30" y="71.5" width="162.5" height="162.5"/>
+                    <rect key="frame" x="30" y="71.5" width="160" height="160"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6JD-rA-weG">
-                            <rect key="frame" x="10" y="10" width="142.5" height="142.5"/>
+                            <rect key="frame" x="10" y="10" width="140" height="140"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -51,20 +51,21 @@
                         <constraint firstItem="6JD-rA-weG" firstAttribute="top" secondItem="8XJ-CG-bIT" secondAttribute="top" constant="10" id="dVx-bq-vlQ"/>
                         <constraint firstAttribute="trailing" secondItem="6JD-rA-weG" secondAttribute="trailing" constant="10" id="fpM-Ge-MA0"/>
                         <constraint firstAttribute="width" secondItem="8XJ-CG-bIT" secondAttribute="height" multiplier="1:1" id="kwR-pi-QfY"/>
+                        <constraint firstAttribute="width" constant="160" id="mId-PD-nKt"/>
                         <constraint firstAttribute="bottom" secondItem="6JD-rA-weG" secondAttribute="bottom" constant="10" id="ufy-1A-mSm"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bY6-4v-RDl">
-                    <rect key="frame" x="222.5" y="129" width="156.5" height="48"/>
+                    <rect key="frame" x="220" y="127.5" width="159" height="48"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Castcle ID" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p1w-Qy-uNR">
-                            <rect key="frame" x="0.0" y="0.0" width="156.5" height="21.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="159" height="21.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@CastcleID" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XtV-eA-UDz">
-                            <rect key="frame" x="0.0" y="26.5" width="156.5" height="21.5"/>
+                            <rect key="frame" x="0.0" y="26.5" width="159" height="21.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -86,7 +87,6 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="F8V-yl-jr3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="1dO-fO-uea"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="8XJ-CG-bIT" secondAttribute="bottom" constant="30" id="4tD-VN-9He"/>
                 <constraint firstItem="8XJ-CG-bIT" firstAttribute="top" secondItem="CvX-UP-tIj" secondAttribute="bottom" constant="30" id="8Rp-fM-mWY"/>
                 <constraint firstItem="8XJ-CG-bIT" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="30" id="LST-Ot-KRR"/>
                 <constraint firstItem="F8V-yl-jr3" firstAttribute="centerY" secondItem="CvX-UP-tIj" secondAttribute="centerY" id="ZkW-uD-zaG"/>

@@ -30,13 +30,13 @@ import Core
 
 class MyQRCode: UIView {
 
-    @IBOutlet var contentView: UIView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var castcleIdtitleLabel: UILabel!
-    @IBOutlet weak var castcleIdLabel: UILabel!
-    @IBOutlet weak var castcleImage: UIImageView!
-    @IBOutlet weak var qrCodeImage: UIImageView!
-    @IBOutlet weak var qrCodeView: UIView!
+    @IBOutlet private var contentView: UIView!
+    @IBOutlet private var titleLabel: UILabel!
+    @IBOutlet private var castcleIdtitleLabel: UILabel!
+    @IBOutlet private var castcleIdLabel: UILabel!
+    @IBOutlet private var castcleImage: UIImageView!
+    @IBOutlet private var qrCodeImage: UIImageView!
+    @IBOutlet private var qrCodeView: UIView!
 
     private var qrCode: UIImage = UIImage()
     private var castcleId: String = ""
