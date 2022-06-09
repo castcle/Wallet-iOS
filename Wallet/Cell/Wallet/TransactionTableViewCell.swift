@@ -61,7 +61,7 @@ class TransactionTableViewCell: UITableViewCell {
     }
 
     @IBAction func depositAction(_ sender: Any) {
-        Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.myQrCode(.deposit)), animated: true)
+        Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.castcleQrCode(.deposit)), animated: true)
     }
 
     @IBAction func sendAction(_ sender: Any) {

@@ -127,6 +127,17 @@
                                     <action selector="myQrAction:" destination="sdg-UQ-ASb" eventType="touchUpInside" id="Euy-bb-8bc"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k7V-MV-oVA">
+                                <rect key="frame" x="270" y="320.5" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="VCD-Y8-aMM"/>
+                                    <constraint firstAttribute="width" constant="30" id="gB4-xr-DKq"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <connections>
+                                    <action selector="galleryAction:" destination="sdg-UQ-ASb" eventType="touchUpInside" id="WUG-Te-sma"/>
+                                </connections>
+                            </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scan-line" translatesAutoresizingMaskIntoConstraints="NO" id="wVE-Ys-CD9">
                                 <rect key="frame" x="60" y="84" width="200" height="200"/>
                                 <constraints>
@@ -194,6 +205,7 @@
                             <constraint firstItem="XYV-mx-f8l" firstAttribute="top" secondItem="mIb-oa-IXB" secondAttribute="bottom" id="7Ln-NE-QE1"/>
                             <constraint firstItem="aKB-9g-rKy" firstAttribute="top" secondItem="nQV-9Y-22u" secondAttribute="top" id="8tF-q9-yKl"/>
                             <constraint firstItem="F4v-b7-T6L" firstAttribute="top" secondItem="nQV-9Y-22u" secondAttribute="top" id="AKr-nU-ecA"/>
+                            <constraint firstItem="2La-eS-nh1" firstAttribute="trailing" secondItem="k7V-MV-oVA" secondAttribute="trailing" constant="20" id="BqU-42-7AX"/>
                             <constraint firstItem="bf8-5m-9Tv" firstAttribute="top" secondItem="fGF-cj-59F" secondAttribute="bottom" id="CHf-XQ-Pmv"/>
                             <constraint firstItem="F4v-b7-T6L" firstAttribute="leading" secondItem="2La-eS-nh1" secondAttribute="leading" id="Dgu-BX-Pd7"/>
                             <constraint firstItem="fGF-cj-59F" firstAttribute="trailing" secondItem="2La-eS-nh1" secondAttribute="trailing" id="DuC-ow-KAE"/>
@@ -204,6 +216,7 @@
                             <constraint firstItem="fGF-cj-59F" firstAttribute="top" secondItem="F4v-b7-T6L" secondAttribute="bottom" id="LNZ-KP-c0b"/>
                             <constraint firstItem="2La-eS-nh1" firstAttribute="trailing" secondItem="wVE-Ys-CD9" secondAttribute="trailing" constant="60" id="NF5-WC-25k"/>
                             <constraint firstItem="wVE-Ys-CD9" firstAttribute="top" secondItem="F4v-b7-T6L" secondAttribute="bottom" constant="-3" id="NoA-B9-5hZ"/>
+                            <constraint firstItem="k7V-MV-oVA" firstAttribute="centerY" secondItem="1Wc-FS-b19" secondAttribute="centerY" id="PhS-ei-sp6"/>
                             <constraint firstItem="fGF-cj-59F" firstAttribute="leading" secondItem="wVE-Ys-CD9" secondAttribute="trailing" constant="-3" id="QOG-Kq-nVk"/>
                             <constraint firstItem="8P1-eC-xK7" firstAttribute="top" secondItem="2La-eS-nh1" secondAttribute="top" constant="5" id="RFg-cw-odK"/>
                             <constraint firstItem="mIb-oa-IXB" firstAttribute="leading" secondItem="2La-eS-nh1" secondAttribute="leading" id="Tvz-0e-Pbu"/>
@@ -236,6 +249,7 @@
                         <outlet property="dataView" destination="4hO-3E-20V" id="FIT-lB-FV0"/>
                         <outlet property="detailTitleLabel" destination="RlY-87-KKd" id="1lI-Jl-pC7"/>
                         <outlet property="detailView" destination="XYV-mx-f8l" id="o9e-oc-qgO"/>
+                        <outlet property="galleryButton" destination="k7V-MV-oVA" id="f54-1h-FpS"/>
                         <outlet property="myQrButton" destination="1Wc-FS-b19" id="kIn-Kj-xT5"/>
                         <outlet property="scanView" destination="aKB-9g-rKy" id="Dfg-B0-Fhe"/>
                         <outlet property="titleLabel" destination="FvD-Mf-4mg" id="aXo-Vb-17j"/>

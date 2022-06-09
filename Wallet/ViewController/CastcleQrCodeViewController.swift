@@ -35,11 +35,21 @@ class CastcleQrCodeViewController: UIViewController {
 
     var pageIndex: Int = 0
     var pageTitle: String?
+    var qrCodeType: QrCodeType = .wallet
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.Asset.darkGraphiteBlue
         self.configureTableView()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.setupNavBar()
+    }
+
+    func setupNavBar() {
+        self.customNavigationBar(.secondary, title: self.qrCodeType.display)
     }
 
     func configureTableView() {

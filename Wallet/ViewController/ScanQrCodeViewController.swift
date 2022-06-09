@@ -30,6 +30,7 @@ import AVFoundation
 import Core
 import Component
 import Defaults
+import TLPhotoPicker
 
 class ScanQrCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
 
@@ -42,6 +43,7 @@ class ScanQrCodeViewController: UIViewController, AVCaptureMetadataOutputObjects
     @IBOutlet weak var dataLabel: UILabel!
     @IBOutlet weak var copyButton: UIButton!
     @IBOutlet weak var dataView: UIView!
+    @IBOutlet weak var galleryButton: UIButton!
 
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
@@ -56,6 +58,7 @@ class ScanQrCodeViewController: UIViewController, AVCaptureMetadataOutputObjects
         self.dataLabel.textColor = UIColor.Asset.white
         self.backButton.setImage(UIImage.init(icon: .castcle(.back), size: CGSize(width: 20, height: 20), textColor: UIColor.Asset.white).withRenderingMode(.alwaysOriginal), for: .normal)
         self.copyButton.setImage(UIImage.init(icon: .castcle(.copy), size: CGSize(width: 20, height: 20), textColor: UIColor.Asset.white).withRenderingMode(.alwaysOriginal), for: .normal)
+        self.galleryButton.setImage(UIImage.init(icon: .castcle(.image), size: CGSize(width: 30, height: 30), textColor: UIColor.Asset.white).withRenderingMode(.alwaysOriginal), for: .normal)
 
         self.myQrButton.titleLabel?.font = UIFont.asset(.regular, fontSize: .overline)
         self.myQrButton.setIcon(prefixText: "", prefixTextColor: UIColor.Asset.white, icon: .castcle(.qrCode), iconColor: UIColor.Asset.white, postfixText: "  My QR Code", postfixTextColor: UIColor.Asset.white, forState: .normal, textSize: 14, iconSize: 14)
@@ -134,13 +137,46 @@ class ScanQrCodeViewController: UIViewController, AVCaptureMetadataOutputObjects
     private func foundData(code: String) {
         if code.isUrl, let url = URL(string: code) {
             self.navigationController?.popViewController(animated: true)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 Utility.currentViewController().navigationController?.pushViewController(ComponentOpener.open(.internalWebView(url)), animated: true)
             }
         } else {
             self.dataLabel.text = code
             self.dataView.isHidden = false
         }
+    }
+
+    private func selectCameraRoll() {
+        let photosPickerViewController = TLPhotosPickerViewController()
+        photosPickerViewController.delegate = self
+        photosPickerViewController.view.backgroundColor = UIColor.Asset.darkGraphiteBlue
+        photosPickerViewController.collectionView.backgroundColor = UIColor.clear
+        photosPickerViewController.navigationBar.barTintColor = UIColor.Asset.darkGraphiteBlue
+        photosPickerViewController.navigationBar.isTranslucent = false
+        photosPickerViewController.titleLabel.font = UIFont.asset(.regular, fontSize: .overline)
+        photosPickerViewController.subTitleLabel.font = UIFont.asset(.regular, fontSize: .small)
+        photosPickerViewController.doneButton.setTitleTextAttributes([
+            NSAttributedString.Key.font: UIFont.asset(.bold, fontSize: .head4),
+            NSAttributedString.Key.foregroundColor: UIColor.Asset.lightBlue
+        ], for: .normal)
+        photosPickerViewController.cancelButton.setTitleTextAttributes([
+            NSAttributedString.Key.font: UIFont.asset(.regular, fontSize: .body),
+            NSAttributedString.Key.foregroundColor: UIColor.Asset.lightBlue
+        ], for: .normal)
+
+        var configure = TLPhotosPickerConfigure()
+        configure.numberOfColumn = 3
+        configure.singleSelectedMode = true
+        configure.mediaType = .image
+        configure.usedCameraButton = false
+        configure.allowedLivePhotos = false
+        configure.allowedPhotograph = false
+        configure.allowedVideo = false
+        configure.autoPlay = false
+        configure.allowedVideoRecording = false
+        configure.selectedColor = UIColor.Asset.lightBlue
+        photosPickerViewController.configure = configure
+        Utility.currentViewController().present(photosPickerViewController, animated: true, completion: nil)
     }
 
     @IBAction func backAction(_ sender: Any) {
@@ -150,12 +186,40 @@ class ScanQrCodeViewController: UIViewController, AVCaptureMetadataOutputObjects
     @IBAction func myQrAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.myQrCode(.wallet)), animated: true)
+            Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.castcleQrCode(.wallet)), animated: true)
         }
     }
 
     @IBAction func copyAction(_ sender: Any) {
         UIPasteboard.general.string = self.dataLabel.text
         UINotificationFeedbackGenerator().notificationOccurred(.success)
+    }
+
+    @IBAction func galleryAction(_ sender: Any) {
+        self.captureSession.stopRunning()
+        self.selectCameraRoll()
+    }
+}
+
+extension ScanQrCodeViewController: TLPhotosPickerViewControllerDelegate {
+    func shouldDismissPhotoPicker(withTLPHAssets: [TLPHAsset]) -> Bool {
+        if let asset = withTLPHAssets.first {
+            if let image = asset.fullResolutionImage, let detector: CIDetector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyHigh]), let ciImage: CIImage = CIImage(image: image), let features = detector.features(in: ciImage) as? [CIQRCodeFeature] {
+                var qrCodeString = ""
+                features.forEach { feature in
+                    if let messageString = feature.messageString {
+                        qrCodeString += messageString
+                    }
+                }
+                if qrCodeString.isEmpty {
+                    self.failed()
+                } else {
+                    self.foundData(code: qrCodeString)
+                }
+            } else {
+                self.failed()
+            }
+        }
+        return true
     }
 }

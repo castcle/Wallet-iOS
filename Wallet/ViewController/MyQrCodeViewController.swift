@@ -72,7 +72,7 @@ class MyQrCodeViewController: ButtonBarPagerTabStripViewController {
 
     // MARK: - PagerTabStripDataSource
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-        let vc1 = WalletOpener.open(.castcleQrCode) as? CastcleQrCodeViewController
+        let vc1 = WalletOpener.open(.castcleQrCode(self.qrCodeType)) as? CastcleQrCodeViewController
         vc1?.pageIndex = 0
         vc1?.pageTitle = "Castcle ID"
         let castcleQrView = vc1 ?? CastcleQrCodeViewController()
