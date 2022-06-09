@@ -28,6 +28,7 @@
 import UIKit
 import Core
 import JGProgressHUD
+import SwiftColor
 
 class CastcleQrCodeTableViewCell: UITableViewCell {
 
@@ -44,6 +45,7 @@ class CastcleQrCodeTableViewCell: UITableViewCell {
     @IBOutlet weak var castcleIdView: UIView!
 
     private let hud = JGProgressHUD()
+    private var myQrCode: UIImage?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -62,13 +64,18 @@ class CastcleQrCodeTableViewCell: UITableViewCell {
         self.copyButton.setImage(UIImage.init(icon: .castcle(.copy), size: CGSize(width: 20, height: 20), textColor: UIColor.Asset.white).withRenderingMode(.alwaysOriginal), for: .normal)
         self.castcleIdView.custom(color: UIColor.Asset.darkGray, cornerRadius: 5)
         self.castcleIdLabel.text = UserManager.shared.castcleId
-        if let myQrCodeImage = Utility.generateQRCode(from: UserManager.shared.rawCastcleId) {
-            self.qrCodeImage.image = myQrCodeImage
-        }
+        self.qrCodeImage.image = UIColor.Asset.white.toImage()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+
+    func configCell(qrCodeImage: UIImage?) {
+        self.myQrCode = qrCodeImage
+        if let myQrCodeImage = self.myQrCode {
+            self.qrCodeImage.image = myQrCodeImage
+        }
     }
 
     @IBAction func copyAction(_ sender: Any) {
@@ -77,7 +84,7 @@ class CastcleQrCodeTableViewCell: UITableViewCell {
     }
 
     @IBAction func shareAction(_ sender: Any) {
-        if let myQrCodeImage = Utility.generateQRCode(from: UserManager.shared.rawCastcleId) {
+        if let myQrCodeImage = self.myQrCode {
             let myQRCode: MyQRCode = MyQRCode(castcleId: UserManager.shared.castcleId, qrCodeImage: myQrCodeImage)
             let activityView = UIActivityViewController(activityItems: [myQRCode.asImage()], applicationActivities: [])
             Utility.currentViewController().present(activityView, animated: true)
@@ -85,7 +92,7 @@ class CastcleQrCodeTableViewCell: UITableViewCell {
     }
 
     @IBAction func saveAction(_ sender: Any) {
-        if let myQrCodeImage = Utility.generateQRCode(from: UserManager.shared.rawCastcleId) {
+        if let myQrCodeImage = self.myQrCode {
             let myQRCode: MyQRCode = MyQRCode(castcleId: UserManager.shared.castcleId, qrCodeImage: myQrCodeImage)
             UIImageWriteToSavedPhotosAlbum(myQRCode.asImage(), self, nil, nil)
             UINotificationFeedbackGenerator().notificationOccurred(.success)

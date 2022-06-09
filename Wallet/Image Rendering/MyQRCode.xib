@@ -42,17 +42,17 @@
                     <rect key="frame" x="30" y="71.5" width="160" height="160"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6JD-rA-weG">
-                            <rect key="frame" x="10" y="10" width="140" height="140"/>
+                            <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstItem="6JD-rA-weG" firstAttribute="leading" secondItem="8XJ-CG-bIT" secondAttribute="leading" constant="10" id="O5p-J8-YKB"/>
-                        <constraint firstItem="6JD-rA-weG" firstAttribute="top" secondItem="8XJ-CG-bIT" secondAttribute="top" constant="10" id="dVx-bq-vlQ"/>
-                        <constraint firstAttribute="trailing" secondItem="6JD-rA-weG" secondAttribute="trailing" constant="10" id="fpM-Ge-MA0"/>
+                        <constraint firstItem="6JD-rA-weG" firstAttribute="leading" secondItem="8XJ-CG-bIT" secondAttribute="leading" id="O5p-J8-YKB"/>
+                        <constraint firstItem="6JD-rA-weG" firstAttribute="top" secondItem="8XJ-CG-bIT" secondAttribute="top" id="dVx-bq-vlQ"/>
+                        <constraint firstAttribute="trailing" secondItem="6JD-rA-weG" secondAttribute="trailing" id="fpM-Ge-MA0"/>
                         <constraint firstAttribute="width" secondItem="8XJ-CG-bIT" secondAttribute="height" multiplier="1:1" id="kwR-pi-QfY"/>
                         <constraint firstAttribute="width" constant="160" id="mId-PD-nKt"/>
-                        <constraint firstAttribute="bottom" secondItem="6JD-rA-weG" secondAttribute="bottom" constant="10" id="ufy-1A-mSm"/>
+                        <constraint firstAttribute="bottom" secondItem="6JD-rA-weG" secondAttribute="bottom" id="ufy-1A-mSm"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bY6-4v-RDl">

@@ -36,11 +36,16 @@ class CastcleQrCodeViewController: UIViewController {
     var pageIndex: Int = 0
     var pageTitle: String?
     var qrCodeType: QrCodeType = .wallet
+    let viewModel = CastcleQrCodeViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.Asset.darkGraphiteBlue
         self.configureTableView()
+        self.viewModel.getQrCode()
+        self.viewModel.didGetQrCodeFinish = {
+            self.tableView.reloadData()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -73,6 +78,7 @@ extension CastcleQrCodeViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.castcleQrCode, for: indexPath as IndexPath) as? CastcleQrCodeTableViewCell
         cell?.backgroundColor = UIColor.clear
+        cell?.configCell(qrCodeImage: self.viewModel.qrCodeImage)
         return cell ?? CastcleQrCodeTableViewCell()
     }
 }

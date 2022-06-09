@@ -10,6 +10,7 @@
 		B7117028283B836500FF985A /* MyQRCode.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7117027283B836500FF985A /* MyQRCode.xib */; };
 		B711702A283B846900FF985A /* MyQRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7117029283B846900FF985A /* MyQRCode.swift */; };
 		B71170572840AD7700FF985A /* ScanQrCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71170562840AD7700FF985A /* ScanQrCodeViewController.swift */; };
+		B727FDF52851ECD100BA50C7 /* CastcleQrCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B727FDF42851ECD100BA50C7 /* CastcleQrCodeViewModel.swift */; };
 		B728FE552844ACCC00CF03DA /* MyQrCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B728FE542844ACCC00CF03DA /* MyQrCodeViewController.swift */; };
 		B728FE572844AD9C00CF03DA /* CastcleQrCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B728FE562844AD9C00CF03DA /* CastcleQrCodeViewController.swift */; };
 		B728FE5C2844B17C00CF03DA /* CastcleQrCodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B728FE5A2844B17C00CF03DA /* CastcleQrCodeTableViewCell.swift */; };
@@ -63,6 +64,7 @@
 		B7117027283B836500FF985A /* MyQRCode.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyQRCode.xib; sourceTree = "<group>"; };
 		B7117029283B846900FF985A /* MyQRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyQRCode.swift; sourceTree = "<group>"; };
 		B71170562840AD7700FF985A /* ScanQrCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQrCodeViewController.swift; sourceTree = "<group>"; };
+		B727FDF42851ECD100BA50C7 /* CastcleQrCodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastcleQrCodeViewModel.swift; sourceTree = "<group>"; };
 		B728FE542844ACCC00CF03DA /* MyQrCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyQrCodeViewController.swift; sourceTree = "<group>"; };
 		B728FE562844AD9C00CF03DA /* CastcleQrCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastcleQrCodeViewController.swift; sourceTree = "<group>"; };
 		B728FE5A2844B17C00CF03DA /* CastcleQrCodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastcleQrCodeTableViewCell.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 			children = (
 				B72FDECD28339FC500748D13 /* WalletViewModel.swift */,
 				B72FDEF32833C4F800748D13 /* SelectPageViewModel.swift */,
+				B727FDF42851ECD100BA50C7 /* CastcleQrCodeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				B728FE5C2844B17C00CF03DA /* CastcleQrCodeTableViewCell.swift in Sources */,
 				B71170572840AD7700FF985A /* ScanQrCodeViewController.swift in Sources */,
 				B72FDED52833B38200748D13 /* TransactionTableViewCell.swift in Sources */,
+				B727FDF52851ECD100BA50C7 /* CastcleQrCodeViewModel.swift in Sources */,
 				B72FDEBF283398B300748D13 /* WalletOpener.swift in Sources */,
 				B72FDEDD2833BA9300748D13 /* WalletNoDataTableViewCell.swift in Sources */,
 				B711702A283B846900FF985A /* MyQRCode.swift in Sources */,
