@@ -91,15 +91,14 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case WalletViewControllerSection.banner.rawValue:
+        if section == WalletViewControllerSection.banner.rawValue {
             let airdropEnable = RemoteConfig.remoteConfig().configValue(forKey: "banner_early_airdrop_enable").boolValue
             if airdropEnable {
                 return 1
             } else {
                 return 0
             }
-        default:
+        } else {
             return 1
         }
     }
