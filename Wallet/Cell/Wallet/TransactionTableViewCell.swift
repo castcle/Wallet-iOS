@@ -65,10 +65,10 @@ class TransactionTableViewCell: UITableViewCell {
     }
 
     @IBAction func sendAction(_ sender: Any) {
-        // TODO: - Send function
+        // MARK: - Send function
     }
 
     @IBAction func buyAction(_ sender: Any) {
-        // TODO: - Buy function
+        // MARK: - Buy function
     }
 }
