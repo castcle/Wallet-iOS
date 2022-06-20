@@ -57,7 +57,7 @@ class SelectPageViewController: UIViewController {
     func configureTableView() {
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.register(UINib(nibName: WalletNibVars.TableViewCell.selectPage, bundle: ConfigBundle.wallet), forCellReuseIdentifier: WalletNibVars.TableViewCell.selectPage)
+        self.tableView.register(UINib(nibName: WalletNibVars.TableViewCell.displayName, bundle: ConfigBundle.wallet), forCellReuseIdentifier: WalletNibVars.TableViewCell.displayName)
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 100
     }
@@ -73,16 +73,16 @@ extension SelectPageViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.selectPage, for: indexPath as IndexPath) as? SelectPageTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.displayName, for: indexPath as IndexPath) as? DisplayNameTableViewCell
         let page = self.viewModel.pages[indexPath.section]
-        cell?.configCell(page: page)
+        cell?.configCell(page: page, isDisplayOnly: true)
         cell?.backgroundColor = UIColor.Asset.darkGray
         if page.castcleId == self.viewModel.selectPage.castcleId {
-            cell?.selectIcon.isHidden = false
+            cell?.iconImage.isHidden = false
         } else {
-            cell?.selectIcon.isHidden = true
+            cell?.iconImage.isHidden = true
         }
-        return cell ?? SelectPageTableViewCell()
+        return cell ?? DisplayNameTableViewCell()
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

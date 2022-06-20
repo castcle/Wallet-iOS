@@ -107,7 +107,7 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.section {
         case WalletViewControllerSection.displayName.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.displayName, for: indexPath as IndexPath) as? DisplayNameTableViewCell
-            cell?.configCell(page: self.viewModel.page)
+            cell?.configCell(page: self.viewModel.page, isDisplayOnly: false)
             cell?.backgroundColor = UIColor.clear
             cell?.delegate = self
             return cell ?? DisplayNameTableViewCell()

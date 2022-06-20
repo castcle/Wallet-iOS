@@ -38,9 +38,10 @@ class DisplayNameTableViewCell: UITableViewCell {
     @IBOutlet var displayNameLabel: UILabel!
     @IBOutlet var typeLabel: UILabel!
     @IBOutlet var avatarImage: UIImageView!
-    @IBOutlet var nextImage: UIImageView!
+    @IBOutlet var iconImage: UIImageView!
 
     var delegate: DisplayNameTableViewCellDelegate?
+    private var isDisplayOnly: Bool = true
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -49,14 +50,14 @@ class DisplayNameTableViewCell: UITableViewCell {
         self.displayNameLabel.textColor = UIColor.Asset.white
         self.typeLabel.font = UIFont.asset(.regular, fontSize: .small)
         self.typeLabel.textColor = UIColor.Asset.white
-        self.nextImage.image = UIImage.init(icon: .castcle(.dropDown), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.white)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
 
-    public func configCell(page: Page) {
+    public func configCell(page: Page, isDisplayOnly: Bool) {
+        self.isDisplayOnly = isDisplayOnly
         let userAvatar = URL(string: page.avatar)
         self.avatarImage.kf.setImage(with: userAvatar, placeholder: UIImage.Asset.userPlaceholder, options: [.transition(.fade(0.35))])
         self.displayNameLabel.text = page.displayName
@@ -65,9 +66,16 @@ class DisplayNameTableViewCell: UITableViewCell {
         } else {
             self.typeLabel.text = "Page"
         }
+        if self.isDisplayOnly {
+            self.iconImage.image = UIImage.init(icon: .castcle(.checkmark), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.lightBlue)
+        } else {
+            self.iconImage.image = UIImage.init(icon: .castcle(.dropDown), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.white)
+        }
     }
 
     @IBAction func choosePageAction(_ sender: Any) {
-        self.delegate?.didChoosePage(self)
+        if !self.isDisplayOnly {
+            self.delegate?.didChoosePage(self)
+        }
     }
 }
