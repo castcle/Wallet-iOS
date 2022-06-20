@@ -32,16 +32,16 @@ import SwiftColor
 
 class CastcleQrCodeTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var qrCodeImage: UIImageView!
-    @IBOutlet weak var shareView: UIView!
-    @IBOutlet weak var saveView: UIView!
-    @IBOutlet weak var shareLabel: UILabel!
-    @IBOutlet weak var saveLabel: UILabel!
-    @IBOutlet weak var shareIcon: UIImageView!
-    @IBOutlet weak var saveIcon: UIImageView!
+    @IBOutlet weak var qrCodeCastcleImage: UIImageView!
+    @IBOutlet weak var shareQrCodeCastcleView: UIView!
+    @IBOutlet weak var saveQrCodeCastcleView: UIView!
+    @IBOutlet weak var shareQrCodeCastcleLabel: UILabel!
+    @IBOutlet weak var saveQrCodeCastcleLabel: UILabel!
+    @IBOutlet weak var shareQrCodeCastcleIcon: UIImageView!
+    @IBOutlet weak var saveQrCodeCastcleIcon: UIImageView!
     @IBOutlet weak var castcleIdTitleLabel: UILabel!
     @IBOutlet weak var castcleIdLabel: UILabel!
-    @IBOutlet weak var copyButton: UIButton!
+    @IBOutlet weak var copyCastcleIdButton: UIButton!
     @IBOutlet weak var castcleIdView: UIView!
 
     private let hud = JGProgressHUD()
@@ -49,22 +49,22 @@ class CastcleQrCodeTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.shareLabel.font = UIFont.asset(.regular, fontSize: .overline)
-        self.shareLabel.textColor = UIColor.Asset.white
-        self.saveLabel.font = UIFont.asset(.regular, fontSize: .overline)
-        self.saveLabel.textColor = UIColor.Asset.white
-        self.shareView.custom(color: UIColor.Asset.lightBlue, cornerRadius: 5)
-        self.saveView.custom(color: UIColor.Asset.lightBlue, cornerRadius: 5)
-        self.shareIcon.image = UIImage.init(icon: .castcle(.share), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.white)
-        self.saveIcon.image = UIImage.init(icon: .castcle(.save), size: CGSize(width: 30, height: 30), textColor: UIColor.Asset.white)
+        self.shareQrCodeCastcleLabel.font = UIFont.asset(.regular, fontSize: .overline)
+        self.shareQrCodeCastcleLabel.textColor = UIColor.Asset.white
+        self.saveQrCodeCastcleLabel.font = UIFont.asset(.regular, fontSize: .overline)
+        self.saveQrCodeCastcleLabel.textColor = UIColor.Asset.white
+        self.shareQrCodeCastcleView.custom(color: UIColor.Asset.lightBlue, cornerRadius: 5)
+        self.saveQrCodeCastcleView.custom(color: UIColor.Asset.lightBlue, cornerRadius: 5)
+        self.shareQrCodeCastcleIcon.image = UIImage.init(icon: .castcle(.share), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.white)
+        self.saveQrCodeCastcleIcon.image = UIImage.init(icon: .castcle(.save), size: CGSize(width: 30, height: 30), textColor: UIColor.Asset.white)
         self.castcleIdTitleLabel.font = UIFont.asset(.bold, fontSize: .body)
         self.castcleIdTitleLabel.textColor = UIColor.Asset.white
         self.castcleIdLabel.font = UIFont.asset(.regular, fontSize: .overline)
         self.castcleIdLabel.textColor = UIColor.Asset.white
-        self.copyButton.setImage(UIImage.init(icon: .castcle(.copy), size: CGSize(width: 20, height: 20), textColor: UIColor.Asset.white).withRenderingMode(.alwaysOriginal), for: .normal)
+        self.copyCastcleIdButton.setImage(UIImage.init(icon: .castcle(.copy), size: CGSize(width: 20, height: 20), textColor: UIColor.Asset.white).withRenderingMode(.alwaysOriginal), for: .normal)
         self.castcleIdView.custom(color: UIColor.Asset.darkGray, cornerRadius: 5)
         self.castcleIdLabel.text = UserManager.shared.castcleId
-        self.qrCodeImage.image = UIColor.Asset.white.toImage()
+        self.qrCodeCastcleImage.image = UIColor.Asset.white.toImage()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -74,16 +74,16 @@ class CastcleQrCodeTableViewCell: UITableViewCell {
     func configCell(qrCodeImage: UIImage?) {
         self.myQrCode = qrCodeImage
         if let myQrCodeImage = self.myQrCode {
-            self.qrCodeImage.image = myQrCodeImage
+            self.qrCodeCastcleImage.image = myQrCodeImage
         }
     }
 
-    @IBAction func copyAction(_ sender: Any) {
+    @IBAction func copyCastcleIdAction(_ sender: Any) {
         UIPasteboard.general.string = UserManager.shared.rawCastcleId
         UINotificationFeedbackGenerator().notificationOccurred(.success)
     }
 
-    @IBAction func shareAction(_ sender: Any) {
+    @IBAction func shareQrCodeCastcleAction(_ sender: Any) {
         if let myQrCodeImage = self.myQrCode {
             let myQRCode: MyQRCode = MyQRCode(castcleId: UserManager.shared.castcleId, qrCodeImage: myQrCodeImage)
             let activityView = UIActivityViewController(activityItems: [myQRCode.asImage()], applicationActivities: [])
@@ -91,7 +91,7 @@ class CastcleQrCodeTableViewCell: UITableViewCell {
         }
     }
 
-    @IBAction func saveAction(_ sender: Any) {
+    @IBAction func saveQrCodeCastcleAction(_ sender: Any) {
         if let myQrCodeImage = self.myQrCode {
             let myQRCode: MyQRCode = MyQRCode(castcleId: UserManager.shared.castcleId, qrCodeImage: myQrCodeImage)
             UIImageWriteToSavedPhotosAlbum(myQRCode.asImage(), self, nil, nil)

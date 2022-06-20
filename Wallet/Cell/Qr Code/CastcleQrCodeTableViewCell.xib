@@ -47,7 +47,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <connections>
-                                            <action selector="shareAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="X7p-h6-efc"/>
+                                            <action selector="shareQrCodeCastcleAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="i8u-m7-9eV"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -83,7 +83,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <connections>
-                                            <action selector="saveAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="PED-Kr-8TA"/>
+                                            <action selector="saveQrCodeCastcleAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="QYJ-h0-qVP"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -131,7 +131,7 @@
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <connections>
-                                    <action selector="copyAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="mzI-iC-B8h"/>
+                                    <action selector="copyCastcleIdAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="4Q0-cz-EVW"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Data" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GF8-DE-DJd">
@@ -169,17 +169,17 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="castcleIdLabel" destination="GF8-DE-DJd" id="Ho8-KR-L1d"/>
-                <outlet property="castcleIdTitleLabel" destination="xZh-3E-Ju8" id="7KD-oi-Ipo"/>
-                <outlet property="castcleIdView" destination="G8N-Bx-tj3" id="2qi-Ob-usU"/>
-                <outlet property="copyButton" destination="BMx-Cd-FwL" id="E33-WM-F71"/>
-                <outlet property="qrCodeImage" destination="WW3-GD-eXE" id="1FY-Tt-a39"/>
-                <outlet property="saveIcon" destination="Wxa-jk-CLw" id="rM6-Kd-mok"/>
-                <outlet property="saveLabel" destination="agA-Fe-bfh" id="LoS-24-tJh"/>
-                <outlet property="saveView" destination="o1a-wx-voG" id="sRN-b3-fXQ"/>
-                <outlet property="shareIcon" destination="7HX-9U-Z82" id="By3-LQ-Egj"/>
-                <outlet property="shareLabel" destination="K8f-FR-ZdK" id="9ot-ez-g57"/>
-                <outlet property="shareView" destination="lyW-1Z-5dg" id="tRR-Yy-Cee"/>
+                <outlet property="castcleIdLabel" destination="GF8-DE-DJd" id="16S-ar-haj"/>
+                <outlet property="castcleIdTitleLabel" destination="xZh-3E-Ju8" id="qM7-wc-Gcu"/>
+                <outlet property="castcleIdView" destination="G8N-Bx-tj3" id="9bA-dg-eCc"/>
+                <outlet property="copyCastcleIdButton" destination="BMx-Cd-FwL" id="Lyy-Va-kqN"/>
+                <outlet property="qrCodeCastcleImage" destination="WW3-GD-eXE" id="36l-j5-eMC"/>
+                <outlet property="saveQrCodeCastcleIcon" destination="Wxa-jk-CLw" id="orr-MS-RPj"/>
+                <outlet property="saveQrCodeCastcleLabel" destination="agA-Fe-bfh" id="y39-pQ-HxW"/>
+                <outlet property="saveQrCodeCastcleView" destination="o1a-wx-voG" id="p6j-fA-mQS"/>
+                <outlet property="shareQrCodeCastcleIcon" destination="7HX-9U-Z82" id="aVx-D7-vsO"/>
+                <outlet property="shareQrCodeCastcleLabel" destination="K8f-FR-ZdK" id="pMF-sI-R0E"/>
+                <outlet property="shareQrCodeCastcleView" destination="lyW-1Z-5dg" id="wjY-ep-8c4"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="234.375"/>
         </tableViewCell>
