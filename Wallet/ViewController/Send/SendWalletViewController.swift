@@ -90,7 +90,11 @@ class SendWalletViewController: UIViewController {
 
     @IBAction func sendAction(_ sender: Any) {
         if self.isAvtive {
-            Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.sendReview), animated: true)
+            if self.sendTo == "aaaa" {
+                ApiHelper.displayMessage(title: "Warning", message: "Incorrect Castcle ID. Please check the Castcle ID and try again.\n\n** You have insufficient balance", buttonTitle: "Close")
+            } else {
+                Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.sendReview), animated: true)
+            }
         }
     }
 }

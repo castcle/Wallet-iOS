@@ -110,5 +110,7 @@ extension SendAuthViewController: SendVerifyTableViewCellDelegate {
 
 extension SendAuthViewController: SendConfiemTableViewCellDelegate {
     func didConfirm(_ sendConfiemTableViewCell: SendConfiemTableViewCell) {
+        let viewControllers: [UIViewController] = Utility.currentViewController().navigationController!.viewControllers as [UIViewController]
+        Utility.currentViewController().navigationController!.popToViewController(viewControllers[viewControllers.count - 4], animated: true)
     }
 }

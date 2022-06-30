@@ -572,6 +572,36 @@
             </objects>
             <point key="canvasLocation" x="765" y="1462"/>
         </scene>
+        <!--Wallet Verify Account View Controller-->
+        <scene sceneID="BQw-bI-Efb">
+            <objects>
+                <viewController storyboardIdentifier="WalletVerifyAccountViewController" hidesBottomBarWhenPushed="YES" id="B1A-F5-bqs" customClass="WalletVerifyAccountViewController" customModule="Wallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ohu-o4-TMc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lo6-CC-sNj">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="S3u-4a-2YM"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="lo6-CC-sNj" secondAttribute="bottom" id="1B5-fX-VAS"/>
+                            <constraint firstItem="lo6-CC-sNj" firstAttribute="leading" secondItem="Ohu-o4-TMc" secondAttribute="leading" id="Ib1-j6-O6y"/>
+                            <constraint firstItem="lo6-CC-sNj" firstAttribute="top" secondItem="Ohu-o4-TMc" secondAttribute="top" id="L0z-3R-LEt"/>
+                            <constraint firstAttribute="trailing" secondItem="lo6-CC-sNj" secondAttribute="trailing" id="hOe-rl-9jc"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="lo6-CC-sNj" id="vGt-lH-4wa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QVp-ma-YX8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="94" y="2160"/>
+        </scene>
     </scenes>
     <resources>
         <image name="overlay" width="4.5" height="4.5"/>

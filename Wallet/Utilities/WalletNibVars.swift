@@ -38,6 +38,7 @@ public struct WalletNibVars {
         public static let sendWallet = "SendWalletViewController"
         public static let sendReview = "SendReviewViewController"
         public static let sendAuth = "SendAuthViewController"
+        public static let verifyAccount = "WalletVerifyAccountViewController"
     }
 
     // MARK: - View
@@ -68,6 +69,8 @@ public struct WalletNibVars {
         public static let reviewData = "ReviewDataTableViewCell"
         public static let sendConfiem = "SendConfiemTableViewCell"
         public static let sendVerify = "SendVerifyTableViewCell"
+        public static let verifyAccount = "VerifyAccountTableViewCell"
+        public static let notice = "NoticeTableViewCell"
     }
 
     // MARK: - CollectionViewCell

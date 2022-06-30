@@ -39,6 +39,7 @@ public enum WalletScene {
     case sendWallet
     case sendReview
     case sendAuth
+    case verifyAccount
 }
 
 public struct WalletOpener {
@@ -86,6 +87,10 @@ public struct WalletOpener {
         case .sendAuth:
             let storyboard: UIStoryboard = UIStoryboard(name: WalletNibVars.Storyboard.wallet, bundle: ConfigBundle.wallet)
             let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.sendAuth)
+            return viewController
+        case .verifyAccount:
+            let storyboard: UIStoryboard = UIStoryboard(name: WalletNibVars.Storyboard.wallet, bundle: ConfigBundle.wallet)
+            let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.verifyAccount)
             return viewController
         }
     }
