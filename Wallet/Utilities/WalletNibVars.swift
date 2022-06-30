@@ -35,6 +35,9 @@ public struct WalletNibVars {
         public static let castcleQrCode = "CastcleQrCodeViewController"
         public static let otherChain = "OtherChainViewController"
         public static let selectNetwork = "SelectNetworkViewController"
+        public static let sendWallet = "SendWalletViewController"
+        public static let sendReview = "SendReviewViewController"
+        public static let sendAuth = "SendAuthViewController"
     }
 
     // MARK: - View
@@ -59,9 +62,16 @@ public struct WalletNibVars {
         public static let otherChain = "OtherChainTableViewCell"
         public static let memo = "MemoTableViewCell"
         public static let selectNetwork = "SelectNetworkTableViewCell"
+        public static let sendShortcut = "SendShortcutTableViewCell"
+        public static let sendTo = "SendToTableViewCell"
+        public static let reviewSend = "ReviewSendTableViewCell"
+        public static let reviewData = "ReviewDataTableViewCell"
+        public static let sendConfiem = "SendConfiemTableViewCell"
+        public static let sendVerify = "SendVerifyTableViewCell"
     }
 
     // MARK: - CollectionViewCell
     public struct CollectionViewCell {
+        public static let shortcut = "ShortcutCollectionViewCell"
     }
 }

@@ -36,6 +36,9 @@ public enum WalletScene {
     case castcleQrCode(QrCodeType)
     case otherChain
     case selectNetwork
+    case sendWallet
+    case sendReview
+    case sendAuth
 }
 
 public struct WalletOpener {
@@ -71,6 +74,18 @@ public struct WalletOpener {
         case .selectNetwork:
             let storyboard: UIStoryboard = UIStoryboard(name: WalletNibVars.Storyboard.wallet, bundle: ConfigBundle.wallet)
             let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.selectNetwork)
+            return viewController
+        case .sendWallet:
+            let storyboard: UIStoryboard = UIStoryboard(name: WalletNibVars.Storyboard.wallet, bundle: ConfigBundle.wallet)
+            let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.sendWallet)
+            return viewController
+        case .sendReview:
+            let storyboard: UIStoryboard = UIStoryboard(name: WalletNibVars.Storyboard.wallet, bundle: ConfigBundle.wallet)
+            let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.sendReview)
+            return viewController
+        case .sendAuth:
+            let storyboard: UIStoryboard = UIStoryboard(name: WalletNibVars.Storyboard.wallet, bundle: ConfigBundle.wallet)
+            let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.sendAuth)
             return viewController
         }
     }

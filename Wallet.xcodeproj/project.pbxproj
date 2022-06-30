@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B7031554286D86940070493B /* ShortcutCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7031552286D86940070493B /* ShortcutCollectionViewCell.swift */; };
+		B7031555286D86940070493B /* ShortcutCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7031553286D86940070493B /* ShortcutCollectionViewCell.xib */; };
+		B7031558286D9A2A0070493B /* SendToTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7031556286D9A2A0070493B /* SendToTableViewCell.swift */; };
+		B7031559286D9A2A0070493B /* SendToTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7031557286D9A2A0070493B /* SendToTableViewCell.xib */; };
 		B7117028283B836500FF985A /* MyQRCode.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7117027283B836500FF985A /* MyQRCode.xib */; };
 		B711702A283B846900FF985A /* MyQRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7117029283B846900FF985A /* MyQRCode.swift */; };
 		B71170572840AD7700FF985A /* ScanQrCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71170562840AD7700FF985A /* ScanQrCodeViewController.swift */; };
@@ -38,6 +42,16 @@
 		B72FDEF12833C47F00748D13 /* SelectPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72FDEEF2833C47F00748D13 /* SelectPageTableViewCell.swift */; };
 		B72FDEF22833C47F00748D13 /* SelectPageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B72FDEF02833C47F00748D13 /* SelectPageTableViewCell.xib */; };
 		B72FDEF42833C4F800748D13 /* SelectPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72FDEF32833C4F800748D13 /* SelectPageViewModel.swift */; };
+		B73D980E286E001600D6ECA8 /* SendReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73D980D286E001600D6ECA8 /* SendReviewViewController.swift */; };
+		B73D9810286E003C00D6ECA8 /* SendAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73D980F286E003C00D6ECA8 /* SendAuthViewController.swift */; };
+		B73D9813286E054700D6ECA8 /* ReviewSendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73D9811286E054700D6ECA8 /* ReviewSendTableViewCell.swift */; };
+		B73D9814286E054700D6ECA8 /* ReviewSendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73D9812286E054700D6ECA8 /* ReviewSendTableViewCell.xib */; };
+		B73D9817286E056800D6ECA8 /* ReviewDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73D9815286E056800D6ECA8 /* ReviewDataTableViewCell.swift */; };
+		B73D9818286E056800D6ECA8 /* ReviewDataTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73D9816286E056800D6ECA8 /* ReviewDataTableViewCell.xib */; };
+		B73D981B286E0B0B00D6ECA8 /* SendConfiemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73D9819286E0B0B00D6ECA8 /* SendConfiemTableViewCell.swift */; };
+		B73D981C286E0B0B00D6ECA8 /* SendConfiemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73D981A286E0B0B00D6ECA8 /* SendConfiemTableViewCell.xib */; };
+		B73D981F286E0F3900D6ECA8 /* SendVerifyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73D981D286E0F3900D6ECA8 /* SendVerifyTableViewCell.swift */; };
+		B73D9820286E0F3900D6ECA8 /* SendVerifyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73D981E286E0F3900D6ECA8 /* SendVerifyTableViewCell.xib */; };
 		B7476E7F2847681C00331614 /* SelectNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7476E7E2847681C00331614 /* SelectNetworkViewController.swift */; };
 		B7476E8228476A7C00331614 /* SelectNetworkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7476E8028476A7C00331614 /* SelectNetworkTableViewCell.swift */; };
 		B7476E8328476A7C00331614 /* SelectNetworkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7476E8128476A7C00331614 /* SelectNetworkTableViewCell.xib */; };
@@ -48,6 +62,9 @@
 		B767A76A2845CE3F00E4381F /* MemoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B767A7682845CE3F00E4381F /* MemoTableViewCell.xib */; };
 		B767A76C2845D8E200E4381F /* OtherChainQRCode.xib in Resources */ = {isa = PBXBuildFile; fileRef = B767A76B2845D8E200E4381F /* OtherChainQRCode.xib */; };
 		B767A76E2845D90A00E4381F /* OtherChainQRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B767A76D2845D90A00E4381F /* OtherChainQRCode.swift */; };
+		B792AA30286C3DC500014352 /* SendWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B792AA2F286C3DC500014352 /* SendWalletViewController.swift */; };
+		B792AA34286C455700014352 /* SendShortcutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B792AA32286C455700014352 /* SendShortcutTableViewCell.swift */; };
+		B792AA35286C455700014352 /* SendShortcutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B792AA33286C455700014352 /* SendShortcutTableViewCell.xib */; };
 		B7F0D318282B5C9900BA9764 /* Wallet.h in Headers */ = {isa = PBXBuildFile; fileRef = B7F0D317282B5C9900BA9764 /* Wallet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B7F0D327282B5FAF00BA9764 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F0D326282B5FAE00BA9764 /* Core.framework */; };
 		B7F0D32B282B5FB600BA9764 /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F0D32A282B5FB600BA9764 /* Networking.framework */; };
@@ -61,6 +78,10 @@
 		8E1FF3686C48A8E2C8323EBD /* Pods_Wallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9657DB77AD00DE85F92BE87 /* Pods-Wallet.release (staging).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wallet.release (staging).xcconfig"; path = "Target Support Files/Pods-Wallet/Pods-Wallet.release (staging).xcconfig"; sourceTree = "<group>"; };
 		B64023A181614786618CCA62 /* Pods-Wallet.release (development).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wallet.release (development).xcconfig"; path = "Target Support Files/Pods-Wallet/Pods-Wallet.release (development).xcconfig"; sourceTree = "<group>"; };
+		B7031552286D86940070493B /* ShortcutCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutCollectionViewCell.swift; sourceTree = "<group>"; };
+		B7031553286D86940070493B /* ShortcutCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShortcutCollectionViewCell.xib; sourceTree = "<group>"; };
+		B7031556286D9A2A0070493B /* SendToTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendToTableViewCell.swift; sourceTree = "<group>"; };
+		B7031557286D9A2A0070493B /* SendToTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendToTableViewCell.xib; sourceTree = "<group>"; };
 		B7117027283B836500FF985A /* MyQRCode.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyQRCode.xib; sourceTree = "<group>"; };
 		B7117029283B846900FF985A /* MyQRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyQRCode.swift; sourceTree = "<group>"; };
 		B71170562840AD7700FF985A /* ScanQrCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQrCodeViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +113,16 @@
 		B72FDEEF2833C47F00748D13 /* SelectPageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPageTableViewCell.swift; sourceTree = "<group>"; };
 		B72FDEF02833C47F00748D13 /* SelectPageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectPageTableViewCell.xib; sourceTree = "<group>"; };
 		B72FDEF32833C4F800748D13 /* SelectPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPageViewModel.swift; sourceTree = "<group>"; };
+		B73D980D286E001600D6ECA8 /* SendReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendReviewViewController.swift; sourceTree = "<group>"; };
+		B73D980F286E003C00D6ECA8 /* SendAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendAuthViewController.swift; sourceTree = "<group>"; };
+		B73D9811286E054700D6ECA8 /* ReviewSendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSendTableViewCell.swift; sourceTree = "<group>"; };
+		B73D9812286E054700D6ECA8 /* ReviewSendTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewSendTableViewCell.xib; sourceTree = "<group>"; };
+		B73D9815286E056800D6ECA8 /* ReviewDataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDataTableViewCell.swift; sourceTree = "<group>"; };
+		B73D9816286E056800D6ECA8 /* ReviewDataTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewDataTableViewCell.xib; sourceTree = "<group>"; };
+		B73D9819286E0B0B00D6ECA8 /* SendConfiemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendConfiemTableViewCell.swift; sourceTree = "<group>"; };
+		B73D981A286E0B0B00D6ECA8 /* SendConfiemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendConfiemTableViewCell.xib; sourceTree = "<group>"; };
+		B73D981D286E0F3900D6ECA8 /* SendVerifyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendVerifyTableViewCell.swift; sourceTree = "<group>"; };
+		B73D981E286E0F3900D6ECA8 /* SendVerifyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendVerifyTableViewCell.xib; sourceTree = "<group>"; };
 		B7476E7E2847681C00331614 /* SelectNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectNetworkViewController.swift; sourceTree = "<group>"; };
 		B7476E8028476A7C00331614 /* SelectNetworkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectNetworkTableViewCell.swift; sourceTree = "<group>"; };
 		B7476E8128476A7C00331614 /* SelectNetworkTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectNetworkTableViewCell.xib; sourceTree = "<group>"; };
@@ -102,6 +133,9 @@
 		B767A7682845CE3F00E4381F /* MemoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemoTableViewCell.xib; sourceTree = "<group>"; };
 		B767A76B2845D8E200E4381F /* OtherChainQRCode.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OtherChainQRCode.xib; sourceTree = "<group>"; };
 		B767A76D2845D90A00E4381F /* OtherChainQRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherChainQRCode.swift; sourceTree = "<group>"; };
+		B792AA2F286C3DC500014352 /* SendWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendWalletViewController.swift; sourceTree = "<group>"; };
+		B792AA32286C455700014352 /* SendShortcutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendShortcutTableViewCell.swift; sourceTree = "<group>"; };
+		B792AA33286C455700014352 /* SendShortcutTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendShortcutTableViewCell.xib; sourceTree = "<group>"; };
 		B7F0D314282B5C9900BA9764 /* Wallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Wallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7F0D317282B5C9900BA9764 /* Wallet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Wallet.h; sourceTree = "<group>"; };
 		B7F0D326282B5FAE00BA9764 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -208,11 +242,10 @@
 		B72FDEB62833982000748D13 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				B792AA2E286C3DA300014352 /* Send */,
+				B792AA2D286C3D7400014352 /* Qr Code */,
 				B72FDEBA2833986100748D13 /* WalletViewController.swift */,
 				B72FDEE72833C38500748D13 /* SelectPageViewController.swift */,
-				B71170562840AD7700FF985A /* ScanQrCodeViewController.swift */,
-				B728FE542844ACCC00CF03DA /* MyQrCodeViewController.swift */,
-				B728FE562844AD9C00CF03DA /* CastcleQrCodeViewController.swift */,
 				B767A7612845CD0200E4381F /* OtherChainViewController.swift */,
 				B7476E7E2847681C00331614 /* SelectNetworkViewController.swift */,
 			);
@@ -232,6 +265,7 @@
 		B72FDEB82833983A00748D13 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				B792AA31286C436600014352 /* Send */,
 				B728FE592844B15900CF03DA /* Qr Code */,
 				B728FE582844B14400CF03DA /* Wallet */,
 			);
@@ -244,6 +278,47 @@
 				B72FDEC728339F5700748D13 /* Assets.xcassets */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		B792AA2D286C3D7400014352 /* Qr Code */ = {
+			isa = PBXGroup;
+			children = (
+				B71170562840AD7700FF985A /* ScanQrCodeViewController.swift */,
+				B728FE542844ACCC00CF03DA /* MyQrCodeViewController.swift */,
+				B728FE562844AD9C00CF03DA /* CastcleQrCodeViewController.swift */,
+			);
+			path = "Qr Code";
+			sourceTree = "<group>";
+		};
+		B792AA2E286C3DA300014352 /* Send */ = {
+			isa = PBXGroup;
+			children = (
+				B792AA2F286C3DC500014352 /* SendWalletViewController.swift */,
+				B73D980D286E001600D6ECA8 /* SendReviewViewController.swift */,
+				B73D980F286E003C00D6ECA8 /* SendAuthViewController.swift */,
+			);
+			path = Send;
+			sourceTree = "<group>";
+		};
+		B792AA31286C436600014352 /* Send */ = {
+			isa = PBXGroup;
+			children = (
+				B792AA32286C455700014352 /* SendShortcutTableViewCell.swift */,
+				B792AA33286C455700014352 /* SendShortcutTableViewCell.xib */,
+				B7031552286D86940070493B /* ShortcutCollectionViewCell.swift */,
+				B7031553286D86940070493B /* ShortcutCollectionViewCell.xib */,
+				B7031556286D9A2A0070493B /* SendToTableViewCell.swift */,
+				B7031557286D9A2A0070493B /* SendToTableViewCell.xib */,
+				B73D9811286E054700D6ECA8 /* ReviewSendTableViewCell.swift */,
+				B73D9812286E054700D6ECA8 /* ReviewSendTableViewCell.xib */,
+				B73D9815286E056800D6ECA8 /* ReviewDataTableViewCell.swift */,
+				B73D9816286E056800D6ECA8 /* ReviewDataTableViewCell.xib */,
+				B73D9819286E0B0B00D6ECA8 /* SendConfiemTableViewCell.swift */,
+				B73D981A286E0B0B00D6ECA8 /* SendConfiemTableViewCell.xib */,
+				B73D981D286E0F3900D6ECA8 /* SendVerifyTableViewCell.swift */,
+				B73D981E286E0F3900D6ECA8 /* SendVerifyTableViewCell.xib */,
+			);
+			path = Send;
 			sourceTree = "<group>";
 		};
 		B7F0D30A282B5C9900BA9764 = {
@@ -350,19 +425,26 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7031559286D9A2A0070493B /* SendToTableViewCell.xib in Resources */,
 				B767A7662845CE2C00E4381F /* OtherChainTableViewCell.xib in Resources */,
 				B72FDEF22833C47F00748D13 /* SelectPageTableViewCell.xib in Resources */,
+				B73D9814286E054700D6ECA8 /* ReviewSendTableViewCell.xib in Resources */,
 				B72FDEDE2833BA9300748D13 /* WalletNoDataTableViewCell.xib in Resources */,
+				B7031555286D86940070493B /* ShortcutCollectionViewCell.xib in Resources */,
 				B7476E8328476A7C00331614 /* SelectNetworkTableViewCell.xib in Resources */,
 				B72FDED62833B38200748D13 /* TransactionTableViewCell.xib in Resources */,
 				B728FE5D2844B17D00CF03DA /* CastcleQrCodeTableViewCell.xib in Resources */,
 				B767A76A2845CE3F00E4381F /* MemoTableViewCell.xib in Resources */,
+				B792AA35286C455700014352 /* SendShortcutTableViewCell.xib in Resources */,
+				B73D981C286E0B0B00D6ECA8 /* SendConfiemTableViewCell.xib in Resources */,
 				B72FDECC28339F7A00748D13 /* DisplayNameTableViewCell.xib in Resources */,
 				B72FDEC828339F5700748D13 /* Assets.xcassets in Resources */,
 				B72FDEE22833BE6F00748D13 /* WalletHistoryHeaderTableViewCell.xib in Resources */,
 				B72FDED22833A48600748D13 /* BalanceTableViewCell.xib in Resources */,
+				B73D9818286E056800D6ECA8 /* ReviewDataTableViewCell.xib in Resources */,
 				B7117028283B836500FF985A /* MyQRCode.xib in Resources */,
 				B72FDEB42833978A00748D13 /* Wallet.storyboard in Resources */,
+				B73D9820286E0F3900D6ECA8 /* SendVerifyTableViewCell.xib in Resources */,
 				B767A76C2845D8E200E4381F /* OtherChainQRCode.xib in Resources */,
 				B72FDEDA2833B6E000748D13 /* BannerTableViewCell.xib in Resources */,
 			);
@@ -400,8 +482,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B73D980E286E001600D6ECA8 /* SendReviewViewController.swift in Sources */,
 				B7476E8228476A7C00331614 /* SelectNetworkTableViewCell.swift in Sources */,
 				B72FDEBD2833989C00748D13 /* WalletNibVars.swift in Sources */,
+				B73D9817286E056800D6ECA8 /* ReviewDataTableViewCell.swift in Sources */,
 				B7476E7F2847681C00331614 /* SelectNetworkViewController.swift in Sources */,
 				B72FDEF12833C47F00748D13 /* SelectPageTableViewCell.swift in Sources */,
 				B728FE5C2844B17C00CF03DA /* CastcleQrCodeTableViewCell.swift in Sources */,
@@ -409,14 +493,22 @@
 				B72FDED52833B38200748D13 /* TransactionTableViewCell.swift in Sources */,
 				B727FDF52851ECD100BA50C7 /* CastcleQrCodeViewModel.swift in Sources */,
 				B72FDEBF283398B300748D13 /* WalletOpener.swift in Sources */,
+				B73D981F286E0F3900D6ECA8 /* SendVerifyTableViewCell.swift in Sources */,
 				B72FDEDD2833BA9300748D13 /* WalletNoDataTableViewCell.swift in Sources */,
 				B711702A283B846900FF985A /* MyQRCode.swift in Sources */,
+				B73D981B286E0B0B00D6ECA8 /* SendConfiemTableViewCell.swift in Sources */,
 				B767A7622845CD0200E4381F /* OtherChainViewController.swift in Sources */,
+				B7031554286D86940070493B /* ShortcutCollectionViewCell.swift in Sources */,
 				B72FDEF42833C4F800748D13 /* SelectPageViewModel.swift in Sources */,
+				B73D9810286E003C00D6ECA8 /* SendAuthViewController.swift in Sources */,
 				B767A76E2845D90A00E4381F /* OtherChainQRCode.swift in Sources */,
 				B767A7692845CE3F00E4381F /* MemoTableViewCell.swift in Sources */,
+				B7031558286D9A2A0070493B /* SendToTableViewCell.swift in Sources */,
+				B792AA30286C3DC500014352 /* SendWalletViewController.swift in Sources */,
 				B728FE572844AD9C00CF03DA /* CastcleQrCodeViewController.swift in Sources */,
 				B72FDED12833A48600748D13 /* BalanceTableViewCell.swift in Sources */,
+				B792AA34286C455700014352 /* SendShortcutTableViewCell.swift in Sources */,
+				B73D9813286E054700D6ECA8 /* ReviewSendTableViewCell.swift in Sources */,
 				B767A7652845CE2C00E4381F /* OtherChainTableViewCell.swift in Sources */,
 				B72FDECE28339FC500748D13 /* WalletViewModel.swift in Sources */,
 				B728FE552844ACCC00CF03DA /* MyQrCodeViewController.swift in Sources */,

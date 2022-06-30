@@ -65,7 +65,7 @@ class TransactionTableViewCell: UITableViewCell {
     }
 
     @IBAction func sendAction(_ sender: Any) {
-        // MARK: - Send function
+        Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.sendWallet), animated: true)
     }
 
     @IBAction func buyAction(_ sender: Any) {
