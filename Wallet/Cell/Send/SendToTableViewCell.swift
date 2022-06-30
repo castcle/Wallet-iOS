@@ -112,8 +112,18 @@ class SendToTableViewCell: UITableViewCell, UITextFieldDelegate {
         return true
     }
 
+    func configCell(sendTo: String) {
+        self.sendToTextField.text = sendTo
+    }
+
     @objc func textFieldDidChange(_ textField: UITextField) {
         self.delegate?.didValueChange(self, sendTo: self.sendToTextField.text ?? "", memo: self.memoTextField.text ?? "", amount: self.amountTextField.text ?? "", note: self.noteTextField.text ?? "")
+    }
+
+    @IBAction func resendAction(_ sender: Any) {
+        let viewController = WalletOpener.open(.resend) as? ResendViewController
+        viewController?.delegate = self
+        Utility.currentViewController().navigationController?.pushViewController(viewController ?? ResendViewController(), animated: true)
     }
 
     @IBAction func scanSendToAction(_ sender: Any) {
@@ -126,5 +136,12 @@ class SendToTableViewCell: UITableViewCell, UITextFieldDelegate {
 
     @IBAction func maxAction(_ sender: Any) {
         self.amountTextField.text = "10"
+    }
+}
+
+extension SendToTableViewCell: ResendViewControllerDelegate {
+    func didSelect(_ resendViewController: ResendViewController, name: String) {
+        self.sendToTextField.text = name
+        self.delegate?.didValueChange(self, sendTo: self.sendToTextField.text ?? "", memo: self.memoTextField.text ?? "", amount: self.amountTextField.text ?? "", note: self.noteTextField.text ?? "")
     }
 }

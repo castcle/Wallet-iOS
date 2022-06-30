@@ -28,11 +28,17 @@
 import UIKit
 import Core
 
+protocol SendShortcutTableViewCellDelegate: AnyObject {
+    func didSelectShortcut(_ sendShortcutTableViewCell: SendShortcutTableViewCell, name: String)
+}
+
 class SendShortcutTableViewCell: UITableViewCell {
 
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet weak var shortcutTitleLabel: UILabel!
     @IBOutlet weak var manageButton: UIButton!
+
+    public var delegate: SendShortcutTableViewCellDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -72,6 +78,8 @@ extension SendShortcutTableViewCell: UICollectionViewDataSource, UICollectionVie
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // MARK: - Add action
+        if indexPath.row != 2 {
+            self.delegate?.didSelectShortcut(self, name: "@simple_user\(indexPath.row + 1)")
+        }
     }
 }

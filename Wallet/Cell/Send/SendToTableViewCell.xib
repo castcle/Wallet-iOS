@@ -43,6 +43,13 @@
                                     <action selector="scanSendToAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="nIk-7U-p1R"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zes-Xe-oHA">
+                                <rect key="frame" x="15" y="5" width="210" height="30"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <connections>
+                                    <action selector="resendAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="xny-C7-l3M"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
@@ -50,7 +57,11 @@
                             <constraint firstAttribute="bottom" secondItem="zLf-dc-DS1" secondAttribute="bottom" constant="5" id="1DY-eH-PME"/>
                             <constraint firstAttribute="trailing" secondItem="voJ-we-kIg" secondAttribute="trailing" constant="15" id="2C4-VE-MKE"/>
                             <constraint firstItem="zLf-dc-DS1" firstAttribute="leading" secondItem="r1P-sw-Fpb" secondAttribute="leading" constant="15" id="7Uc-6l-nkL"/>
+                            <constraint firstItem="zes-Xe-oHA" firstAttribute="leading" secondItem="zLf-dc-DS1" secondAttribute="leading" id="8Ej-ta-kKo"/>
+                            <constraint firstItem="zes-Xe-oHA" firstAttribute="top" secondItem="zLf-dc-DS1" secondAttribute="top" id="CMq-nE-Tbw"/>
+                            <constraint firstItem="zes-Xe-oHA" firstAttribute="bottom" secondItem="zLf-dc-DS1" secondAttribute="bottom" id="Kb5-GA-P2T"/>
                             <constraint firstItem="zLf-dc-DS1" firstAttribute="top" secondItem="r1P-sw-Fpb" secondAttribute="top" constant="5" id="lP0-38-UIK"/>
+                            <constraint firstItem="zes-Xe-oHA" firstAttribute="trailing" secondItem="zLf-dc-DS1" secondAttribute="trailing" id="nhA-1l-PE7"/>
                             <constraint firstItem="voJ-we-kIg" firstAttribute="leading" secondItem="zLf-dc-DS1" secondAttribute="trailing" constant="10" id="opv-Cg-6m6"/>
                             <constraint firstItem="voJ-we-kIg" firstAttribute="centerY" secondItem="r1P-sw-Fpb" secondAttribute="centerY" id="sJZ-bd-kas"/>
                         </constraints>
@@ -211,7 +222,7 @@
                 <outlet property="sendToTitle" destination="ghy-p0-957" id="WY0-Uu-5bT"/>
                 <outlet property="sendToView" destination="r1P-sw-Fpb" id="S9k-Y3-eYM"/>
             </connections>
-            <point key="canvasLocation" x="137.68115942028987" y="215.625"/>
+            <point key="canvasLocation" x="137.68115942028987" y="215.29017857142856"/>
         </tableViewCell>
     </objects>
     <resources>

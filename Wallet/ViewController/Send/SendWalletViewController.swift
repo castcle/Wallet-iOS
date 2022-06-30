@@ -112,13 +112,22 @@ extension SendWalletViewController: UITableViewDelegate, UITableViewDataSource {
         if SendWalletViewControllerSection.shortcuts.rawValue == indexPath.section {
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.sendShortcut, for: indexPath as IndexPath) as? SendShortcutTableViewCell
             cell?.backgroundColor = UIColor.clear
+            cell?.delegate = self
             return cell ?? SendShortcutTableViewCell()
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.sendTo, for: indexPath as IndexPath) as? SendToTableViewCell
             cell?.backgroundColor = UIColor.clear
             cell?.delegate = self
+            cell?.configCell(sendTo: self.sendTo)
             return cell ?? SendToTableViewCell()
         }
+    }
+}
+
+extension SendWalletViewController: SendShortcutTableViewCellDelegate {
+    func didSelectShortcut(_ sendShortcutTableViewCell: SendShortcutTableViewCell, name: String) {
+        self.sendTo = name
+        self.tableView.reloadData()
     }
 }
 
