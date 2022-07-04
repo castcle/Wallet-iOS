@@ -60,6 +60,15 @@ class WalletViewController: UIViewController {
 
     func setupNavBar() {
         self.customNavigationBar(.secondary, title: "Wallet")
+        var rightButton: [UIBarButtonItem] = []
+        let scanIcon = NavBarButtonType.qrCode.barButton
+        scanIcon.addTarget(self, action: #selector(self.scanAction), for: .touchUpInside)
+        rightButton.append(UIBarButtonItem(customView: scanIcon))
+        self.navigationItem.rightBarButtonItems = rightButton
+    }
+
+    @objc private func scanAction() {
+        self.navigationController?.pushViewController(WalletOpener.open(.scanQrCode), animated: true)
     }
 
     func configureTableView() {
@@ -82,15 +91,14 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case WalletViewControllerSection.banner.rawValue:
+        if section == WalletViewControllerSection.banner.rawValue {
             let airdropEnable = RemoteConfig.remoteConfig().configValue(forKey: "banner_early_airdrop_enable").boolValue
             if airdropEnable {
                 return 1
             } else {
                 return 0
             }
-        default:
+        } else {
             return 1
         }
     }
@@ -99,7 +107,7 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.section {
         case WalletViewControllerSection.displayName.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.displayName, for: indexPath as IndexPath) as? DisplayNameTableViewCell
-            cell?.configCell(page: self.viewModel.page)
+            cell?.configCell(page: self.viewModel.page, isDisplayOnly: false)
             cell?.backgroundColor = UIColor.clear
             cell?.delegate = self
             return cell ?? DisplayNameTableViewCell()

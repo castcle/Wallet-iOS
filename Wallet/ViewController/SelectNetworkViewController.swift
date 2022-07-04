@@ -19,10 +19,10 @@
 //  Thailand 10160, or visit www.castcle.com if you need additional information
 //  or have any questions.
 //
-//  SelectPageViewController.swift
+//  SelectNetworkViewController.swift
 //  Wallet
 //
-//  Created by Castcle Co., Ltd. on 17/5/2565 BE.
+//  Created by Castcle Co., Ltd. on 1/6/2565 BE.
 //
 
 import UIKit
@@ -31,17 +31,20 @@ import Networking
 import Defaults
 import PanModal
 
-protocol SelectPageViewControllerDelegate: AnyObject {
-    func didChoosePage(_ view: SelectPageViewController, page: Page)
+protocol SelectNetworkViewControllerDelegate: AnyObject {
+    func didChooseNetwork(_ view: SelectNetworkViewController, network: String)
 }
 
-class SelectPageViewController: UIViewController {
+class SelectNetworkViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
 
-    var delegate: SelectPageViewControllerDelegate?
-    var viewModel = SelectPageViewModel()
+    var delegate: SelectNetworkViewControllerDelegate?
     var maxHeight = (UIScreen.main.bounds.height - 365)
+    private let networks: [String] = [
+        "Polygon (MATIC)",
+        "Terra (LUNA)"
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,15 +60,15 @@ class SelectPageViewController: UIViewController {
     func configureTableView() {
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.register(UINib(nibName: WalletNibVars.TableViewCell.displayName, bundle: ConfigBundle.wallet), forCellReuseIdentifier: WalletNibVars.TableViewCell.displayName)
+        self.tableView.register(UINib(nibName: WalletNibVars.TableViewCell.selectNetwork, bundle: ConfigBundle.wallet), forCellReuseIdentifier: WalletNibVars.TableViewCell.selectNetwork)
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 100
     }
 }
 
-extension SelectPageViewController: UITableViewDelegate, UITableViewDataSource {
+extension SelectNetworkViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return self.viewModel.pages.count
+        return self.networks.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -73,35 +76,28 @@ extension SelectPageViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.displayName, for: indexPath as IndexPath) as? DisplayNameTableViewCell
-        let page = self.viewModel.pages[indexPath.section]
-        cell?.configCell(page: page, isDisplayOnly: true)
-        cell?.backgroundColor = UIColor.Asset.darkGray
-        if page.castcleId == self.viewModel.selectPage.castcleId {
-            cell?.iconImage.isHidden = false
-        } else {
-            cell?.iconImage.isHidden = true
-        }
-        return cell ?? DisplayNameTableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.selectNetwork, for: indexPath as IndexPath) as? SelectNetworkTableViewCell
+        cell?.networkLabel.text = self.networks[indexPath.section]
+        return cell ?? SelectNetworkTableViewCell()
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 5
+        return 1
     }
 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 5))
+        let footerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 1))
         footerView.backgroundColor = UIColor.clear
         return footerView
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.delegate?.didChoosePage(self, page: self.viewModel.pages[indexPath.section])
+        self.delegate?.didChooseNetwork(self, network: self.networks[indexPath.section])
         self.dismiss(animated: true)
     }
 }
 
-extension SelectPageViewController: PanModalPresentable {
+extension SelectNetworkViewController: PanModalPresentable {
     public override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }

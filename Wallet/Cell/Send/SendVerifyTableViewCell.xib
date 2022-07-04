@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="230" id="KGk-i7-Jjw" customClass="SendVerifyTableViewCell" customModule="Wallet" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="230"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="230"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="E-mail verification" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kkx-Ku-LFk">
+                        <rect key="frame" x="20" y="20" width="130.5" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 mins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DeS-w6-WQs">
+                        <rect key="frame" x="257" y="21.5" width="43" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Code will be sent to Cas***@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gbr-E2-Wrw">
+                        <rect key="frame" x="20" y="45" width="280" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XI4-f6-Rnf">
+                        <rect key="frame" x="20" y="65" width="280" height="40"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter your e-mail verification code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J9z-GN-tVi">
+                                <rect key="frame" x="15" y="5" width="190" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FfW-mU-qU3">
+                                <rect key="frame" x="215" y="5" width="50" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="kNg-yy-YYV"/>
+                                    <constraint firstAttribute="width" constant="50" id="nVF-yy-nYe"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Resend"/>
+                                <connections>
+                                    <action selector="resendEmailAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="EXh-U2-6ve"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="0mS-pR-2rM"/>
+                            <constraint firstItem="FfW-mU-qU3" firstAttribute="leading" secondItem="J9z-GN-tVi" secondAttribute="trailing" constant="10" id="3kV-Sj-0Ut"/>
+                            <constraint firstItem="FfW-mU-qU3" firstAttribute="centerY" secondItem="XI4-f6-Rnf" secondAttribute="centerY" id="4EO-cr-waC"/>
+                            <constraint firstItem="J9z-GN-tVi" firstAttribute="leading" secondItem="XI4-f6-Rnf" secondAttribute="leading" constant="15" id="D9Q-CJ-fJw"/>
+                            <constraint firstAttribute="trailing" secondItem="FfW-mU-qU3" secondAttribute="trailing" constant="15" id="aFt-9H-wWd"/>
+                            <constraint firstAttribute="bottom" secondItem="J9z-GN-tVi" secondAttribute="bottom" constant="5" id="rqt-Bq-XF6"/>
+                            <constraint firstItem="J9z-GN-tVi" firstAttribute="top" secondItem="XI4-f6-Rnf" secondAttribute="top" constant="5" id="wPX-Q1-wei"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SMS verification" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emu-if-nox">
+                        <rect key="frame" x="20" y="125" width="117.5" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 mins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="haC-b5-uLK">
+                        <rect key="frame" x="257" y="126.5" width="43" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Code will be sent to 091*******" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KHz-SQ-JyV">
+                        <rect key="frame" x="20" y="150" width="280" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SfL-BS-uXf">
+                        <rect key="frame" x="20" y="170" width="280" height="40"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter your mobile verification code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lng-dQ-HVz">
+                                <rect key="frame" x="15" y="5" width="190" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D3J-1X-rJC">
+                                <rect key="frame" x="215" y="5" width="50" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="E3z-Xh-Yzk"/>
+                                    <constraint firstAttribute="width" constant="50" id="sXg-A4-GNY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Resend"/>
+                                <connections>
+                                    <action selector="resendSmsAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="wAw-Mn-AAn"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="lng-dQ-HVz" firstAttribute="top" secondItem="SfL-BS-uXf" secondAttribute="top" constant="5" id="3Xx-dK-usa"/>
+                            <constraint firstItem="lng-dQ-HVz" firstAttribute="leading" secondItem="SfL-BS-uXf" secondAttribute="leading" constant="15" id="5sn-4a-G5I"/>
+                            <constraint firstAttribute="bottom" secondItem="lng-dQ-HVz" secondAttribute="bottom" constant="5" id="62j-wl-DzV"/>
+                            <constraint firstAttribute="trailing" secondItem="D3J-1X-rJC" secondAttribute="trailing" constant="15" id="ZjH-8j-lLk"/>
+                            <constraint firstAttribute="height" constant="40" id="dEU-L7-4SW"/>
+                            <constraint firstItem="D3J-1X-rJC" firstAttribute="centerY" secondItem="SfL-BS-uXf" secondAttribute="centerY" id="m2J-jc-goX"/>
+                            <constraint firstItem="D3J-1X-rJC" firstAttribute="leading" secondItem="lng-dQ-HVz" secondAttribute="trailing" constant="10" id="sDW-19-QPA"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="haC-b5-uLK" firstAttribute="centerY" secondItem="emu-if-nox" secondAttribute="centerY" id="2l2-oC-3Tj"/>
+                    <constraint firstAttribute="trailing" secondItem="DeS-w6-WQs" secondAttribute="trailing" constant="20" id="3oW-sT-Oo8"/>
+                    <constraint firstItem="SfL-BS-uXf" firstAttribute="top" secondItem="KHz-SQ-JyV" secondAttribute="bottom" constant="5" id="5oR-8Q-0st"/>
+                    <constraint firstAttribute="trailing" secondItem="Gbr-E2-Wrw" secondAttribute="trailing" constant="20" id="7LY-My-HQG"/>
+                    <constraint firstAttribute="trailing" secondItem="haC-b5-uLK" secondAttribute="trailing" constant="20" id="FVM-FB-rLW"/>
+                    <constraint firstItem="DeS-w6-WQs" firstAttribute="centerY" secondItem="kkx-Ku-LFk" secondAttribute="centerY" id="Flh-N6-P0c"/>
+                    <constraint firstItem="XI4-f6-Rnf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="G5S-Nh-sRg"/>
+                    <constraint firstItem="KHz-SQ-JyV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Owa-2I-SMO"/>
+                    <constraint firstItem="KHz-SQ-JyV" firstAttribute="top" secondItem="emu-if-nox" secondAttribute="bottom" constant="5" id="SUg-Ak-uZP"/>
+                    <constraint firstItem="emu-if-nox" firstAttribute="top" secondItem="XI4-f6-Rnf" secondAttribute="bottom" constant="20" id="TQK-yb-D92"/>
+                    <constraint firstItem="Gbr-E2-Wrw" firstAttribute="top" secondItem="kkx-Ku-LFk" secondAttribute="bottom" constant="5" id="Vjn-MV-qkD"/>
+                    <constraint firstItem="kkx-Ku-LFk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="YbF-c6-5PM"/>
+                    <constraint firstAttribute="bottom" secondItem="SfL-BS-uXf" secondAttribute="bottom" constant="20" id="Zof-fo-8p0"/>
+                    <constraint firstItem="emu-if-nox" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="cbb-6S-TAl"/>
+                    <constraint firstItem="SfL-BS-uXf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="cxB-TK-iwM"/>
+                    <constraint firstItem="XI4-f6-Rnf" firstAttribute="top" secondItem="Gbr-E2-Wrw" secondAttribute="bottom" constant="5" id="hiI-3t-YNg"/>
+                    <constraint firstItem="Gbr-E2-Wrw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="oga-2Q-iCn"/>
+                    <constraint firstAttribute="trailing" secondItem="SfL-BS-uXf" secondAttribute="trailing" constant="20" id="onR-fW-AYH"/>
+                    <constraint firstItem="kkx-Ku-LFk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="py4-ak-AJi"/>
+                    <constraint firstAttribute="trailing" secondItem="XI4-f6-Rnf" secondAttribute="trailing" constant="20" id="qJq-cJ-JTp"/>
+                    <constraint firstAttribute="trailing" secondItem="KHz-SQ-JyV" secondAttribute="trailing" constant="20" id="zd8-VG-Wgd"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="emailCountdownLabel" destination="DeS-w6-WQs" id="ay0-8N-cvh"/>
+                <outlet property="emailNoteLabel" destination="Gbr-E2-Wrw" id="0o3-oG-l5M"/>
+                <outlet property="emailTextField" destination="J9z-GN-tVi" id="hnI-uB-ifr"/>
+                <outlet property="emailVerifyLabel" destination="kkx-Ku-LFk" id="g17-a8-7EH"/>
+                <outlet property="emailView" destination="XI4-f6-Rnf" id="skH-mL-eYc"/>
+                <outlet property="resendEmailButton" destination="FfW-mU-qU3" id="Kst-Fj-rXo"/>
+                <outlet property="resendSmsButton" destination="D3J-1X-rJC" id="PpZ-Pq-bhA"/>
+                <outlet property="smsCountdownLabel" destination="haC-b5-uLK" id="3jH-Sg-Pwi"/>
+                <outlet property="smsNoteLabel" destination="KHz-SQ-JyV" id="vND-Eb-gvC"/>
+                <outlet property="smsTextField" destination="lng-dQ-HVz" id="xjn-xg-3nq"/>
+                <outlet property="smsVerifyLabel" destination="emu-if-nox" id="laB-gb-c6M"/>
+                <outlet property="smsView" destination="SfL-BS-uXf" id="zks-PM-53C"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="157.03125"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -75,7 +75,7 @@
             <connections>
                 <outlet property="avatarImage" destination="Ml3-bp-Pyu" id="wQM-4m-ZfA"/>
                 <outlet property="displayNameLabel" destination="V5U-39-QSE" id="xBc-36-QvX"/>
-                <outlet property="nextImage" destination="OmO-I0-9YR" id="MoK-NY-BXd"/>
+                <outlet property="iconImage" destination="OmO-I0-9YR" id="bWC-2G-Xo9"/>
                 <outlet property="typeLabel" destination="fqn-Uk-Ur2" id="xM1-DA-ZSr"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="113.16964285714285"/>

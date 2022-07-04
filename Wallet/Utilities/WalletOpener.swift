@@ -31,6 +31,16 @@ import Core
 public enum WalletScene {
     case wallet
     case selectPage(SelectPageViewModel)
+    case scanQrCode
+    case myQrCode(QrCodeType)
+    case castcleQrCode(QrCodeType)
+    case otherChain
+    case selectNetwork
+    case sendWallet
+    case sendReview
+    case sendAuth
+    case verifyAccount
+    case resend
 }
 
 public struct WalletOpener {
@@ -45,6 +55,48 @@ public struct WalletOpener {
             let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.selectPage) as? SelectPageViewController
             viewController?.viewModel = viewModel
             return viewController ?? SelectPageViewController()
+        case .scanQrCode:
+            let storyboard: UIStoryboard = UIStoryboard(name: WalletNibVars.Storyboard.wallet, bundle: ConfigBundle.wallet)
+            let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.scanQrCode)
+            return viewController
+        case .myQrCode(let qrCodeType):
+            let storyboard: UIStoryboard = UIStoryboard(name: WalletNibVars.Storyboard.wallet, bundle: ConfigBundle.wallet)
+            let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.myQrCode) as? MyQrCodeViewController
+            viewController?.qrCodeType = qrCodeType
+            return viewController ?? MyQrCodeViewController()
+        case .castcleQrCode(let qrCodeType):
+            let storyboard: UIStoryboard = UIStoryboard(name: WalletNibVars.Storyboard.wallet, bundle: ConfigBundle.wallet)
+            let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.castcleQrCode) as? CastcleQrCodeViewController
+            viewController?.qrCodeType = qrCodeType
+            return viewController ?? CastcleQrCodeViewController()
+        case .otherChain:
+            let storyboard: UIStoryboard = UIStoryboard(name: WalletNibVars.Storyboard.wallet, bundle: ConfigBundle.wallet)
+            let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.otherChain)
+            return viewController
+        case .selectNetwork:
+            let storyboard: UIStoryboard = UIStoryboard(name: WalletNibVars.Storyboard.wallet, bundle: ConfigBundle.wallet)
+            let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.selectNetwork)
+            return viewController
+        case .sendWallet:
+            let storyboard: UIStoryboard = UIStoryboard(name: WalletNibVars.Storyboard.wallet, bundle: ConfigBundle.wallet)
+            let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.sendWallet)
+            return viewController
+        case .sendReview:
+            let storyboard: UIStoryboard = UIStoryboard(name: WalletNibVars.Storyboard.wallet, bundle: ConfigBundle.wallet)
+            let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.sendReview)
+            return viewController
+        case .sendAuth:
+            let storyboard: UIStoryboard = UIStoryboard(name: WalletNibVars.Storyboard.wallet, bundle: ConfigBundle.wallet)
+            let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.sendAuth)
+            return viewController
+        case .verifyAccount:
+            let storyboard: UIStoryboard = UIStoryboard(name: WalletNibVars.Storyboard.wallet, bundle: ConfigBundle.wallet)
+            let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.verifyAccount)
+            return viewController
+        case .resend:
+            let storyboard: UIStoryboard = UIStoryboard(name: WalletNibVars.Storyboard.wallet, bundle: ConfigBundle.wallet)
+            let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.resend)
+            return viewController
         }
     }
 }

@@ -30,11 +30,26 @@ public struct WalletNibVars {
     public struct ViewController {
         public static let wallet = "WalletViewController"
         public static let selectPage = "SelectPageViewController"
+        public static let scanQrCode = "ScanQrCodeViewController"
+        public static let myQrCode = "MyQrCodeViewController"
+        public static let castcleQrCode = "CastcleQrCodeViewController"
+        public static let otherChain = "OtherChainViewController"
+        public static let selectNetwork = "SelectNetworkViewController"
+        public static let sendWallet = "SendWalletViewController"
+        public static let sendReview = "SendReviewViewController"
+        public static let sendAuth = "SendAuthViewController"
+        public static let verifyAccount = "WalletVerifyAccountViewController"
+        public static let resend = "ResendViewController"
     }
 
     // MARK: - View
     public struct Storyboard {
         public static let wallet = "Wallet"
+    }
+
+    public struct View {
+        public static let myQRCode = "MyQRCode"
+        public static let otherChainQRCode = "OtherChainQRCode"
     }
 
     // MARK: - TableViewCell
@@ -45,10 +60,26 @@ public struct WalletNibVars {
         public static let banner = "BannerTableViewCell"
         public static let walletHistoryHeader = "WalletHistoryHeaderTableViewCell"
         public static let walletNoData = "WalletNoDataTableViewCell"
-        public static let selectPage = "SelectPageTableViewCell"
+        public static let castcleQrCode = "CastcleQrCodeTableViewCell"
+        public static let otherChain = "OtherChainTableViewCell"
+        public static let memo = "MemoTableViewCell"
+        public static let selectNetwork = "SelectNetworkTableViewCell"
+        public static let sendShortcut = "SendShortcutTableViewCell"
+        public static let sendTo = "SendToTableViewCell"
+        public static let reviewSend = "ReviewSendTableViewCell"
+        public static let reviewData = "ReviewDataTableViewCell"
+        public static let sendConfiem = "SendConfiemTableViewCell"
+        public static let sendVerify = "SendVerifyTableViewCell"
+        public static let verifyAccount = "VerifyAccountTableViewCell"
+        public static let notice = "NoticeTableViewCell"
+        public static let resendUser = "ResendUserTableViewCell"
+        public static let resendOther = "ResendOtherTableViewCell"
+        public static let viewMore = "ViewMoreTableViewCell"
+        public static let emptyData = "EmptyDataTableViewCell"
     }
 
     // MARK: - CollectionViewCell
     public struct CollectionViewCell {
+        public static let shortcut = "ShortcutCollectionViewCell"
     }
 }

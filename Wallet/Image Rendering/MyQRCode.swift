@@ -30,35 +30,46 @@ import Core
 
 class MyQRCode: UIView {
 
-    @IBOutlet var contentView: UIView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var qrCodeImage: UIImageView!
+    @IBOutlet private var contentView: UIView!
+    @IBOutlet private var titleLabel: UILabel!
+    @IBOutlet private var castcleIdtitleLabel: UILabel!
+    @IBOutlet private var castcleIdLabel: UILabel!
+    @IBOutlet private var castcleImage: UIImageView!
+    @IBOutlet private var qrCodeImage: UIImageView!
+    @IBOutlet private var qrCodeView: UIView!
 
-    // MARK: - How to generate and save qr code to device
-//    if let qrCodeImage = Utility.generateQRCode(from: "https://www.castcle.com") {
-//        let myQRCode: MyQRCode = MyQRCode(frame: CGRect(x: 0, y: 0, width: 400, height: 300))
-//        myQRCode.titleLabel.text = "Test My QR Code"
-//        myQRCode.qrCodeImage.image = qrCodeImage
-//        UIImageWriteToSavedPhotosAlbum(myQRCode.asImage(), self, nil, nil)
-//    }
+    private var qrCode: UIImage = UIImage()
+    private var castcleId: String = ""
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    required init(castcleId: String, qrCodeImage: UIImage) {
+        self.castcleId = castcleId
+        self.qrCode = qrCodeImage
+        super.init(frame: CGRect(x: 0, y: 0, width: 414, height: 264))
         self.commonInit()
+        self.layoutIfNeeded()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.commonInit()
+        self.layoutIfNeeded()
     }
 
     private func commonInit() {
-        ConfigBundle.wallet.loadNibNamed("MyQRCode", owner: self)
+        ConfigBundle.wallet.loadNibNamed(WalletNibVars.View.myQRCode, owner: self)
         addSubview(self.contentView)
         self.contentView.frame = self.bounds
-        self.contentView.backgroundColor = UIColor.Asset.white
-        self.titleLabel.font = UIFont.asset(.regular, fontSize: .body)
-        self.titleLabel.textColor = UIColor.Asset.black
+        self.contentView.backgroundColor = UIColor.Asset.darkGraphiteBlue
+        self.qrCodeView.backgroundColor = UIColor.Asset.white
+        self.titleLabel.font = UIFont.asset(.medium, fontSize: .head4)
+        self.titleLabel.textColor = UIColor.Asset.white
+        self.castcleIdtitleLabel.font = UIFont.asset(.medium, fontSize: .head4)
+        self.castcleIdtitleLabel.textColor = UIColor.Asset.white
+        self.castcleIdLabel.font = UIFont.asset(.regular, fontSize: .head4)
+        self.castcleIdLabel.textColor = UIColor.Asset.lightBlue
+        self.castcleImage.image = UIImage.init(icon: .castcle(.logo), size: CGSize(width: 30, height: 30), textColor: UIColor.Asset.white)
+        self.qrCodeImage.image = self.qrCode
+        self.castcleIdLabel.text = self.castcleId
         self.contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
 }
