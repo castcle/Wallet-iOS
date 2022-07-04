@@ -57,6 +57,7 @@ class SendShortcutTableViewCell: UITableViewCell {
     }
 
     @IBAction func manageAction(_ sender: Any) {
+        // MARK: - Add action
     }
 }
 
