@@ -27,6 +27,7 @@
 
 import UIKit
 import Core
+import Networking
 import Defaults
 import FirebaseRemoteConfig
 import PanModal
@@ -55,7 +56,13 @@ class WalletViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupNavBar()
-        Defaults[.screenId] = ""
+        Defaults[.screenId] = ScreenId.wallet.rawValue
+    }
+
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        EngagementHelper().sendCastcleAnalytic(event: .onScreenView, screen: .wallet)
+        self.sendAnalytics()
     }
 
     func setupNavBar() {
@@ -65,6 +72,13 @@ class WalletViewController: UIViewController {
         scanIcon.addTarget(self, action: #selector(self.scanAction), for: .touchUpInside)
         rightButton.append(UIBarButtonItem(customView: scanIcon))
         self.navigationItem.rightBarButtonItems = rightButton
+    }
+
+    private func sendAnalytics() {
+        let item = Analytic()
+        item.accountId = UserManager.shared.accountId
+        item.userId = UserManager.shared.id
+        TrackingAnalyticHelper.shared.sendTrackingAnalytic(eventType: .viewWallet, item: item)
     }
 
     @objc private func scanAction() {
