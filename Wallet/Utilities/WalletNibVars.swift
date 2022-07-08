@@ -40,6 +40,7 @@ public struct WalletNibVars {
         public static let sendAuth = "SendAuthViewController"
         public static let verifyAccount = "WalletVerifyAccountViewController"
         public static let resend = "ResendViewController"
+        public static let manageShortcuts = "ManageShortcutsViewController"
     }
 
     // MARK: - View
@@ -76,6 +77,7 @@ public struct WalletNibVars {
         public static let resendOther = "ResendOtherTableViewCell"
         public static let viewMore = "ViewMoreTableViewCell"
         public static let emptyData = "EmptyDataTableViewCell"
+        public static let manageShortcutHeader = "ManageShortcutHeaderTableViewCell"
     }
 
     // MARK: - CollectionViewCell

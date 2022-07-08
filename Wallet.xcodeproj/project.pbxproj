@@ -52,6 +52,11 @@
 		B73D981C286E0B0B00D6ECA8 /* SendConfiemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73D981A286E0B0B00D6ECA8 /* SendConfiemTableViewCell.xib */; };
 		B73D981F286E0F3900D6ECA8 /* SendVerifyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73D981D286E0F3900D6ECA8 /* SendVerifyTableViewCell.swift */; };
 		B73D9820286E0F3900D6ECA8 /* SendVerifyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73D981E286E0F3900D6ECA8 /* SendVerifyTableViewCell.xib */; };
+		B744AC342877E78100378924 /* SendWalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B744AC332877E78100378924 /* SendWalletViewModel.swift */; };
+		B744AC38287809D800378924 /* ManageShortcutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B744AC37287809D800378924 /* ManageShortcutsViewController.swift */; };
+		B744AC3B2878190300378924 /* ManageShortcutHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B744AC392878190300378924 /* ManageShortcutHeaderTableViewCell.swift */; };
+		B744AC3C2878190300378924 /* ManageShortcutHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B744AC3A2878190300378924 /* ManageShortcutHeaderTableViewCell.xib */; };
+		B744AC3E28781A2C00378924 /* ManageShortcutsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B744AC3D28781A2C00378924 /* ManageShortcutsViewModel.swift */; };
 		B7476E7F2847681C00331614 /* SelectNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7476E7E2847681C00331614 /* SelectNetworkViewController.swift */; };
 		B7476E8228476A7C00331614 /* SelectNetworkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7476E8028476A7C00331614 /* SelectNetworkTableViewCell.swift */; };
 		B7476E8328476A7C00331614 /* SelectNetworkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7476E8128476A7C00331614 /* SelectNetworkTableViewCell.xib */; };
@@ -138,6 +143,11 @@
 		B73D981A286E0B0B00D6ECA8 /* SendConfiemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendConfiemTableViewCell.xib; sourceTree = "<group>"; };
 		B73D981D286E0F3900D6ECA8 /* SendVerifyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendVerifyTableViewCell.swift; sourceTree = "<group>"; };
 		B73D981E286E0F3900D6ECA8 /* SendVerifyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendVerifyTableViewCell.xib; sourceTree = "<group>"; };
+		B744AC332877E78100378924 /* SendWalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendWalletViewModel.swift; sourceTree = "<group>"; };
+		B744AC37287809D800378924 /* ManageShortcutsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageShortcutsViewController.swift; sourceTree = "<group>"; };
+		B744AC392878190300378924 /* ManageShortcutHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageShortcutHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		B744AC3A2878190300378924 /* ManageShortcutHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ManageShortcutHeaderTableViewCell.xib; sourceTree = "<group>"; };
+		B744AC3D28781A2C00378924 /* ManageShortcutsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageShortcutsViewModel.swift; sourceTree = "<group>"; };
 		B7476E7E2847681C00331614 /* SelectNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectNetworkViewController.swift; sourceTree = "<group>"; };
 		B7476E8028476A7C00331614 /* SelectNetworkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectNetworkTableViewCell.swift; sourceTree = "<group>"; };
 		B7476E8128476A7C00331614 /* SelectNetworkTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectNetworkTableViewCell.xib; sourceTree = "<group>"; };
@@ -276,6 +286,7 @@
 		B72FDEB62833982000748D13 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				B744AC3F28781B0700378924 /* Shortcut */,
 				B796347F286E3A25003F2E9C /* Resend */,
 				B792AA2E286C3DA300014352 /* Send */,
 				B792AA2D286C3D7400014352 /* Qr Code */,
@@ -295,6 +306,8 @@
 				B72FDEF32833C4F800748D13 /* SelectPageViewModel.swift */,
 				B727FDF42851ECD100BA50C7 /* CastcleQrCodeViewModel.swift */,
 				B7A5B53A286E239D00FB92D1 /* WalletVerifyAccountViewModel.swift */,
+				B744AC332877E78100378924 /* SendWalletViewModel.swift */,
+				B744AC3D28781A2C00378924 /* ManageShortcutsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -302,6 +315,7 @@
 		B72FDEB82833983A00748D13 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				B744AC4028781B1B00378924 /* Shortcut */,
 				B7963482286E40A5003F2E9C /* Resend */,
 				B792AA31286C436600014352 /* Send */,
 				B728FE592844B15900CF03DA /* Qr Code */,
@@ -316,6 +330,23 @@
 				B72FDEC728339F5700748D13 /* Assets.xcassets */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		B744AC3F28781B0700378924 /* Shortcut */ = {
+			isa = PBXGroup;
+			children = (
+				B744AC37287809D800378924 /* ManageShortcutsViewController.swift */,
+			);
+			path = Shortcut;
+			sourceTree = "<group>";
+		};
+		B744AC4028781B1B00378924 /* Shortcut */ = {
+			isa = PBXGroup;
+			children = (
+				B744AC392878190300378924 /* ManageShortcutHeaderTableViewCell.swift */,
+				B744AC3A2878190300378924 /* ManageShortcutHeaderTableViewCell.xib */,
+			);
+			path = Shortcut;
 			sourceTree = "<group>";
 		};
 		B792AA2D286C3D7400014352 /* Qr Code */ = {
@@ -488,6 +519,7 @@
 			files = (
 				B7031559286D9A2A0070493B /* SendToTableViewCell.xib in Resources */,
 				B767A7662845CE2C00E4381F /* OtherChainTableViewCell.xib in Resources */,
+				B744AC3C2878190300378924 /* ManageShortcutHeaderTableViewCell.xib in Resources */,
 				B72FDEF22833C47F00748D13 /* SelectPageTableViewCell.xib in Resources */,
 				B7963492286E4EB3003F2E9C /* EmptyDataTableViewCell.xib in Resources */,
 				B73D9814286E054700D6ECA8 /* ReviewSendTableViewCell.xib in Resources */,
@@ -559,6 +591,7 @@
 				B7A5B53E286E28CE00FB92D1 /* VerifyAccountTableViewCell.swift in Sources */,
 				B7963485286E40D5003F2E9C /* ResendUserTableViewCell.swift in Sources */,
 				B72FDEF12833C47F00748D13 /* SelectPageTableViewCell.swift in Sources */,
+				B744AC3B2878190300378924 /* ManageShortcutHeaderTableViewCell.swift in Sources */,
 				B728FE5C2844B17C00CF03DA /* CastcleQrCodeTableViewCell.swift in Sources */,
 				B71170572840AD7700FF985A /* ScanQrCodeViewController.swift in Sources */,
 				B72FDED52833B38200748D13 /* TransactionTableViewCell.swift in Sources */,
@@ -577,13 +610,16 @@
 				B767A7692845CE3F00E4381F /* MemoTableViewCell.swift in Sources */,
 				B7031558286D9A2A0070493B /* SendToTableViewCell.swift in Sources */,
 				B792AA30286C3DC500014352 /* SendWalletViewController.swift in Sources */,
+				B744AC3E28781A2C00378924 /* ManageShortcutsViewModel.swift in Sources */,
 				B728FE572844AD9C00CF03DA /* CastcleQrCodeViewController.swift in Sources */,
+				B744AC38287809D800378924 /* ManageShortcutsViewController.swift in Sources */,
 				B72FDED12833A48600748D13 /* BalanceTableViewCell.swift in Sources */,
 				B792AA34286C455700014352 /* SendShortcutTableViewCell.swift in Sources */,
 				B7A5B542286E2DEE00FB92D1 /* NoticeTableViewCell.swift in Sources */,
 				B73D9813286E054700D6ECA8 /* ReviewSendTableViewCell.swift in Sources */,
 				B767A7652845CE2C00E4381F /* OtherChainTableViewCell.swift in Sources */,
 				B72FDECE28339FC500748D13 /* WalletViewModel.swift in Sources */,
+				B744AC342877E78100378924 /* SendWalletViewModel.swift in Sources */,
 				B7963491286E4EB3003F2E9C /* EmptyDataTableViewCell.swift in Sources */,
 				B728FE552844ACCC00CF03DA /* MyQrCodeViewController.swift in Sources */,
 				B72FDEE92833C38500748D13 /* SelectPageViewController.swift in Sources */,

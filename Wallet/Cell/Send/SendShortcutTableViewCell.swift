@@ -30,6 +30,7 @@ import Core
 
 protocol SendShortcutTableViewCellDelegate: AnyObject {
     func didSelectShortcut(_ sendShortcutTableViewCell: SendShortcutTableViewCell, name: String)
+    func didManageShortcut(_ sendShortcutTableViewCell: SendShortcutTableViewCell)
 }
 
 class SendShortcutTableViewCell: UITableViewCell {
@@ -57,7 +58,7 @@ class SendShortcutTableViewCell: UITableViewCell {
     }
 
     @IBAction func manageAction(_ sender: Any) {
-        // MARK: - Add action
+        self.delegate?.didManageShortcut(self)
     }
 }
 

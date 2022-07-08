@@ -38,6 +38,7 @@ class SendWalletViewController: UIViewController {
     @IBOutlet weak var feeLabel: UILabel!
     @IBOutlet weak var sendButton: UIButton!
 
+    var viewModel = SendWalletViewModel()
     var sendTo: String = ""
     var memo: String = ""
     var amount: String = ""
@@ -67,6 +68,7 @@ class SendWalletViewController: UIViewController {
         self.feeLabel.font = UIFont.asset(.regular, fontSize: .overline)
         self.feeLabel.textColor = UIColor.Asset.white
         self.sendButton.activeButton(isActive: false, fontSize: .overline)
+        self.viewModel.getWalletShortcuts()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -128,6 +130,10 @@ extension SendWalletViewController: SendShortcutTableViewCellDelegate {
     func didSelectShortcut(_ sendShortcutTableViewCell: SendShortcutTableViewCell, name: String) {
         self.sendTo = name
         self.tableView.reloadData()
+    }
+
+    func didManageShortcut(_ sendShortcutTableViewCell: SendShortcutTableViewCell) {
+        Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.manageShortcuts), animated: true)
     }
 }
 
