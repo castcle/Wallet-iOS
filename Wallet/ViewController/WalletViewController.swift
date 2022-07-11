@@ -132,6 +132,7 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
         case WalletViewControllerSection.transaction.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.transaction, for: indexPath as IndexPath) as? TransactionTableViewCell
             cell?.backgroundColor = UIColor.clear
+            cell?.configCell(page: self.viewModel.page)
             return cell ?? TransactionTableViewCell()
         case WalletViewControllerSection.banner.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.banner, for: indexPath as IndexPath) as? BannerTableViewCell

@@ -35,9 +35,11 @@ public final class SendWalletViewModel {
     let tokenHelper: TokenHelper = TokenHelper()
     var accounts: [Shortcut] = []
     var shortcuts: [Shortcut] = []
+    var page: Page = Page()
 
-    public init() {
+    public init(page: Page = Page()) {
         self.tokenHelper.delegate = self
+        self.page = page
     }
 
     func getWalletShortcuts() {

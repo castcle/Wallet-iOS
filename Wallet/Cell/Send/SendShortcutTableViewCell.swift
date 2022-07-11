@@ -27,9 +27,10 @@
 
 import UIKit
 import Core
+import Networking
 
 protocol SendShortcutTableViewCellDelegate: AnyObject {
-    func didSelectShortcut(_ sendShortcutTableViewCell: SendShortcutTableViewCell, name: String)
+    func didSelectShortcut(_ sendShortcutTableViewCell: SendShortcutTableViewCell, shortcut: Shortcut)
     func didManageShortcut(_ sendShortcutTableViewCell: SendShortcutTableViewCell)
 }
 
@@ -40,6 +41,7 @@ class SendShortcutTableViewCell: UITableViewCell {
     @IBOutlet weak var manageButton: UIButton!
 
     public var delegate: SendShortcutTableViewCellDelegate?
+    private var shortcuts: [Shortcut] = []
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -57,6 +59,11 @@ class SendShortcutTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
+    func configCell(shortcuts: [Shortcut]) {
+        self.shortcuts = shortcuts
+        self.collectionView.reloadData()
+    }
+
     @IBAction func manageAction(_ sender: Any) {
         self.delegate?.didManageShortcut(self)
     }
@@ -64,24 +71,25 @@ class SendShortcutTableViewCell: UITableViewCell {
 
 extension SendShortcutTableViewCell: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return (self.shortcuts.count + 1)
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.row == 2 {
+        if indexPath.row == self.shortcuts.count {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WalletNibVars.CollectionViewCell.shortcut, for: indexPath as IndexPath) as? ShortcutCollectionViewCell
-            cell?.configCell(isAdd: true, index: indexPath.row)
+            cell?.configCell(isAdd: true, castcleId: "", avatar: "")
             return cell ?? ShortcutCollectionViewCell()
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WalletNibVars.CollectionViewCell.shortcut, for: indexPath as IndexPath) as? ShortcutCollectionViewCell
-            cell?.configCell(isAdd: false, index: indexPath.row)
+            let shortcut = self.shortcuts[indexPath.row]
+            cell?.configCell(isAdd: false, castcleId: shortcut.castcleId, avatar: shortcut.images.avatar.thumbnail)
             return cell ?? ShortcutCollectionViewCell()
         }
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.row != 2 {
-            self.delegate?.didSelectShortcut(self, name: "@simple_user\(indexPath.row + 1)")
+        if indexPath.row != self.shortcuts.count {
+            self.delegate?.didSelectShortcut(self, shortcut: self.shortcuts[indexPath.row])
         }
     }
 }

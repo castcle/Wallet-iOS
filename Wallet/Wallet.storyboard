@@ -721,7 +721,37 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="85P-wF-JwP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2147" y="1462"/>
+            <point key="canvasLocation" x="94" y="3539"/>
+        </scene>
+        <!--Create Shortcut View Controller-->
+        <scene sceneID="YJZ-X2-qBV">
+            <objects>
+                <viewController storyboardIdentifier="CreateShortcutViewController" hidesBottomBarWhenPushed="YES" id="2zZ-yB-hBY" customClass="CreateShortcutViewController" customModule="Wallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1Vc-YH-cB1">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Df8-DD-8wR">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="E0n-aX-P3c"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Df8-DD-8wR" firstAttribute="leading" secondItem="1Vc-YH-cB1" secondAttribute="leading" id="QM5-B7-TOB"/>
+                            <constraint firstAttribute="trailing" secondItem="Df8-DD-8wR" secondAttribute="trailing" id="Wr6-JD-WRG"/>
+                            <constraint firstAttribute="bottom" secondItem="Df8-DD-8wR" secondAttribute="bottom" id="hcU-GY-amJ"/>
+                            <constraint firstItem="Df8-DD-8wR" firstAttribute="top" secondItem="1Vc-YH-cB1" secondAttribute="top" id="v7o-Eh-FAk"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="Df8-DD-8wR" id="XF8-Du-ryR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gXE-UY-bQF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="765" y="3539"/>
         </scene>
     </scenes>
     <resources>

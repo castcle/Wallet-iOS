@@ -27,6 +27,7 @@
 
 import UIKit
 import Core
+import Kingfisher
 
 class ShortcutCollectionViewCell: UICollectionViewCell {
 
@@ -41,17 +42,18 @@ class ShortcutCollectionViewCell: UICollectionViewCell {
         self.addIcon.image = UIImage.init(icon: .castcle(.add), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.lightBlue)
     }
 
-    func configCell(isAdd: Bool, index: Int) {
+    func configCell(isAdd: Bool, castcleId: String, avatar: String) {
         if isAdd {
             self.addIcon.isHidden = false
             self.avatarShortImage.image = UIImage()
             self.avatarShortImage.circle(color: UIColor.Asset.lightBlue)
-            self.nameShortcutLabel.text = ""
+            self.nameShortcutLabel.text = "Add"
         } else {
             self.addIcon.isHidden = true
-            self.avatarShortImage.image = UIImage.Asset.userPlaceholder
             self.avatarShortImage.circle(color: UIColor.Asset.white)
-            self.nameShortcutLabel.text = "@simple_user\(index + 1)"
+            self.nameShortcutLabel.text = "@\(castcleId)"
+            let shortcutAvatar = URL(string: avatar)
+            self.avatarShortImage.kf.setImage(with: shortcutAvatar, placeholder: UIImage.Asset.userPlaceholder, options: [.transition(.fade(0.35))])
         }
     }
 }

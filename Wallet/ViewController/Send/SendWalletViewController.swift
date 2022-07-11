@@ -27,6 +27,7 @@
 
 import UIKit
 import Core
+import Networking
 import Defaults
 
 class SendWalletViewController: UIViewController {
@@ -69,6 +70,9 @@ class SendWalletViewController: UIViewController {
         self.feeLabel.textColor = UIColor.Asset.white
         self.sendButton.activeButton(isActive: false, fontSize: .overline)
         self.viewModel.getWalletShortcuts()
+        self.viewModel.didGetWalletShortcutsFinish = {
+            self.tableView.reloadData()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -115,6 +119,7 @@ extension SendWalletViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.sendShortcut, for: indexPath as IndexPath) as? SendShortcutTableViewCell
             cell?.backgroundColor = UIColor.clear
             cell?.delegate = self
+            cell?.configCell(shortcuts: self.viewModel.shortcuts)
             return cell ?? SendShortcutTableViewCell()
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.sendTo, for: indexPath as IndexPath) as? SendToTableViewCell
@@ -127,13 +132,13 @@ extension SendWalletViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension SendWalletViewController: SendShortcutTableViewCellDelegate {
-    func didSelectShortcut(_ sendShortcutTableViewCell: SendShortcutTableViewCell, name: String) {
-        self.sendTo = name
+    func didSelectShortcut(_ sendShortcutTableViewCell: SendShortcutTableViewCell, shortcut: Shortcut) {
+        self.sendTo = "@\(shortcut.castcleId)"
         self.tableView.reloadData()
     }
 
     func didManageShortcut(_ sendShortcutTableViewCell: SendShortcutTableViewCell) {
-        Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.manageShortcuts), animated: true)
+        Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.manageShortcuts(ManageShortcutsViewModel(page: self.viewModel.page))), animated: true)
     }
 }
 

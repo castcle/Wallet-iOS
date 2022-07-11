@@ -27,6 +27,7 @@
 
 import UIKit
 import Core
+import Networking
 
 class TransactionTableViewCell: UITableViewCell {
 
@@ -39,6 +40,8 @@ class TransactionTableViewCell: UITableViewCell {
     @IBOutlet weak var sendIcon: UIImageView!
     @IBOutlet weak var depositIcon: UIImageView!
     @IBOutlet weak var buyIcon: UIImageView!
+
+    private var page: Page = Page()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -60,12 +63,16 @@ class TransactionTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
+    func configCell(page: Page) {
+        self.page = page
+    }
+
     @IBAction func depositAction(_ sender: Any) {
         Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.castcleQrCode(.deposit)), animated: true)
     }
 
     @IBAction func sendAction(_ sender: Any) {
-        Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.sendWallet), animated: true)
+        Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.sendWallet(SendWalletViewModel(page: self.page))), animated: true)
     }
 
     @IBAction func buyAction(_ sender: Any) {

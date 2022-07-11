@@ -28,11 +28,13 @@
 import UIKit
 import Core
 import Defaults
+import JGProgressHUD
 
 class ManageShortcutsViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
 
+    private let hud = JGProgressHUD()
     var viewModel = ManageShortcutsViewModel()
     enum ManageShortcutsViewControllerSection: Int, CaseIterable {
         case myAccountHeader = 0
@@ -45,6 +47,13 @@ class ManageShortcutsViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.Asset.darkGraphiteBlue
         self.configureTableView()
+        self.hud.textLabel.text = "Loading"
+        self.hud.show(in: self.view)
+        self.viewModel.getWalletShortcuts()
+        self.viewModel.didGetWalletShortcutsFinish = {
+            self.hud.dismiss()
+            self.tableView.reloadData()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -61,7 +70,7 @@ class ManageShortcutsViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.register(UINib(nibName: WalletNibVars.TableViewCell.manageShortcutHeader, bundle: ConfigBundle.wallet), forCellReuseIdentifier: WalletNibVars.TableViewCell.manageShortcutHeader)
-//        self.tableView.register(UINib(nibName: WalletNibVars.TableViewCell.sendConfiem, bundle: ConfigBundle.wallet), forCellReuseIdentifier: WalletNibVars.TableViewCell.sendConfiem)
+        self.tableView.register(UINib(nibName: WalletNibVars.TableViewCell.shortcut, bundle: ConfigBundle.wallet), forCellReuseIdentifier: WalletNibVars.TableViewCell.shortcut)
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 100
     }
@@ -74,8 +83,10 @@ extension ManageShortcutsViewController: UITableViewDelegate, UITableViewDataSou
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case ManageShortcutsViewControllerSection.myAccountHeader.rawValue:
-            return 1
+        case ManageShortcutsViewControllerSection.myAccount.rawValue:
+            return self.viewModel.accounts.count
+        case ManageShortcutsViewControllerSection.shortcut.rawValue:
+            return self.viewModel.shortcuts.count
         default:
             return 1
         }
@@ -88,13 +99,32 @@ extension ManageShortcutsViewController: UITableViewDelegate, UITableViewDataSou
             cell?.backgroundColor = UIColor.Asset.darkGraphiteBlue
             cell?.configCell(title: "My account", hiddenAddShortcut: true)
             return cell ?? ManageShortcutHeaderTableViewCell()
+        case ManageShortcutsViewControllerSection.myAccount.rawValue:
+            let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.shortcut, for: indexPath as IndexPath) as? ShortcutTableViewCell
+            let account = self.viewModel.accounts[indexPath.row]
+            cell?.backgroundColor = UIColor.Asset.darkGraphiteBlue
+            cell?.configCell(avatar: account.images.avatar.thumbnail, castcleId: account.castcleId, pageCastcleId: self.viewModel.page.castcleId)
+            return cell ?? ShortcutTableViewCell()
         case ManageShortcutsViewControllerSection.shortcutHeader.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.manageShortcutHeader, for: indexPath as IndexPath) as? ManageShortcutHeaderTableViewCell
             cell?.backgroundColor = UIColor.Asset.darkGraphiteBlue
             cell?.configCell(title: "Shortcut list", hiddenAddShortcut: false)
+            cell?.delegate = self
             return cell ?? ManageShortcutHeaderTableViewCell()
+        case ManageShortcutsViewControllerSection.shortcut.rawValue:
+            let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.shortcut, for: indexPath as IndexPath) as? ShortcutTableViewCell
+            let account = self.viewModel.shortcuts[indexPath.row]
+            cell?.backgroundColor = UIColor.Asset.darkGraphiteBlue
+            cell?.configCell(avatar: account.images.avatar.thumbnail, castcleId: account.castcleId, pageCastcleId: self.viewModel.page.castcleId)
+            return cell ?? ShortcutTableViewCell()
         default:
             return UITableViewCell()
         }
+    }
+}
+
+extension ManageShortcutsViewController: ManageShortcutHeaderTableViewCellDelegate {
+    func didAddShortcut(_ manageShortcutHeaderTableViewCell: ManageShortcutHeaderTableViewCell) {
+        Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.createShortcut), animated: true)
     }
 }

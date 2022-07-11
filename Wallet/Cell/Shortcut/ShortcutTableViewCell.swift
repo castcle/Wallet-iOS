@@ -19,44 +19,42 @@
 //  Thailand 10160, or visit www.castcle.com if you need additional information
 //  or have any questions.
 //
-//  ManageShortcutHeaderTableViewCell.swift
+//  ShortcutTableViewCell.swift
 //  Wallet
 //
-//  Created by Castcle Co., Ltd. on 8/7/2565 BE.
+//  Created by Castcle Co., Ltd. on 10/7/2565 BE.
 //
 
 import UIKit
 import Core
+import Kingfisher
 
-protocol ManageShortcutHeaderTableViewCellDelegate: AnyObject {
-    func didAddShortcut(_ manageShortcutHeaderTableViewCell: ManageShortcutHeaderTableViewCell)
-}
+class ShortcutTableViewCell: UITableViewCell {
 
-class ManageShortcutHeaderTableViewCell: UITableViewCell {
-
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var addShortcutButton: UIButton!
-
-    public var delegate: ManageShortcutHeaderTableViewCellDelegate?
+    @IBOutlet weak var shortcutAvatarImage: UIImageView!
+    @IBOutlet weak var shortcutTitleLabel: UILabel!
+    @IBOutlet weak var shortcutLine: UIView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.titleLabel.font = UIFont.asset(.bold, fontSize: .body)
-        self.titleLabel.textColor = UIColor.Asset.white
-        self.addShortcutButton.titleLabel?.font = UIFont.asset(.regular, fontSize: .overline)
-        self.addShortcutButton.setTitleColor(UIColor.Asset.lightBlue, for: .normal)
+        self.shortcutTitleLabel.font = UIFont.asset(.regular, fontSize: .body)
+        self.shortcutLine.backgroundColor = UIColor.Asset.darkGray
+        self.shortcutAvatarImage.circle(color: UIColor.Asset.white)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
 
-    func configCell(title: String, hiddenAddShortcut: Bool) {
-        self.titleLabel.text = title
-        self.addShortcutButton.isHidden = hiddenAddShortcut
-    }
-
-    @IBAction func addShortcutAction(_ sender: Any) {
-        self.delegate?.didAddShortcut(self)
+    func configCell(avatar: String, castcleId: String, pageCastcleId: String) {
+        if castcleId == pageCastcleId {
+            self.shortcutTitleLabel.text = "@\(castcleId) (You)"
+            self.shortcutTitleLabel.textColor = UIColor.Asset.lightBlue
+        } else {
+            self.shortcutTitleLabel.text = "@\(castcleId)"
+            self.shortcutTitleLabel.textColor = UIColor.Asset.white
+        }
+        let shortcutAvatar = URL(string: avatar)
+        self.shortcutAvatarImage.kf.setImage(with: shortcutAvatar, placeholder: UIImage.Asset.userPlaceholder, options: [.transition(.fade(0.35))])
     }
 }
