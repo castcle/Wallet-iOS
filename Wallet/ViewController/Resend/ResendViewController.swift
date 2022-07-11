@@ -63,13 +63,16 @@ class ResendViewController: UIViewController, UITextFieldDelegate {
         self.searchTextField.font = UIFont.asset(.regular, fontSize: .overline)
         self.searchTextField.textColor = UIColor.Asset.white
         self.searchTextField.delegate = self
-        self.searchTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
         self.searchImage.image = UIImage.init(icon: .castcle(.search), size: CGSize(width: 20, height: 20), textColor: UIColor.Asset.white)
         self.hud.textLabel.text = "Loading"
         self.hud.show(in: self.view)
         self.viewModel.getWalletRecent()
         self.viewModel.didGetWalletRecentFinish = {
             self.hud.dismiss()
+        }
+        self.viewModel.didGetWalletSearchFinish = {
+            self.hud.dismiss()
+            self.tableView.reloadData()
         }
     }
 
@@ -97,13 +100,20 @@ class ResendViewController: UIViewController, UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        return true
-    }
-
-    @objc func textFieldDidChange(_ textField: UITextField) {
         let searchText = textField.text ?? ""
-        self.viewModel.isSearchCastcle = searchText.hasPrefix("@")
-        self.tableView.reloadData()
+        if !searchText.isEmpty {
+            self.viewModel.isSearch = true
+            self.viewModel.isSearchCastcle = searchText.hasPrefix("@")
+            self.viewModel.walletRequest.keyword = searchText
+            self.hud.textLabel.text = "Searching"
+            self.hud.show(in: self.view)
+            self.viewModel.walletSearch()
+        } else {
+            self.viewModel.isSearch = false
+            self.viewModel.walletRequest.keyword = ""
+            self.tableView.reloadData()
+        }
+        return true
     }
 
     @IBAction func backAction(_ sender: Any) {
@@ -126,7 +136,7 @@ extension ResendViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.viewModel.isSearch {
-            return (self.viewModel.searchUser.count > 0 ? self.viewModel.searchUser.count : 1)
+            return (self.viewModel.searchCastcle.count > 0 ? self.viewModel.searchCastcle.count : 1)
         } else {
             if section == ResendViewControllerSection.castcle.rawValue {
                 return self.getRowRecent(isCastcle: true)
@@ -170,10 +180,17 @@ extension ResendViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if self.viewModel.isSearch {
-            let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.emptyData, for: indexPath as IndexPath) as? EmptyDataTableViewCell
-            cell?.backgroundColor = UIColor.clear
-            cell?.configCell(isCastcle: self.viewModel.isSearchCastcle)
-            return cell ?? EmptyDataTableViewCell()
+            if self.viewModel.searchCastcle.isEmpty {
+                let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.emptyData, for: indexPath as IndexPath) as? EmptyDataTableViewCell
+                cell?.backgroundColor = UIColor.clear
+                cell?.configCell(isCastcle: self.viewModel.isSearchCastcle)
+                return cell ?? EmptyDataTableViewCell()
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.resendUser, for: indexPath as IndexPath) as? ResendUserTableViewCell
+                cell?.backgroundColor = UIColor.clear
+                cell?.configCell(walletsRecent: self.viewModel.searchCastcle[indexPath.row])
+                return cell ?? ResendUserTableViewCell()
+            }
         } else {
             if indexPath.section == ResendViewControllerSection.castcle.rawValue {
                 return self.getRecentCell(isCastcle: true, tableView: tableView, didSelectRowAt: indexPath)
@@ -184,21 +201,26 @@ extension ResendViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == ResendViewControllerSection.castcle.rawValue {
-            if !self.viewModel.isCastcleRecentExpand && indexPath.row == 3 {
-                self.viewModel.isCastcleRecentExpand = true
-                self.tableView.reloadData()
-            } else {
-                self.delegate?.didSelect(self, walletsRecent: self.viewModel.castcle[indexPath.row])
-                self.navigationController?.popViewController(animated: true)
-            }
+        if self.viewModel.isSearch && !self.viewModel.searchCastcle.isEmpty {
+            self.delegate?.didSelect(self, walletsRecent: self.viewModel.searchCastcle[indexPath.row])
+            self.navigationController?.popViewController(animated: true)
         } else {
-            if !self.viewModel.isOtherRecentExpand && indexPath.row == 3 {
-                self.viewModel.isOtherRecentExpand = true
-                self.tableView.reloadData()
+            if indexPath.section == ResendViewControllerSection.castcle.rawValue {
+                if !self.viewModel.isCastcleRecentExpand && indexPath.row == 3 {
+                    self.viewModel.isCastcleRecentExpand = true
+                    self.tableView.reloadData()
+                } else {
+                    self.delegate?.didSelect(self, walletsRecent: self.viewModel.castcle[indexPath.row])
+                    self.navigationController?.popViewController(animated: true)
+                }
             } else {
-                self.delegate?.didSelect(self, walletsRecent: self.viewModel.other[indexPath.row])
-                self.navigationController?.popViewController(animated: true)
+                if !self.viewModel.isOtherRecentExpand && indexPath.row == 3 {
+                    self.viewModel.isOtherRecentExpand = true
+                    self.tableView.reloadData()
+                } else {
+                    self.delegate?.didSelect(self, walletsRecent: self.viewModel.other[indexPath.row])
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
         }
     }

@@ -38,15 +38,17 @@ public enum ResendType {
 public final class RecentViewModel {
 
     private var walletRepository: WalletRepository = WalletRepositoryImpl()
+    private var state: State = .none
     let tokenHelper: TokenHelper = TokenHelper()
     var castcle: [WalletsRecent] = []
     var other: [WalletsRecent] = []
-    var searchUser: [WalletsRecent] = []
+    var searchCastcle: [WalletsRecent] = []
     var page: Page = Page()
     var isCastcleRecentExpand: Bool = false
     var isOtherRecentExpand: Bool = false
     var isSearch: Bool = false
     var isSearchCastcle: Bool = false
+    var walletRequest: WalletRequest = WalletRequest()
 
     public init(page: Page = Page()) {
         self.tokenHelper.delegate = self
@@ -54,7 +56,8 @@ public final class RecentViewModel {
     }
 
     func getWalletRecent() {
-        self.walletRepository.getWalletRecent(accountId: self.page.id) { (success, response, isRefreshToken) in
+        self.state = .getWalletRecent
+        self.walletRepository.getWalletRecent(userId: self.page.id) { (success, response, isRefreshToken) in
             if success {
                 do {
                     let rawJson = try response.mapJSON()
@@ -71,11 +74,34 @@ public final class RecentViewModel {
         }
     }
 
+    func walletSearch() {
+        self.state = .walletSearch
+        self.walletRepository.walletSearch(userId: self.page.id, walletRequest: self.walletRequest) { (success, response, isRefreshToken) in
+            if success {
+                do {
+                    let rawJson = try response.mapJSON()
+                    let json = JSON(rawJson)
+                    self.searchCastcle = (json[JsonKey.castcle.rawValue].arrayValue).map { WalletsRecent(json: $0) }
+                    self.didGetWalletSearchFinish?()
+                } catch {}
+            } else {
+                if isRefreshToken {
+                    self.tokenHelper.refreshToken()
+                }
+            }
+        }
+    }
+
     var didGetWalletRecentFinish: (() -> Void)?
+    var didGetWalletSearchFinish: (() -> Void)?
 }
 
 extension RecentViewModel: TokenHelperDelegate {
     public func didRefreshTokenFinish() {
-        self.getWalletRecent()
+        if self.state == .getWalletRecent {
+            self.getWalletRecent()
+        } else if self.state == .walletSearch {
+            self.walletSearch()
+        }
     }
 }
