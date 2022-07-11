@@ -62,6 +62,8 @@
 		B7471239287A816D00C3C7EE /* CreateShortcutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7471238287A816D00C3C7EE /* CreateShortcutViewController.swift */; };
 		B747123C287A835600C3C7EE /* CreateShortcutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B747123A287A835600C3C7EE /* CreateShortcutTableViewCell.swift */; };
 		B747123D287A835600C3C7EE /* CreateShortcutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B747123B287A835600C3C7EE /* CreateShortcutTableViewCell.xib */; };
+		B7471241287BFC0600C3C7EE /* RecentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7471240287BFC0600C3C7EE /* RecentViewModel.swift */; };
+		B7471243287C028C00C3C7EE /* CreateShortcutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7471242287C028C00C3C7EE /* CreateShortcutViewModel.swift */; };
 		B7476E7F2847681C00331614 /* SelectNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7476E7E2847681C00331614 /* SelectNetworkViewController.swift */; };
 		B7476E8228476A7C00331614 /* SelectNetworkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7476E8028476A7C00331614 /* SelectNetworkTableViewCell.swift */; };
 		B7476E8328476A7C00331614 /* SelectNetworkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7476E8128476A7C00331614 /* SelectNetworkTableViewCell.xib */; };
@@ -158,6 +160,8 @@
 		B7471238287A816D00C3C7EE /* CreateShortcutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateShortcutViewController.swift; sourceTree = "<group>"; };
 		B747123A287A835600C3C7EE /* CreateShortcutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateShortcutTableViewCell.swift; sourceTree = "<group>"; };
 		B747123B287A835600C3C7EE /* CreateShortcutTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateShortcutTableViewCell.xib; sourceTree = "<group>"; };
+		B7471240287BFC0600C3C7EE /* RecentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentViewModel.swift; sourceTree = "<group>"; };
+		B7471242287C028C00C3C7EE /* CreateShortcutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateShortcutViewModel.swift; sourceTree = "<group>"; };
 		B7476E7E2847681C00331614 /* SelectNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectNetworkViewController.swift; sourceTree = "<group>"; };
 		B7476E8028476A7C00331614 /* SelectNetworkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectNetworkTableViewCell.swift; sourceTree = "<group>"; };
 		B7476E8128476A7C00331614 /* SelectNetworkTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectNetworkTableViewCell.xib; sourceTree = "<group>"; };
@@ -318,6 +322,8 @@
 				B7A5B53A286E239D00FB92D1 /* WalletVerifyAccountViewModel.swift */,
 				B744AC332877E78100378924 /* SendWalletViewModel.swift */,
 				B744AC3D28781A2C00378924 /* ManageShortcutsViewModel.swift */,
+				B7471242287C028C00C3C7EE /* CreateShortcutViewModel.swift */,
+				B7471240287BFC0600C3C7EE /* RecentViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -618,6 +624,7 @@
 				B727FDF52851ECD100BA50C7 /* CastcleQrCodeViewModel.swift in Sources */,
 				B72FDEBF283398B300748D13 /* WalletOpener.swift in Sources */,
 				B73D981F286E0F3900D6ECA8 /* SendVerifyTableViewCell.swift in Sources */,
+				B7471243287C028C00C3C7EE /* CreateShortcutViewModel.swift in Sources */,
 				B72FDEDD2833BA9300748D13 /* WalletNoDataTableViewCell.swift in Sources */,
 				B711702A283B846900FF985A /* MyQRCode.swift in Sources */,
 				B73D981B286E0B0B00D6ECA8 /* SendConfiemTableViewCell.swift in Sources */,
@@ -635,6 +642,7 @@
 				B72FDED12833A48600748D13 /* BalanceTableViewCell.swift in Sources */,
 				B792AA34286C455700014352 /* SendShortcutTableViewCell.swift in Sources */,
 				B7A5B542286E2DEE00FB92D1 /* NoticeTableViewCell.swift in Sources */,
+				B7471241287BFC0600C3C7EE /* RecentViewModel.swift in Sources */,
 				B73D9813286E054700D6ECA8 /* ReviewSendTableViewCell.swift in Sources */,
 				B767A7652845CE2C00E4381F /* OtherChainTableViewCell.swift in Sources */,
 				B72FDECE28339FC500748D13 /* WalletViewModel.swift in Sources */,

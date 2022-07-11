@@ -40,9 +40,9 @@ public enum WalletScene {
     case sendReview
     case sendAuth
     case verifyAccount
-    case resend
+    case resend(RecentViewModel)
     case manageShortcuts(ManageShortcutsViewModel)
-    case createShortcut
+    case createShortcut(CreateShortcutViewModel)
 }
 
 public struct WalletOpener {
@@ -96,19 +96,21 @@ public struct WalletOpener {
             let storyboard: UIStoryboard = UIStoryboard(name: WalletNibVars.Storyboard.wallet, bundle: ConfigBundle.wallet)
             let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.verifyAccount)
             return viewController
-        case .resend:
+        case .resend(let viewModel):
             let storyboard: UIStoryboard = UIStoryboard(name: WalletNibVars.Storyboard.wallet, bundle: ConfigBundle.wallet)
-            let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.resend)
-            return viewController
+            let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.resend) as? ResendViewController
+            viewController?.viewModel = viewModel
+            return viewController ?? ResendViewController()
         case .manageShortcuts(let viewModel):
             let storyboard: UIStoryboard = UIStoryboard(name: WalletNibVars.Storyboard.wallet, bundle: ConfigBundle.wallet)
             let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.manageShortcuts) as? ManageShortcutsViewController
             viewController?.viewModel = viewModel
             return viewController ?? ManageShortcutsViewController()
-        case .createShortcut:
+        case .createShortcut(let viewModel):
             let storyboard: UIStoryboard = UIStoryboard(name: WalletNibVars.Storyboard.wallet, bundle: ConfigBundle.wallet)
-            let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.createShortcut)
-            return viewController
+            let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.createShortcut) as? CreateShortcutViewController
+            viewController?.viewModel = viewModel
+            return viewController ?? CreateShortcutViewController()
         }
     }
 }

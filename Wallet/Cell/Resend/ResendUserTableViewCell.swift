@@ -27,6 +27,7 @@
 
 import UIKit
 import Core
+import Networking
 
 class ResendUserTableViewCell: UITableViewCell {
 
@@ -47,7 +48,7 @@ class ResendUserTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    func configCell(name: String) {
-        self.nameLabel.text = name
+    func configCell(walletsRecent: WalletsRecent) {
+        self.nameLabel.text = "@\(walletsRecent.castcleId)"
     }
 }

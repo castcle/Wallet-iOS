@@ -27,6 +27,7 @@
 
 import UIKit
 import Core
+import Networking
 
 protocol SendToTableViewCellDelegate: AnyObject {
     func didValueChange(_ sendToTableViewCell: SendToTableViewCell, sendTo: String, memo: String, amount: String, note: String)
@@ -52,6 +53,7 @@ class SendToTableViewCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet weak var maxButton: UIButton!
 
     public var delegate: SendToTableViewCellDelegate?
+    private var page: Page = Page()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -112,8 +114,9 @@ class SendToTableViewCell: UITableViewCell, UITextFieldDelegate {
         return true
     }
 
-    func configCell(sendTo: String) {
+    func configCell(sendTo: String, page: Page) {
         self.sendToTextField.text = sendTo
+        self.page = page
     }
 
     @objc func textFieldDidChange(_ textField: UITextField) {
@@ -121,7 +124,7 @@ class SendToTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
 
     @IBAction func resendAction(_ sender: Any) {
-        let viewController = WalletOpener.open(.resend) as? ResendViewController
+        let viewController = WalletOpener.open(.resend(RecentViewModel(page: self.page))) as? ResendViewController
         viewController?.delegate = self
         Utility.currentViewController().navigationController?.pushViewController(viewController ?? ResendViewController(), animated: true)
     }
@@ -140,8 +143,12 @@ class SendToTableViewCell: UITableViewCell, UITextFieldDelegate {
 }
 
 extension SendToTableViewCell: ResendViewControllerDelegate {
-    func didSelect(_ resendViewController: ResendViewController, name: String) {
-        self.sendToTextField.text = name
+    func didSelect(_ resendViewController: ResendViewController, walletsRecent: WalletsRecent) {
+        if walletsRecent.type == .none {
+            self.sendToTextField.text = walletsRecent.displayName
+        } else {
+            self.sendToTextField.text = "@\(walletsRecent.castcleId)"
+        }
         self.delegate?.didValueChange(self, sendTo: self.sendToTextField.text ?? "", memo: self.memoTextField.text ?? "", amount: self.amountTextField.text ?? "", note: self.noteTextField.text ?? "")
     }
 }

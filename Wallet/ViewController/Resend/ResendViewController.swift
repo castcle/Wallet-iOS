@@ -27,16 +27,12 @@
 
 import UIKit
 import Core
+import Networking
 import Defaults
-
-public enum ResendType {
-    case all
-    case castcle
-    case other
-}
+import JGProgressHUD
 
 protocol ResendViewControllerDelegate: AnyObject {
-    func didSelect(_ resendViewController: ResendViewController, name: String)
+    func didSelect(_ resendViewController: ResendViewController, walletsRecent: WalletsRecent)
 }
 
 class ResendViewController: UIViewController, UITextFieldDelegate {
@@ -48,10 +44,9 @@ class ResendViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var searchImage: UIImageView!
 
+    private let hud = JGProgressHUD()
+    var viewModel = RecentViewModel()
     public var delegate: ResendViewControllerDelegate?
-    var resendType: ResendType = .all
-    var isEmpty: Bool = false
-    var isSearchCastcle: Bool = false
     enum ResendViewControllerSection: Int, CaseIterable {
         case castcle = 0
         case other
@@ -70,6 +65,12 @@ class ResendViewController: UIViewController, UITextFieldDelegate {
         self.searchTextField.delegate = self
         self.searchTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
         self.searchImage.image = UIImage.init(icon: .castcle(.search), size: CGSize(width: 20, height: 20), textColor: UIColor.Asset.white)
+        self.hud.textLabel.text = "Loading"
+        self.hud.show(in: self.view)
+        self.viewModel.getWalletRecent()
+        self.viewModel.didGetWalletRecentFinish = {
+            self.hud.dismiss()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -101,18 +102,12 @@ class ResendViewController: UIViewController, UITextFieldDelegate {
 
     @objc func textFieldDidChange(_ textField: UITextField) {
         let searchText = textField.text ?? ""
-        self.isSearchCastcle = searchText.hasPrefix("@")
-        self.isEmpty = !searchText.isEmpty
+        self.viewModel.isSearchCastcle = searchText.hasPrefix("@")
         self.tableView.reloadData()
     }
 
     @IBAction func backAction(_ sender: Any) {
-        if self.resendType == .castcle || self.resendType == .other {
-            self.resendType = .all
-            self.tableView.reloadData()
-        } else {
-            self.navigationController?.popViewController(animated: true)
-        }
+        self.navigationController?.popViewController(animated: true)
     }
 
     @IBAction func scanAction(_ sender: Any) {
@@ -122,7 +117,7 @@ class ResendViewController: UIViewController, UITextFieldDelegate {
 
 extension ResendViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        if self.isEmpty {
+        if self.viewModel.isSearch {
             return 1
         } else {
             return ResendViewControllerSection.allCases.count
@@ -130,35 +125,31 @@ extension ResendViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.isEmpty {
-            return 1
-        } else if self.resendType == .all {
-            return 4
+        if self.viewModel.isSearch {
+            return (self.viewModel.searchUser.count > 0 ? self.viewModel.searchUser.count : 1)
         } else {
             if section == ResendViewControllerSection.castcle.rawValue {
-                return (self.resendType == .castcle ? 4 : 0)
+                return self.getRowRecent(isCastcle: true)
             } else {
-                return (self.resendType == .other ? 4 : 0)
+                return self.getRowRecent(isCastcle: false)
             }
         }
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if self.isEmpty {
+        if self.viewModel.isSearch {
             return 0
-        } else if self.resendType == .all {
-            return 50
         } else {
             if section == ResendViewControllerSection.castcle.rawValue {
-                return self.resendType == .castcle ? 50 : 0
+                return self.viewModel.castcle.count > 0 ? 50 : 0
             } else {
-                return self.resendType == .other ? 50 : 0
+                return self.viewModel.other.count > 0 ? 50 : 0
             }
         }
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if self.isEmpty {
+        if self.viewModel.isSearch {
             return UIView()
         } else {
             let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 50))
@@ -178,45 +169,80 @@ extension ResendViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if self.isEmpty {
+        if self.viewModel.isSearch {
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.emptyData, for: indexPath as IndexPath) as? EmptyDataTableViewCell
             cell?.backgroundColor = UIColor.clear
-            cell?.configCell(isCastcle: self.isSearchCastcle)
+            cell?.configCell(isCastcle: self.viewModel.isSearchCastcle)
             return cell ?? EmptyDataTableViewCell()
-        } else if self.resendType == .all && indexPath.row == 3 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.viewMore, for: indexPath as IndexPath) as? ViewMoreTableViewCell
-            cell?.backgroundColor = UIColor.clear
-            return cell ?? ViewMoreTableViewCell()
         } else {
             if indexPath.section == ResendViewControllerSection.castcle.rawValue {
-                let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.resendUser, for: indexPath as IndexPath) as? ResendUserTableViewCell
-                cell?.backgroundColor = UIColor.clear
-                cell?.configCell(name: "@simple_user\(indexPath.row + 1)")
-                return cell ?? ResendUserTableViewCell()
+                return self.getRecentCell(isCastcle: true, tableView: tableView, didSelectRowAt: indexPath)
             } else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.resendOther, for: indexPath as IndexPath) as? ResendOtherTableViewCell
-                cell?.backgroundColor = UIColor.clear
-                cell?.configCell(name: "Other User \(indexPath.row + 1)", address: "121231212\(indexPath.row + 1)")
-                return cell ?? ResendOtherTableViewCell()
+                return self.getRecentCell(isCastcle: false, tableView: tableView, didSelectRowAt: indexPath)
             }
         }
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if self.resendType == .all && indexPath.row == 3 {
-            if indexPath.section == ResendViewControllerSection.castcle.rawValue {
-                self.resendType = .castcle
+        if indexPath.section == ResendViewControllerSection.castcle.rawValue {
+            if !self.viewModel.isCastcleRecentExpand && indexPath.row == 3 {
+                self.viewModel.isCastcleRecentExpand = true
+                self.tableView.reloadData()
             } else {
-                self.resendType = .other
+                self.delegate?.didSelect(self, walletsRecent: self.viewModel.castcle[indexPath.row])
+                self.navigationController?.popViewController(animated: true)
             }
-            self.tableView.reloadData()
-        } else if !self.isEmpty {
-            if indexPath.section == ResendViewControllerSection.castcle.rawValue {
-                self.delegate?.didSelect(self, name: "@simple_user\(indexPath.row + 1)")
-                self.navigationController?.popViewController(animated: true)
+        } else {
+            if !self.viewModel.isOtherRecentExpand && indexPath.row == 3 {
+                self.viewModel.isOtherRecentExpand = true
+                self.tableView.reloadData()
             } else {
-                self.delegate?.didSelect(self, name: "121231212\(indexPath.row + 1)")
+                self.delegate?.didSelect(self, walletsRecent: self.viewModel.other[indexPath.row])
                 self.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
+
+    private func getRowRecent(isCastcle: Bool) -> Int {
+        if isCastcle {
+            if !self.viewModel.isCastcleRecentExpand && (self.viewModel.castcle.count > 3) {
+                return 4
+            } else {
+                return self.viewModel.castcle.count
+            }
+        } else {
+            if !self.viewModel.isOtherRecentExpand && (self.viewModel.other.count > 3) {
+                return 4
+            } else {
+                return self.viewModel.other.count
+            }
+        }
+    }
+
+    private func getRecentCell(isCastcle: Bool, tableView: UITableView, didSelectRowAt indexPath: IndexPath) -> UITableViewCell {
+        if isCastcle {
+            if !self.viewModel.isCastcleRecentExpand && indexPath
+                .row == 3 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.viewMore, for: indexPath as IndexPath) as? ViewMoreTableViewCell
+                cell?.backgroundColor = UIColor.clear
+                return cell ?? ViewMoreTableViewCell()
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.resendUser, for: indexPath as IndexPath) as? ResendUserTableViewCell
+                cell?.backgroundColor = UIColor.clear
+                cell?.configCell(walletsRecent: self.viewModel.castcle[indexPath.row])
+                return cell ?? ResendUserTableViewCell()
+            }
+        } else {
+            if !self.viewModel.isOtherRecentExpand && indexPath
+                .row == 3 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.viewMore, for: indexPath as IndexPath) as? ViewMoreTableViewCell
+                cell?.backgroundColor = UIColor.clear
+                return cell ?? ViewMoreTableViewCell()
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.resendOther, for: indexPath as IndexPath) as? ResendOtherTableViewCell
+                cell?.backgroundColor = UIColor.clear
+                cell?.configCell(walletsRecent: self.viewModel.other[indexPath.row])
+                return cell ?? ResendOtherTableViewCell()
             }
         }
     }

@@ -125,6 +125,6 @@ extension ManageShortcutsViewController: UITableViewDelegate, UITableViewDataSou
 
 extension ManageShortcutsViewController: ManageShortcutHeaderTableViewCellDelegate {
     func didAddShortcut(_ manageShortcutHeaderTableViewCell: ManageShortcutHeaderTableViewCell) {
-        Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.createShortcut), animated: true)
+        Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.createShortcut(CreateShortcutViewModel(page: self.viewModel.page))), animated: true)
     }
 }

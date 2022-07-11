@@ -33,7 +33,7 @@ class CreateShortcutViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
 
-//    var viewModel = ManageShortcutsViewModel()
+    var viewModel = CreateShortcutViewModel()
     enum ManageShortcutsViewControllerSection: Int, CaseIterable {
         case myAccountHeader = 0
         case myAccount
@@ -45,11 +45,6 @@ class CreateShortcutViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.Asset.darkGraphiteBlue
         self.configureTableView()
-//        self.viewModel.getWalletShortcuts()
-//
-//        self.viewModel.didGetWalletShortcutsFinish = {
-//            self.tableView.reloadData()
-//        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -83,6 +78,7 @@ extension CreateShortcutViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.createShortcut, for: indexPath as IndexPath) as? CreateShortcutTableViewCell
         cell?.backgroundColor = UIColor.Asset.darkGraphiteBlue
+        cell?.configCell(page: self.viewModel.page)
         return cell ?? CreateShortcutTableViewCell()
     }
 }

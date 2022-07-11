@@ -19,58 +19,29 @@
 //  Thailand 10160, or visit www.castcle.com if you need additional information
 //  or have any questions.
 //
-//  SendWalletViewModel.swift
+//  CreateShortcutViewModel.swift
 //  Wallet
 //
-//  Created by Castcle Co., Ltd. on 8/7/2565 BE.
+//  Created by Castcle Co., Ltd. on 11/7/2565 BE.
 //
 
 import Core
 import Networking
 import SwiftyJSON
 
-public final class SendWalletViewModel {
+public final class CreateShortcutViewModel {
 
     private var walletRepository: WalletRepository = WalletRepositoryImpl()
     let tokenHelper: TokenHelper = TokenHelper()
-    var accounts: [Shortcut] = []
-    var shortcuts: [Shortcut] = []
     var page: Page = Page()
-
-    // MARK: - Temp Value
-    var sendTo: String = ""
-    var memo: String = ""
-    var amount: String = ""
-    var note: String = ""
 
     public init(page: Page = Page()) {
         self.tokenHelper.delegate = self
         self.page = page
     }
-
-    func getWalletShortcuts() {
-        self.walletRepository.getWalletShortcuts(accountId: UserManager.shared.accountId) { (success, response, isRefreshToken) in
-            if success {
-                do {
-                    let rawJson = try response.mapJSON()
-                    let json = JSON(rawJson)
-                    self.accounts = (json[JsonKey.accounts.rawValue].arrayValue).map { Shortcut(json: $0) }
-                    self.shortcuts = (json[JsonKey.shortcuts.rawValue].arrayValue).map { Shortcut(json: $0) }
-                    self.didGetWalletShortcutsFinish?()
-                } catch {}
-            } else {
-                if isRefreshToken {
-                    self.tokenHelper.refreshToken()
-                }
-            }
-        }
-    }
-
-    var didGetWalletShortcutsFinish: (() -> Void)?
 }
 
-extension SendWalletViewModel: TokenHelperDelegate {
+extension CreateShortcutViewModel: TokenHelperDelegate {
     public func didRefreshTokenFinish() {
-        self.getWalletShortcuts()
     }
 }

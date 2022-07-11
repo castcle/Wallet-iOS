@@ -19,44 +19,49 @@
 //  Thailand 10160, or visit www.castcle.com if you need additional information
 //  or have any questions.
 //
-//  SendWalletViewModel.swift
+//  RecentViewModel.swift
 //  Wallet
 //
-//  Created by Castcle Co., Ltd. on 8/7/2565 BE.
+//  Created by Castcle Co., Ltd. on 11/7/2565 BE.
 //
 
 import Core
 import Networking
 import SwiftyJSON
 
-public final class SendWalletViewModel {
+public enum ResendType {
+    case all
+    case castcle
+    case other
+}
+
+public final class RecentViewModel {
 
     private var walletRepository: WalletRepository = WalletRepositoryImpl()
     let tokenHelper: TokenHelper = TokenHelper()
-    var accounts: [Shortcut] = []
-    var shortcuts: [Shortcut] = []
+    var castcle: [WalletsRecent] = []
+    var other: [WalletsRecent] = []
+    var searchUser: [WalletsRecent] = []
     var page: Page = Page()
-
-    // MARK: - Temp Value
-    var sendTo: String = ""
-    var memo: String = ""
-    var amount: String = ""
-    var note: String = ""
+    var isCastcleRecentExpand: Bool = false
+    var isOtherRecentExpand: Bool = false
+    var isSearch: Bool = false
+    var isSearchCastcle: Bool = false
 
     public init(page: Page = Page()) {
         self.tokenHelper.delegate = self
         self.page = page
     }
 
-    func getWalletShortcuts() {
-        self.walletRepository.getWalletShortcuts(accountId: UserManager.shared.accountId) { (success, response, isRefreshToken) in
+    func getWalletRecent() {
+        self.walletRepository.getWalletRecent(accountId: self.page.id) { (success, response, isRefreshToken) in
             if success {
                 do {
                     let rawJson = try response.mapJSON()
                     let json = JSON(rawJson)
-                    self.accounts = (json[JsonKey.accounts.rawValue].arrayValue).map { Shortcut(json: $0) }
-                    self.shortcuts = (json[JsonKey.shortcuts.rawValue].arrayValue).map { Shortcut(json: $0) }
-                    self.didGetWalletShortcutsFinish?()
+                    self.castcle = (json[JsonKey.castcle.rawValue].arrayValue).map { WalletsRecent(json: $0) }
+                    self.other = (json[JsonKey.other.rawValue].arrayValue).map { WalletsRecent(json: $0) }
+                    self.didGetWalletRecentFinish?()
                 } catch {}
             } else {
                 if isRefreshToken {
@@ -66,11 +71,11 @@ public final class SendWalletViewModel {
         }
     }
 
-    var didGetWalletShortcutsFinish: (() -> Void)?
+    var didGetWalletRecentFinish: (() -> Void)?
 }
 
-extension SendWalletViewModel: TokenHelperDelegate {
+extension RecentViewModel: TokenHelperDelegate {
     public func didRefreshTokenFinish() {
-        self.getWalletShortcuts()
+        self.getWalletRecent()
     }
 }

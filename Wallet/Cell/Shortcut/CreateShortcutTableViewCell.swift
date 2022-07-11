@@ -27,6 +27,7 @@
 
 import UIKit
 import Core
+import Networking
 
 class CreateShortcutTableViewCell: UITableViewCell {
 
@@ -40,6 +41,8 @@ class CreateShortcutTableViewCell: UITableViewCell {
     @IBOutlet weak var scanButton: UIButton!
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var dataView: UIView!
+
+    private var page: Page = Page()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -63,8 +66,12 @@ class CreateShortcutTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
+    func configCell(page: Page) {
+        self.page = page
+    }
+
     @IBAction func resendAction(_ sender: Any) {
-        let viewController = WalletOpener.open(.resend) as? ResendViewController
+        let viewController = WalletOpener.open(.resend(RecentViewModel(page: self.page))) as? ResendViewController
         viewController?.delegate = self
         Utility.currentViewController().navigationController?.pushViewController(viewController ?? ResendViewController(), animated: true)
     }
@@ -79,7 +86,7 @@ class CreateShortcutTableViewCell: UITableViewCell {
 }
 
 extension CreateShortcutTableViewCell: ResendViewControllerDelegate {
-    func didSelect(_ resendViewController: ResendViewController, name: String) {
-       // MARK: - Resend
+    func didSelect(_ resendViewController: ResendViewController, walletsRecent: WalletsRecent) {
+        // MARK: - Resend
     }
 }

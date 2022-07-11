@@ -27,6 +27,7 @@
 
 import UIKit
 import Core
+import Networking
 
 class ResendOtherTableViewCell: UITableViewCell {
 
@@ -50,7 +51,8 @@ class ResendOtherTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    func configCell(name: String, address: String) {
-        self.nameLabel.text = name
+    func configCell(walletsRecent: WalletsRecent) {
+        self.nameLabel.text = walletsRecent.displayName
+        self.addressLabel.text = walletsRecent.walletAddress
     }
 }
