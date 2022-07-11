@@ -41,7 +41,7 @@ class SendWalletViewController: UIViewController {
 
     var viewModel = SendWalletViewModel()
     var isAvtive: Bool {
-        if self.viewModel.sendTo.isEmpty || self.viewModel.amount.isEmpty {
+        if self.viewModel.userId.isEmpty || self.viewModel.amount.isEmpty {
             return false
         } else {
             return true
@@ -92,7 +92,7 @@ class SendWalletViewController: UIViewController {
 
     @IBAction func sendAction(_ sender: Any) {
         if self.isAvtive {
-            if self.viewModel.sendTo == "aaaa" {
+            if self.viewModel.userId == "aaaa" {
                 ApiHelper.displayMessage(title: "Warning", message: "Incorrect Castcle ID. Please check the Castcle ID and try again.\n\n** You have insufficient balance", buttonTitle: "Close")
             } else {
                 Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.sendReview), animated: true)
@@ -121,7 +121,7 @@ extension SendWalletViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.sendTo, for: indexPath as IndexPath) as? SendToTableViewCell
             cell?.backgroundColor = UIColor.clear
             cell?.delegate = self
-            cell?.configCell(sendTo: self.viewModel.sendTo, page: self.viewModel.page)
+            cell?.configCell(sendTo: "@\(self.viewModel.castcleId)", page: self.viewModel.page)
             return cell ?? SendToTableViewCell()
         }
     }
@@ -129,7 +129,8 @@ extension SendWalletViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension SendWalletViewController: SendShortcutTableViewCellDelegate {
     func didSelectShortcut(_ sendShortcutTableViewCell: SendShortcutTableViewCell, shortcut: Shortcut) {
-        self.viewModel.sendTo = "@\(shortcut.castcleId)"
+        self.viewModel.userId = shortcut.userId
+        self.viewModel.castcleId = shortcut.castcleId
         self.tableView.reloadData()
     }
 
@@ -139,8 +140,12 @@ extension SendWalletViewController: SendShortcutTableViewCellDelegate {
 }
 
 extension SendWalletViewController: SendToTableViewCellDelegate {
-    func didValueChange(_ sendToTableViewCell: SendToTableViewCell, sendTo: String, memo: String, amount: String, note: String) {
-        self.viewModel.sendTo = sendTo
+    func didSelectWalletsRecent(_ sendToTableViewCell: SendToTableViewCell, walletsRecent: WalletsRecent) {
+        self.viewModel.userId = walletsRecent.id
+        self.viewModel.castcleId = walletsRecent.castcleId
+    }
+
+    func didValueChange(_ sendToTableViewCell: SendToTableViewCell, memo: String, amount: String, note: String) {
         self.viewModel.memo = memo
         self.viewModel.amount = amount
         self.viewModel.note = note

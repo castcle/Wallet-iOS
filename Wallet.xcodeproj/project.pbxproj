@@ -92,6 +92,7 @@
 		B7A5B53F286E28CE00FB92D1 /* VerifyAccountTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7A5B53D286E28CE00FB92D1 /* VerifyAccountTableViewCell.xib */; };
 		B7A5B542286E2DEE00FB92D1 /* NoticeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A5B540286E2DEB00FB92D1 /* NoticeTableViewCell.swift */; };
 		B7A5B543286E2DEE00FB92D1 /* NoticeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7A5B541286E2DEC00FB92D1 /* NoticeTableViewCell.xib */; };
+		B7DF047B287C639A005D2026 /* ScanQrCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DF047A287C639A005D2026 /* ScanQrCodeViewModel.swift */; };
 		B7F0D318282B5C9900BA9764 /* Wallet.h in Headers */ = {isa = PBXBuildFile; fileRef = B7F0D317282B5C9900BA9764 /* Wallet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B7F0D327282B5FAF00BA9764 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F0D326282B5FAE00BA9764 /* Core.framework */; };
 		B7F0D32B282B5FB600BA9764 /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F0D32A282B5FB600BA9764 /* Networking.framework */; };
@@ -190,6 +191,7 @@
 		B7A5B53D286E28CE00FB92D1 /* VerifyAccountTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VerifyAccountTableViewCell.xib; sourceTree = "<group>"; };
 		B7A5B540286E2DEB00FB92D1 /* NoticeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeTableViewCell.swift; sourceTree = "<group>"; };
 		B7A5B541286E2DEC00FB92D1 /* NoticeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoticeTableViewCell.xib; sourceTree = "<group>"; };
+		B7DF047A287C639A005D2026 /* ScanQrCodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQrCodeViewModel.swift; sourceTree = "<group>"; };
 		B7F0D314282B5C9900BA9764 /* Wallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Wallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7F0D317282B5C9900BA9764 /* Wallet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Wallet.h; sourceTree = "<group>"; };
 		B7F0D326282B5FAE00BA9764 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -324,6 +326,7 @@
 				B744AC3D28781A2C00378924 /* ManageShortcutsViewModel.swift */,
 				B7471242287C028C00C3C7EE /* CreateShortcutViewModel.swift */,
 				B7471240287BFC0600C3C7EE /* RecentViewModel.swift */,
+				B7DF047A287C639A005D2026 /* ScanQrCodeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -651,6 +654,7 @@
 				B728FE552844ACCC00CF03DA /* MyQrCodeViewController.swift in Sources */,
 				B72FDEE92833C38500748D13 /* SelectPageViewController.swift in Sources */,
 				B72FDEE12833BE6F00748D13 /* WalletHistoryHeaderTableViewCell.swift in Sources */,
+				B7DF047B287C639A005D2026 /* ScanQrCodeViewModel.swift in Sources */,
 				B72FDED92833B6E000748D13 /* BannerTableViewCell.swift in Sources */,
 				B7963481286E3A42003F2E9C /* ResendViewController.swift in Sources */,
 				B7471236287A7C8B00C3C7EE /* ShortcutTableViewCell.swift in Sources */,

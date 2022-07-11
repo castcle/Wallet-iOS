@@ -45,6 +45,7 @@ class ScanQrCodeViewController: UIViewController, AVCaptureMetadataOutputObjects
     @IBOutlet weak var dataView: UIView!
     @IBOutlet weak var galleryButton: UIButton!
 
+    var viewModel = ScanQrCodeViewModel()
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
 
@@ -125,17 +126,23 @@ class ScanQrCodeViewController: UIViewController, AVCaptureMetadataOutputObjects
     }
 
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        self.captureSession.stopRunning()
         if let metadataObject = metadataObjects.first {
             guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
             guard let stringValue = readableObject.stringValue else { return }
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-            self.foundData(code: stringValue)
+            if self.viewModel.scanType == .wallet {
+                
+            } else {
+                self.captureSession.stopRunning()
+                self.foundData(code: stringValue)
+            }
         }
     }
 
     private func foundData(code: String) {
-        if code.isUrl, let url = URL(string: code) {
+        if self.viewModel.isWalletData(value: code) {
+            self.viewModel.validateQrCode(value: code)
+        } else if code.isUrl, let url = URL(string: code) {
             self.navigationController?.popViewController(animated: true)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 Utility.currentViewController().navigationController?.pushViewController(ComponentOpener.open(.internalWebView(url)), animated: true)

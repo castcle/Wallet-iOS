@@ -82,7 +82,7 @@ class WalletViewController: UIViewController {
     }
 
     @objc private func scanAction() {
-        self.navigationController?.pushViewController(WalletOpener.open(.scanQrCode), animated: true)
+        self.navigationController?.pushViewController(WalletOpener.open(.scanQrCode(ScanQrCodeViewModel(scanType: .all, page: self.viewModel.page))), animated: true)
     }
 
     func configureTableView() {

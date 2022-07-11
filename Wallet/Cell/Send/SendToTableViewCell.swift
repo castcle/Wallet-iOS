@@ -30,7 +30,8 @@ import Core
 import Networking
 
 protocol SendToTableViewCellDelegate: AnyObject {
-    func didValueChange(_ sendToTableViewCell: SendToTableViewCell, sendTo: String, memo: String, amount: String, note: String)
+    func didSelectWalletsRecent(_ sendToTableViewCell: SendToTableViewCell, walletsRecent: WalletsRecent)
+    func didValueChange(_ sendToTableViewCell: SendToTableViewCell, memo: String, amount: String, note: String)
 }
 
 class SendToTableViewCell: UITableViewCell, UITextFieldDelegate {
@@ -85,7 +86,6 @@ class SendToTableViewCell: UITableViewCell, UITextFieldDelegate {
         self.scanMemoButton.setImage(UIImage.init(icon: .castcle(.qrCode), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.white).withRenderingMode(.alwaysOriginal), for: .normal)
         self.sendToTextField.delegate = self
         self.sendToTextField.tag = 0
-        self.sendToTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
         self.memoTextField.delegate = self
         self.memoTextField.tag = 1
         self.memoTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
@@ -120,7 +120,9 @@ class SendToTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
 
     @objc func textFieldDidChange(_ textField: UITextField) {
-        self.delegate?.didValueChange(self, sendTo: self.sendToTextField.text ?? "", memo: self.memoTextField.text ?? "", amount: self.amountTextField.text ?? "", note: self.noteTextField.text ?? "")
+        if textField.tag != 0 {
+            self.delegate?.didValueChange(self, memo: self.memoTextField.text ?? "", amount: self.amountTextField.text ?? "", note: self.noteTextField.text ?? "")
+        }
     }
 
     @IBAction func resendAction(_ sender: Any) {
@@ -139,6 +141,7 @@ class SendToTableViewCell: UITableViewCell, UITextFieldDelegate {
 
     @IBAction func maxAction(_ sender: Any) {
         self.amountTextField.text = "10"
+        self.delegate?.didValueChange(self, memo: self.memoTextField.text ?? "", amount: self.amountTextField.text ?? "", note: self.noteTextField.text ?? "")
     }
 }
 
@@ -149,6 +152,6 @@ extension SendToTableViewCell: ResendViewControllerDelegate {
         } else {
             self.sendToTextField.text = "@\(walletsRecent.castcleId)"
         }
-        self.delegate?.didValueChange(self, sendTo: self.sendToTextField.text ?? "", memo: self.memoTextField.text ?? "", amount: self.amountTextField.text ?? "", note: self.noteTextField.text ?? "")
+        self.delegate?.didSelectWalletsRecent(self, walletsRecent: walletsRecent)
     }
 }

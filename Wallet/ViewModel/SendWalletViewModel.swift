@@ -36,16 +36,19 @@ public final class SendWalletViewModel {
     var accounts: [Shortcut] = []
     var shortcuts: [Shortcut] = []
     var page: Page = Page()
-
-    // MARK: - Temp Value
-    var sendTo: String = ""
+    var chainId: String = ""
+    var userId: String = ""
+    var castcleId: String = ""
     var memo: String = ""
     var amount: String = ""
     var note: String = ""
 
-    public init(page: Page = Page()) {
+    public init(page: Page = Page(), chainId: String = "", userId: String = "", castcleId: String = "") {
         self.tokenHelper.delegate = self
         self.page = page
+        self.chainId = chainId
+        self.userId = userId
+        self.castcleId = castcleId
     }
 
     func getWalletShortcuts() {
