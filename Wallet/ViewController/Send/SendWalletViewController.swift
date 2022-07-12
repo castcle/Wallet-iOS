@@ -121,7 +121,7 @@ extension SendWalletViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.sendTo, for: indexPath as IndexPath) as? SendToTableViewCell
             cell?.backgroundColor = UIColor.clear
             cell?.delegate = self
-            cell?.configCell(sendTo: "@\(self.viewModel.castcleId)", page: self.viewModel.page)
+            cell?.configCell(sendTo: self.viewModel.castcleId, page: self.viewModel.page)
             return cell ?? SendToTableViewCell()
         }
     }
@@ -151,5 +151,15 @@ extension SendWalletViewController: SendToTableViewCellDelegate {
         self.viewModel.note = note
         self.castLabel.text = "\(self.viewModel.amount) CAST"
         self.sendButton.activeButton(isActive: self.isAvtive, fontSize: .overline)
+    }
+
+    func didScanWalletSuccess(_ sendToTableViewCell: SendToTableViewCell, chainId: String, userId: String, castcleId: String) {
+        self.viewModel.chainId = chainId
+        self.viewModel.userId = userId
+        self.viewModel.castcleId = castcleId
+    }
+
+    func didScanTextSuccess(_ sendToTableViewCell: SendToTableViewCell, text: String) {
+        self.viewModel.memo = text
     }
 }

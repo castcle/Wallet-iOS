@@ -32,6 +32,7 @@ import SwiftyJSON
 public enum ScanType {
     case all
     case wallet
+    case text
 }
 
 public final class ScanQrCodeViewModel {
@@ -48,6 +49,9 @@ public final class ScanQrCodeViewModel {
 //    var isSearch: Bool = false
 //    var isSearchCastcle: Bool = false
 //    var walletRequest: WalletRequest = WalletRequest()
+    var chainId: String = ""
+    var userId: String = ""
+    var castcleId: String = ""
     var scanType: ScanType = .all
 
     public init(scanType: ScanType = .all, page: Page = Page()) {
@@ -56,29 +60,37 @@ public final class ScanQrCodeViewModel {
     }
 
     func isWalletData(value: String) -> Bool {
-        return value.contains(Environment.qrCodeUrl)
+        return (value.contains(Environment.qrCodeUrl) && value.contains("/w/s/"))
     }
 
     func validateQrCode(value: String) {
-        if value.contains(Environment.qrCodeUrl) {
-            let data = value.replacingOccurrences(of: Environment.qrCodeUrl, with: "")
-            self.checkWalletData(value: data)
+        let data = value.replacingOccurrences(of: "\(Environment.qrCodeUrl)w/s/", with: "")
+        self.checkWalletData(value: data)
+    }
+
+    func isCorrectWalletData(value: String) -> Bool {
+        let data = value.replacingOccurrences(of: "\(Environment.qrCodeUrl)w/s/", with: "")
+        let walletDataArr = data.components(separatedBy: "|")
+        if walletDataArr.count == 3 {
+            self.chainId = walletDataArr[0]
+            self.userId = walletDataArr[1]
+            self.castcleId = walletDataArr[2]
+            return true
+        } else {
+            return false
         }
     }
 
     private func checkWalletData(value: String) {
-        if value.contains("w/s/") {
-            let walletData = value.replacingOccurrences(of: "w/s/", with: "")
-            let walletDataArr = walletData.components(separatedBy: "|")
-            if walletDataArr.count == 3 {
-                let chainId: String = walletDataArr[0]
-                let userId: String = walletDataArr[1]
-                let castcleId: String = walletDataArr[2]
-                if self.scanType == .all {
-                    Utility.currentViewController().navigationController?.popViewController(animated: true)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.sendWallet(SendWalletViewModel(page: self.page, chainId: chainId, userId: userId, castcleId: castcleId))), animated: true)
-                    }
+        let walletDataArr = value.components(separatedBy: "|")
+        if walletDataArr.count == 3 {
+            self.chainId = walletDataArr[0]
+            self.userId = walletDataArr[1]
+            self.castcleId = walletDataArr[2]
+            if self.scanType == .all {
+                Utility.currentViewController().navigationController?.popViewController(animated: true)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.sendWallet(SendWalletViewModel(page: self.page, chainId: self.chainId, userId: self.userId, castcleId: self.castcleId))), animated: true)
                 }
             }
         }

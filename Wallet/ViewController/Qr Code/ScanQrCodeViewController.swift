@@ -32,6 +32,11 @@ import Component
 import Defaults
 import TLPhotoPicker
 
+protocol ScanQrCodeViewControllerDelegate: AnyObject {
+    func didScanWalletSuccess(_ scanQrCodeViewController: ScanQrCodeViewController, chainId: String, userId: String, castcleId: String)
+    func didScanTextSuccess(_ scanQrCodeViewController: ScanQrCodeViewController, text: String)
+}
+
 class ScanQrCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
 
     @IBOutlet weak var scanView: UIView!
@@ -45,6 +50,7 @@ class ScanQrCodeViewController: UIViewController, AVCaptureMetadataOutputObjects
     @IBOutlet weak var dataView: UIView!
     @IBOutlet weak var galleryButton: UIButton!
 
+    public var delegate: ScanQrCodeViewControllerDelegate?
     var viewModel = ScanQrCodeViewModel()
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
@@ -130,25 +136,37 @@ class ScanQrCodeViewController: UIViewController, AVCaptureMetadataOutputObjects
             guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
             guard let stringValue = readableObject.stringValue else { return }
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-            if self.viewModel.scanType == .wallet {
-                
-            } else {
-                self.captureSession.stopRunning()
-                self.foundData(code: stringValue)
-            }
+            self.handleByScanType(value: stringValue)
         }
     }
 
-    private func foundData(code: String) {
-        if self.viewModel.isWalletData(value: code) {
-            self.viewModel.validateQrCode(value: code)
-        } else if code.isUrl, let url = URL(string: code) {
+    private func handleByScanType(value: String) {
+        if self.viewModel.scanType == .wallet {
+            if self.viewModel.isWalletData(value: value) && self.viewModel.isCorrectWalletData(value: value) {
+                self.captureSession.stopRunning()
+                Utility.currentViewController().navigationController?.popViewController(animated: true)
+                self.delegate?.didScanWalletSuccess(self, chainId: self.viewModel.chainId, userId: self.viewModel.userId, castcleId: self.viewModel.castcleId)
+            }
+        } else if self.viewModel.scanType == .text {
+            self.captureSession.stopRunning()
+            Utility.currentViewController().navigationController?.popViewController(animated: true)
+            self.delegate?.didScanTextSuccess(self, text: value)
+        } else {
+            self.captureSession.stopRunning()
+            self.foundData(value: value)
+        }
+    }
+
+    private func foundData(value: String) {
+        if self.viewModel.isWalletData(value: value) {
+            self.viewModel.validateQrCode(value: value)
+        } else if value.isUrl, let url = URL(string: value) {
             self.navigationController?.popViewController(animated: true)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 Utility.currentViewController().navigationController?.pushViewController(ComponentOpener.open(.internalWebView(url)), animated: true)
             }
         } else {
-            self.dataLabel.text = code
+            self.dataLabel.text = value
             self.dataView.isHidden = false
         }
     }
@@ -221,7 +239,7 @@ extension ScanQrCodeViewController: TLPhotosPickerViewControllerDelegate {
                 if qrCodeString.isEmpty {
                     self.failed()
                 } else {
-                    self.foundData(code: qrCodeString)
+                    self.handleByScanType(value: qrCodeString)
                 }
             } else {
                 self.failed()
