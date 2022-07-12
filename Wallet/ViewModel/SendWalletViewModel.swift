@@ -33,8 +33,6 @@ public final class SendWalletViewModel {
 
     private var walletRepository: WalletRepository = WalletRepositoryImpl()
     let tokenHelper: TokenHelper = TokenHelper()
-    var accounts: [Shortcut] = []
-    var shortcuts: [Shortcut] = []
     var page: Page = Page()
     var chainId: String = ""
     var userId: String = ""
@@ -42,6 +40,7 @@ public final class SendWalletViewModel {
     var memo: String = ""
     var amount: String = ""
     var note: String = ""
+    var myShortcut: [Shortcut] = []
 
     public init(page: Page = Page(), chainId: String = "", userId: String = "", castcleId: String = "") {
         self.tokenHelper.delegate = self
@@ -57,8 +56,11 @@ public final class SendWalletViewModel {
                 do {
                     let rawJson = try response.mapJSON()
                     let json = JSON(rawJson)
-                    self.accounts = (json[JsonKey.accounts.rawValue].arrayValue).map { Shortcut(json: $0) }
-                    self.shortcuts = (json[JsonKey.shortcuts.rawValue].arrayValue).map { Shortcut(json: $0) }
+                    let accounts = (json[JsonKey.accounts.rawValue].arrayValue).map { Shortcut(json: $0) }.filter { $0.userId != self.page.id }
+                    let shortcuts = (json[JsonKey.shortcuts.rawValue].arrayValue).map { Shortcut(json: $0) }
+                    self.myShortcut = []
+                    self.myShortcut.append(contentsOf: accounts)
+                    self.myShortcut.append(contentsOf: shortcuts)
                     self.didGetWalletShortcutsFinish?()
                 } catch {}
             } else {

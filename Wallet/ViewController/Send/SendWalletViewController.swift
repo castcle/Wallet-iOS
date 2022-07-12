@@ -115,7 +115,7 @@ extension SendWalletViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.sendShortcut, for: indexPath as IndexPath) as? SendShortcutTableViewCell
             cell?.backgroundColor = UIColor.clear
             cell?.delegate = self
-            cell?.configCell(shortcuts: self.viewModel.shortcuts, page: self.viewModel.page)
+            cell?.configCell(shortcuts: self.viewModel.myShortcut, page: self.viewModel.page)
             return cell ?? SendShortcutTableViewCell()
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.sendTo, for: indexPath as IndexPath) as? SendToTableViewCell
