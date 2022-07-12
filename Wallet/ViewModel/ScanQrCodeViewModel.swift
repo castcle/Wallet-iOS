@@ -37,18 +37,7 @@ public enum ScanType {
 
 public final class ScanQrCodeViewModel {
 
-//    private var walletRepository: WalletRepository = WalletRepositoryImpl()
-//    private var state: State = .none
-//    let tokenHelper: TokenHelper = TokenHelper()
-//    var castcle: [WalletsRecent] = []
-//    var other: [WalletsRecent] = []
-//    var searchCastcle: [WalletsRecent] = []
     var page: Page = Page()
-//    var isCastcleRecentExpand: Bool = false
-//    var isOtherRecentExpand: Bool = false
-//    var isSearch: Bool = false
-//    var isSearchCastcle: Bool = false
-//    var walletRequest: WalletRequest = WalletRequest()
     var chainId: String = ""
     var userId: String = ""
     var castcleId: String = ""

@@ -34,11 +34,28 @@ public final class CreateShortcutViewModel {
     private var walletRepository: WalletRepository = WalletRepositoryImpl()
     let tokenHelper: TokenHelper = TokenHelper()
     var page: Page = Page()
+    var walletsRecent: WalletsRecent = WalletsRecent()
+    var walletRequest: WalletRequest = WalletRequest()
+    var castcleId: String = ""
 
     public init(page: Page = Page()) {
         self.tokenHelper.delegate = self
         self.page = page
     }
+
+    func createShortcutCastcle() {
+        self.walletRepository.createShortcutCastcle(accountId: UserManager.shared.accountId, walletRequest: self.walletRequest) { (success, _, isRefreshToken) in
+            if success {
+                self.didCreateShortcutFinish?()
+            } else {
+                if isRefreshToken {
+                    self.tokenHelper.refreshToken()
+                }
+            }
+        }
+    }
+
+    var didCreateShortcutFinish: (() -> Void)?
 }
 
 extension CreateShortcutViewModel: TokenHelperDelegate {

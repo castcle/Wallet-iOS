@@ -42,6 +42,7 @@ class SendShortcutTableViewCell: UITableViewCell {
 
     public var delegate: SendShortcutTableViewCellDelegate?
     private var shortcuts: [Shortcut] = []
+    private var page: Page = Page()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -59,8 +60,9 @@ class SendShortcutTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    func configCell(shortcuts: [Shortcut]) {
+    func configCell(shortcuts: [Shortcut], page: Page) {
         self.shortcuts = shortcuts
+        self.page = page
         self.collectionView.reloadData()
     }
 
@@ -90,6 +92,8 @@ extension SendShortcutTableViewCell: UICollectionViewDataSource, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row != self.shortcuts.count {
             self.delegate?.didSelectShortcut(self, shortcut: self.shortcuts[indexPath.row])
+        } else {
+            Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.createShortcut(CreateShortcutViewModel(page: self.page))), animated: true)
         }
     }
 }

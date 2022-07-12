@@ -47,9 +47,6 @@ class ManageShortcutsViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.Asset.darkGraphiteBlue
         self.configureTableView()
-        self.hud.textLabel.text = "Loading"
-        self.hud.show(in: self.view)
-        self.viewModel.getWalletShortcuts()
         self.viewModel.didGetWalletShortcutsFinish = {
             self.hud.dismiss()
             self.tableView.reloadData()
@@ -60,6 +57,9 @@ class ManageShortcutsViewController: UIViewController {
         super.viewWillAppear(animated)
         self.setupNavBar()
         Defaults[.screenId] = ""
+        self.hud.textLabel.text = "Loading"
+        self.hud.show(in: self.view)
+        self.viewModel.getWalletShortcuts()
     }
 
     func setupNavBar() {

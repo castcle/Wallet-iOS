@@ -65,7 +65,6 @@ class SendWalletViewController: UIViewController {
         self.feeLabel.font = UIFont.asset(.regular, fontSize: .overline)
         self.feeLabel.textColor = UIColor.Asset.white
         self.sendButton.activeButton(isActive: false, fontSize: .overline)
-        self.viewModel.getWalletShortcuts()
         self.viewModel.didGetWalletShortcutsFinish = {
             self.tableView.reloadData()
         }
@@ -75,6 +74,7 @@ class SendWalletViewController: UIViewController {
         super.viewWillAppear(animated)
         self.setupNavBar()
         Defaults[.screenId] = ""
+        self.viewModel.getWalletShortcuts()
     }
 
     func setupNavBar() {
@@ -115,7 +115,7 @@ extension SendWalletViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.sendShortcut, for: indexPath as IndexPath) as? SendShortcutTableViewCell
             cell?.backgroundColor = UIColor.clear
             cell?.delegate = self
-            cell?.configCell(shortcuts: self.viewModel.shortcuts)
+            cell?.configCell(shortcuts: self.viewModel.shortcuts, page: self.viewModel.page)
             return cell ?? SendShortcutTableViewCell()
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.sendTo, for: indexPath as IndexPath) as? SendToTableViewCell

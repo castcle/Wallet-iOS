@@ -33,6 +33,7 @@ import JGProgressHUD
 
 protocol ResendViewControllerDelegate: AnyObject {
     func didSelect(_ resendViewController: ResendViewController, walletsRecent: WalletsRecent)
+    func didScanWalletSuccess(_ resendViewController: ResendViewController, chainId: String, userId: String, castcleId: String)
 }
 
 class ResendViewController: UIViewController, UITextFieldDelegate {
@@ -121,7 +122,9 @@ class ResendViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func scanAction(_ sender: Any) {
-        // MARK: - Add action
+        let viewController = WalletOpener.open(.scanQrCode(ScanQrCodeViewModel(scanType: .wallet))) as? ScanQrCodeViewController
+        viewController?.delegate = self
+        Utility.currentViewController().navigationController?.pushViewController(viewController ?? ScanQrCodeViewController(), animated: true)
     }
 }
 
@@ -267,5 +270,16 @@ extension ResendViewController: UITableViewDelegate, UITableViewDataSource {
                 return cell ?? ResendOtherTableViewCell()
             }
         }
+    }
+}
+
+extension ResendViewController: ScanQrCodeViewControllerDelegate {
+    func didScanWalletSuccess(_ scanQrCodeViewController: ScanQrCodeViewController, chainId: String, userId: String, castcleId: String) {
+        self.navigationController?.popViewController(animated: true)
+        self.delegate?.didScanWalletSuccess(self, chainId: chainId, userId: userId, castcleId: castcleId)
+    }
+
+    func didScanTextSuccess(_ scanQrCodeViewController: ScanQrCodeViewController, text: String) {
+        // MARK: - Not Use
     }
 }

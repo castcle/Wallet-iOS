@@ -160,6 +160,11 @@ extension SendToTableViewCell: ResendViewControllerDelegate {
         }
         self.delegate?.didSelectWalletsRecent(self, walletsRecent: walletsRecent)
     }
+
+    func didScanWalletSuccess(_ resendViewController: ResendViewController, chainId: String, userId: String, castcleId: String) {
+        self.sendToTextField.text = "@\(castcleId)"
+        self.delegate?.didScanWalletSuccess(self, chainId: chainId, userId: userId, castcleId: castcleId)
+    }
 }
 
 extension SendToTableViewCell: ScanQrCodeViewControllerDelegate {
