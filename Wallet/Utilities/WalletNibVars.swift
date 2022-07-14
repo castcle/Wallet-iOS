@@ -81,6 +81,7 @@ public struct WalletNibVars {
         public static let manageShortcutHeader = "ManageShortcutHeaderTableViewCell"
         public static let shortcut = "ShortcutTableViewCell"
         public static let createShortcut = "CreateShortcutTableViewCell"
+        public static let editShortcutList = "EditShortcutListTableViewCell"
     }
 
     // MARK: - CollectionViewCell

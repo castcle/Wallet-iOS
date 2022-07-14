@@ -96,6 +96,8 @@
 		B7F0D318282B5C9900BA9764 /* Wallet.h in Headers */ = {isa = PBXBuildFile; fileRef = B7F0D317282B5C9900BA9764 /* Wallet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B7F0D327282B5FAF00BA9764 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F0D326282B5FAE00BA9764 /* Core.framework */; };
 		B7F0D32B282B5FB600BA9764 /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F0D32A282B5FB600BA9764 /* Networking.framework */; };
+		B7F53761288028E80050114A /* EditShortcutListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F5375F288028E80050114A /* EditShortcutListTableViewCell.swift */; };
+		B7F53762288028E80050114A /* EditShortcutListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7F53760288028E80050114A /* EditShortcutListTableViewCell.xib */; };
 		B9F4004DD1EC4A26E8B498C0 /* Pods_Wallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E1FF3686C48A8E2C8323EBD /* Pods_Wallet.framework */; };
 /* End PBXBuildFile section */
 
@@ -196,6 +198,8 @@
 		B7F0D317282B5C9900BA9764 /* Wallet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Wallet.h; sourceTree = "<group>"; };
 		B7F0D326282B5FAE00BA9764 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7F0D32A282B5FB600BA9764 /* Networking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Networking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7F5375F288028E80050114A /* EditShortcutListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditShortcutListTableViewCell.swift; sourceTree = "<group>"; };
+		B7F53760288028E80050114A /* EditShortcutListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditShortcutListTableViewCell.xib; sourceTree = "<group>"; };
 		C895B30D8776736F07008395 /* Pods-Wallet.debug (development).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wallet.debug (development).xcconfig"; path = "Target Support Files/Pods-Wallet/Pods-Wallet.debug (development).xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -367,6 +371,8 @@
 				B744AC3A2878190300378924 /* ManageShortcutHeaderTableViewCell.xib */,
 				B7471234287A7C8B00C3C7EE /* ShortcutTableViewCell.swift */,
 				B7471235287A7C8B00C3C7EE /* ShortcutTableViewCell.xib */,
+				B7F5375F288028E80050114A /* EditShortcutListTableViewCell.swift */,
+				B7F53760288028E80050114A /* EditShortcutListTableViewCell.xib */,
 				B747123A287A835600C3C7EE /* CreateShortcutTableViewCell.swift */,
 				B747123B287A835600C3C7EE /* CreateShortcutTableViewCell.xib */,
 			);
@@ -566,6 +572,7 @@
 				B72FDEE22833BE6F00748D13 /* WalletHistoryHeaderTableViewCell.xib in Resources */,
 				B72FDED22833A48600748D13 /* BalanceTableViewCell.xib in Resources */,
 				B796348A286E480C003F2E9C /* ResendOtherTableViewCell.xib in Resources */,
+				B7F53762288028E80050114A /* EditShortcutListTableViewCell.xib in Resources */,
 				B73D9818286E056800D6ECA8 /* ReviewDataTableViewCell.xib in Resources */,
 				B7117028283B836500FF985A /* MyQRCode.xib in Resources */,
 				B72FDEB42833978A00748D13 /* Wallet.storyboard in Resources */,
@@ -658,6 +665,7 @@
 				B72FDED92833B6E000748D13 /* BannerTableViewCell.swift in Sources */,
 				B7963481286E3A42003F2E9C /* ResendViewController.swift in Sources */,
 				B7471236287A7C8B00C3C7EE /* ShortcutTableViewCell.swift in Sources */,
+				B7F53761288028E80050114A /* EditShortcutListTableViewCell.swift in Sources */,
 				B796348D286E4BA9003F2E9C /* ViewMoreTableViewCell.swift in Sources */,
 				B72FDEBB2833986100748D13 /* WalletViewController.swift in Sources */,
 				B72FDECB28339F7A00748D13 /* DisplayNameTableViewCell.swift in Sources */,

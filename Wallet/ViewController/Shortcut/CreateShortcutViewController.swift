@@ -48,7 +48,7 @@ class CreateShortcutViewController: UIViewController {
     }
 
     func setupNavBar() {
-        self.customNavigationBar(.secondary, title: "Add Shortcut")
+        self.customNavigationBar(.secondary, title: (self.viewModel.shortcut.id.isEmpty ? "Add Shortcut" : "Edit Shortcut"))
     }
 
     func configureTableView() {

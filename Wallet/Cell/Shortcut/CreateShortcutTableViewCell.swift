@@ -71,10 +71,28 @@ class CreateShortcutTableViewCell: UITableViewCell {
 
     func configCell(viewModel: CreateShortcutViewModel) {
         self.viewModel = viewModel
+        if !self.viewModel.shortcut.id.isEmpty {
+            self.viewModel.walletRequest.userId = self.viewModel.shortcut.userId
+            self.viewModel.castcleId = self.viewModel.shortcut.castcleId
+            let shortcutAvatar = URL(string: self.viewModel.shortcut.images.avatar.thumbnail)
+            self.shortcutAvatarImage.kf.setImage(with: shortcutAvatar, placeholder: UIImage.Asset.userPlaceholder, options: [.transition(.fade(0.35))])
+            self.updateUI()
+        }
         self.viewModel.didCreateShortcutFinish = {
             self.hud.dismiss()
             Utility.currentViewController().navigationController?.popViewController(animated: true)
         }
+        self.viewModel.didUpdateShortcutFinish = {
+            self.hud.dismiss()
+            Utility.currentViewController().navigationController?.popViewController(animated: true)
+        }
+    }
+
+    private func updateUI() {
+        self.displayNameLabel.text = "@\(self.viewModel.castcleId)"
+        self.idTextField.text = "@\(self.viewModel.castcleId)"
+        self.confirmButton.activeButton(isActive: true, fontSize: .overline)
+        self.dataView.isHidden = false
     }
 
     @IBAction func resendAction(_ sender: Any) {
@@ -90,8 +108,11 @@ class CreateShortcutTableViewCell: UITableViewCell {
     }
 
     @IBAction func confirmAction(_ sender: Any) {
-        // MARK: - Add action
-        if !self.viewModel.walletRequest.userId.isEmpty {
+        if !self.viewModel.shortcut.id.isEmpty && !self.viewModel.walletRequest.userId.isEmpty {
+            self.hud.textLabel.text = "Updating"
+            self.hud.show(in: Utility.currentViewController().view)
+            self.viewModel.updateShortcut()
+        } else if self.viewModel.shortcut.id.isEmpty && !self.viewModel.walletRequest.userId.isEmpty {
             self.hud.textLabel.text = "Creating"
             self.hud.show(in: Utility.currentViewController().view)
             self.viewModel.createShortcutCastcle()
@@ -103,22 +124,17 @@ extension CreateShortcutTableViewCell: ResendViewControllerDelegate {
     func didSelect(_ resendViewController: ResendViewController, walletsRecent: WalletsRecent) {
         self.viewModel.walletsRecent = walletsRecent
         self.viewModel.walletRequest.userId = walletsRecent.id
-        self.displayNameLabel.text = "@\(walletsRecent.castcleId)"
-        self.idTextField.text = "@\(walletsRecent.castcleId)"
+        self.viewModel.castcleId = walletsRecent.castcleId
         let shortcutAvatar = URL(string: walletsRecent.images.avatar.thumbnail)
         self.shortcutAvatarImage.kf.setImage(with: shortcutAvatar, placeholder: UIImage.Asset.userPlaceholder, options: [.transition(.fade(0.35))])
-        self.confirmButton.activeButton(isActive: true, fontSize: .overline)
-        self.dataView.isHidden = false
+        self.updateUI()
     }
 
     func didScanWalletSuccess(_ resendViewController: ResendViewController, chainId: String, userId: String, castcleId: String) {
         self.viewModel.walletRequest.userId = userId
         self.viewModel.castcleId = castcleId
-        self.displayNameLabel.text = "@\(castcleId)"
-        self.idTextField.text = "@\(castcleId)"
         self.shortcutAvatarImage.image = UIImage.Asset.userPlaceholder
-        self.confirmButton.activeButton(isActive: true, fontSize: .overline)
-        self.dataView.isHidden = false
+        self.updateUI()
     }
 }
 
