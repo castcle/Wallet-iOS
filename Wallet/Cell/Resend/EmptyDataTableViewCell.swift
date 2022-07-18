@@ -54,4 +54,9 @@ class EmptyDataTableViewCell: UITableViewCell {
             self.subtitleLabel.text = "The wallet address you searched for was not found, or does not exist."
         }
     }
+
+    func configCellEmptyRecent() {
+        self.titleLabel.text = "No Recent List"
+        self.subtitleLabel.text = "After your first transaction, your recent list will appear here"
+    }
 }

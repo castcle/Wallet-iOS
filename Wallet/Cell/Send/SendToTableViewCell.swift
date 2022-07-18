@@ -30,7 +30,10 @@ import Core
 import Networking
 
 protocol SendToTableViewCellDelegate: AnyObject {
-    func didValueChange(_ sendToTableViewCell: SendToTableViewCell, sendTo: String, memo: String, amount: String, note: String)
+    func didSelectWalletsRecent(_ sendToTableViewCell: SendToTableViewCell, walletsRecent: WalletsRecent)
+    func didValueChange(_ sendToTableViewCell: SendToTableViewCell, memo: String, amount: String, note: String)
+    func didScanWalletSuccess(_ sendToTableViewCell: SendToTableViewCell, chainId: String, userId: String, castcleId: String)
+    func didScanTextSuccess(_ sendToTableViewCell: SendToTableViewCell, text: String)
 }
 
 class SendToTableViewCell: UITableViewCell, UITextFieldDelegate {
@@ -85,7 +88,6 @@ class SendToTableViewCell: UITableViewCell, UITextFieldDelegate {
         self.scanMemoButton.setImage(UIImage.init(icon: .castcle(.qrCode), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.white).withRenderingMode(.alwaysOriginal), for: .normal)
         self.sendToTextField.delegate = self
         self.sendToTextField.tag = 0
-        self.sendToTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
         self.memoTextField.delegate = self
         self.memoTextField.tag = 1
         self.memoTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
@@ -115,12 +117,14 @@ class SendToTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
 
     func configCell(sendTo: String, page: Page) {
-        self.sendToTextField.text = sendTo
+        self.sendToTextField.text = (sendTo.isEmpty ? "" : "@\(sendTo)")
         self.page = page
     }
 
     @objc func textFieldDidChange(_ textField: UITextField) {
-        self.delegate?.didValueChange(self, sendTo: self.sendToTextField.text ?? "", memo: self.memoTextField.text ?? "", amount: self.amountTextField.text ?? "", note: self.noteTextField.text ?? "")
+        if textField.tag != 0 {
+            self.delegate?.didValueChange(self, memo: self.memoTextField.text ?? "", amount: self.amountTextField.text ?? "", note: self.noteTextField.text ?? "")
+        }
     }
 
     @IBAction func resendAction(_ sender: Any) {
@@ -130,15 +134,20 @@ class SendToTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
 
     @IBAction func scanSendToAction(_ sender: Any) {
-        // MARK: - Add action
+        let viewController = WalletOpener.open(.scanQrCode(ScanQrCodeViewModel(scanType: .wallet))) as? ScanQrCodeViewController
+        viewController?.delegate = self
+        Utility.currentViewController().navigationController?.pushViewController(viewController ?? ScanQrCodeViewController(), animated: true)
     }
 
     @IBAction func scanMemoAction(_ sender: Any) {
-        // MARK: - Add action
+        let viewController = WalletOpener.open(.scanQrCode(ScanQrCodeViewModel(scanType: .text))) as? ScanQrCodeViewController
+        viewController?.delegate = self
+        Utility.currentViewController().navigationController?.pushViewController(viewController ?? ScanQrCodeViewController(), animated: true)
     }
 
     @IBAction func maxAction(_ sender: Any) {
         self.amountTextField.text = "10"
+        self.delegate?.didValueChange(self, memo: self.memoTextField.text ?? "", amount: self.amountTextField.text ?? "", note: self.noteTextField.text ?? "")
     }
 }
 
@@ -149,6 +158,23 @@ extension SendToTableViewCell: ResendViewControllerDelegate {
         } else {
             self.sendToTextField.text = "@\(walletsRecent.castcleId)"
         }
-        self.delegate?.didValueChange(self, sendTo: self.sendToTextField.text ?? "", memo: self.memoTextField.text ?? "", amount: self.amountTextField.text ?? "", note: self.noteTextField.text ?? "")
+        self.delegate?.didSelectWalletsRecent(self, walletsRecent: walletsRecent)
+    }
+
+    func didScanWalletSuccess(_ resendViewController: ResendViewController, chainId: String, userId: String, castcleId: String) {
+        self.sendToTextField.text = "@\(castcleId)"
+        self.delegate?.didScanWalletSuccess(self, chainId: chainId, userId: userId, castcleId: castcleId)
+    }
+}
+
+extension SendToTableViewCell: ScanQrCodeViewControllerDelegate {
+    func didScanWalletSuccess(_ scanQrCodeViewController: ScanQrCodeViewController, chainId: String, userId: String, castcleId: String) {
+        self.sendToTextField.text = "@\(castcleId)"
+        self.delegate?.didScanWalletSuccess(self, chainId: chainId, userId: userId, castcleId: castcleId)
+    }
+
+    func didScanTextSuccess(_ scanQrCodeViewController: ScanQrCodeViewController, text: String) {
+        self.memoTextField.text = text
+        self.delegate?.didScanTextSuccess(self, text: text)
     }
 }

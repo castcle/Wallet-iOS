@@ -33,6 +33,7 @@ import JGProgressHUD
 
 protocol ResendViewControllerDelegate: AnyObject {
     func didSelect(_ resendViewController: ResendViewController, walletsRecent: WalletsRecent)
+    func didScanWalletSuccess(_ resendViewController: ResendViewController, chainId: String, userId: String, castcleId: String)
 }
 
 class ResendViewController: UIViewController, UITextFieldDelegate {
@@ -121,13 +122,17 @@ class ResendViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func scanAction(_ sender: Any) {
-        // MARK: - Add action
+        let viewController = WalletOpener.open(.scanQrCode(ScanQrCodeViewModel(scanType: .wallet))) as? ScanQrCodeViewController
+        viewController?.delegate = self
+        Utility.currentViewController().navigationController?.pushViewController(viewController ?? ScanQrCodeViewController(), animated: true)
     }
 }
 
 extension ResendViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         if self.viewModel.isSearch {
+            return 1
+        } else if self.viewModel.castcle.isEmpty && self.viewModel.other.isEmpty {
             return 1
         } else {
             return ResendViewControllerSection.allCases.count
@@ -137,6 +142,8 @@ extension ResendViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.viewModel.isSearch {
             return (self.viewModel.searchCastcle.count > 0 ? self.viewModel.searchCastcle.count : 1)
+        } else if self.viewModel.castcle.isEmpty && self.viewModel.other.isEmpty {
+            return 1
         } else {
             if section == ResendViewControllerSection.castcle.rawValue {
                 return self.getRowRecent(isCastcle: true)
@@ -149,6 +156,8 @@ extension ResendViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if self.viewModel.isSearch {
             return 0
+        } else if self.viewModel.castcle.isEmpty && self.viewModel.other.isEmpty {
+            return 0
         } else {
             if section == ResendViewControllerSection.castcle.rawValue {
                 return self.viewModel.castcle.count > 0 ? 50 : 0
@@ -160,6 +169,8 @@ extension ResendViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if self.viewModel.isSearch {
+            return UIView()
+        } else if self.viewModel.castcle.isEmpty && self.viewModel.other.isEmpty {
             return UIView()
         } else {
             let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 50))
@@ -191,6 +202,11 @@ extension ResendViewController: UITableViewDelegate, UITableViewDataSource {
                 cell?.configCell(walletsRecent: self.viewModel.searchCastcle[indexPath.row])
                 return cell ?? ResendUserTableViewCell()
             }
+        } else if self.viewModel.castcle.isEmpty && self.viewModel.other.isEmpty {
+            let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.emptyData, for: indexPath as IndexPath) as? EmptyDataTableViewCell
+            cell?.backgroundColor = UIColor.clear
+            cell?.configCellEmptyRecent()
+            return cell ?? EmptyDataTableViewCell()
         } else {
             if indexPath.section == ResendViewControllerSection.castcle.rawValue {
                 return self.getRecentCell(isCastcle: true, tableView: tableView, didSelectRowAt: indexPath)
@@ -204,7 +220,7 @@ extension ResendViewController: UITableViewDelegate, UITableViewDataSource {
         if self.viewModel.isSearch && !self.viewModel.searchCastcle.isEmpty {
             self.delegate?.didSelect(self, walletsRecent: self.viewModel.searchCastcle[indexPath.row])
             self.navigationController?.popViewController(animated: true)
-        } else {
+        } else if !self.viewModel.castcle.isEmpty && !self.viewModel.other.isEmpty {
             if indexPath.section == ResendViewControllerSection.castcle.rawValue {
                 if !self.viewModel.isCastcleRecentExpand && indexPath.row == 3 {
                     self.viewModel.isCastcleRecentExpand = true
@@ -267,5 +283,16 @@ extension ResendViewController: UITableViewDelegate, UITableViewDataSource {
                 return cell ?? ResendOtherTableViewCell()
             }
         }
+    }
+}
+
+extension ResendViewController: ScanQrCodeViewControllerDelegate {
+    func didScanWalletSuccess(_ scanQrCodeViewController: ScanQrCodeViewController, chainId: String, userId: String, castcleId: String) {
+        self.navigationController?.popViewController(animated: true)
+        self.delegate?.didScanWalletSuccess(self, chainId: chainId, userId: userId, castcleId: castcleId)
+    }
+
+    func didScanTextSuccess(_ scanQrCodeViewController: ScanQrCodeViewController, text: String) {
+        // MARK: - Not Use
     }
 }

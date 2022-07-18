@@ -34,12 +34,6 @@ class CreateShortcutViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
 
     var viewModel = CreateShortcutViewModel()
-    enum ManageShortcutsViewControllerSection: Int, CaseIterable {
-        case myAccountHeader = 0
-        case myAccount
-        case shortcutHeader
-        case shortcut
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +48,7 @@ class CreateShortcutViewController: UIViewController {
     }
 
     func setupNavBar() {
-        self.customNavigationBar(.secondary, title: "Add Shortcut")
+        self.customNavigationBar(.secondary, title: (self.viewModel.shortcut.id.isEmpty ? "Add Shortcut" : "Edit Shortcut"))
     }
 
     func configureTableView() {
@@ -78,7 +72,7 @@ extension CreateShortcutViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.createShortcut, for: indexPath as IndexPath) as? CreateShortcutTableViewCell
         cell?.backgroundColor = UIColor.Asset.darkGraphiteBlue
-        cell?.configCell(page: self.viewModel.page)
+        cell?.configCell(viewModel: self.viewModel)
         return cell ?? CreateShortcutTableViewCell()
     }
 }

@@ -33,19 +33,21 @@ public final class SendWalletViewModel {
 
     private var walletRepository: WalletRepository = WalletRepositoryImpl()
     let tokenHelper: TokenHelper = TokenHelper()
-    var accounts: [Shortcut] = []
-    var shortcuts: [Shortcut] = []
     var page: Page = Page()
-
-    // MARK: - Temp Value
-    var sendTo: String = ""
+    var chainId: String = ""
+    var userId: String = ""
+    var castcleId: String = ""
     var memo: String = ""
     var amount: String = ""
     var note: String = ""
+    var myShortcut: [Shortcut] = []
 
-    public init(page: Page = Page()) {
+    public init(page: Page = Page(), chainId: String = "", userId: String = "", castcleId: String = "") {
         self.tokenHelper.delegate = self
         self.page = page
+        self.chainId = chainId
+        self.userId = userId
+        self.castcleId = castcleId
     }
 
     func getWalletShortcuts() {
@@ -54,8 +56,11 @@ public final class SendWalletViewModel {
                 do {
                     let rawJson = try response.mapJSON()
                     let json = JSON(rawJson)
-                    self.accounts = (json[JsonKey.accounts.rawValue].arrayValue).map { Shortcut(json: $0) }
-                    self.shortcuts = (json[JsonKey.shortcuts.rawValue].arrayValue).map { Shortcut(json: $0) }
+                    let accounts = (json[JsonKey.accounts.rawValue].arrayValue).map { Shortcut(json: $0) }.filter { $0.userId != self.page.id }
+                    let shortcuts = (json[JsonKey.shortcuts.rawValue].arrayValue).map { Shortcut(json: $0) }
+                    self.myShortcut = []
+                    self.myShortcut.append(contentsOf: accounts)
+                    self.myShortcut.append(contentsOf: shortcuts)
                     self.didGetWalletShortcutsFinish?()
                 } catch {}
             } else {

@@ -41,7 +41,7 @@ class SendWalletViewController: UIViewController {
 
     var viewModel = SendWalletViewModel()
     var isAvtive: Bool {
-        if self.viewModel.sendTo.isEmpty || self.viewModel.amount.isEmpty {
+        if self.viewModel.userId.isEmpty || self.viewModel.amount.isEmpty {
             return false
         } else {
             return true
@@ -65,7 +65,6 @@ class SendWalletViewController: UIViewController {
         self.feeLabel.font = UIFont.asset(.regular, fontSize: .overline)
         self.feeLabel.textColor = UIColor.Asset.white
         self.sendButton.activeButton(isActive: false, fontSize: .overline)
-        self.viewModel.getWalletShortcuts()
         self.viewModel.didGetWalletShortcutsFinish = {
             self.tableView.reloadData()
         }
@@ -75,6 +74,7 @@ class SendWalletViewController: UIViewController {
         super.viewWillAppear(animated)
         self.setupNavBar()
         Defaults[.screenId] = ""
+        self.viewModel.getWalletShortcuts()
     }
 
     func setupNavBar() {
@@ -92,7 +92,7 @@ class SendWalletViewController: UIViewController {
 
     @IBAction func sendAction(_ sender: Any) {
         if self.isAvtive {
-            if self.viewModel.sendTo == "aaaa" {
+            if self.viewModel.userId == "aaaa" {
                 ApiHelper.displayMessage(title: "Warning", message: "Incorrect Castcle ID. Please check the Castcle ID and try again.\n\n** You have insufficient balance", buttonTitle: "Close")
             } else {
                 Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.sendReview), animated: true)
@@ -115,13 +115,13 @@ extension SendWalletViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.sendShortcut, for: indexPath as IndexPath) as? SendShortcutTableViewCell
             cell?.backgroundColor = UIColor.clear
             cell?.delegate = self
-            cell?.configCell(shortcuts: self.viewModel.shortcuts)
+            cell?.configCell(shortcuts: self.viewModel.myShortcut, page: self.viewModel.page)
             return cell ?? SendShortcutTableViewCell()
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.sendTo, for: indexPath as IndexPath) as? SendToTableViewCell
             cell?.backgroundColor = UIColor.clear
             cell?.delegate = self
-            cell?.configCell(sendTo: self.viewModel.sendTo, page: self.viewModel.page)
+            cell?.configCell(sendTo: self.viewModel.castcleId, page: self.viewModel.page)
             return cell ?? SendToTableViewCell()
         }
     }
@@ -129,7 +129,8 @@ extension SendWalletViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension SendWalletViewController: SendShortcutTableViewCellDelegate {
     func didSelectShortcut(_ sendShortcutTableViewCell: SendShortcutTableViewCell, shortcut: Shortcut) {
-        self.viewModel.sendTo = "@\(shortcut.castcleId)"
+        self.viewModel.userId = shortcut.userId
+        self.viewModel.castcleId = shortcut.castcleId
         self.tableView.reloadData()
     }
 
@@ -139,12 +140,26 @@ extension SendWalletViewController: SendShortcutTableViewCellDelegate {
 }
 
 extension SendWalletViewController: SendToTableViewCellDelegate {
-    func didValueChange(_ sendToTableViewCell: SendToTableViewCell, sendTo: String, memo: String, amount: String, note: String) {
-        self.viewModel.sendTo = sendTo
+    func didSelectWalletsRecent(_ sendToTableViewCell: SendToTableViewCell, walletsRecent: WalletsRecent) {
+        self.viewModel.userId = walletsRecent.id
+        self.viewModel.castcleId = walletsRecent.castcleId
+    }
+
+    func didValueChange(_ sendToTableViewCell: SendToTableViewCell, memo: String, amount: String, note: String) {
         self.viewModel.memo = memo
         self.viewModel.amount = amount
         self.viewModel.note = note
         self.castLabel.text = "\(self.viewModel.amount) CAST"
         self.sendButton.activeButton(isActive: self.isAvtive, fontSize: .overline)
+    }
+
+    func didScanWalletSuccess(_ sendToTableViewCell: SendToTableViewCell, chainId: String, userId: String, castcleId: String) {
+        self.viewModel.chainId = chainId
+        self.viewModel.userId = userId
+        self.viewModel.castcleId = castcleId
+    }
+
+    func didScanTextSuccess(_ sendToTableViewCell: SendToTableViewCell, text: String) {
+        self.viewModel.memo = text
     }
 }

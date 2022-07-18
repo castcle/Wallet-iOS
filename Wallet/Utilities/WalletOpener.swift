@@ -31,7 +31,7 @@ import Core
 public enum WalletScene {
     case wallet
     case selectPage(SelectPageViewModel)
-    case scanQrCode
+    case scanQrCode(ScanQrCodeViewModel)
     case myQrCode(QrCodeType)
     case castcleQrCode(QrCodeType)
     case otherChain
@@ -57,10 +57,11 @@ public struct WalletOpener {
             let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.selectPage) as? SelectPageViewController
             viewController?.viewModel = viewModel
             return viewController ?? SelectPageViewController()
-        case .scanQrCode:
+        case .scanQrCode(let viewModel):
             let storyboard: UIStoryboard = UIStoryboard(name: WalletNibVars.Storyboard.wallet, bundle: ConfigBundle.wallet)
-            let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.scanQrCode)
-            return viewController
+            let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.scanQrCode) as? ScanQrCodeViewController
+            viewController?.viewModel = viewModel
+            return viewController ?? ScanQrCodeViewController()
         case .myQrCode(let qrCodeType):
             let storyboard: UIStoryboard = UIStoryboard(name: WalletNibVars.Storyboard.wallet, bundle: ConfigBundle.wallet)
             let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.myQrCode) as? MyQrCodeViewController

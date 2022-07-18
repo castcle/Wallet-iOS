@@ -28,6 +28,8 @@
 import UIKit
 import Core
 import Networking
+import Kingfisher
+import JGProgressHUD
 
 class CreateShortcutTableViewCell: UITableViewCell {
 
@@ -42,7 +44,8 @@ class CreateShortcutTableViewCell: UITableViewCell {
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var dataView: UIView!
 
-    private var page: Page = Page()
+    private var viewModel = CreateShortcutViewModel()
+    private let hud = JGProgressHUD()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -66,27 +69,87 @@ class CreateShortcutTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    func configCell(page: Page) {
-        self.page = page
+    func configCell(viewModel: CreateShortcutViewModel) {
+        self.viewModel = viewModel
+        if !self.viewModel.shortcut.id.isEmpty {
+            self.viewModel.walletRequest.userId = self.viewModel.shortcut.userId
+            self.viewModel.castcleId = self.viewModel.shortcut.castcleId
+            let shortcutAvatar = URL(string: self.viewModel.shortcut.images.avatar.thumbnail)
+            self.shortcutAvatarImage.kf.setImage(with: shortcutAvatar, placeholder: UIImage.Asset.userPlaceholder, options: [.transition(.fade(0.35))])
+            self.updateUI()
+        }
+        self.viewModel.didCreateShortcutFinish = {
+            self.hud.dismiss()
+            Utility.currentViewController().navigationController?.popViewController(animated: true)
+        }
+        self.viewModel.didUpdateShortcutFinish = {
+            self.hud.dismiss()
+            Utility.currentViewController().navigationController?.popViewController(animated: true)
+        }
+    }
+
+    private func updateUI() {
+        self.displayNameLabel.text = "@\(self.viewModel.castcleId)"
+        self.idTextField.text = "@\(self.viewModel.castcleId)"
+        self.confirmButton.activeButton(isActive: true, fontSize: .overline)
+        self.dataView.isHidden = false
     }
 
     @IBAction func resendAction(_ sender: Any) {
-        let viewController = WalletOpener.open(.resend(RecentViewModel(page: self.page))) as? ResendViewController
+        let viewController = WalletOpener.open(.resend(RecentViewModel(page: self.viewModel.page))) as? ResendViewController
         viewController?.delegate = self
         Utility.currentViewController().navigationController?.pushViewController(viewController ?? ResendViewController(), animated: true)
     }
 
     @IBAction func scanSendToAction(_ sender: Any) {
-        // MARK: - Add action
+        let viewController = WalletOpener.open(.scanQrCode(ScanQrCodeViewModel(scanType: .wallet))) as? ScanQrCodeViewController
+        viewController?.delegate = self
+        Utility.currentViewController().navigationController?.pushViewController(viewController ?? ScanQrCodeViewController(), animated: true)
     }
 
     @IBAction func confirmAction(_ sender: Any) {
-        // MARK: - Add action
+        if !self.viewModel.shortcut.id.isEmpty && !self.viewModel.walletRequest.userId.isEmpty {
+            self.hud.textLabel.text = "Updating"
+            self.hud.show(in: Utility.currentViewController().view)
+            self.viewModel.updateShortcut()
+        } else if self.viewModel.shortcut.id.isEmpty && !self.viewModel.walletRequest.userId.isEmpty {
+            self.hud.textLabel.text = "Creating"
+            self.hud.show(in: Utility.currentViewController().view)
+            self.viewModel.createShortcutCastcle()
+        }
     }
 }
 
 extension CreateShortcutTableViewCell: ResendViewControllerDelegate {
     func didSelect(_ resendViewController: ResendViewController, walletsRecent: WalletsRecent) {
-        // MARK: - Resend
+        self.viewModel.walletsRecent = walletsRecent
+        self.viewModel.walletRequest.userId = walletsRecent.id
+        self.viewModel.castcleId = walletsRecent.castcleId
+        let shortcutAvatar = URL(string: walletsRecent.images.avatar.thumbnail)
+        self.shortcutAvatarImage.kf.setImage(with: shortcutAvatar, placeholder: UIImage.Asset.userPlaceholder, options: [.transition(.fade(0.35))])
+        self.updateUI()
+    }
+
+    func didScanWalletSuccess(_ resendViewController: ResendViewController, chainId: String, userId: String, castcleId: String) {
+        self.viewModel.walletRequest.userId = userId
+        self.viewModel.castcleId = castcleId
+        self.shortcutAvatarImage.image = UIImage.Asset.userPlaceholder
+        self.updateUI()
+    }
+}
+
+extension CreateShortcutTableViewCell: ScanQrCodeViewControllerDelegate {
+    func didScanWalletSuccess(_ scanQrCodeViewController: ScanQrCodeViewController, chainId: String, userId: String, castcleId: String) {
+        self.viewModel.walletRequest.userId = userId
+        self.viewModel.castcleId = castcleId
+        self.displayNameLabel.text = "@\(castcleId)"
+        self.idTextField.text = "@\(castcleId)"
+        self.shortcutAvatarImage.image = UIImage.Asset.userPlaceholder
+        self.confirmButton.activeButton(isActive: true, fontSize: .overline)
+        self.dataView.isHidden = false
+    }
+
+    func didScanTextSuccess(_ scanQrCodeViewController: ScanQrCodeViewController, text: String) {
+        // MARK: - Not use
     }
 }

@@ -36,6 +36,10 @@ public final class ManageShortcutsViewModel {
     var accounts: [Shortcut] = []
     var shortcuts: [Shortcut] = []
     var page: Page = Page()
+    var walletRequest: WalletRequest = WalletRequest()
+    var loadState: LoadState = .loading
+    var state: State = .none
+    private var deleteShortcut: Shortcut = Shortcut()
 
     public init(page: Page = Page()) {
         self.tokenHelper.delegate = self
@@ -43,6 +47,8 @@ public final class ManageShortcutsViewModel {
     }
 
     func getWalletShortcuts() {
+        self.state = .getWalletShortcuts
+        self.loadState = .loading
         self.walletRepository.getWalletShortcuts(accountId: UserManager.shared.accountId) { (success, response, isRefreshToken) in
             if success {
                 do {
@@ -51,19 +57,76 @@ public final class ManageShortcutsViewModel {
                     self.accounts = (json[JsonKey.accounts.rawValue].arrayValue).map { Shortcut(json: $0) }
                     self.shortcuts = (json[JsonKey.shortcuts.rawValue].arrayValue).map { Shortcut(json: $0) }
                     self.didGetWalletShortcutsFinish?()
-                } catch {}
+                    self.loadState = .loaded
+                } catch {
+                    self.loadState = .loaded
+                }
             } else {
                 if isRefreshToken {
                     self.tokenHelper.refreshToken()
+                } else {
+                    self.loadState = .loaded
+                }
+            }
+        }
+    }
+
+    func sortShortcuts() {
+        self.state = .sortWalletShortcuts
+        self.loadState = .loading
+        var payload: [[String: Any]] = []
+        for index in 0..<self.shortcuts.count {
+            payload.append([
+                JsonKey.id.rawValue: self.shortcuts[index].id,
+                JsonKey.order.rawValue: (index + 1)
+            ])
+        }
+        self.walletRequest.payloadSort = payload
+        self.walletRepository.sortShortcuts(accountId: UserManager.shared.accountId, walletRequest: self.walletRequest) { (success, _, isRefreshToken) in
+            if success {
+                self.didSortShortcutsFinish?()
+                self.loadState = .loaded
+            } else {
+                if isRefreshToken {
+                    self.tokenHelper.refreshToken()
+                } else {
+                    self.loadState = .loaded
+                }
+            }
+        }
+    }
+
+    func deleteShortcut(deleteShortcut: Shortcut) {
+        self.deleteShortcut = deleteShortcut
+        self.state = .deleteWalletShortcut
+        self.loadState = .loading
+        self.walletRepository.deleteShortcut(accountId: UserManager.shared.accountId, shortcutId: self.deleteShortcut.id) { (success, _, isRefreshToken) in
+            if success {
+                self.didDeleteShortcutsFinish?()
+                self.loadState = .loaded
+            } else {
+                if isRefreshToken {
+                    self.tokenHelper.refreshToken()
+                } else {
+                    self.loadState = .loaded
                 }
             }
         }
     }
 
     var didGetWalletShortcutsFinish: (() -> Void)?
+    var didSortShortcutsFinish: (() -> Void)?
+    var didDeleteShortcutsFinish: (() -> Void)?
 }
 
 extension ManageShortcutsViewModel: TokenHelperDelegate {
     public func didRefreshTokenFinish() {
+        if self.state == .getWalletShortcuts {
+            self.getWalletShortcuts()
+        } else if self.state == .sortWalletShortcuts {
+            self.sortShortcuts()
+        } else if self.state == .deleteWalletShortcut {
+            self.deleteShortcut(deleteShortcut: self.deleteShortcut)
+        }
     }
 }
