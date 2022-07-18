@@ -49,16 +49,16 @@ public final class ScanQrCodeViewModel {
     }
 
     func isWalletData(value: String) -> Bool {
-        return (value.contains(Environment.qrCodeUrl) && value.contains("/w/s/"))
+        return value.contains(Environment.qrCodeUrl)
     }
 
     func validateQrCode(value: String) {
-        let data = value.replacingOccurrences(of: "\(Environment.qrCodeUrl)w/s/", with: "")
+        let data = value.replacingOccurrences(of: "\(Environment.qrCodeUrl)", with: "")
         self.checkWalletData(value: data)
     }
 
     func isCorrectWalletData(value: String) -> Bool {
-        let data = value.replacingOccurrences(of: "\(Environment.qrCodeUrl)w/s/", with: "")
+        let data = value.replacingOccurrences(of: "\(Environment.qrCodeUrl)", with: "")
         let walletDataArr = data.components(separatedBy: "|")
         if walletDataArr.count == 3 {
             self.chainId = walletDataArr[0]
