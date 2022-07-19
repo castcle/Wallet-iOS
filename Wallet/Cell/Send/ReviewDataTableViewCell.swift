@@ -40,7 +40,7 @@ class ReviewDataTableViewCell: UITableViewCell {
         self.titleLabel.textColor = UIColor.Asset.white
         self.valueLabel.font = UIFont.asset(.regular, fontSize: .body)
         self.valueLabel.textColor = UIColor.Asset.white
-        self.lineView.backgroundColor = UIColor.Asset.darkGray
+        self.lineView.backgroundColor = UIColor.Asset.cellBackground
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

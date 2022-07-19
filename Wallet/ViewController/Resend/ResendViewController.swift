@@ -60,7 +60,7 @@ class ResendViewController: UIViewController, UITextFieldDelegate {
         self.configureTableView()
         self.backButton.setImage(UIImage.init(icon: .castcle(.back), size: CGSize(width: 20, height: 20), textColor: UIColor.Asset.white).withRenderingMode(.alwaysOriginal), for: .normal)
         self.scanButton.setImage(UIImage.init(icon: .castcle(.qrCode), size: CGSize(width: 20, height: 20), textColor: UIColor.Asset.white).withRenderingMode(.alwaysOriginal), for: .normal)
-        self.searchView.custom(color: UIColor.Asset.darkGray, cornerRadius: 10)
+        self.searchView.custom(color: UIColor.Asset.cellBackground, cornerRadius: 10)
         self.searchTextField.font = UIFont.asset(.regular, fontSize: .overline)
         self.searchTextField.textColor = UIColor.Asset.white
         self.searchTextField.delegate = self

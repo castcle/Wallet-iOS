@@ -76,7 +76,7 @@ extension SelectPageViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.displayName, for: indexPath as IndexPath) as? DisplayNameTableViewCell
         let page = self.viewModel.pages[indexPath.section]
         cell?.configCell(page: page, isDisplayOnly: true)
-        cell?.backgroundColor = UIColor.Asset.darkGray
+        cell?.backgroundColor = UIColor.Asset.cellBackground
         if page.castcleId == self.viewModel.selectPage.castcleId {
             cell?.iconImage.isHidden = false
         } else {

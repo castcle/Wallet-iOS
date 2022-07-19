@@ -78,10 +78,10 @@ class SendToTableViewCell: UITableViewCell, UITextFieldDelegate {
         self.amountTextField.textColor = UIColor.Asset.white
         self.noteTextField.font = UIFont.asset(.regular, fontSize: .overline)
         self.noteTextField.textColor = UIColor.Asset.white
-        self.sendToView.capsule(color: UIColor.Asset.darkGray)
-        self.memoView.capsule(color: UIColor.Asset.darkGray)
-        self.amountView.capsule(color: UIColor.Asset.darkGray)
-        self.noteView.capsule(color: UIColor.Asset.darkGray)
+        self.sendToView.capsule(color: UIColor.Asset.cellBackground)
+        self.memoView.capsule(color: UIColor.Asset.cellBackground)
+        self.amountView.capsule(color: UIColor.Asset.cellBackground)
+        self.noteView.capsule(color: UIColor.Asset.cellBackground)
         self.maxButton.titleLabel?.font = UIFont.asset(.regular, fontSize: .overline)
         self.maxButton.setTitleColor(UIColor.Asset.lightBlue, for: .normal)
         self.scanSendToButton.setImage(UIImage.init(icon: .castcle(.qrCode), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.white).withRenderingMode(.alwaysOriginal), for: .normal)

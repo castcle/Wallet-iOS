@@ -71,7 +71,7 @@ class OtherChainTableViewCell: UITableViewCell {
         self.addressLabel.textColor = UIColor.Asset.white
         self.copyButton.setImage(UIImage.init(icon: .castcle(.copy), size: CGSize(width: 20, height: 20), textColor: UIColor.Asset.white).withRenderingMode(.alwaysOriginal), for: .normal)
         self.changeNetworkButton.setImage(UIImage.init(icon: .castcle(.exchange), size: CGSize(width: 20, height: 20), textColor: UIColor.Asset.white).withRenderingMode(.alwaysOriginal), for: .normal)
-        self.addressView.custom(color: UIColor.Asset.darkGray, cornerRadius: 5)
+        self.addressView.custom(color: UIColor.Asset.cellBackground, cornerRadius: 5)
         self.addressLabel.text = self.address
         if let myQrCodeImage = Utility.generateQRCode(from: self.address) {
             self.qrCodeImage.image = myQrCodeImage

@@ -38,7 +38,7 @@ class ShortcutTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.shortcutTitleLabel.font = UIFont.asset(.regular, fontSize: .body)
-        self.shortcutLine.backgroundColor = UIColor.Asset.darkGray
+        self.shortcutLine.backgroundColor = UIColor.Asset.cellBackground
         self.shortcutAvatarImage.circle(color: UIColor.Asset.white)
     }
 

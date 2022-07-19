@@ -48,7 +48,7 @@ class MemoTableViewCell: UITableViewCell {
         self.noticLabel.font = UIFont.asset(.regular, fontSize: .overline)
         self.noticLabel.textColor = UIColor.Asset.denger
         self.copyButton.setImage(UIImage.init(icon: .castcle(.copy), size: CGSize(width: 20, height: 20), textColor: UIColor.Asset.white).withRenderingMode(.alwaysOriginal), for: .normal)
-        self.memoView.custom(color: UIColor.Asset.darkGray, cornerRadius: 5)
+        self.memoView.custom(color: UIColor.Asset.cellBackground, cornerRadius: 5)
         self.memoLabel.text = self.memo
         if let myQrCodeImage = Utility.generateQRCode(from: self.memo) {
             self.qrCodeImage.image = myQrCodeImage

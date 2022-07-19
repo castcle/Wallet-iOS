@@ -57,8 +57,8 @@ class CreateShortcutTableViewCell: UITableViewCell {
         self.displayNameLabel.textColor = UIColor.Asset.white
         self.idTextField.font = UIFont.asset(.regular, fontSize: .overline)
         self.idTextField.textColor = UIColor.Asset.white
-        self.idView.capsule(color: UIColor.Asset.darkGray)
-        self.nameView.capsule(color: UIColor.Asset.darkGray)
+        self.idView.capsule(color: UIColor.Asset.cellBackground)
+        self.nameView.capsule(color: UIColor.Asset.cellBackground)
         self.shortcutAvatarImage.circle(color: UIColor.Asset.white)
         self.scanButton.setImage(UIImage.init(icon: .castcle(.qrCode), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.white).withRenderingMode(.alwaysOriginal), for: .normal)
         self.confirmButton.activeButton(isActive: false, fontSize: .overline)

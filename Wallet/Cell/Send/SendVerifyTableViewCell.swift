@@ -67,12 +67,12 @@ class SendVerifyTableViewCell: UITableViewCell, UITextFieldDelegate {
         self.emailTextField.textColor = UIColor.Asset.white
         self.smsTextField.font = UIFont.asset(.regular, fontSize: .overline)
         self.smsTextField.textColor = UIColor.Asset.white
-        self.emailView.capsule(color: UIColor.Asset.darkGray)
-        self.smsView.capsule(color: UIColor.Asset.darkGray)
+        self.emailView.capsule(color: UIColor.Asset.cellBackground)
+        self.smsView.capsule(color: UIColor.Asset.cellBackground)
         self.resendEmailButton.titleLabel?.font = UIFont.asset(.regular, fontSize: .overline)
-        self.resendEmailButton.setTitleColor(UIColor.Asset.darkGray, for: .normal)
+        self.resendEmailButton.setTitleColor(UIColor.Asset.cellBackground, for: .normal)
         self.resendSmsButton.titleLabel?.font = UIFont.asset(.regular, fontSize: .overline)
-        self.resendSmsButton.setTitleColor(UIColor.Asset.darkGray, for: .normal)
+        self.resendSmsButton.setTitleColor(UIColor.Asset.cellBackground, for: .normal)
         self.emailTextField.delegate = self
         self.emailTextField.tag = 0
         self.emailTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)

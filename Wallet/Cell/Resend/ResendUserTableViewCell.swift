@@ -39,7 +39,7 @@ class ResendUserTableViewCell: UITableViewCell {
         super.awakeFromNib()
         self.nameLabel.font = UIFont.asset(.regular, fontSize: .body)
         self.nameLabel.textColor = UIColor.Asset.white
-        self.lineView.backgroundColor = UIColor.Asset.darkGray
+        self.lineView.backgroundColor = UIColor.Asset.cellBackground
         self.avatarImage.image = UIImage.Asset.userPlaceholder
         self.avatarImage.circle(color: UIColor.Asset.white)
     }

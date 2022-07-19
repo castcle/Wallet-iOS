@@ -70,7 +70,7 @@ class ScanQrCodeViewController: UIViewController, AVCaptureMetadataOutputObjects
         self.myQrButton.titleLabel?.font = UIFont.asset(.regular, fontSize: .overline)
         self.myQrButton.setIcon(prefixText: "", prefixTextColor: UIColor.Asset.white, icon: .castcle(.qrCode), iconColor: UIColor.Asset.white, postfixText: "  My QR Code", postfixTextColor: UIColor.Asset.white, forState: .normal, textSize: 14, iconSize: 14)
         self.myQrButton.capsule(color: UIColor.Asset.lightBlue, borderWidth: 1, borderColor: UIColor.Asset.lightBlue)
-        self.dataView.custom(color: UIColor.Asset.darkGray, cornerRadius: 5)
+        self.dataView.custom(color: UIColor.Asset.cellBackground, cornerRadius: 5)
         self.dataView.isHidden = true
         self.detailView.backgroundColor = UIColor.Asset.darkGraphiteBlue
         self.setupScanCamera()

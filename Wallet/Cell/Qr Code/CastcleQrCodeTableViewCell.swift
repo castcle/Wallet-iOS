@@ -62,7 +62,7 @@ class CastcleQrCodeTableViewCell: UITableViewCell {
         self.castcleIdLabel.font = UIFont.asset(.regular, fontSize: .overline)
         self.castcleIdLabel.textColor = UIColor.Asset.white
         self.copyCastcleIdButton.setImage(UIImage.init(icon: .castcle(.copy), size: CGSize(width: 20, height: 20), textColor: UIColor.Asset.white).withRenderingMode(.alwaysOriginal), for: .normal)
-        self.castcleIdView.custom(color: UIColor.Asset.darkGray, cornerRadius: 5)
+        self.castcleIdView.custom(color: UIColor.Asset.cellBackground, cornerRadius: 5)
         self.castcleIdLabel.text = UserManager.shared.castcleId
         self.qrCodeCastcleImage.image = UIColor.Asset.white.toImage()
     }

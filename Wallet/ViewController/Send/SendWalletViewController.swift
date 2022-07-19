@@ -57,7 +57,7 @@ class SendWalletViewController: UIViewController {
         self.view.backgroundColor = UIColor.Asset.darkGraphiteBlue
         self.hideKeyboardWhenTapped()
         self.configureTableView()
-        self.totalView.backgroundColor = UIColor.Asset.darkGray
+        self.totalView.backgroundColor = UIColor.Asset.cellBackground
         self.reciveAmountLabel.font = UIFont.asset(.regular, fontSize: .body)
         self.reciveAmountLabel.textColor = UIColor.Asset.white
         self.castLabel.font = UIFont.asset(.regular, fontSize: .head4)
