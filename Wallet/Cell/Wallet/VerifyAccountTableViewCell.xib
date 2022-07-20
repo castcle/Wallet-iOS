@@ -30,28 +30,50 @@
                             <constraint firstAttribute="height" constant="15" id="dFU-fc-MJi"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Display" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FZH-kB-htI">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MUS-DF-YQt">
                         <rect key="frame" x="61.5" y="20" width="213.5" height="20"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Display" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1si-hU-OSo">
+                                <rect key="frame" x="0.0" y="0.0" width="213.5" height="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UxZ-RX-3zf">
+                                <rect key="frame" x="0.0" y="20" width="213.5" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="1si-hU-OSo" secondAttribute="trailing" id="07i-Z1-2KA"/>
+                            <constraint firstItem="1si-hU-OSo" firstAttribute="leading" secondItem="MUS-DF-YQt" secondAttribute="leading" id="B8Y-6R-lPe"/>
+                            <constraint firstItem="1si-hU-OSo" firstAttribute="top" secondItem="MUS-DF-YQt" secondAttribute="top" id="EA2-G1-dNl"/>
+                            <constraint firstItem="UxZ-RX-3zf" firstAttribute="leading" secondItem="MUS-DF-YQt" secondAttribute="leading" id="FMi-Tb-4Ry"/>
+                            <constraint firstItem="UxZ-RX-3zf" firstAttribute="top" secondItem="1si-hU-OSo" secondAttribute="bottom" id="HaM-ZB-2lk"/>
+                            <constraint firstAttribute="trailing" secondItem="UxZ-RX-3zf" secondAttribute="trailing" id="YXZ-XR-47n"/>
+                            <constraint firstAttribute="bottom" secondItem="UxZ-RX-3zf" secondAttribute="bottom" id="d7v-g3-Y7c"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="FZH-kB-htI" firstAttribute="centerY" secondItem="aKB-k8-fLj" secondAttribute="centerY" id="0G1-7S-U6v"/>
-                    <constraint firstItem="6tJ-cD-CIX" firstAttribute="leading" secondItem="FZH-kB-htI" secondAttribute="trailing" constant="10" id="DTs-EB-rUt"/>
+                    <constraint firstItem="MUS-DF-YQt" firstAttribute="leading" secondItem="aKB-k8-fLj" secondAttribute="trailing" constant="10" id="74c-lP-Vzu"/>
+                    <constraint firstItem="6tJ-cD-CIX" firstAttribute="centerY" secondItem="aKB-k8-fLj" secondAttribute="centerY" id="9yn-JB-QVR"/>
+                    <constraint firstItem="6tJ-cD-CIX" firstAttribute="leading" secondItem="MUS-DF-YQt" secondAttribute="trailing" constant="10" id="JQu-Zz-LVT"/>
                     <constraint firstItem="aKB-k8-fLj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="OJU-9s-1DT"/>
-                    <constraint firstItem="FZH-kB-htI" firstAttribute="leading" secondItem="aKB-k8-fLj" secondAttribute="trailing" constant="10" id="Tho-tT-bSf"/>
-                    <constraint firstItem="6tJ-cD-CIX" firstAttribute="centerY" secondItem="FZH-kB-htI" secondAttribute="centerY" id="cuT-K3-qCN"/>
                     <constraint firstAttribute="bottom" secondItem="aKB-k8-fLj" secondAttribute="bottom" constant="20" id="hUV-B5-FXW"/>
                     <constraint firstAttribute="trailing" secondItem="6tJ-cD-CIX" secondAttribute="trailing" constant="20" id="ku2-Gb-ZAy"/>
+                    <constraint firstItem="MUS-DF-YQt" firstAttribute="centerY" secondItem="aKB-k8-fLj" secondAttribute="centerY" id="rsp-Vd-XVg"/>
                     <constraint firstItem="aKB-k8-fLj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="xut-7w-nuK"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="settingDisplayLabel" destination="FZH-kB-htI" id="Ihp-wW-Btl"/>
+                <outlet property="settingDisplayLabel" destination="1si-hU-OSo" id="G9z-lB-sQl"/>
                 <outlet property="settingNextImage" destination="6tJ-cD-CIX" id="DJv-7D-jmw"/>
+                <outlet property="settingNoteLabel" destination="UxZ-RX-3zf" id="tua-4C-TGg"/>
                 <outlet property="settingTitleLabel" destination="aKB-k8-fLj" id="lOQ-Uh-c2h"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="120.53571428571428"/>

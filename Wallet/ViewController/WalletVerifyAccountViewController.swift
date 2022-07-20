@@ -104,8 +104,8 @@ extension WalletVerifyAccountViewController: UITableViewDelegate, UITableViewDat
         let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 50))
         let label = UILabel()
         label.frame = CGRect.init(x: 15, y: 5, width: headerView.frame.width - 10, height: headerView.frame.height - 10)
-        label.font = UIFont.asset(.regular, fontSize: .overline)
-        label.textColor = UIColor.Asset.gray
+        label.font = UIFont.asset(.light, fontSize: .overline)
+        label.textColor = UIColor.Asset.textGray
         if section == WalletVerifyAccountViewControllerSection.setting.rawValue {
             label.text = "General Information"
         } else {

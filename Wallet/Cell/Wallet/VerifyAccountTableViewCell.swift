@@ -32,14 +32,16 @@ class VerifyAccountTableViewCell: UITableViewCell {
 
     @IBOutlet var settingTitleLabel: UILabel!
     @IBOutlet var settingDisplayLabel: UILabel!
+    @IBOutlet var settingNoteLabel: UILabel!
     @IBOutlet var settingNextImage: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         self.settingTitleLabel.font = UIFont.asset(.regular, fontSize: .body)
         self.settingTitleLabel.textColor = UIColor.Asset.white
-        self.settingDisplayLabel.font = UIFont.asset(.regular, fontSize: .body)
-        self.settingDisplayLabel.textColor = UIColor.Asset.gray
+        self.settingDisplayLabel.font = UIFont.asset(.contentLight, fontSize: .body)
+        self.settingNoteLabel.font = UIFont.asset(.contentLight, fontSize: .small)
+        self.settingNoteLabel.textColor = UIColor.Asset.denger
         self.settingNextImage.image = UIImage.init(icon: .castcle(.next), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.white)
     }
 
@@ -50,27 +52,37 @@ class VerifyAccountTableViewCell: UITableViewCell {
     func configCell(section: VerifyAccountSection) {
         self.settingTitleLabel.text = section.text
         if section == .email {
-            if UserManager.shared.isVerifiedEmail {
-                self.settingDisplayLabel.text = "Registered"
-                self.settingNextImage.isHidden = true
-                self.settingDisplayLabel.textColor = UIColor.Asset.lightBlue
-            } else {
+            if UserManager.shared.email.isEmpty {
+                self.settingDisplayLabel.textColor = UIColor.Asset.unregistered
                 self.settingDisplayLabel.text = "Unregistered"
+                self.settingNoteLabel.text = ""
                 self.settingNextImage.isHidden = false
-                self.settingDisplayLabel.textColor = UIColor.Asset.gray
+            } else if !UserManager.shared.isVerifiedEmail {
+                self.settingDisplayLabel.textColor = UIColor.Asset.textGray
+                self.settingDisplayLabel.text = UserManager.shared.email
+                self.settingNoteLabel.text = "Please verify you email"
+                self.settingNextImage.isHidden = false
+            } else {
+                self.settingDisplayLabel.textColor = UIColor.Asset.textGray
+                self.settingDisplayLabel.text = UserManager.shared.email
+                self.settingNoteLabel.text = ""
+                self.settingNextImage.isHidden = true
             }
         } else if section == .mobile {
             if UserManager.shared.isVerifiedMobile {
                 self.settingDisplayLabel.text = "Registered"
+                self.settingNoteLabel.text = ""
                 self.settingNextImage.isHidden = true
                 self.settingDisplayLabel.textColor = UIColor.Asset.lightBlue
             } else {
                 self.settingDisplayLabel.text = "Unregistered"
+                self.settingNoteLabel.text = ""
                 self.settingNextImage.isHidden = false
-                self.settingDisplayLabel.textColor = UIColor.Asset.gray
+                self.settingDisplayLabel.textColor = UIColor.Asset.unregistered
             }
         } else {
             self.settingDisplayLabel.text = ""
+            self.settingNoteLabel.text = ""
             self.settingNextImage.isHidden = false
         }
     }
