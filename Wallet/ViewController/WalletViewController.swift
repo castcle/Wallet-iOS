@@ -31,12 +31,14 @@ import Networking
 import Defaults
 import FirebaseRemoteConfig
 import PanModal
+import JGProgressHUD
 
 class WalletViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
 
     var viewModel = WalletViewModel()
+    private let hud = JGProgressHUD()
 
     enum WalletViewControllerSection: Int, CaseIterable {
         case displayName = 0
@@ -51,12 +53,22 @@ class WalletViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.Asset.darkGraphiteBlue
         self.configureTableView()
+        self.viewModel.didGetWalletBalanceFinish = {
+            self.hud.dismiss()
+            self.tableView.reloadData()
+        }
+        self.viewModel.didError = {
+            self.hud.dismiss()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupNavBar()
         Defaults[.screenId] = ScreenId.wallet.rawValue
+        self.hud.textLabel.text = "Loading"
+        self.hud.show(in: self.view)
+        self.viewModel.walletLookup()
     }
 
     public override func viewDidAppear(_ animated: Bool) {
@@ -128,6 +140,7 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
         case WalletViewControllerSection.balance.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.balance, for: indexPath as IndexPath) as? BalanceTableViewCell
             cell?.backgroundColor = UIColor.clear
+            cell?.configCell(wallet: self.viewModel.wallet)
             return cell ?? BalanceTableViewCell()
         case WalletViewControllerSection.transaction.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.transaction, for: indexPath as IndexPath) as? TransactionTableViewCell

@@ -34,23 +34,21 @@ public final class SendWalletViewModel {
     private var walletRepository: WalletRepository = WalletRepositoryImpl()
     let tokenHelper: TokenHelper = TokenHelper()
     var page: Page = Page()
-    var chainId: String = ""
-    var userId: String = ""
     var castcleId: String = ""
-    var memo: String = ""
-    var amount: String = ""
-    var note: String = ""
+    var walletRequest: WalletRequest = WalletRequest()
     var myShortcut: [Shortcut] = []
+    private var state: State = .none
 
     public init(page: Page = Page(), chainId: String = "", userId: String = "", castcleId: String = "") {
         self.tokenHelper.delegate = self
         self.page = page
-        self.chainId = chainId
-        self.userId = userId
+        self.walletRequest.chainId = (castcleId.isEmpty ? "castcle" : chainId)
+        self.walletRequest.address = userId
         self.castcleId = castcleId
     }
 
     func getWalletShortcuts() {
+        self.state = .getWalletShortcuts
         self.walletRepository.getWalletShortcuts(accountId: UserManager.shared.accountId) { (success, response, isRefreshToken) in
             if success {
                 do {
@@ -71,11 +69,33 @@ public final class SendWalletViewModel {
         }
     }
 
+    func reviewSendToken() {
+        self.state = .reviewSendToken
+        self.walletRepository.reviewSendToken(userId: self.page.id, walletRequest: self.walletRequest) { (success, response, isRefreshToken) in
+            if success {
+                do {
+                    let rawJson = try response.mapJSON()
+                    let json = JSON(rawJson)
+                    print(json)
+                    print("========")
+                } catch {}
+            } else {
+                if isRefreshToken {
+                    self.tokenHelper.refreshToken()
+                }
+            }
+        }
+    }
+
     var didGetWalletShortcutsFinish: (() -> Void)?
 }
 
 extension SendWalletViewModel: TokenHelperDelegate {
     public func didRefreshTokenFinish() {
-        self.getWalletShortcuts()
+        if self.state == .getWalletShortcuts {
+            self.getWalletShortcuts()
+        } else if self.state == .reviewSendToken {
+            self.reviewSendToken()
+        }
     }
 }

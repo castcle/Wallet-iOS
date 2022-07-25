@@ -26,12 +26,48 @@
 //
 
 import Core
+import Networking
+import SwiftyJSON
 
 public final class WalletViewModel {
+    private var walletRepository: WalletRepository = WalletRepositoryImpl()
+    let tokenHelper: TokenHelper = TokenHelper()
     var page: Page = Page()
     var walletHistoryType: WalletHistoryType = .wallet
+    var wallet: Wallet = Wallet()
 
     public init() {
         self.page = Page().initCustom(id: UserManager.shared.id, displayName: UserManager.shared.displayName, castcleId: UserManager.shared.rawCastcleId, avatar: UserManager.shared.avatar, cover: UserManager.shared.cover, overview: UserManager.shared.overview, official: UserManager.shared.official)
+        self.tokenHelper.delegate = self
+    }
+
+    func walletLookup() {
+        self.walletRepository.walletLookup(userId: self.page.id) { (success, response, isRefreshToken) in
+            if success {
+                do {
+                    let rawJson = try response.mapJSON()
+                    let json = JSON(rawJson)
+                    self.wallet = Wallet(json: json)
+                    self.didGetWalletBalanceFinish?()
+                } catch {
+                    self.didError?()
+                }
+            } else {
+                if isRefreshToken {
+                    self.tokenHelper.refreshToken()
+                } else {
+                    self.didError?()
+                }
+            }
+        }
+    }
+
+    var didGetWalletBalanceFinish: (() -> Void)?
+    var didError: (() -> Void)?
+}
+
+extension WalletViewModel: TokenHelperDelegate {
+    public func didRefreshTokenFinish() {
+        self.walletLookup()
     }
 }
