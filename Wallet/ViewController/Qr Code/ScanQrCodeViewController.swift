@@ -28,6 +28,7 @@
 import UIKit
 import AVFoundation
 import Core
+import Networking
 import Component
 import Defaults
 import TLPhotoPicker
@@ -51,7 +52,7 @@ class ScanQrCodeViewController: UIViewController, AVCaptureMetadataOutputObjects
     @IBOutlet weak var galleryButton: UIButton!
 
     public var delegate: ScanQrCodeViewControllerDelegate?
-    var viewModel = ScanQrCodeViewModel()
+    var viewModel = ScanQrCodeViewModel(wallet: Wallet())
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
 

@@ -37,14 +37,16 @@ public final class SendWalletViewModel {
     var castcleId: String = ""
     var walletRequest: WalletRequest = WalletRequest()
     var myShortcut: [Shortcut] = []
+    var wallet: Wallet = Wallet()
     private var state: State = .none
 
-    public init(page: Page = Page(), chainId: String = "", userId: String = "", castcleId: String = "") {
+    public init(page: Page = Page(), chainId: String = "", userId: String = "", castcleId: String = "", wallet: Wallet) {
         self.tokenHelper.delegate = self
         self.page = page
         self.walletRequest.chainId = (castcleId.isEmpty ? "castcle" : chainId)
         self.walletRequest.address = userId
         self.castcleId = castcleId
+        self.wallet = wallet
     }
 
     func getWalletShortcuts() {
@@ -71,14 +73,9 @@ public final class SendWalletViewModel {
 
     func reviewSendToken() {
         self.state = .reviewSendToken
-        self.walletRepository.reviewSendToken(userId: self.page.id, walletRequest: self.walletRequest) { (success, response, isRefreshToken) in
+        self.walletRepository.reviewSendToken(userId: self.page.id, walletRequest: self.walletRequest) { (success, _, isRefreshToken) in
             if success {
-                do {
-                    let rawJson = try response.mapJSON()
-                    let json = JSON(rawJson)
-                    print(json)
-                    print("========")
-                } catch {}
+                self.didReviewSendTokenFinish?()
             } else {
                 if isRefreshToken {
                     self.tokenHelper.refreshToken()
@@ -88,6 +85,7 @@ public final class SendWalletViewModel {
     }
 
     var didGetWalletShortcutsFinish: (() -> Void)?
+    var didReviewSendTokenFinish: (() -> Void)?
 }
 
 extension SendWalletViewModel: TokenHelperDelegate {

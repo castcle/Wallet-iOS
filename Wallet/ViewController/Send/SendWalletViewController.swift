@@ -39,7 +39,7 @@ class SendWalletViewController: UIViewController {
     @IBOutlet weak var feeLabel: UILabel!
     @IBOutlet weak var sendButton: UIButton!
 
-    var viewModel = SendWalletViewModel()
+    var viewModel = SendWalletViewModel(wallet: Wallet())
     var isAvtive: Bool {
         if self.viewModel.walletRequest.address.isEmpty || self.viewModel.walletRequest.amount.isEmpty {
             return false
@@ -68,6 +68,9 @@ class SendWalletViewController: UIViewController {
         self.viewModel.didGetWalletShortcutsFinish = {
             self.tableView.reloadData()
         }
+        self.viewModel.didReviewSendTokenFinish = {
+            Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.sendReview), animated: true)
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -92,12 +95,12 @@ class SendWalletViewController: UIViewController {
 
     @IBAction func sendAction(_ sender: Any) {
         if self.isAvtive {
-            self.viewModel.reviewSendToken()
-//            if self.viewModel.walletRequest.address == "aaaa" {
-//                ApiHelper.displayMessage(title: "Warning", message: "Incorrect Castcle ID. Please check the Castcle ID and try again.\n\n** You have insufficient balance", buttonTitle: "Close")
-//            } else {
-//                Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.sendReview), animated: true)
-//            }
+            let amount: Double = Double(self.viewModel.walletRequest.amount) ?? 0
+            if (amount <= 0) || (amount > self.viewModel.wallet.availableBalance) || (self.viewModel.wallet.availableBalance <= 0) {
+                ApiHelper.displayMessage(title: "Warning", message: "** You have insufficient balance", buttonTitle: "Close")
+            } else {
+                self.viewModel.reviewSendToken()
+            }
         }
     }
 }
@@ -122,7 +125,7 @@ extension SendWalletViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.sendTo, for: indexPath as IndexPath) as? SendToTableViewCell
             cell?.backgroundColor = UIColor.clear
             cell?.delegate = self
-            cell?.configCell(sendTo: self.viewModel.castcleId, page: self.viewModel.page)
+            cell?.configCell(sendTo: self.viewModel.castcleId, page: self.viewModel.page, wallet: self.viewModel.wallet)
             return cell ?? SendToTableViewCell()
         }
     }
@@ -132,6 +135,7 @@ extension SendWalletViewController: SendShortcutTableViewCellDelegate {
     func didSelectShortcut(_ sendShortcutTableViewCell: SendShortcutTableViewCell, shortcut: Shortcut) {
         self.viewModel.walletRequest.address = shortcut.userId
         self.viewModel.castcleId = shortcut.castcleId
+        self.sendButton.activeButton(isActive: self.isAvtive, fontSize: .overline)
         self.tableView.reloadData()
     }
 
@@ -144,6 +148,7 @@ extension SendWalletViewController: SendToTableViewCellDelegate {
     func didSelectWalletsRecent(_ sendToTableViewCell: SendToTableViewCell, walletsRecent: WalletsRecent) {
         self.viewModel.walletRequest.address = walletsRecent.id
         self.viewModel.castcleId = walletsRecent.castcleId
+        self.sendButton.activeButton(isActive: self.isAvtive, fontSize: .overline)
     }
 
     func didValueChange(_ sendToTableViewCell: SendToTableViewCell, memo: String, amount: String, note: String) {
@@ -158,6 +163,7 @@ extension SendWalletViewController: SendToTableViewCellDelegate {
         self.viewModel.walletRequest.chainId = chainId
         self.viewModel.walletRequest.address = userId
         self.viewModel.castcleId = castcleId
+        self.sendButton.activeButton(isActive: self.isAvtive, fontSize: .overline)
     }
 
     func didScanTextSuccess(_ sendToTableViewCell: SendToTableViewCell, text: String) {

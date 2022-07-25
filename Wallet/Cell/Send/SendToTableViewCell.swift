@@ -57,6 +57,7 @@ class SendToTableViewCell: UITableViewCell, UITextFieldDelegate {
 
     public var delegate: SendToTableViewCellDelegate?
     private var page: Page = Page()
+    private var wallet: Wallet = Wallet()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -116,9 +117,11 @@ class SendToTableViewCell: UITableViewCell, UITextFieldDelegate {
         return true
     }
 
-    func configCell(sendTo: String, page: Page) {
+    func configCell(sendTo: String, page: Page, wallet: Wallet) {
         self.sendToTextField.text = (sendTo.isEmpty ? "" : "@\(sendTo)")
         self.page = page
+        self.wallet = wallet
+        self.currentBalanceTitle.text = "Current available balance: \(self.wallet.availableBalance) CAST"
     }
 
     @objc func textFieldDidChange(_ textField: UITextField) {
@@ -134,19 +137,19 @@ class SendToTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
 
     @IBAction func scanSendToAction(_ sender: Any) {
-        let viewController = WalletOpener.open(.scanQrCode(ScanQrCodeViewModel(scanType: .wallet))) as? ScanQrCodeViewController
+        let viewController = WalletOpener.open(.scanQrCode(ScanQrCodeViewModel(scanType: .wallet, wallet: Wallet()))) as? ScanQrCodeViewController
         viewController?.delegate = self
         Utility.currentViewController().navigationController?.pushViewController(viewController ?? ScanQrCodeViewController(), animated: true)
     }
 
     @IBAction func scanMemoAction(_ sender: Any) {
-        let viewController = WalletOpener.open(.scanQrCode(ScanQrCodeViewModel(scanType: .text))) as? ScanQrCodeViewController
+        let viewController = WalletOpener.open(.scanQrCode(ScanQrCodeViewModel(scanType: .text, wallet: Wallet()))) as? ScanQrCodeViewController
         viewController?.delegate = self
         Utility.currentViewController().navigationController?.pushViewController(viewController ?? ScanQrCodeViewController(), animated: true)
     }
 
     @IBAction func maxAction(_ sender: Any) {
-        self.amountTextField.text = "10"
+        self.amountTextField.text = "\(self.wallet.availableBalance)"
         self.delegate?.didValueChange(self, memo: self.memoTextField.text ?? "", amount: self.amountTextField.text ?? "", note: self.noteTextField.text ?? "")
     }
 }

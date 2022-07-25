@@ -102,7 +102,7 @@ class CreateShortcutTableViewCell: UITableViewCell {
     }
 
     @IBAction func scanSendToAction(_ sender: Any) {
-        let viewController = WalletOpener.open(.scanQrCode(ScanQrCodeViewModel(scanType: .wallet))) as? ScanQrCodeViewController
+        let viewController = WalletOpener.open(.scanQrCode(ScanQrCodeViewModel(scanType: .wallet, wallet: Wallet()))) as? ScanQrCodeViewController
         viewController?.delegate = self
         Utility.currentViewController().navigationController?.pushViewController(viewController ?? ScanQrCodeViewController(), animated: true)
     }

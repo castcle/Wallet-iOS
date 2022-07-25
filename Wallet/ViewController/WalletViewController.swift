@@ -94,7 +94,7 @@ class WalletViewController: UIViewController {
     }
 
     @objc private func scanAction() {
-        self.navigationController?.pushViewController(WalletOpener.open(.scanQrCode(ScanQrCodeViewModel(scanType: .all, page: self.viewModel.page))), animated: true)
+        self.navigationController?.pushViewController(WalletOpener.open(.scanQrCode(ScanQrCodeViewModel(scanType: .all, page: self.viewModel.page, wallet: self.viewModel.wallet))), animated: true)
     }
 
     func configureTableView() {
@@ -145,7 +145,7 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
         case WalletViewControllerSection.transaction.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.transaction, for: indexPath as IndexPath) as? TransactionTableViewCell
             cell?.backgroundColor = UIColor.clear
-            cell?.configCell(page: self.viewModel.page)
+            cell?.configCell(page: self.viewModel.page, wallet: self.viewModel.wallet)
             return cell ?? TransactionTableViewCell()
         case WalletViewControllerSection.banner.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.banner, for: indexPath as IndexPath) as? BannerTableViewCell
