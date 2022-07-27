@@ -38,7 +38,7 @@ public enum WalletScene {
     case selectNetwork
     case sendWallet(SendWalletViewModel)
     case sendReview(SendReviewViewModel)
-    case sendAuth
+    case sendAuth(SendReviewViewModel)
     case verifyAccount
     case resend(RecentViewModel)
     case manageShortcuts(ManageShortcutsViewModel)
@@ -90,10 +90,11 @@ public struct WalletOpener {
             let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.sendReview) as? SendReviewViewController
             viewController?.viewModel = viewModel
             return viewController ?? SendReviewViewController()
-        case .sendAuth:
+        case .sendAuth(let viewModel):
             let storyboard: UIStoryboard = UIStoryboard(name: WalletNibVars.Storyboard.wallet, bundle: ConfigBundle.wallet)
-            let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.sendAuth)
-            return viewController
+            let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.sendAuth) as? SendAuthViewController
+            viewController?.viewModel = viewModel
+            return viewController ?? SendAuthViewController()
         case .verifyAccount:
             let storyboard: UIStoryboard = UIStoryboard(name: WalletNibVars.Storyboard.wallet, bundle: ConfigBundle.wallet)
             let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.verifyAccount)

@@ -30,6 +30,8 @@ import Core
 
 protocol SendVerifyTableViewCellDelegate: AnyObject {
     func didValueChange(_ sendVerifyTableViewCell: SendVerifyTableViewCell, verifyEmail: String, verifySms: String)
+    func didResendOtpEmail(_ sendVerifyTableViewCell: SendVerifyTableViewCell)
+    func didResendOtpMobile(_ sendVerifyTableViewCell: SendVerifyTableViewCell)
 }
 
 class SendVerifyTableViewCell: UITableViewCell, UITextFieldDelegate {
@@ -48,6 +50,10 @@ class SendVerifyTableViewCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet weak var resendSmsButton: UIButton!
 
     public var delegate: SendVerifyTableViewCellDelegate?
+    private var isCanResendOtpEmail: Bool = false
+    private var isCanResendOtpMobile: Bool = false
+    var secondsEmailRemaining = 300
+    var secondsMobileRemaining = 300
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -70,19 +76,73 @@ class SendVerifyTableViewCell: UITableViewCell, UITextFieldDelegate {
         self.emailView.capsule(color: UIColor.Asset.cellBackground)
         self.smsView.capsule(color: UIColor.Asset.cellBackground)
         self.resendEmailButton.titleLabel?.font = UIFont.asset(.regular, fontSize: .overline)
-        self.resendEmailButton.setTitleColor(UIColor.Asset.cellBackground, for: .normal)
         self.resendSmsButton.titleLabel?.font = UIFont.asset(.regular, fontSize: .overline)
-        self.resendSmsButton.setTitleColor(UIColor.Asset.cellBackground, for: .normal)
         self.emailTextField.delegate = self
         self.emailTextField.tag = 0
         self.emailTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
         self.smsTextField.delegate = self
         self.smsTextField.tag = 1
         self.smsTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
+        self.updateUiResend()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+
+    func configCell(email: String, mobile: String) {
+        self.emailNoteLabel.text = "Code will be sent to \(email)"
+        self.smsNoteLabel.text = "Code will be sent to \(mobile)"
+        self.setupCountdownEmail()
+        self.setupCountdownMobile()
+    }
+
+    private func updateUiResend() {
+        if self.isCanResendOtpEmail {
+            self.resendEmailButton.setTitleColor(UIColor.Asset.lightBlue, for: .normal)
+        } else {
+            self.resendEmailButton.setTitleColor(UIColor.Asset.textGray, for: .normal)
+        }
+
+        if self.isCanResendOtpMobile {
+            self.resendSmsButton.setTitleColor(UIColor.Asset.lightBlue, for: .normal)
+        } else {
+            self.resendSmsButton.setTitleColor(UIColor.Asset.textGray, for: .normal)
+        }
+    }
+
+    private func setupCountdownMobile() {
+        self.smsCountdownLabel.isHidden = false
+        self.secondsMobileRemaining = 5
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (timer) in
+            if self.secondsMobileRemaining > 0 {
+                self.smsCountdownLabel.text = "\(self.secondsMobileRemaining.secondsToTime()) mins"
+                self.secondsMobileRemaining -= 1
+            } else {
+                self.isCanResendOtpMobile = true
+                self.updateUiResend()
+                timer.invalidate()
+                self.smsCountdownLabel.isHidden = true
+                self.smsCountdownLabel.text = "05:00 mins"
+            }
+        }
+    }
+
+    private func setupCountdownEmail() {
+        self.emailCountdownLabel.isHidden = false
+        self.secondsEmailRemaining = 10
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (timer) in
+            if self.secondsEmailRemaining > 0 {
+                self.emailCountdownLabel.text = "\(self.secondsEmailRemaining.secondsToTime()) mins"
+                self.secondsEmailRemaining -= 1
+            } else {
+                self.isCanResendOtpEmail = true
+                self.updateUiResend()
+                timer.invalidate()
+                self.emailCountdownLabel.isHidden = true
+                self.emailCountdownLabel.text = "05:00 mins"
+            }
+        }
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -99,10 +159,20 @@ class SendVerifyTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
 
     @IBAction func resendEmailAction(_ sender: Any) {
-        // MARK: - Add action
+        if self.isCanResendOtpEmail {
+            self.isCanResendOtpEmail = false
+            self.updateUiResend()
+            self.setupCountdownEmail()
+            self.delegate?.didResendOtpEmail(self)
+        }
     }
 
     @IBAction func resendSmsAction(_ sender: Any) {
-        // MARK: - Add action
+        if self.isCanResendOtpMobile {
+            self.isCanResendOtpMobile = false
+            self.updateUiResend()
+            self.setupCountdownMobile()
+            self.delegate?.didResendOtpMobile(self)
+        }
     }
 }

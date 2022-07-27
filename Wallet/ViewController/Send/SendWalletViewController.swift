@@ -29,6 +29,7 @@ import UIKit
 import Core
 import Networking
 import Defaults
+import JGProgressHUD
 
 class SendWalletViewController: UIViewController {
 
@@ -40,6 +41,7 @@ class SendWalletViewController: UIViewController {
     @IBOutlet weak var sendButton: UIButton!
 
     var viewModel = SendWalletViewModel(wallet: Wallet())
+    private let hud = JGProgressHUD()
     var isAvtive: Bool {
         if self.viewModel.walletRequest.address.isEmpty || self.viewModel.walletRequest.amount.isEmpty {
             return false
@@ -69,7 +71,11 @@ class SendWalletViewController: UIViewController {
             self.tableView.reloadData()
         }
         self.viewModel.didReviewSendTokenFinish = {
+            self.hud.dismiss()
             Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.sendReview(SendReviewViewModel(walletRequest: self.viewModel.walletRequest, page: self.viewModel.page))), animated: true)
+        }
+        self.viewModel.didError = {
+            self.hud.dismiss()
         }
     }
 
@@ -99,6 +105,8 @@ class SendWalletViewController: UIViewController {
             if (amount <= 0) || (amount > self.viewModel.wallet.availableBalance) || (self.viewModel.wallet.availableBalance <= 0) {
                 ApiHelper.displayMessage(title: "Warning", message: "** You have insufficient balance", buttonTitle: "Close")
             } else {
+                self.hud.textLabel.text = "Reviewing"
+                self.hud.show(in: self.view)
                 self.viewModel.reviewSendToken()
             }
         }

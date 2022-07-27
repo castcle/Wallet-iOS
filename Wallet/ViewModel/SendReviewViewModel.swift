@@ -36,15 +36,16 @@ struct SendReview {
 
 public final class SendReviewViewModel {
 
-//    private var walletRepository: WalletRepository = WalletRepositoryImpl()
+    private var walletRepository: WalletRepository = WalletRepositoryImpl()
+    private var authenticationRepository: AuthenticationRepository = AuthenticationRepositoryImpl()
     let tokenHelper: TokenHelper = TokenHelper()
     var page: Page = Page()
-//    var castcleId: String = ""
     var walletRequest: WalletRequest = WalletRequest()
-//    var myShortcut: [Shortcut] = []
-//    var wallet: Wallet = Wallet()
-//    private var state: State = .none
+    var authenRequest: AuthenRequest = AuthenRequest()
+    private var state: State = .none
     var sendReview: [SendReview] = []
+    var isSendEmailOtp: Bool = false
+    var isSendMobileOtp: Bool = false
 
     public init(walletRequest: WalletRequest = WalletRequest(), page: Page = Page()) {
         self.tokenHelper.delegate = self
@@ -62,52 +63,84 @@ public final class SendReviewViewModel {
         self.sendReview.append(SendReview(title: "Amount", value: "\(self.walletRequest.amount) CAST"))
         self.sendReview.append(SendReview(title: "Network fee", value: "0 CAST"))
     }
-//
-//    func getWalletShortcuts() {
-//        self.state = .getWalletShortcuts
-//        self.walletRepository.getWalletShortcuts(accountId: UserManager.shared.accountId) { (success, response, isRefreshToken) in
-//            if success {
-//                do {
-//                    let rawJson = try response.mapJSON()
-//                    let json = JSON(rawJson)
-//                    let accounts = (json[JsonKey.accounts.rawValue].arrayValue).map { Shortcut(json: $0) }.filter { $0.userId != self.page.id }
-//                    let shortcuts = (json[JsonKey.shortcuts.rawValue].arrayValue).map { Shortcut(json: $0) }
-//                    self.myShortcut = []
-//                    self.myShortcut.append(contentsOf: accounts)
-//                    self.myShortcut.append(contentsOf: shortcuts)
-//                    self.didGetWalletShortcutsFinish?()
-//                } catch {}
-//            } else {
-//                if isRefreshToken {
-//                    self.tokenHelper.refreshToken()
-//                }
-//            }
-//        }
-//    }
-//
-//    func reviewSendToken() {
-//        self.state = .reviewSendToken
-//        self.walletRepository.reviewSendToken(userId: self.page.id, walletRequest: self.walletRequest) { (success, _, isRefreshToken) in
-//            if success {
-//                self.didReviewSendTokenFinish?()
-//            } else {
-//                if isRefreshToken {
-//                    self.tokenHelper.refreshToken()
-//                }
-//            }
-//        }
-//    }
-//
-//    var didGetWalletShortcutsFinish: (() -> Void)?
-//    var didReviewSendTokenFinish: (() -> Void)?
+
+    func requestOtpWithMobile() {
+        self.state = .requestOtpWithMobile
+        self.isSendMobileOtp = false
+        self.authenticationRepository.requestOtpWithMobile(authenRequest: self.authenRequest) { (success, response, isRefreshToken) in
+            if success {
+                do {
+                    let rawJson = try response.mapJSON()
+                    let json = JSON(rawJson)
+                    self.walletRequest.mobileRefCode = json[JsonKey.refCode.rawValue].stringValue
+                    self.walletRequest.countryCode = UserManager.shared.countryCode
+                    self.walletRequest.mobileNumber = UserManager.shared.mobile
+                    self.isSendMobileOtp = true
+                    self.didRequestOtpFinish?()
+                } catch {
+                    self.didError?()
+                }
+            } else {
+                if isRefreshToken {
+                    self.tokenHelper.refreshToken()
+                } else {
+                    self.didError?()
+                }
+            }
+        }
+    }
+
+    func requestOtpWithEmail() {
+        self.state = .requestOtpWithEmail
+        self.isSendEmailOtp = false
+        self.authenticationRepository.requestOtpWithEmail(authenRequest: self.authenRequest) { (success, response, isRefreshToken) in
+            if success {
+                do {
+                    let rawJson = try response.mapJSON()
+                    let json = JSON(rawJson)
+                    self.walletRequest.emailRefCode = json[JsonKey.refCode.rawValue].stringValue
+                    self.walletRequest.email = UserManager.shared.email
+                    self.isSendEmailOtp = true
+                    self.didRequestOtpFinish?()
+                } catch {
+                    self.didError?()
+                }
+            } else {
+                if isRefreshToken {
+                    self.tokenHelper.refreshToken()
+                } else {
+                    self.didError?()
+                }
+            }
+        }
+    }
+
+    func confirmSendToken() {
+        self.state = .confirmSendToken
+        self.walletRepository.confirmSendToken(userId: self.page.id, walletRequest: self.walletRequest) { (success, _, isRefreshToken) in
+            if success {
+                self.didSendTokenFinish?()
+            } else {
+                if isRefreshToken {
+                    self.tokenHelper.refreshToken()
+                } else {
+                    self.didError?()
+                }
+            }
+        }
+    }
+
+    var didRequestOtpFinish: (() -> Void)?
+    var didSendTokenFinish: (() -> Void)?
+    var didError: (() -> Void)?
 }
 
 extension SendReviewViewModel: TokenHelperDelegate {
     public func didRefreshTokenFinish() {
-//        if self.state == .getWalletShortcuts {
-//            self.getWalletShortcuts()
-//        } else if self.state == .reviewSendToken {
-//            self.reviewSendToken()
-//        }
+        if self.state == .requestOtpWithMobile {
+            self.requestOtpWithMobile()
+        } else if self.state == .requestOtpWithEmail {
+            self.requestOtpWithEmail()
+        }
     }
 }

@@ -78,6 +78,8 @@ public final class SendWalletViewModel {
             } else {
                 if isRefreshToken {
                     self.tokenHelper.refreshToken()
+                } else {
+                    self.didError?()
                 }
             }
         }
@@ -85,6 +87,7 @@ public final class SendWalletViewModel {
 
     var didGetWalletShortcutsFinish: (() -> Void)?
     var didReviewSendTokenFinish: (() -> Void)?
+    var didError: (() -> Void)?
 }
 
 extension SendWalletViewModel: TokenHelperDelegate {
