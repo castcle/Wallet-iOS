@@ -70,6 +70,7 @@ class ResendViewController: UIViewController, UITextFieldDelegate {
         self.viewModel.getWalletRecent()
         self.viewModel.didGetWalletRecentFinish = {
             self.hud.dismiss()
+            self.tableView.reloadData()
         }
         self.viewModel.didGetWalletSearchFinish = {
             self.hud.dismiss()
@@ -220,7 +221,7 @@ extension ResendViewController: UITableViewDelegate, UITableViewDataSource {
         if self.viewModel.isSearch && !self.viewModel.searchCastcle.isEmpty {
             self.delegate?.didSelect(self, walletsRecent: self.viewModel.searchCastcle[indexPath.row])
             self.navigationController?.popViewController(animated: true)
-        } else if !self.viewModel.castcle.isEmpty && !self.viewModel.other.isEmpty {
+        } else if !self.viewModel.castcle.isEmpty || !self.viewModel.other.isEmpty {
             if indexPath.section == ResendViewControllerSection.castcle.rawValue {
                 if !self.viewModel.isCastcleRecentExpand && indexPath.row == 3 {
                     self.viewModel.isCastcleRecentExpand = true

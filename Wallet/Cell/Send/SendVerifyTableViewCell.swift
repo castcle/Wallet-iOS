@@ -113,7 +113,7 @@ class SendVerifyTableViewCell: UITableViewCell, UITextFieldDelegate {
 
     private func setupCountdownMobile() {
         self.smsCountdownLabel.isHidden = false
-        self.secondsMobileRemaining = 5
+        self.secondsMobileRemaining = 300
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (timer) in
             if self.secondsMobileRemaining > 0 {
                 self.smsCountdownLabel.text = "\(self.secondsMobileRemaining.secondsToTime()) mins"
@@ -130,7 +130,7 @@ class SendVerifyTableViewCell: UITableViewCell, UITextFieldDelegate {
 
     private func setupCountdownEmail() {
         self.emailCountdownLabel.isHidden = false
-        self.secondsEmailRemaining = 10
+        self.secondsEmailRemaining = 300
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (timer) in
             if self.secondsEmailRemaining > 0 {
                 self.emailCountdownLabel.text = "\(self.secondsEmailRemaining.secondsToTime()) mins"
@@ -156,6 +156,12 @@ class SendVerifyTableViewCell: UITableViewCell, UITextFieldDelegate {
 
     @objc func textFieldDidChange(_ textField: UITextField) {
         self.delegate?.didValueChange(self, verifyEmail: self.emailTextField.text ?? "", verifySms: self.smsTextField.text ?? "")
+    }
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let text = textField.text else { return true }
+        let newLength = text.count + string.count - range.length
+        return newLength <= 6
     }
 
     @IBAction func resendEmailAction(_ sender: Any) {
