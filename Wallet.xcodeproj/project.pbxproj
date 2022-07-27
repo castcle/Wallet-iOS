@@ -67,6 +67,7 @@
 		B7476E7F2847681C00331614 /* SelectNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7476E7E2847681C00331614 /* SelectNetworkViewController.swift */; };
 		B7476E8228476A7C00331614 /* SelectNetworkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7476E8028476A7C00331614 /* SelectNetworkTableViewCell.swift */; };
 		B7476E8328476A7C00331614 /* SelectNetworkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7476E8128476A7C00331614 /* SelectNetworkTableViewCell.xib */; };
+		B75E416F2890DFBB0037B388 /* SendReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E416E2890DFBB0037B388 /* SendReviewViewModel.swift */; };
 		B767A7622845CD0200E4381F /* OtherChainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B767A7612845CD0200E4381F /* OtherChainViewController.swift */; };
 		B767A7652845CE2C00E4381F /* OtherChainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B767A7632845CE2C00E4381F /* OtherChainTableViewCell.swift */; };
 		B767A7662845CE2C00E4381F /* OtherChainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B767A7642845CE2C00E4381F /* OtherChainTableViewCell.xib */; };
@@ -168,6 +169,7 @@
 		B7476E7E2847681C00331614 /* SelectNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectNetworkViewController.swift; sourceTree = "<group>"; };
 		B7476E8028476A7C00331614 /* SelectNetworkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectNetworkTableViewCell.swift; sourceTree = "<group>"; };
 		B7476E8128476A7C00331614 /* SelectNetworkTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectNetworkTableViewCell.xib; sourceTree = "<group>"; };
+		B75E416E2890DFBB0037B388 /* SendReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendReviewViewModel.swift; sourceTree = "<group>"; };
 		B767A7612845CD0200E4381F /* OtherChainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherChainViewController.swift; sourceTree = "<group>"; };
 		B767A7632845CE2C00E4381F /* OtherChainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherChainTableViewCell.swift; sourceTree = "<group>"; };
 		B767A7642845CE2C00E4381F /* OtherChainTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OtherChainTableViewCell.xib; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 				B7471242287C028C00C3C7EE /* CreateShortcutViewModel.swift */,
 				B7471240287BFC0600C3C7EE /* RecentViewModel.swift */,
 				B7DF047A287C639A005D2026 /* ScanQrCodeViewModel.swift */,
+				B75E416E2890DFBB0037B388 /* SendReviewViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -634,6 +637,7 @@
 				B727FDF52851ECD100BA50C7 /* CastcleQrCodeViewModel.swift in Sources */,
 				B72FDEBF283398B300748D13 /* WalletOpener.swift in Sources */,
 				B73D981F286E0F3900D6ECA8 /* SendVerifyTableViewCell.swift in Sources */,
+				B75E416F2890DFBB0037B388 /* SendReviewViewModel.swift in Sources */,
 				B7471243287C028C00C3C7EE /* CreateShortcutViewModel.swift in Sources */,
 				B72FDEDD2833BA9300748D13 /* WalletNoDataTableViewCell.swift in Sources */,
 				B711702A283B846900FF985A /* MyQRCode.swift in Sources */,

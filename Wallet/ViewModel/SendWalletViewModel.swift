@@ -34,7 +34,6 @@ public final class SendWalletViewModel {
     private var walletRepository: WalletRepository = WalletRepositoryImpl()
     let tokenHelper: TokenHelper = TokenHelper()
     var page: Page = Page()
-    var castcleId: String = ""
     var walletRequest: WalletRequest = WalletRequest()
     var myShortcut: [Shortcut] = []
     var wallet: Wallet = Wallet()
@@ -45,7 +44,7 @@ public final class SendWalletViewModel {
         self.page = page
         self.walletRequest.chainId = (castcleId.isEmpty ? "castcle" : chainId)
         self.walletRequest.address = userId
-        self.castcleId = castcleId
+        self.walletRequest.castcleId = castcleId
         self.wallet = wallet
     }
 

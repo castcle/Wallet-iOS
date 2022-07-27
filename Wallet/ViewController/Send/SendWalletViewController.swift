@@ -69,7 +69,7 @@ class SendWalletViewController: UIViewController {
             self.tableView.reloadData()
         }
         self.viewModel.didReviewSendTokenFinish = {
-            Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.sendReview), animated: true)
+            Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.sendReview(SendReviewViewModel(walletRequest: self.viewModel.walletRequest, page: self.viewModel.page))), animated: true)
         }
     }
 
@@ -125,7 +125,7 @@ extension SendWalletViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.sendTo, for: indexPath as IndexPath) as? SendToTableViewCell
             cell?.backgroundColor = UIColor.clear
             cell?.delegate = self
-            cell?.configCell(sendTo: self.viewModel.castcleId, page: self.viewModel.page, wallet: self.viewModel.wallet)
+            cell?.configCell(sendTo: self.viewModel.walletRequest.castcleId, page: self.viewModel.page, wallet: self.viewModel.wallet)
             return cell ?? SendToTableViewCell()
         }
     }
@@ -134,7 +134,7 @@ extension SendWalletViewController: UITableViewDelegate, UITableViewDataSource {
 extension SendWalletViewController: SendShortcutTableViewCellDelegate {
     func didSelectShortcut(_ sendShortcutTableViewCell: SendShortcutTableViewCell, shortcut: Shortcut) {
         self.viewModel.walletRequest.address = shortcut.userId
-        self.viewModel.castcleId = shortcut.castcleId
+        self.viewModel.walletRequest.castcleId = shortcut.castcleId
         self.sendButton.activeButton(isActive: self.isAvtive, fontSize: .overline)
         self.tableView.reloadData()
     }
@@ -147,7 +147,7 @@ extension SendWalletViewController: SendShortcutTableViewCellDelegate {
 extension SendWalletViewController: SendToTableViewCellDelegate {
     func didSelectWalletsRecent(_ sendToTableViewCell: SendToTableViewCell, walletsRecent: WalletsRecent) {
         self.viewModel.walletRequest.address = walletsRecent.id
-        self.viewModel.castcleId = walletsRecent.castcleId
+        self.viewModel.walletRequest.castcleId = walletsRecent.castcleId
         self.sendButton.activeButton(isActive: self.isAvtive, fontSize: .overline)
     }
 
@@ -162,7 +162,7 @@ extension SendWalletViewController: SendToTableViewCellDelegate {
     func didScanWalletSuccess(_ sendToTableViewCell: SendToTableViewCell, chainId: String, userId: String, castcleId: String) {
         self.viewModel.walletRequest.chainId = chainId
         self.viewModel.walletRequest.address = userId
-        self.viewModel.castcleId = castcleId
+        self.viewModel.walletRequest.castcleId = castcleId
         self.sendButton.activeButton(isActive: self.isAvtive, fontSize: .overline)
     }
 
