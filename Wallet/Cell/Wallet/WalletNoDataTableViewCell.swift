@@ -46,6 +46,6 @@ class WalletNoDataTableViewCell: UITableViewCell {
     }
 
     func configCell(type: WalletHistoryType) {
-        self.descriptionLabel.text = "All \(type.rawValue) history will be displayed here"
+        self.descriptionLabel.text = "All \(type.display) history will be displayed here"
     }
 }

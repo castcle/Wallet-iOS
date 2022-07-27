@@ -67,6 +67,8 @@
 		B7476E7F2847681C00331614 /* SelectNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7476E7E2847681C00331614 /* SelectNetworkViewController.swift */; };
 		B7476E8228476A7C00331614 /* SelectNetworkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7476E8028476A7C00331614 /* SelectNetworkTableViewCell.swift */; };
 		B7476E8328476A7C00331614 /* SelectNetworkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7476E8128476A7C00331614 /* SelectNetworkTableViewCell.xib */; };
+		B75AFE4C28918B110036AC36 /* WalletHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75AFE4A28918B110036AC36 /* WalletHistoryTableViewCell.swift */; };
+		B75AFE4D28918B110036AC36 /* WalletHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B75AFE4B28918B110036AC36 /* WalletHistoryTableViewCell.xib */; };
 		B75E416F2890DFBB0037B388 /* SendReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E416E2890DFBB0037B388 /* SendReviewViewModel.swift */; };
 		B767A7622845CD0200E4381F /* OtherChainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B767A7612845CD0200E4381F /* OtherChainViewController.swift */; };
 		B767A7652845CE2C00E4381F /* OtherChainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B767A7632845CE2C00E4381F /* OtherChainTableViewCell.swift */; };
@@ -169,6 +171,8 @@
 		B7476E7E2847681C00331614 /* SelectNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectNetworkViewController.swift; sourceTree = "<group>"; };
 		B7476E8028476A7C00331614 /* SelectNetworkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectNetworkTableViewCell.swift; sourceTree = "<group>"; };
 		B7476E8128476A7C00331614 /* SelectNetworkTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectNetworkTableViewCell.xib; sourceTree = "<group>"; };
+		B75AFE4A28918B110036AC36 /* WalletHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletHistoryTableViewCell.swift; sourceTree = "<group>"; };
+		B75AFE4B28918B110036AC36 /* WalletHistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletHistoryTableViewCell.xib; sourceTree = "<group>"; };
 		B75E416E2890DFBB0037B388 /* SendReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendReviewViewModel.swift; sourceTree = "<group>"; };
 		B767A7612845CD0200E4381F /* OtherChainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherChainViewController.swift; sourceTree = "<group>"; };
 		B767A7632845CE2C00E4381F /* OtherChainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherChainTableViewCell.swift; sourceTree = "<group>"; };
@@ -269,6 +273,8 @@
 				B72FDED82833B6E000748D13 /* BannerTableViewCell.xib */,
 				B72FDEDF2833BE6E00748D13 /* WalletHistoryHeaderTableViewCell.swift */,
 				B72FDEE02833BE6F00748D13 /* WalletHistoryHeaderTableViewCell.xib */,
+				B75AFE4A28918B110036AC36 /* WalletHistoryTableViewCell.swift */,
+				B75AFE4B28918B110036AC36 /* WalletHistoryTableViewCell.xib */,
 				B72FDEDB2833BA9300748D13 /* WalletNoDataTableViewCell.swift */,
 				B72FDEDC2833BA9300748D13 /* WalletNoDataTableViewCell.xib */,
 				B72FDEEF2833C47F00748D13 /* SelectPageTableViewCell.swift */,
@@ -573,6 +579,7 @@
 				B72FDECC28339F7A00748D13 /* DisplayNameTableViewCell.xib in Resources */,
 				B72FDEC828339F5700748D13 /* Assets.xcassets in Resources */,
 				B72FDEE22833BE6F00748D13 /* WalletHistoryHeaderTableViewCell.xib in Resources */,
+				B75AFE4D28918B110036AC36 /* WalletHistoryTableViewCell.xib in Resources */,
 				B72FDED22833A48600748D13 /* BalanceTableViewCell.xib in Resources */,
 				B796348A286E480C003F2E9C /* ResendOtherTableViewCell.xib in Resources */,
 				B7F53762288028E80050114A /* EditShortcutListTableViewCell.xib in Resources */,
@@ -630,6 +637,7 @@
 				B72FDEF12833C47F00748D13 /* SelectPageTableViewCell.swift in Sources */,
 				B744AC3B2878190300378924 /* ManageShortcutHeaderTableViewCell.swift in Sources */,
 				B728FE5C2844B17C00CF03DA /* CastcleQrCodeTableViewCell.swift in Sources */,
+				B75AFE4C28918B110036AC36 /* WalletHistoryTableViewCell.swift in Sources */,
 				B71170572840AD7700FF985A /* ScanQrCodeViewController.swift in Sources */,
 				B72FDED52833B38200748D13 /* TransactionTableViewCell.swift in Sources */,
 				B747123C287A835600C3C7EE /* CreateShortcutTableViewCell.swift in Sources */,

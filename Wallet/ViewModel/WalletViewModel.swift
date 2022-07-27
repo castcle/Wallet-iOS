@@ -33,8 +33,10 @@ public final class WalletViewModel {
     private var walletRepository: WalletRepository = WalletRepositoryImpl()
     let tokenHelper: TokenHelper = TokenHelper()
     var page: Page = Page()
-    var walletHistoryType: WalletHistoryType = .wallet
+    var walletRequest: WalletRequest = WalletRequest()
     var wallet: Wallet = Wallet()
+    var history: [WalletHistory] = []
+    private var state: State = .none
 
     public init() {
         self.page = Page().initCustom(id: UserManager.shared.id, displayName: UserManager.shared.displayName, castcleId: UserManager.shared.rawCastcleId, avatar: UserManager.shared.avatar, cover: UserManager.shared.cover, overview: UserManager.shared.overview, official: UserManager.shared.official)
@@ -42,6 +44,7 @@ public final class WalletViewModel {
     }
 
     func walletLookup() {
+        self.state = .walletLookup
         self.walletRepository.walletLookup(userId: self.page.id) { (success, response, isRefreshToken) in
             if success {
                 do {
@@ -62,12 +65,39 @@ public final class WalletViewModel {
         }
     }
 
+    func getWalletHistory() {
+        self.state = .getWalletHistory
+        self.walletRepository.getWalletHistory(userId: self.page.id, walletRequest: self.walletRequest) { (success, response, isRefreshToken) in
+            if success {
+                do {
+                    let rawJson = try response.mapJSON()
+                    let json = JSON(rawJson)
+                    self.history = (json[JsonKey.payload.rawValue].arrayValue).map { WalletHistory(json: $0) }
+                    self.didGetWalletHistoryFinish?()
+                } catch {
+                    self.didError?()
+                }
+            } else {
+                if isRefreshToken {
+                    self.tokenHelper.refreshToken()
+                } else {
+                    self.didError?()
+                }
+            }
+        }
+    }
+
     var didGetWalletBalanceFinish: (() -> Void)?
+    var didGetWalletHistoryFinish: (() -> Void)?
     var didError: (() -> Void)?
 }
 
 extension WalletViewModel: TokenHelperDelegate {
     public func didRefreshTokenFinish() {
-        self.walletLookup()
+        if self.state == .walletLookup {
+            self.walletLookup()
+        } else if self.state == .getWalletHistory {
+            self.getWalletHistory()
+        }
     }
 }

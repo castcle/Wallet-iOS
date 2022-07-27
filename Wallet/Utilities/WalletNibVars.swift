@@ -61,6 +61,7 @@ public struct WalletNibVars {
         public static let transaction = "TransactionTableViewCell"
         public static let banner = "BannerTableViewCell"
         public static let walletHistoryHeader = "WalletHistoryHeaderTableViewCell"
+        public static let walletHistory = "WalletHistoryTableViewCell"
         public static let walletNoData = "WalletNoDataTableViewCell"
         public static let castcleQrCode = "CastcleQrCodeTableViewCell"
         public static let otherChain = "OtherChainTableViewCell"
