@@ -37,8 +37,8 @@ public enum WalletScene {
     case otherChain
     case selectNetwork
     case sendWallet(SendWalletViewModel)
-    case sendReview
-    case sendAuth
+    case sendReview(SendReviewViewModel)
+    case sendAuth(SendReviewViewModel)
     case verifyAccount
     case resend(RecentViewModel)
     case manageShortcuts(ManageShortcutsViewModel)
@@ -85,14 +85,16 @@ public struct WalletOpener {
             let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.sendWallet) as? SendWalletViewController
             viewController?.viewModel = viewModel
             return viewController ?? SendWalletViewController()
-        case .sendReview:
+        case .sendReview(let viewModel):
             let storyboard: UIStoryboard = UIStoryboard(name: WalletNibVars.Storyboard.wallet, bundle: ConfigBundle.wallet)
-            let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.sendReview)
-            return viewController
-        case .sendAuth:
+            let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.sendReview) as? SendReviewViewController
+            viewController?.viewModel = viewModel
+            return viewController ?? SendReviewViewController()
+        case .sendAuth(let viewModel):
             let storyboard: UIStoryboard = UIStoryboard(name: WalletNibVars.Storyboard.wallet, bundle: ConfigBundle.wallet)
-            let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.sendAuth)
-            return viewController
+            let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.sendAuth) as? SendAuthViewController
+            viewController?.viewModel = viewModel
+            return viewController ?? SendAuthViewController()
         case .verifyAccount:
             let storyboard: UIStoryboard = UIStoryboard(name: WalletNibVars.Storyboard.wallet, bundle: ConfigBundle.wallet)
             let viewController = storyboard.instantiateViewController(withIdentifier: WalletNibVars.ViewController.verifyAccount)

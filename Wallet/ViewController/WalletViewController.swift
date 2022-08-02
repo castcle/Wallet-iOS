@@ -31,12 +31,14 @@ import Networking
 import Defaults
 import FirebaseRemoteConfig
 import PanModal
+import JGProgressHUD
 
 class WalletViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
 
     var viewModel = WalletViewModel()
+    private let hud = JGProgressHUD()
 
     enum WalletViewControllerSection: Int, CaseIterable {
         case displayName = 0
@@ -51,12 +53,26 @@ class WalletViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.Asset.darkGraphiteBlue
         self.configureTableView()
+        self.viewModel.didGetWalletBalanceFinish = {
+            self.hud.dismiss()
+            self.tableView.reloadData()
+        }
+        self.viewModel.didGetWalletHistoryFinish = {
+            self.tableView.reloadData()
+        }
+        self.viewModel.didError = {
+            self.hud.dismiss()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupNavBar()
         Defaults[.screenId] = ScreenId.wallet.rawValue
+        self.hud.textLabel.text = "Loading"
+        self.hud.show(in: self.view)
+        self.viewModel.walletLookup()
+        self.viewModel.getWalletHistory()
     }
 
     public override func viewDidAppear(_ animated: Bool) {
@@ -82,7 +98,7 @@ class WalletViewController: UIViewController {
     }
 
     @objc private func scanAction() {
-        self.navigationController?.pushViewController(WalletOpener.open(.scanQrCode(ScanQrCodeViewModel(scanType: .all, page: self.viewModel.page))), animated: true)
+        self.navigationController?.pushViewController(WalletOpener.open(.scanQrCode(ScanQrCodeViewModel(scanType: .all, page: self.viewModel.page, wallet: self.viewModel.wallet))), animated: true)
     }
 
     func configureTableView() {
@@ -93,6 +109,7 @@ class WalletViewController: UIViewController {
         self.tableView.register(UINib(nibName: WalletNibVars.TableViewCell.transaction, bundle: ConfigBundle.wallet), forCellReuseIdentifier: WalletNibVars.TableViewCell.transaction)
         self.tableView.register(UINib(nibName: WalletNibVars.TableViewCell.banner, bundle: ConfigBundle.wallet), forCellReuseIdentifier: WalletNibVars.TableViewCell.banner)
         self.tableView.register(UINib(nibName: WalletNibVars.TableViewCell.walletHistoryHeader, bundle: ConfigBundle.wallet), forCellReuseIdentifier: WalletNibVars.TableViewCell.walletHistoryHeader)
+        self.tableView.register(UINib(nibName: WalletNibVars.TableViewCell.walletHistory, bundle: ConfigBundle.wallet), forCellReuseIdentifier: WalletNibVars.TableViewCell.walletHistory)
         self.tableView.register(UINib(nibName: WalletNibVars.TableViewCell.walletNoData, bundle: ConfigBundle.wallet), forCellReuseIdentifier: WalletNibVars.TableViewCell.walletNoData)
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 100
@@ -105,14 +122,21 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == WalletViewControllerSection.banner.rawValue {
+        switch section {
+        case WalletViewControllerSection.banner.rawValue:
             let airdropEnable = RemoteConfig.remoteConfig().configValue(forKey: "banner_early_airdrop_enable").boolValue
             if airdropEnable {
                 return 1
             } else {
                 return 0
             }
-        } else {
+        case WalletViewControllerSection.history.rawValue:
+            if self.viewModel.walletRequest.filter == .walletBalance && !self.viewModel.history.isEmpty {
+                return self.viewModel.history.count
+            } else {
+                return 1
+            }
+        default:
             return 1
         }
     }
@@ -128,11 +152,12 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
         case WalletViewControllerSection.balance.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.balance, for: indexPath as IndexPath) as? BalanceTableViewCell
             cell?.backgroundColor = UIColor.clear
+            cell?.configCell(wallet: self.viewModel.wallet)
             return cell ?? BalanceTableViewCell()
         case WalletViewControllerSection.transaction.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.transaction, for: indexPath as IndexPath) as? TransactionTableViewCell
             cell?.backgroundColor = UIColor.clear
-            cell?.configCell(page: self.viewModel.page)
+            cell?.configCell(page: self.viewModel.page, wallet: self.viewModel.wallet)
             return cell ?? TransactionTableViewCell()
         case WalletViewControllerSection.banner.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.banner, for: indexPath as IndexPath) as? BannerTableViewCell
@@ -141,14 +166,21 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
         case WalletViewControllerSection.historyHeader.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.walletHistoryHeader, for: indexPath as IndexPath) as? WalletHistoryHeaderTableViewCell
             cell?.backgroundColor = UIColor.clear
-            cell?.configCell(type: self.viewModel.walletHistoryType)
+            cell?.configCell(type: self.viewModel.walletRequest.filter)
             cell?.delegate = self
             return cell ?? WalletHistoryHeaderTableViewCell()
         case WalletViewControllerSection.history.rawValue:
-            let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.walletNoData, for: indexPath as IndexPath) as? WalletNoDataTableViewCell
-            cell?.backgroundColor = UIColor.clear
-            cell?.configCell(type: self.viewModel.walletHistoryType)
-            return cell ?? WalletNoDataTableViewCell()
+            if self.viewModel.walletRequest.filter == .walletBalance && !self.viewModel.history.isEmpty {
+                let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.walletHistory, for: indexPath as IndexPath) as? WalletHistoryTableViewCell
+                cell?.backgroundColor = UIColor.Asset.cellBackground
+                cell?.configCell(walletHistory: self.viewModel.history[indexPath.row])
+                return cell ?? WalletHistoryTableViewCell()
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.walletNoData, for: indexPath as IndexPath) as? WalletNoDataTableViewCell
+                cell?.backgroundColor = UIColor.clear
+                cell?.configCell(type: self.viewModel.walletRequest.filter)
+                return cell ?? WalletNoDataTableViewCell()
+            }
         default:
             return UITableViewCell()
         }
@@ -165,7 +197,7 @@ extension WalletViewController: DisplayNameTableViewCellDelegate {
 
 extension WalletViewController: WalletHistoryHeaderTableViewCellDelegate {
     func didChooseFilter(_ cell: WalletHistoryHeaderTableViewCell, type: WalletHistoryType) {
-        self.viewModel.walletHistoryType = type
+        self.viewModel.walletRequest.filter = type
         self.tableView.reloadData()
     }
 }

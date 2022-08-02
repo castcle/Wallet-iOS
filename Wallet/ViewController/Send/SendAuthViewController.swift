@@ -28,18 +28,19 @@
 import UIKit
 import Core
 import Defaults
+import JGProgressHUD
 
 class SendAuthViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
 
-    var verifyEmail: String = ""
-    var verifySms: String = ""
+    var viewModel = SendReviewViewModel()
+    private let hud = JGProgressHUD()
     var isAvtive: Bool {
-        if self.verifyEmail.isEmpty && self.verifySms.isEmpty {
-            return false
-        } else {
+        if (self.viewModel.walletRequest.emailOtp.count == 6) && (self.viewModel.walletRequest.mobileOtp.count == 6) {
             return true
+        } else {
+            return false
         }
     }
     enum SendAuthViewControllerSection: Int, CaseIterable {
@@ -52,6 +53,18 @@ class SendAuthViewController: UIViewController {
         self.view.backgroundColor = UIColor.Asset.darkGraphiteBlue
         self.hideKeyboardWhenTapped()
         self.configureTableView()
+        self.hud.textLabel.text = "Sending"
+        self.viewModel.didSendTokenFinish = {
+            self.hud.dismiss()
+            let viewControllers: [UIViewController] = Utility.currentViewController().navigationController!.viewControllers as [UIViewController]
+            Utility.currentViewController().navigationController!.popToViewController(viewControllers[viewControllers.count - 4], animated: true)
+        }
+        self.viewModel.didRequestOtpFinish = {
+            self.hud.dismiss()
+        }
+        self.viewModel.didError = {
+            self.hud.dismiss()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -87,6 +100,7 @@ extension SendAuthViewController: UITableViewDelegate, UITableViewDataSource {
         if SendAuthViewControllerSection.verify.rawValue == indexPath.section {
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.sendVerify, for: indexPath as IndexPath) as? SendVerifyTableViewCell
             cell?.backgroundColor = UIColor.clear
+            cell?.configCell(email: self.viewModel.walletRequest.email, mobile: "(\(self.viewModel.walletRequest.countryCode)) \(self.viewModel.walletRequest.mobileNumber)")
             cell?.delegate = self
             return cell ?? SendVerifyTableViewCell()
         } else {
@@ -101,16 +115,30 @@ extension SendAuthViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension SendAuthViewController: SendVerifyTableViewCellDelegate {
     func didValueChange(_ sendVerifyTableViewCell: SendVerifyTableViewCell, verifyEmail: String, verifySms: String) {
-        self.verifyEmail = verifyEmail
-        self.verifySms = verifySms
-        let indexPath = IndexPath(item: 0, section: 1)
-        self.tableView.reloadRows(at: [indexPath], with: .none)
+        if (verifyEmail.count == 6) && (verifySms.count == 6) {
+            self.viewModel.walletRequest.emailOtp = verifyEmail
+            self.viewModel.walletRequest.mobileOtp = verifySms
+            let indexPath = IndexPath(item: 0, section: 1)
+            self.tableView.reloadRows(at: [indexPath], with: .none)
+        }
+    }
+
+    func didResendOtpEmail(_ sendVerifyTableViewCell: SendVerifyTableViewCell) {
+        self.hud.show(in: self.view)
+        self.viewModel.requestOtpWithEmail()
+    }
+
+    func didResendOtpMobile(_ sendVerifyTableViewCell: SendVerifyTableViewCell) {
+        self.hud.show(in: self.view)
+        self.viewModel.requestOtpWithMobile()
     }
 }
 
 extension SendAuthViewController: SendConfiemTableViewCellDelegate {
     func didConfirm(_ sendConfiemTableViewCell: SendConfiemTableViewCell) {
-        let viewControllers: [UIViewController] = Utility.currentViewController().navigationController!.viewControllers as [UIViewController]
-        Utility.currentViewController().navigationController!.popToViewController(viewControllers[viewControllers.count - 4], animated: true)
+        if self.isAvtive {
+            self.hud.show(in: self.view)
+            self.viewModel.confirmSendToken()
+        }
     }
 }

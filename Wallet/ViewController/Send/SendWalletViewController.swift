@@ -29,6 +29,7 @@ import UIKit
 import Core
 import Networking
 import Defaults
+import JGProgressHUD
 
 class SendWalletViewController: UIViewController {
 
@@ -39,9 +40,10 @@ class SendWalletViewController: UIViewController {
     @IBOutlet weak var feeLabel: UILabel!
     @IBOutlet weak var sendButton: UIButton!
 
-    var viewModel = SendWalletViewModel()
+    var viewModel = SendWalletViewModel(wallet: Wallet())
+    private let hud = JGProgressHUD()
     var isAvtive: Bool {
-        if self.viewModel.userId.isEmpty || self.viewModel.amount.isEmpty {
+        if self.viewModel.walletRequest.address.isEmpty || self.viewModel.walletRequest.amount.isEmpty {
             return false
         } else {
             return true
@@ -68,6 +70,13 @@ class SendWalletViewController: UIViewController {
         self.viewModel.didGetWalletShortcutsFinish = {
             self.tableView.reloadData()
         }
+        self.viewModel.didReviewSendTokenFinish = {
+            self.hud.dismiss()
+            Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.sendReview(SendReviewViewModel(walletRequest: self.viewModel.walletRequest, page: self.viewModel.page))), animated: true)
+        }
+        self.viewModel.didError = {
+            self.hud.dismiss()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -92,10 +101,13 @@ class SendWalletViewController: UIViewController {
 
     @IBAction func sendAction(_ sender: Any) {
         if self.isAvtive {
-            if self.viewModel.userId == "aaaa" {
-                ApiHelper.displayMessage(title: "Warning", message: "Incorrect Castcle ID. Please check the Castcle ID and try again.\n\n** You have insufficient balance", buttonTitle: "Close")
+            let amount: Double = Double(self.viewModel.walletRequest.amount) ?? 0
+            if (amount <= 0) || (amount > self.viewModel.wallet.availableBalance) || (self.viewModel.wallet.availableBalance <= 0) {
+                ApiHelper.displayMessage(title: "Warning", message: "** You have insufficient balance", buttonTitle: "Close")
             } else {
-                Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.sendReview), animated: true)
+                self.hud.textLabel.text = "Reviewing"
+                self.hud.show(in: self.view)
+                self.viewModel.reviewSendToken()
             }
         }
     }
@@ -121,7 +133,7 @@ extension SendWalletViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.sendTo, for: indexPath as IndexPath) as? SendToTableViewCell
             cell?.backgroundColor = UIColor.clear
             cell?.delegate = self
-            cell?.configCell(sendTo: self.viewModel.castcleId, page: self.viewModel.page)
+            cell?.configCell(sendTo: self.viewModel.walletRequest.castcleId, page: self.viewModel.page, wallet: self.viewModel.wallet)
             return cell ?? SendToTableViewCell()
         }
     }
@@ -129,8 +141,9 @@ extension SendWalletViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension SendWalletViewController: SendShortcutTableViewCellDelegate {
     func didSelectShortcut(_ sendShortcutTableViewCell: SendShortcutTableViewCell, shortcut: Shortcut) {
-        self.viewModel.userId = shortcut.userId
-        self.viewModel.castcleId = shortcut.castcleId
+        self.viewModel.walletRequest.address = shortcut.userId
+        self.viewModel.walletRequest.castcleId = shortcut.castcleId
+        self.sendButton.activeButton(isActive: self.isAvtive, fontSize: .overline)
         self.tableView.reloadData()
     }
 
@@ -141,25 +154,27 @@ extension SendWalletViewController: SendShortcutTableViewCellDelegate {
 
 extension SendWalletViewController: SendToTableViewCellDelegate {
     func didSelectWalletsRecent(_ sendToTableViewCell: SendToTableViewCell, walletsRecent: WalletsRecent) {
-        self.viewModel.userId = walletsRecent.id
-        self.viewModel.castcleId = walletsRecent.castcleId
+        self.viewModel.walletRequest.address = walletsRecent.id
+        self.viewModel.walletRequest.castcleId = walletsRecent.castcleId
+        self.sendButton.activeButton(isActive: self.isAvtive, fontSize: .overline)
     }
 
     func didValueChange(_ sendToTableViewCell: SendToTableViewCell, memo: String, amount: String, note: String) {
-        self.viewModel.memo = memo
-        self.viewModel.amount = amount
-        self.viewModel.note = note
-        self.castLabel.text = "\(self.viewModel.amount) CAST"
+        self.viewModel.walletRequest.memo = memo
+        self.viewModel.walletRequest.amount = amount
+        self.viewModel.walletRequest.note = note
+        self.castLabel.text = "\(self.viewModel.walletRequest.amount) CAST"
         self.sendButton.activeButton(isActive: self.isAvtive, fontSize: .overline)
     }
 
     func didScanWalletSuccess(_ sendToTableViewCell: SendToTableViewCell, chainId: String, userId: String, castcleId: String) {
-        self.viewModel.chainId = chainId
-        self.viewModel.userId = userId
-        self.viewModel.castcleId = castcleId
+        self.viewModel.walletRequest.chainId = chainId
+        self.viewModel.walletRequest.address = userId
+        self.viewModel.walletRequest.castcleId = castcleId
+        self.sendButton.activeButton(isActive: self.isAvtive, fontSize: .overline)
     }
 
     func didScanTextSuccess(_ sendToTableViewCell: SendToTableViewCell, text: String) {
-        self.viewModel.memo = text
+        self.viewModel.walletRequest.memo = text
     }
 }

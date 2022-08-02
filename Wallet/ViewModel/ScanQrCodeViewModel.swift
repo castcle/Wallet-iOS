@@ -42,10 +42,12 @@ public final class ScanQrCodeViewModel {
     var userId: String = ""
     var castcleId: String = ""
     var scanType: ScanType = .all
+    var wallet: Wallet = Wallet()
 
-    public init(scanType: ScanType = .all, page: Page = Page()) {
+    public init(scanType: ScanType = .all, page: Page = Page(), wallet: Wallet) {
         self.scanType = scanType
         self.page = page
+        self.wallet = wallet
     }
 
     func isWalletData(value: String) -> Bool {
@@ -79,7 +81,7 @@ public final class ScanQrCodeViewModel {
             if self.scanType == .all {
                 Utility.currentViewController().navigationController?.popViewController(animated: true)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.sendWallet(SendWalletViewModel(page: self.page, chainId: self.chainId, userId: self.userId, castcleId: self.castcleId))), animated: true)
+                    Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.sendWallet(SendWalletViewModel(page: self.page, chainId: self.chainId, userId: self.userId, castcleId: self.castcleId, wallet: self.wallet))), animated: true)
                 }
             }
         }

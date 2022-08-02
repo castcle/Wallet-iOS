@@ -28,30 +28,28 @@
 import UIKit
 import Core
 import Defaults
-
-struct SendReview {
-    let title: String
-    let value: String
-}
+import JGProgressHUD
 
 class SendReviewViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
 
-    let sendReview: [SendReview] = [
-        SendReview(title: "Review send", value: "8.345 CAST"),
-        SendReview(title: "Date", value: Date().dateToString()),
-        SendReview(title: "From", value: UserManager.shared.castcleId),
-        SendReview(title: "To Castcle ID", value: "@Memaketing"),
-        SendReview(title: "Coin", value: "CAST"),
-        SendReview(title: "Amount", value: "8.345 CAST"),
-        SendReview(title: "Network fee", value: "0 CAST")
-    ]
+    var viewModel = SendReviewViewModel()
+    private let hud = JGProgressHUD()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.Asset.darkGraphiteBlue
         self.configureTableView()
+        self.viewModel.didRequestOtpFinish = {
+            if self.viewModel.isSendEmailOtp && self.viewModel.isSendMobileOtp {
+                self.hud.dismiss()
+                Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.sendAuth(self.viewModel)), animated: true)
+            }
+        }
+        self.viewModel.didError = {
+            self.hud.dismiss()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -81,15 +79,16 @@ extension SendReviewViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.sendReview.count + 1
+        return self.viewModel.sendReview.count + 1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.reviewSend, for: indexPath as IndexPath) as? ReviewSendTableViewCell
             cell?.backgroundColor = UIColor.clear
+            cell?.configCell(totalAmount: self.viewModel.walletRequest.amount)
             return cell ?? ReviewSendTableViewCell()
-        } else if indexPath.row == self.sendReview.count {
+        } else if indexPath.row == self.viewModel.sendReview.count {
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.sendConfiem, for: indexPath as IndexPath) as? SendConfiemTableViewCell
             cell?.backgroundColor = UIColor.clear
             cell?.configCell(isActive: true)
@@ -98,7 +97,7 @@ extension SendReviewViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.reviewData, for: indexPath as IndexPath) as? ReviewDataTableViewCell
             cell?.backgroundColor = UIColor.clear
-            let data = self.sendReview[indexPath.row]
+            let data = self.viewModel.sendReview[indexPath.row]
             cell?.configCell(title: data.title, value: data.value)
             return cell ?? ReviewDataTableViewCell()
         }
@@ -107,6 +106,13 @@ extension SendReviewViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension SendReviewViewController: SendConfiemTableViewCellDelegate {
     func didConfirm(_ sendConfiemTableViewCell: SendConfiemTableViewCell) {
-        Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.sendAuth), animated: true)
+        self.viewModel.authenRequest.objective = AuthenObjective.sendToken
+        self.viewModel.authenRequest.email = UserManager.shared.email
+        self.viewModel.authenRequest.countryCode = UserManager.shared.countryCode
+        self.viewModel.authenRequest.mobileNumber = UserManager.shared.mobile
+        self.hud.textLabel.text = "Sending"
+        self.hud.show(in: self.view)
+        self.viewModel.requestOtpWithEmail()
+        self.viewModel.requestOtpWithMobile()
     }
 }

@@ -27,6 +27,7 @@
 
 import UIKit
 import Core
+import Networking
 import GTProgressBar
 
 class BalanceTableViewCell: UITableViewCell {
@@ -69,5 +70,16 @@ class BalanceTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+
+    func configCell(wallet: Wallet) {
+        self.totalBalance.text = "\(wallet.totalBalance) CAST"
+        self.farmBalance.text = "\(wallet.farmBalance) CAST"
+        self.availBalance.text = "\(wallet.availableBalance) CAST"
+        if (wallet.farmBalance + wallet.availableBalance) == 0 {
+            self.barView.progress = 0.5
+        } else {
+            self.barView.progress = CGFloat(wallet.farmBalance / (wallet.farmBalance + wallet.availableBalance))
+        }
     }
 }

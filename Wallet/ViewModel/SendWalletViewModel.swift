@@ -34,23 +34,22 @@ public final class SendWalletViewModel {
     private var walletRepository: WalletRepository = WalletRepositoryImpl()
     let tokenHelper: TokenHelper = TokenHelper()
     var page: Page = Page()
-    var chainId: String = ""
-    var userId: String = ""
-    var castcleId: String = ""
-    var memo: String = ""
-    var amount: String = ""
-    var note: String = ""
+    var walletRequest: WalletRequest = WalletRequest()
     var myShortcut: [Shortcut] = []
+    var wallet: Wallet = Wallet()
+    private var state: State = .none
 
-    public init(page: Page = Page(), chainId: String = "", userId: String = "", castcleId: String = "") {
+    public init(page: Page = Page(), chainId: String = "", userId: String = "", castcleId: String = "", wallet: Wallet) {
         self.tokenHelper.delegate = self
         self.page = page
-        self.chainId = chainId
-        self.userId = userId
-        self.castcleId = castcleId
+        self.walletRequest.chainId = (castcleId.isEmpty ? "castcle" : chainId)
+        self.walletRequest.address = userId
+        self.walletRequest.castcleId = castcleId
+        self.wallet = wallet
     }
 
     func getWalletShortcuts() {
+        self.state = .getWalletShortcuts
         self.walletRepository.getWalletShortcuts(accountId: UserManager.shared.accountId) { (success, response, isRefreshToken) in
             if success {
                 do {
@@ -71,11 +70,32 @@ public final class SendWalletViewModel {
         }
     }
 
+    func reviewSendToken() {
+        self.state = .reviewSendToken
+        self.walletRepository.reviewSendToken(userId: self.page.id, walletRequest: self.walletRequest) { (success, _, isRefreshToken) in
+            if success {
+                self.didReviewSendTokenFinish?()
+            } else {
+                if isRefreshToken {
+                    self.tokenHelper.refreshToken()
+                } else {
+                    self.didError?()
+                }
+            }
+        }
+    }
+
     var didGetWalletShortcutsFinish: (() -> Void)?
+    var didReviewSendTokenFinish: (() -> Void)?
+    var didError: (() -> Void)?
 }
 
 extension SendWalletViewModel: TokenHelperDelegate {
     public func didRefreshTokenFinish() {
-        self.getWalletShortcuts()
+        if self.state == .getWalletShortcuts {
+            self.getWalletShortcuts()
+        } else if self.state == .reviewSendToken {
+            self.reviewSendToken()
+        }
     }
 }
