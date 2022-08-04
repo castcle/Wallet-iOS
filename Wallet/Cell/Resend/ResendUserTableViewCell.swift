@@ -49,7 +49,7 @@ class ResendUserTableViewCell: UITableViewCell {
     }
 
     func configCell(walletsRecent: WalletsRecent) {
-        self.nameLabel.text = "@\(walletsRecent.castcleId)"
+        self.nameLabel.text = walletsRecent.castcleId
         let avatar = URL(string: walletsRecent.images.avatar.thumbnail)
         self.avatarImage.kf.setImage(with: avatar, placeholder: UIImage.Asset.userPlaceholder, options: [.transition(.fade(0.35))])
     }

@@ -118,7 +118,7 @@ class SendToTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
 
     func configCell(sendTo: String, page: Page, wallet: Wallet) {
-        self.sendToTextField.text = (sendTo.isEmpty ? "" : "@\(sendTo)")
+        self.sendToTextField.text = (sendTo.isEmpty ? "" : sendTo)
         self.page = page
         self.wallet = wallet
         self.currentBalanceTitle.text = "Current available balance: \(self.wallet.availableBalance) CAST"
@@ -159,20 +159,20 @@ extension SendToTableViewCell: ResendViewControllerDelegate {
         if walletsRecent.type == .none {
             self.sendToTextField.text = walletsRecent.displayName
         } else {
-            self.sendToTextField.text = "@\(walletsRecent.castcleId)"
+            self.sendToTextField.text = walletsRecent.castcleId
         }
         self.delegate?.didSelectWalletsRecent(self, walletsRecent: walletsRecent)
     }
 
     func didScanWalletSuccess(_ resendViewController: ResendViewController, chainId: String, userId: String, castcleId: String) {
-        self.sendToTextField.text = "@\(castcleId)"
+        self.sendToTextField.text = castcleId
         self.delegate?.didScanWalletSuccess(self, chainId: chainId, userId: userId, castcleId: castcleId)
     }
 }
 
 extension SendToTableViewCell: ScanQrCodeViewControllerDelegate {
     func didScanWalletSuccess(_ scanQrCodeViewController: ScanQrCodeViewController, chainId: String, userId: String, castcleId: String) {
-        self.sendToTextField.text = "@\(castcleId)"
+        self.sendToTextField.text = castcleId
         self.delegate?.didScanWalletSuccess(self, chainId: chainId, userId: userId, castcleId: castcleId)
     }
 

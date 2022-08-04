@@ -51,7 +51,7 @@ class ShortcutCollectionViewCell: UICollectionViewCell {
         } else {
             self.addIcon.isHidden = true
             self.avatarShortImage.circle(color: UIColor.Asset.white)
-            self.nameShortcutLabel.text = "@\(castcleId)"
+            self.nameShortcutLabel.text = castcleId
             let shortcutAvatar = URL(string: avatar)
             self.avatarShortImage.kf.setImage(with: shortcutAvatar, placeholder: UIImage.Asset.userPlaceholder, options: [.transition(.fade(0.35))])
         }

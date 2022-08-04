@@ -64,10 +64,10 @@ class EditShortcutListTableViewCell: UITableViewCell {
     func configCell(avatar: String, castcleId: String, pageCastcleId: String, indexPath: IndexPath) {
         self.indexPath = indexPath
         if castcleId == pageCastcleId {
-            self.shortcutTitleLabel.text = "@\(castcleId) (You)"
+            self.shortcutTitleLabel.text = "\(castcleId) (You)"
             self.shortcutTitleLabel.textColor = UIColor.Asset.lightBlue
         } else {
-            self.shortcutTitleLabel.text = "@\(castcleId)"
+            self.shortcutTitleLabel.text = castcleId
             self.shortcutTitleLabel.textColor = UIColor.Asset.white
         }
         let shortcutAvatar = URL(string: avatar)

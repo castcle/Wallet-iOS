@@ -34,7 +34,7 @@ public final class SelectPageViewModel {
 
     public init(selectPage: Page = Page()) {
         self.selectPage = selectPage
-        self.pages.append(Page().initCustom(id: UserManager.shared.id, displayName: UserManager.shared.displayName, castcleId: UserManager.shared.rawCastcleId, avatar: UserManager.shared.avatar, cover: UserManager.shared.cover, overview: UserManager.shared.overview, official: UserManager.shared.official))
+        self.pages.append(Page().initCustom(id: UserManager.shared.id, displayName: UserManager.shared.displayName, castcleId: UserManager.shared.castcleId, avatar: UserManager.shared.avatar, cover: UserManager.shared.cover, overview: UserManager.shared.overview, official: UserManager.shared.official))
         do {
             let realm = try Realm()
             let pageLocal = realm.objects(Page.self).sorted(byKeyPath: "id")

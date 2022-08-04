@@ -41,7 +41,7 @@ public final class CastcleQrCodeViewModel {
     }
 
     func getQrCode() {
-        self.walletRepository.getQrCode(chainId: "castcle", userId: UserManager.shared.rawCastcleId, walletRequest: self.walletRequest) { (success, response, isRefreshToken) in
+        self.walletRepository.getQrCode(chainId: "castcle", userId: UserManager.shared.castcleId, walletRequest: self.walletRequest) { (success, response, isRefreshToken) in
             if success {
                 do {
                     let rawJson = try response.mapJSON()

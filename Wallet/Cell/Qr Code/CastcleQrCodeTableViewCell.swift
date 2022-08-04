@@ -79,7 +79,7 @@ class CastcleQrCodeTableViewCell: UITableViewCell {
     }
 
     @IBAction func copyCastcleIdAction(_ sender: Any) {
-        UIPasteboard.general.string = UserManager.shared.rawCastcleId
+        UIPasteboard.general.string = UserManager.shared.castcleId
         UINotificationFeedbackGenerator().notificationOccurred(.success)
     }
 

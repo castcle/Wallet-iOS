@@ -89,8 +89,8 @@ class CreateShortcutTableViewCell: UITableViewCell {
     }
 
     private func updateUI() {
-        self.displayNameLabel.text = "@\(self.viewModel.castcleId)"
-        self.idTextField.text = "@\(self.viewModel.castcleId)"
+        self.displayNameLabel.text = self.viewModel.castcleId
+        self.idTextField.text = self.viewModel.castcleId
         self.confirmButton.activeButton(isActive: true, fontSize: .overline)
         self.dataView.isHidden = false
     }
@@ -142,8 +142,8 @@ extension CreateShortcutTableViewCell: ScanQrCodeViewControllerDelegate {
     func didScanWalletSuccess(_ scanQrCodeViewController: ScanQrCodeViewController, chainId: String, userId: String, castcleId: String) {
         self.viewModel.walletRequest.userId = userId
         self.viewModel.castcleId = castcleId
-        self.displayNameLabel.text = "@\(castcleId)"
-        self.idTextField.text = "@\(castcleId)"
+        self.displayNameLabel.text = castcleId
+        self.idTextField.text = castcleId
         self.shortcutAvatarImage.image = UIImage.Asset.userPlaceholder
         self.confirmButton.activeButton(isActive: true, fontSize: .overline)
         self.dataView.isHidden = false

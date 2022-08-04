@@ -57,8 +57,8 @@ public final class SendReviewViewModel {
     private func mappingUi() {
         self.sendReview.append(SendReview(title: "Review send", value: "\(self.walletRequest.amount) CAST"))
         self.sendReview.append(SendReview(title: "Date", value: Date().dateToString()))
-        self.sendReview.append(SendReview(title: "From", value: "@\(self.page.castcleId)"))
-        self.sendReview.append(SendReview(title: "To Castcle ID", value: "@\(self.walletRequest.castcleId)"))
+        self.sendReview.append(SendReview(title: "From", value: self.page.castcleId))
+        self.sendReview.append(SendReview(title: "To Castcle ID", value: self.walletRequest.castcleId))
         self.sendReview.append(SendReview(title: "Coin", value: "CAST"))
         self.sendReview.append(SendReview(title: "Amount", value: "\(self.walletRequest.amount) CAST"))
         self.sendReview.append(SendReview(title: "Network fee", value: "0 CAST"))

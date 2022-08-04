@@ -61,7 +61,7 @@ class DisplayNameTableViewCell: UITableViewCell {
         let userAvatar = URL(string: page.avatar)
         self.avatarImage.kf.setImage(with: userAvatar, placeholder: UIImage.Asset.userPlaceholder, options: [.transition(.fade(0.35))])
         self.displayNameLabel.text = page.displayName
-        if page.castcleId == UserManager.shared.rawCastcleId {
+        if page.castcleId == UserManager.shared.castcleId {
             self.typeLabel.text = "Profile"
         } else {
             self.typeLabel.text = "Page"
