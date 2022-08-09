@@ -35,13 +35,13 @@ public final class ManageShortcutsViewModel {
     let tokenHelper: TokenHelper = TokenHelper()
     var accounts: [Shortcut] = []
     var shortcuts: [Shortcut] = []
-    var page: Page = Page()
+    var page: PageRealm = PageRealm()
     var walletRequest: WalletRequest = WalletRequest()
     var loadState: LoadState = .loading
     var state: State = .none
     private var deleteShortcut: Shortcut = Shortcut()
 
-    public init(page: Page = Page()) {
+    public init(page: PageRealm = PageRealm()) {
         self.tokenHelper.delegate = self
         self.page = page
     }

@@ -56,7 +56,7 @@ class SendToTableViewCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet weak var maxButton: UIButton!
 
     public var delegate: SendToTableViewCellDelegate?
-    private var page: Page = Page()
+    private var page: PageRealm = PageRealm()
     private var wallet: Wallet = Wallet()
 
     override func awakeFromNib() {
@@ -117,7 +117,7 @@ class SendToTableViewCell: UITableViewCell, UITextFieldDelegate {
         return true
     }
 
-    func configCell(sendTo: String, page: Page, wallet: Wallet) {
+    func configCell(sendTo: String, page: PageRealm, wallet: Wallet) {
         self.sendToTextField.text = (sendTo.isEmpty ? "" : sendTo)
         self.page = page
         self.wallet = wallet

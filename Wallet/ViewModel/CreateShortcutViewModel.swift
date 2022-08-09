@@ -33,14 +33,14 @@ public final class CreateShortcutViewModel {
 
     private var walletRepository: WalletRepository = WalletRepositoryImpl()
     let tokenHelper: TokenHelper = TokenHelper()
-    var page: Page = Page()
+    var page: PageRealm = PageRealm()
     var shortcut: Shortcut = Shortcut()
     var walletsRecent: WalletsRecent = WalletsRecent()
     var walletRequest: WalletRequest = WalletRequest()
     var castcleId: String = ""
     var state: State = .none
 
-    public init(page: Page = Page(), shortcut: Shortcut = Shortcut()) {
+    public init(page: PageRealm = PageRealm(), shortcut: Shortcut = Shortcut()) {
         self.tokenHelper.delegate = self
         self.page = page
         self.shortcut = shortcut

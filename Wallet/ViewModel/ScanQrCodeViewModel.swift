@@ -37,14 +37,14 @@ public enum ScanType {
 
 public final class ScanQrCodeViewModel {
 
-    var page: Page = Page()
+    var page: PageRealm = PageRealm()
     var chainId: String = ""
     var userId: String = ""
     var castcleId: String = ""
     var scanType: ScanType = .all
     var wallet: Wallet = Wallet()
 
-    public init(scanType: ScanType = .all, page: Page = Page(), wallet: Wallet) {
+    public init(scanType: ScanType = .all, page: PageRealm = PageRealm(), wallet: Wallet) {
         self.scanType = scanType
         self.page = page
         self.wallet = wallet

@@ -41,7 +41,7 @@ class TransactionTableViewCell: UITableViewCell {
     @IBOutlet weak var depositIcon: UIImageView!
     @IBOutlet weak var buyIcon: UIImageView!
 
-    private var page: Page = Page()
+    private var page: PageRealm = PageRealm()
     private var wallet: Wallet = Wallet()
 
     override func awakeFromNib() {
@@ -64,7 +64,7 @@ class TransactionTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    func configCell(page: Page, wallet: Wallet) {
+    func configCell(page: PageRealm, wallet: Wallet) {
         self.page = page
         self.wallet = wallet
     }

@@ -42,7 +42,7 @@ class SendShortcutTableViewCell: UITableViewCell {
 
     public var delegate: SendShortcutTableViewCellDelegate?
     private var shortcuts: [Shortcut] = []
-    private var page: Page = Page()
+    private var page: PageRealm = PageRealm()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -60,7 +60,7 @@ class SendShortcutTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    func configCell(shortcuts: [Shortcut], page: Page) {
+    func configCell(shortcuts: [Shortcut], page: PageRealm) {
         self.shortcuts = shortcuts
         self.page = page
         self.collectionView.reloadData()

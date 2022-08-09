@@ -56,7 +56,7 @@ class DisplayNameTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    public func configCell(page: Page, isDisplayOnly: Bool) {
+    public func configCell(page: PageRealm, isDisplayOnly: Bool) {
         self.isDisplayOnly = isDisplayOnly
         let userAvatar = URL(string: page.avatar)
         self.avatarImage.kf.setImage(with: userAvatar, placeholder: UIImage.Asset.userPlaceholder, options: [.transition(.fade(0.35))])

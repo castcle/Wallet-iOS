@@ -43,14 +43,14 @@ public final class RecentViewModel {
     var castcle: [WalletsRecent] = []
     var other: [WalletsRecent] = []
     var searchCastcle: [WalletsRecent] = []
-    var page: Page = Page()
+    var page: PageRealm = PageRealm()
     var isCastcleRecentExpand: Bool = false
     var isOtherRecentExpand: Bool = false
     var isSearch: Bool = false
     var isSearchCastcle: Bool = false
     var walletRequest: WalletRequest = WalletRequest()
 
-    public init(page: Page = Page()) {
+    public init(page: PageRealm = PageRealm()) {
         self.tokenHelper.delegate = self
         self.page = page
     }

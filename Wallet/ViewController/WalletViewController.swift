@@ -203,7 +203,7 @@ extension WalletViewController: WalletHistoryHeaderTableViewCellDelegate {
 }
 
 extension WalletViewController: SelectPageViewControllerDelegate {
-    func didChoosePage(_ view: SelectPageViewController, page: Page) {
+    func didChoosePage(_ view: SelectPageViewController, page: PageRealm) {
         self.viewModel.page = page
         self.tableView.reloadData()
     }

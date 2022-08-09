@@ -33,13 +33,13 @@ public final class SendWalletViewModel {
 
     private var walletRepository: WalletRepository = WalletRepositoryImpl()
     let tokenHelper: TokenHelper = TokenHelper()
-    var page: Page = Page()
+    var page: PageRealm = PageRealm()
     var walletRequest: WalletRequest = WalletRequest()
     var myShortcut: [Shortcut] = []
     var wallet: Wallet = Wallet()
     private var state: State = .none
 
-    public init(page: Page = Page(), chainId: String = "", userId: String = "", castcleId: String = "", wallet: Wallet) {
+    public init(page: PageRealm = PageRealm(), chainId: String = "", userId: String = "", castcleId: String = "", wallet: Wallet) {
         self.tokenHelper.delegate = self
         self.page = page
         self.walletRequest.chainId = (castcleId.isEmpty ? "castcle" : chainId)

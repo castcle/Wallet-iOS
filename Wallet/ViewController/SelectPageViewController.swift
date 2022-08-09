@@ -32,7 +32,7 @@ import Defaults
 import PanModal
 
 protocol SelectPageViewControllerDelegate: AnyObject {
-    func didChoosePage(_ view: SelectPageViewController, page: Page)
+    func didChoosePage(_ view: SelectPageViewController, page: PageRealm)
 }
 
 class SelectPageViewController: UIViewController {

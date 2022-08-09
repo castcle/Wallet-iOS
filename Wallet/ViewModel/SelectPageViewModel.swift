@@ -29,15 +29,15 @@ import Core
 import RealmSwift
 
 public final class SelectPageViewModel {
-    var pages: [Page] = []
-    var selectPage: Page = Page()
+    var pages: [PageRealm] = []
+    var selectPage: PageRealm = PageRealm()
 
-    public init(selectPage: Page = Page()) {
+    public init(selectPage: PageRealm = PageRealm()) {
         self.selectPage = selectPage
-        self.pages.append(Page().initCustom(id: UserManager.shared.id, displayName: UserManager.shared.displayName, castcleId: UserManager.shared.castcleId, avatar: UserManager.shared.avatar, cover: UserManager.shared.cover, overview: UserManager.shared.overview, official: UserManager.shared.official))
+        self.pages.append(PageRealm().initCustom(id: UserManager.shared.id, displayName: UserManager.shared.displayName, castcleId: UserManager.shared.castcleId, avatar: UserManager.shared.avatar, cover: UserManager.shared.cover, overview: UserManager.shared.overview, official: UserManager.shared.official))
         do {
             let realm = try Realm()
-            let pageLocal = realm.objects(Page.self).sorted(byKeyPath: "id")
+            let pageLocal = realm.objects(PageRealm.self).sorted(byKeyPath: "id")
             self.pages.append(contentsOf: pageLocal)
         } catch {}
     }
