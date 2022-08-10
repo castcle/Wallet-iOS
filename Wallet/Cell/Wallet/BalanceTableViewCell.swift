@@ -76,10 +76,10 @@ class BalanceTableViewCell: UITableViewCell {
         self.totalBalance.text = "\(wallet.totalBalance) CAST"
         self.farmBalance.text = "\(wallet.farmBalance) CAST"
         self.availBalance.text = "\(wallet.availableBalance) CAST"
-        if (wallet.farmBalance + wallet.availableBalance) == 0 {
+        if (wallet.farmBalanceNumber + wallet.availableBalanceNumber) == 0 {
             self.barView.progress = 0.5
         } else {
-            self.barView.progress = CGFloat(wallet.farmBalance / (wallet.farmBalance + wallet.availableBalance))
+            self.barView.progress = CGFloat(wallet.farmBalanceNumber / (wallet.farmBalanceNumber + wallet.availableBalanceNumber))
         }
     }
 }

@@ -102,7 +102,7 @@ class SendWalletViewController: UIViewController {
     @IBAction func sendAction(_ sender: Any) {
         if self.isAvtive {
             let amount: Double = Double(self.viewModel.walletRequest.amount) ?? 0
-            if (amount <= 0) || (amount > self.viewModel.wallet.availableBalance) || (self.viewModel.wallet.availableBalance <= 0) {
+            if (amount <= 0) || (amount > self.viewModel.wallet.availableBalanceNumber) || (self.viewModel.wallet.availableBalanceNumber <= 0) {
                 ApiHelper.displayMessage(title: "Warning", message: "** You have insufficient balance", buttonTitle: "Close")
             } else {
                 self.hud.textLabel.text = "Reviewing"

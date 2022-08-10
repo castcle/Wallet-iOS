@@ -48,6 +48,7 @@ class ResendViewController: UIViewController, UITextFieldDelegate {
     private let hud = JGProgressHUD()
     var viewModel = RecentViewModel()
     public var delegate: ResendViewControllerDelegate?
+    var timer: Timer?
     enum ResendViewControllerSection: Int, CaseIterable {
         case castcle = 0
         case other
@@ -99,22 +100,35 @@ class ResendViewController: UIViewController, UITextFieldDelegate {
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 100
     }
-
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        let searchText = textField.text ?? ""
-        if !searchText.isEmpty {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        self.timer?.invalidate()
+        let currentText = textField.text ?? ""
+        if (currentText as NSString).replacingCharacters(in: range, with: string).count >= 1 {
             self.viewModel.isSearch = true
-            self.viewModel.isSearchCastcle = searchText.hasPrefix("@")
-            self.viewModel.walletRequest.keyword = searchText
-            self.hud.textLabel.text = "Searching"
-            self.hud.show(in: self.view)
-            self.viewModel.walletSearch()
+            self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.performSearch), userInfo: nil, repeats: false)
         } else {
             self.viewModel.isSearch = false
             self.viewModel.walletRequest.keyword = ""
             self.tableView.reloadData()
         }
+        return true
+    }
+
+    @objc func performSearch() {
+        let searchText = self.searchTextField.text ?? ""
+        if self.viewModel.isSearch && !searchText.isEmpty {
+            self.viewModel.isSearchCastcle = searchText.hasPrefix("@")
+            self.viewModel.walletRequest.keyword = searchText
+            self.viewModel.walletSearch()
+        } else {
+            self.viewModel.walletRequest.keyword = ""
+            self.tableView.reloadData()
+        }
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
         return true
     }
 

@@ -72,6 +72,13 @@ class WalletHistoryTableViewCell: UITableViewCell {
             self.amountLabel.text = "\(walletHistory.value) CAST"
             self.statusLabel.text = walletHistory.status.display
             self.transactionIcon.image = UIImage.init(icon: .castcle(.arowUp), size: CGSize(width: 50, height: 50), textColor: UIColor.Asset.trendDown)
+        } else if walletHistory.type == .airdrop {
+            self.amountLabel.textColor = (walletHistory.status == .failed ? UIColor.Asset.trendDown :  UIColor.Asset.lightBlue)
+            self.typeLabel.text = walletHistory.type.display
+            self.dateLabel.text = "\(walletHistory.transactionDate.dateToString()) \(walletHistory.transactionDate.timeToString())"
+            self.amountLabel.text = "\(walletHistory.value) CAST"
+            self.statusLabel.text = walletHistory.status.display
+            self.transactionIcon.image = UIImage.init(icon: .castcle(.airdropBalloon), size: CGSize(width: 50, height: 50), textColor: UIColor.Asset.white)
         } else {
             self.transactionIcon.image = UIImage()
             self.typeLabel.text = ""
