@@ -100,7 +100,7 @@ class ResendViewController: UIViewController, UITextFieldDelegate {
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 100
     }
-    
+
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         self.timer?.invalidate()
         let currentText = textField.text ?? ""
