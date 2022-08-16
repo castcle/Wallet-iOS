@@ -28,6 +28,7 @@
 import UIKit
 import Core
 import Networking
+import Component
 import Defaults
 import FirebaseRemoteConfig
 import PanModal
@@ -53,15 +54,20 @@ class WalletViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.Asset.darkGraphiteBlue
         self.configureTableView()
-        self.viewModel.didGetWalletBalanceFinish = {
-            self.hud.dismiss()
-            self.tableView.reloadData()
+        self.tableView.coreRefresh.addHeadRefresh(animator: FastAnimator()) { [weak self] in
+            guard let self = self else { return }
+            self.hud.textLabel.text = "Loading"
+            self.hud.show(in: self.view)
+            self.viewModel.walletLookup()
         }
-        self.viewModel.didGetWalletHistoryFinish = {
+        self.viewModel.didGetWalletLockupFinish = {
+            self.hud.dismiss()
+            self.tableView.coreRefresh.endHeaderRefresh()
             self.tableView.reloadData()
         }
         self.viewModel.didError = {
             self.hud.dismiss()
+            self.tableView.reloadData()
         }
     }
 
@@ -72,7 +78,6 @@ class WalletViewController: UIViewController {
         self.hud.textLabel.text = "Loading"
         self.hud.show(in: self.view)
         self.viewModel.walletLookup()
-        self.viewModel.getWalletHistory()
     }
 
     public override func viewDidAppear(_ animated: Bool) {

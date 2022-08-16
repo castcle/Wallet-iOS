@@ -51,21 +51,21 @@ public final class WalletViewModel {
                     let rawJson = try response.mapJSON()
                     let json = JSON(rawJson)
                     self.wallet = Wallet(json: json)
-                    self.didGetWalletBalanceFinish?()
+                    self.getWalletHistory()
                 } catch {
-                    self.didError?()
+                    self.getWalletHistory()
                 }
             } else {
                 if isRefreshToken {
                     self.tokenHelper.refreshToken()
                 } else {
-                    self.didError?()
+                    self.getWalletHistory()
                 }
             }
         }
     }
 
-    func getWalletHistory() {
+    private func getWalletHistory() {
         self.state = .getWalletHistory
         self.walletRepository.getWalletHistory(userId: self.page.id, walletRequest: self.walletRequest) { (success, response, isRefreshToken) in
             if success {
@@ -73,7 +73,7 @@ public final class WalletViewModel {
                     let rawJson = try response.mapJSON()
                     let json = JSON(rawJson)
                     self.history = (json[JsonKey.payload.rawValue].arrayValue).map { WalletHistory(json: $0) }
-                    self.didGetWalletHistoryFinish?()
+                    self.didGetWalletLockupFinish?()
                 } catch {
                     self.didError?()
                 }
@@ -87,8 +87,7 @@ public final class WalletViewModel {
         }
     }
 
-    var didGetWalletBalanceFinish: (() -> Void)?
-    var didGetWalletHistoryFinish: (() -> Void)?
+    var didGetWalletLockupFinish: (() -> Void)?
     var didError: (() -> Void)?
 }
 
