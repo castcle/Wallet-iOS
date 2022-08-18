@@ -52,8 +52,8 @@ class SendVerifyTableViewCell: UITableViewCell, UITextFieldDelegate {
     public var delegate: SendVerifyTableViewCellDelegate?
     private var isCanResendOtpEmail: Bool = false
     private var isCanResendOtpMobile: Bool = false
-    var secondsEmailRemaining = 300
-    var secondsMobileRemaining = 300
+    var secondsEmailRemaining = 600
+    var secondsMobileRemaining = 600
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -113,7 +113,7 @@ class SendVerifyTableViewCell: UITableViewCell, UITextFieldDelegate {
 
     private func setupCountdownMobile() {
         self.smsCountdownLabel.isHidden = false
-        self.secondsMobileRemaining = 300
+        self.secondsMobileRemaining = 600
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (timer) in
             if self.secondsMobileRemaining > 0 {
                 self.smsCountdownLabel.text = "\(self.secondsMobileRemaining.secondsToTime()) mins"
@@ -130,7 +130,7 @@ class SendVerifyTableViewCell: UITableViewCell, UITextFieldDelegate {
 
     private func setupCountdownEmail() {
         self.emailCountdownLabel.isHidden = false
-        self.secondsEmailRemaining = 300
+        self.secondsEmailRemaining = 600
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (timer) in
             if self.secondsEmailRemaining > 0 {
                 self.emailCountdownLabel.text = "\(self.secondsEmailRemaining.secondsToTime()) mins"
