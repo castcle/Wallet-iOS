@@ -27,15 +27,14 @@
 
 import UIKit
 import Core
+import Component
 import Defaults
-import JGProgressHUD
 
 class SendAuthViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
 
     var viewModel = SendReviewViewModel()
-    private let hud = JGProgressHUD()
     var isAvtive: Bool {
         if (self.viewModel.walletRequest.emailOtp.count == 6) && (self.viewModel.walletRequest.mobileOtp.count == 6) {
             return true
@@ -53,17 +52,16 @@ class SendAuthViewController: UIViewController {
         self.view.backgroundColor = UIColor.Asset.darkGraphiteBlue
         self.hideKeyboardWhenTapped()
         self.configureTableView()
-        self.hud.textLabel.text = "Sending"
         self.viewModel.didSendTokenFinish = {
-            self.hud.dismiss()
+            CCLoading.shared.dismiss()
             let viewControllers: [UIViewController] = Utility.currentViewController().navigationController!.viewControllers as [UIViewController]
             Utility.currentViewController().navigationController!.popToViewController(viewControllers[viewControllers.count - 4], animated: true)
         }
         self.viewModel.didRequestOtpFinish = {
-            self.hud.dismiss()
+            CCLoading.shared.dismiss()
         }
         self.viewModel.didError = {
-            self.hud.dismiss()
+            CCLoading.shared.dismiss()
         }
     }
 
@@ -124,12 +122,12 @@ extension SendAuthViewController: SendVerifyTableViewCellDelegate {
     }
 
     func didResendOtpEmail(_ sendVerifyTableViewCell: SendVerifyTableViewCell) {
-        self.hud.show(in: self.view)
+        CCLoading.shared.show(text: "Sending")
         self.viewModel.requestOtpWithEmail()
     }
 
     func didResendOtpMobile(_ sendVerifyTableViewCell: SendVerifyTableViewCell) {
-        self.hud.show(in: self.view)
+        CCLoading.shared.show(text: "Sending")
         self.viewModel.requestOtpWithMobile()
     }
 }
@@ -137,7 +135,7 @@ extension SendAuthViewController: SendVerifyTableViewCellDelegate {
 extension SendAuthViewController: SendConfiemTableViewCellDelegate {
     func didConfirm(_ sendConfiemTableViewCell: SendConfiemTableViewCell) {
         if self.isAvtive {
-            self.hud.show(in: self.view)
+            CCLoading.shared.show(text: "Sending")
             self.viewModel.confirmSendToken()
         }
     }

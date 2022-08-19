@@ -27,15 +27,14 @@
 
 import UIKit
 import Core
+import Component
 import Defaults
-import JGProgressHUD
 
 class SendReviewViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
 
     var viewModel = SendReviewViewModel()
-    private let hud = JGProgressHUD()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,12 +42,12 @@ class SendReviewViewController: UIViewController {
         self.configureTableView()
         self.viewModel.didRequestOtpFinish = {
             if self.viewModel.isSendEmailOtp && self.viewModel.isSendMobileOtp {
-                self.hud.dismiss()
+                CCLoading.shared.dismiss()
                 Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.sendAuth(self.viewModel)), animated: true)
             }
         }
         self.viewModel.didError = {
-            self.hud.dismiss()
+            CCLoading.shared.dismiss()
         }
     }
 
@@ -110,8 +109,7 @@ extension SendReviewViewController: SendConfiemTableViewCellDelegate {
         self.viewModel.authenRequest.email = UserManager.shared.email
         self.viewModel.authenRequest.countryCode = UserManager.shared.countryCode
         self.viewModel.authenRequest.mobileNumber = UserManager.shared.mobile
-        self.hud.textLabel.text = "Sending"
-        self.hud.show(in: self.view)
+        CCLoading.shared.show(text: "Sending")
         self.viewModel.requestOtpWithEmail()
         self.viewModel.requestOtpWithMobile()
     }

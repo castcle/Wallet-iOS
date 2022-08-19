@@ -27,9 +27,9 @@
 
 import UIKit
 import Core
+import Component
 import Networking
 import Defaults
-import JGProgressHUD
 
 protocol ResendViewControllerDelegate: AnyObject {
     func didSelect(_ resendViewController: ResendViewController, walletsRecent: WalletsRecent)
@@ -45,7 +45,6 @@ class ResendViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var searchImage: UIImageView!
 
-    private let hud = JGProgressHUD()
     var viewModel = RecentViewModel()
     public var delegate: ResendViewControllerDelegate?
     var timer: Timer?
@@ -66,15 +65,14 @@ class ResendViewController: UIViewController, UITextFieldDelegate {
         self.searchTextField.textColor = UIColor.Asset.white
         self.searchTextField.delegate = self
         self.searchImage.image = UIImage.init(icon: .castcle(.search), size: CGSize(width: 20, height: 20), textColor: UIColor.Asset.white)
-        self.hud.textLabel.text = "Loading"
-        self.hud.show(in: self.view)
+        CCLoading.shared.show(text: "Loading")
         self.viewModel.getWalletRecent()
         self.viewModel.didGetWalletRecentFinish = {
-            self.hud.dismiss()
+            CCLoading.shared.dismiss()
             self.tableView.reloadData()
         }
         self.viewModel.didGetWalletSearchFinish = {
-            self.hud.dismiss()
+            CCLoading.shared.dismiss()
             self.tableView.reloadData()
         }
     }

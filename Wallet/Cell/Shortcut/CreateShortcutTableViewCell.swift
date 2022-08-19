@@ -27,9 +27,9 @@
 
 import UIKit
 import Core
+import Component
 import Networking
 import Kingfisher
-import JGProgressHUD
 
 class CreateShortcutTableViewCell: UITableViewCell {
 
@@ -45,7 +45,6 @@ class CreateShortcutTableViewCell: UITableViewCell {
     @IBOutlet weak var dataView: UIView!
 
     private var viewModel = CreateShortcutViewModel()
-    private let hud = JGProgressHUD()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -79,11 +78,11 @@ class CreateShortcutTableViewCell: UITableViewCell {
             self.updateUI()
         }
         self.viewModel.didCreateShortcutFinish = {
-            self.hud.dismiss()
+            CCLoading.shared.dismiss()
             Utility.currentViewController().navigationController?.popViewController(animated: true)
         }
         self.viewModel.didUpdateShortcutFinish = {
-            self.hud.dismiss()
+            CCLoading.shared.dismiss()
             Utility.currentViewController().navigationController?.popViewController(animated: true)
         }
     }
@@ -109,12 +108,10 @@ class CreateShortcutTableViewCell: UITableViewCell {
 
     @IBAction func confirmAction(_ sender: Any) {
         if !self.viewModel.shortcut.id.isEmpty && !self.viewModel.walletRequest.userId.isEmpty {
-            self.hud.textLabel.text = "Updating"
-            self.hud.show(in: Utility.currentViewController().view)
+            CCLoading.shared.show(text: "Updating")
             self.viewModel.updateShortcut()
         } else if self.viewModel.shortcut.id.isEmpty && !self.viewModel.walletRequest.userId.isEmpty {
-            self.hud.textLabel.text = "Creating"
-            self.hud.show(in: Utility.currentViewController().view)
+            CCLoading.shared.show(text: "Creating")
             self.viewModel.createShortcutCastcle()
         }
     }

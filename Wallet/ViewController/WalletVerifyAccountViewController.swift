@@ -27,8 +27,8 @@
 
 import UIKit
 import Core
+import Component
 import Defaults
-import JGProgressHUD
 
 class WalletVerifyAccountViewController: UIViewController {
 
@@ -40,20 +40,18 @@ class WalletVerifyAccountViewController: UIViewController {
     }
 
     var viewModel = WalletVerifyAccountViewModel()
-    let hud = JGProgressHUD()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.Asset.darkGraphiteBlue
         self.configureTableView()
-        self.hud.textLabel.text = "Loading"
         self.viewModel.didGetMeFinish = {
-            self.hud.dismiss()
+            CCLoading.shared.dismiss()
             self.tableView.reloadData()
         }
 
         self.viewModel.didError = {
-            self.hud.dismiss()
+            CCLoading.shared.dismiss()
         }
     }
 
@@ -61,7 +59,7 @@ class WalletVerifyAccountViewController: UIViewController {
         super.viewWillAppear(animated)
         self.setupNavBar()
         Defaults[.screenId] = ""
-        self.hud.show(in: Utility.currentViewController().view)
+        CCLoading.shared.show(text: "Loading")
         self.viewModel.getMe()
     }
 

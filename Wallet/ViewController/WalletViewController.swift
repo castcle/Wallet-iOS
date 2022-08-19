@@ -32,14 +32,12 @@ import Component
 import Defaults
 import FirebaseRemoteConfig
 import PanModal
-import JGProgressHUD
 
 class WalletViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
 
     var viewModel = WalletViewModel()
-    private let hud = JGProgressHUD()
 
     enum WalletViewControllerSection: Int, CaseIterable {
         case displayName = 0
@@ -56,17 +54,16 @@ class WalletViewController: UIViewController {
         self.configureTableView()
         self.tableView.coreRefresh.addHeadRefresh(animator: FastAnimator()) { [weak self] in
             guard let self = self else { return }
-            self.hud.textLabel.text = "Loading"
-            self.hud.show(in: self.view)
+            CCLoading.shared.show(text: "Loading")
             self.viewModel.walletLookup()
         }
         self.viewModel.didGetWalletLockupFinish = {
-            self.hud.dismiss()
+            CCLoading.shared.dismiss()
             self.tableView.coreRefresh.endHeaderRefresh()
             self.tableView.reloadData()
         }
         self.viewModel.didError = {
-            self.hud.dismiss()
+            CCLoading.shared.dismiss()
             self.tableView.reloadData()
         }
     }
@@ -75,8 +72,7 @@ class WalletViewController: UIViewController {
         super.viewWillAppear(animated)
         self.setupNavBar()
         Defaults[.screenId] = ScreenId.wallet.rawValue
-        self.hud.textLabel.text = "Loading"
-        self.hud.show(in: self.view)
+        CCLoading.shared.show(text: "Loading")
         self.viewModel.walletLookup()
     }
 

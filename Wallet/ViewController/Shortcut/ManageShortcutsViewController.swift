@@ -27,14 +27,13 @@
 
 import UIKit
 import Core
+import Component
 import Defaults
-import JGProgressHUD
 
 class ManageShortcutsViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
 
-    private let hud = JGProgressHUD()
     var viewModel = ManageShortcutsViewModel()
     enum ManageShortcutsViewControllerSection: Int, CaseIterable {
         case myAccountHeader = 0
@@ -48,15 +47,15 @@ class ManageShortcutsViewController: UIViewController {
         self.view.backgroundColor = UIColor.Asset.darkGraphiteBlue
         self.configureTableView()
         self.viewModel.didGetWalletShortcutsFinish = {
-            self.hud.dismiss()
+            CCLoading.shared.dismiss()
             self.tableView.reloadData()
         }
         self.viewModel.didSortShortcutsFinish = {
-            self.hud.dismiss()
+            CCLoading.shared.dismiss()
             self.tableView.reloadData()
         }
         self.viewModel.didDeleteShortcutsFinish = {
-            self.hud.dismiss()
+            CCLoading.shared.dismiss()
             self.tableView.reloadData()
         }
     }
@@ -65,8 +64,7 @@ class ManageShortcutsViewController: UIViewController {
         super.viewWillAppear(animated)
         self.setupNavBar()
         Defaults[.screenId] = ""
-        self.hud.textLabel.text = "Loading"
-        self.hud.show(in: self.view)
+        CCLoading.shared.show(text: "Loading")
         self.viewModel.getWalletShortcuts()
     }
 
@@ -91,8 +89,7 @@ class ManageShortcutsViewController: UIViewController {
         if self.tableView.isEditing {
             self.tableView.isEditing = false
             self.setupRightBarButton(isEditing: false)
-            self.hud.textLabel.text = "Saving"
-            self.hud.show(in: self.view)
+            CCLoading.shared.show(text: "Saving")
             self.viewModel.sortShortcuts()
         } else {
             self.tableView.isEditing = true
@@ -215,8 +212,7 @@ extension ManageShortcutsViewController: EditShortcutListTableViewCellDelegate {
     }
 
     func didDeleteShortcut(_ editShortcutListTableViewCell: EditShortcutListTableViewCell, indexPath: IndexPath) {
-        self.hud.textLabel.text = "Deleting"
-        self.hud.show(in: self.view)
+        CCLoading.shared.show(text: "Deleting")
         let shortcut = self.viewModel.shortcuts[indexPath.row]
         self.viewModel.deleteShortcut(deleteShortcut: shortcut)
         self.viewModel.shortcuts.remove(at: indexPath.row)

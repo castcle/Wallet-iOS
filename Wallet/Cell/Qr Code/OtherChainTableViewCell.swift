@@ -107,7 +107,7 @@ class OtherChainTableViewCell: UITableViewCell {
             UIImageWriteToSavedPhotosAlbum(otherChainQRCode.asImage(), self, nil, nil)
             UINotificationFeedbackGenerator().notificationOccurred(.success)
             self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-            self.hud.show(in: Utility.currentViewController().view)
+            self.hud.show(in: (Utility.currentViewController().navigationController?.view)!)
             self.hud.dismiss(afterDelay: 1.5)
         }
     }
