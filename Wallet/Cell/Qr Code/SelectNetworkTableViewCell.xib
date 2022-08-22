@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -23,19 +24,35 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5tY-lH-X3a">
+                        <rect key="frame" x="0.0" y="59" width="320" height="1"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="ofz-Vf-QQA"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="5tY-lH-X3a" secondAttribute="trailing" id="1Ah-Rr-MUs"/>
+                    <constraint firstItem="5tY-lH-X3a" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="GNM-us-lj8"/>
                     <constraint firstAttribute="bottom" secondItem="WR0-A1-aRw" secondAttribute="bottom" constant="20" id="GlA-Qz-Ad4"/>
                     <constraint firstAttribute="trailing" secondItem="WR0-A1-aRw" secondAttribute="trailing" constant="30" id="T7L-o9-omE"/>
                     <constraint firstItem="WR0-A1-aRw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="VKg-OM-SoC"/>
                     <constraint firstItem="WR0-A1-aRw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="ag3-5y-CQr"/>
+                    <constraint firstAttribute="bottom" secondItem="5tY-lH-X3a" secondAttribute="bottom" id="oHl-Vi-fZb"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="lineView" destination="5tY-lH-X3a" id="56b-xK-bOF"/>
                 <outlet property="networkLabel" destination="WR0-A1-aRw" id="PpY-IK-t4T"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="97.767857142857139"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

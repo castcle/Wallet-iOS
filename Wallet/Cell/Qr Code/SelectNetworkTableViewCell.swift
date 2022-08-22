@@ -31,11 +31,13 @@ import Core
 class SelectNetworkTableViewCell: UITableViewCell {
 
     @IBOutlet weak var networkLabel: UILabel!
+    @IBOutlet weak var lineView: UIView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         self.networkLabel.font = UIFont.asset(.regular, fontSize: .body)
         self.networkLabel.textColor = UIColor.Asset.white
+        self.lineView.backgroundColor = UIColor.Asset.lineGray
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
