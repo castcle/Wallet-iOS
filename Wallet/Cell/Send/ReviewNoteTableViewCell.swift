@@ -19,27 +19,27 @@
 //  Thailand 10160, or visit www.castcle.com if you need additional information
 //  or have any questions.
 //
-//  ReviewDataTableViewCell.swift
+//  ReviewNoteTableViewCell.swift
 //  Wallet
 //
-//  Created by Castcle Co., Ltd. on 30/6/2565 BE.
+//  Created by Castcle Co., Ltd. on 23/8/2565 BE.
 //
 
 import UIKit
 import Core
 
-class ReviewDataTableViewCell: UITableViewCell {
+class ReviewNoteTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var valueLabel: UILabel!
+    @IBOutlet weak var noteTitleLabel: UILabel!
+    @IBOutlet weak var noteLabel: UILabel!
     @IBOutlet weak var lineView: UIView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.titleLabel.font = UIFont.asset(.medium, fontSize: .body)
-        self.titleLabel.textColor = UIColor.Asset.white
-        self.valueLabel.font = UIFont.asset(.regular, fontSize: .body)
-        self.valueLabel.textColor = UIColor.Asset.white
+        self.noteTitleLabel.font = UIFont.asset(.medium, fontSize: .body)
+        self.noteTitleLabel.textColor = UIColor.Asset.white
+        self.noteLabel.font = UIFont.asset(.contentRegular, fontSize: .overline)
+        self.noteLabel.textColor = UIColor.Asset.white
         self.lineView.backgroundColor = UIColor.Asset.cellBackground
     }
 
@@ -47,8 +47,7 @@ class ReviewDataTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    func configCell(title: String, value: String) {
-        self.titleLabel.text = title
-        self.valueLabel.text = value
+    func configCell(note: String) {
+        self.noteLabel.text = note
     }
 }

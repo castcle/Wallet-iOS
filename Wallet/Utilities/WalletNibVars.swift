@@ -71,6 +71,7 @@ public struct WalletNibVars {
         public static let sendTo = "SendToTableViewCell"
         public static let reviewSend = "ReviewSendTableViewCell"
         public static let reviewData = "ReviewDataTableViewCell"
+        public static let reviewNote = "ReviewNoteTableViewCell"
         public static let sendConfiem = "SendConfiemTableViewCell"
         public static let sendVerify = "SendVerifyTableViewCell"
         public static let verifyAccount = "VerifyAccountTableViewCell"

@@ -31,7 +31,8 @@ import Networking
 
 protocol SendToTableViewCellDelegate: AnyObject {
     func didSelectWalletsRecent(_ sendToTableViewCell: SendToTableViewCell, walletsRecent: WalletsRecent)
-    func didValueChange(_ sendToTableViewCell: SendToTableViewCell, memo: String, amount: String, note: String)
+    func didValueChange(_ sendToTableViewCell: SendToTableViewCell, memo: String, note: String)
+    func didAmountChange(_ sendToTableViewCell: SendToTableViewCell, amount: String)
     func didScanWalletSuccess(_ sendToTableViewCell: SendToTableViewCell, chainId: String, userId: String, castcleId: String)
     func didScanTextSuccess(_ sendToTableViewCell: SendToTableViewCell, text: String)
 }
@@ -104,6 +105,19 @@ class SendToTableViewCell: UITableViewCell, UITextFieldDelegate {
         super.setSelected(selected, animated: animated)
     }
 
+    private func amountCheck(text: String) -> String {
+        let isDotChar: Bool = text.hasSuffix(".")
+        let amountArr = text.split(separator: ".")
+        var amountString: String = ""
+        if amountArr.count > 0 {
+            amountString = "\(amountArr[0])\(isDotChar ? "." : "")"
+        }
+        if amountArr.count > 1 {
+            amountString = "\(amountString).\(String(amountArr[1]).substringWithRange(range: 8))"
+        }
+        return amountString
+    }
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField.tag == 0 {
             self.memoTextField.becomeFirstResponder()
@@ -125,8 +139,12 @@ class SendToTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
 
     @objc func textFieldDidChange(_ textField: UITextField) {
-        if textField.tag != 0 {
-            self.delegate?.didValueChange(self, memo: self.memoTextField.text ?? "", amount: self.amountTextField.text ?? "", note: self.noteTextField.text ?? "")
+        if textField.tag == 2 {
+            let amount: String = self.amountCheck(text: textField.text ?? "")
+            textField.text = amount
+            self.delegate?.didAmountChange(self, amount: amount)
+        } else if textField.tag != 0 {
+            self.delegate?.didValueChange(self, memo: self.memoTextField.text ?? "", note: self.noteTextField.text ?? "")
         }
     }
 
@@ -150,7 +168,7 @@ class SendToTableViewCell: UITableViewCell, UITextFieldDelegate {
 
     @IBAction func maxAction(_ sender: Any) {
         self.amountTextField.text = "\(self.wallet.availableBalance)"
-        self.delegate?.didValueChange(self, memo: self.memoTextField.text ?? "", amount: self.amountTextField.text ?? "", note: self.noteTextField.text ?? "")
+        self.delegate?.didAmountChange(self, amount: self.amountTextField.text ?? "")
     }
 }
 

@@ -157,10 +157,14 @@ extension SendWalletViewController: SendToTableViewCellDelegate {
         self.sendButton.activeButton(isActive: self.isAvtive, fontSize: .overline)
     }
 
-    func didValueChange(_ sendToTableViewCell: SendToTableViewCell, memo: String, amount: String, note: String) {
+    func didValueChange(_ sendToTableViewCell: SendToTableViewCell, memo: String, note: String) {
         self.viewModel.walletRequest.memo = memo
-        self.viewModel.walletRequest.amount = amount
         self.viewModel.walletRequest.note = note
+        self.sendButton.activeButton(isActive: self.isAvtive, fontSize: .overline)
+    }
+
+    func didAmountChange(_ sendToTableViewCell: SendToTableViewCell, amount: String) {
+        self.viewModel.walletRequest.amount = amount
         self.castLabel.text = "\(self.viewModel.walletRequest.amount) CAST"
         self.sendButton.activeButton(isActive: self.isAvtive, fontSize: .overline)
     }

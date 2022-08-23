@@ -36,6 +36,12 @@ class SendReviewViewController: UIViewController {
 
     var viewModel = SendReviewViewModel()
 
+    enum SendReviewViewControllerSection: Int, CaseIterable {
+        case data = 0
+        case note
+        case confirm
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.Asset.darkGraphiteBlue
@@ -66,6 +72,7 @@ class SendReviewViewController: UIViewController {
         self.tableView.dataSource = self
         self.tableView.register(UINib(nibName: WalletNibVars.TableViewCell.reviewSend, bundle: ConfigBundle.wallet), forCellReuseIdentifier: WalletNibVars.TableViewCell.reviewSend)
         self.tableView.register(UINib(nibName: WalletNibVars.TableViewCell.reviewData, bundle: ConfigBundle.wallet), forCellReuseIdentifier: WalletNibVars.TableViewCell.reviewData)
+        self.tableView.register(UINib(nibName: WalletNibVars.TableViewCell.reviewNote, bundle: ConfigBundle.wallet), forCellReuseIdentifier: WalletNibVars.TableViewCell.reviewNote)
         self.tableView.register(UINib(nibName: WalletNibVars.TableViewCell.sendConfiem, bundle: ConfigBundle.wallet), forCellReuseIdentifier: WalletNibVars.TableViewCell.sendConfiem)
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 100
@@ -74,31 +81,48 @@ class SendReviewViewController: UIViewController {
 
 extension SendReviewViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return SendReviewViewControllerSection.allCases.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewModel.sendReview.count + 1
+        switch section {
+        case SendReviewViewControllerSection.data.rawValue:
+            return self.viewModel.sendReview.count
+        case SendReviewViewControllerSection.note.rawValue:
+            return (self.viewModel.walletRequest.note.isEmpty ? 0 : 1)
+        default:
+            return 1
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.reviewSend, for: indexPath as IndexPath) as? ReviewSendTableViewCell
+        switch indexPath.section {
+        case SendReviewViewControllerSection.data.rawValue:
+            if indexPath.row == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.reviewSend, for: indexPath as IndexPath) as? ReviewSendTableViewCell
+                cell?.backgroundColor = UIColor.clear
+                cell?.configCell(totalAmount: self.viewModel.walletRequest.amount)
+                return cell ?? ReviewSendTableViewCell()
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.reviewData, for: indexPath as IndexPath) as? ReviewDataTableViewCell
+                cell?.backgroundColor = UIColor.clear
+                let data = self.viewModel.sendReview[indexPath.row]
+                cell?.configCell(title: data.title, value: data.value)
+                return cell ?? ReviewDataTableViewCell()
+            }
+        case SendReviewViewControllerSection.note.rawValue:
+            let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.reviewNote, for: indexPath as IndexPath) as? ReviewNoteTableViewCell
             cell?.backgroundColor = UIColor.clear
-            cell?.configCell(totalAmount: self.viewModel.walletRequest.amount)
-            return cell ?? ReviewSendTableViewCell()
-        } else if indexPath.row == self.viewModel.sendReview.count {
+            cell?.configCell(note: self.viewModel.walletRequest.note)
+            return cell ?? ReviewNoteTableViewCell()
+        case SendReviewViewControllerSection.confirm.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.sendConfiem, for: indexPath as IndexPath) as? SendConfiemTableViewCell
             cell?.backgroundColor = UIColor.clear
             cell?.configCell(isActive: true)
             cell?.delegate = self
             return cell ?? SendConfiemTableViewCell()
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.reviewData, for: indexPath as IndexPath) as? ReviewDataTableViewCell
-            cell?.backgroundColor = UIColor.clear
-            let data = self.viewModel.sendReview[indexPath.row]
-            cell?.configCell(title: data.title, value: data.value)
-            return cell ?? ReviewDataTableViewCell()
+        default:
+            return UITableViewCell()
         }
     }
 }

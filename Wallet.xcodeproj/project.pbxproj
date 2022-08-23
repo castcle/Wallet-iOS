@@ -95,6 +95,8 @@
 		B7A5B53F286E28CE00FB92D1 /* VerifyAccountTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7A5B53D286E28CE00FB92D1 /* VerifyAccountTableViewCell.xib */; };
 		B7A5B542286E2DEE00FB92D1 /* NoticeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A5B540286E2DEB00FB92D1 /* NoticeTableViewCell.swift */; };
 		B7A5B543286E2DEE00FB92D1 /* NoticeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7A5B541286E2DEC00FB92D1 /* NoticeTableViewCell.xib */; };
+		B7B2CDC928B51AFE00C2D855 /* ReviewNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B2CDC728B51AFD00C2D855 /* ReviewNoteTableViewCell.swift */; };
+		B7B2CDCA28B51AFE00C2D855 /* ReviewNoteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7B2CDC828B51AFE00C2D855 /* ReviewNoteTableViewCell.xib */; };
 		B7DF047B287C639A005D2026 /* ScanQrCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DF047A287C639A005D2026 /* ScanQrCodeViewModel.swift */; };
 		B7F0D318282B5C9900BA9764 /* Wallet.h in Headers */ = {isa = PBXBuildFile; fileRef = B7F0D317282B5C9900BA9764 /* Wallet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B7F0D327282B5FAF00BA9764 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F0D326282B5FAE00BA9764 /* Core.framework */; };
@@ -199,6 +201,8 @@
 		B7A5B53D286E28CE00FB92D1 /* VerifyAccountTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VerifyAccountTableViewCell.xib; sourceTree = "<group>"; };
 		B7A5B540286E2DEB00FB92D1 /* NoticeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeTableViewCell.swift; sourceTree = "<group>"; };
 		B7A5B541286E2DEC00FB92D1 /* NoticeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoticeTableViewCell.xib; sourceTree = "<group>"; };
+		B7B2CDC728B51AFD00C2D855 /* ReviewNoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewNoteTableViewCell.swift; sourceTree = "<group>"; };
+		B7B2CDC828B51AFE00C2D855 /* ReviewNoteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewNoteTableViewCell.xib; sourceTree = "<group>"; };
 		B7DF047A287C639A005D2026 /* ScanQrCodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQrCodeViewModel.swift; sourceTree = "<group>"; };
 		B7F0D314282B5C9900BA9764 /* Wallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Wallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7F0D317282B5C9900BA9764 /* Wallet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Wallet.h; sourceTree = "<group>"; };
@@ -425,6 +429,8 @@
 				B73D981A286E0B0B00D6ECA8 /* SendConfiemTableViewCell.xib */,
 				B73D981D286E0F3900D6ECA8 /* SendVerifyTableViewCell.swift */,
 				B73D981E286E0F3900D6ECA8 /* SendVerifyTableViewCell.xib */,
+				B7B2CDC728B51AFD00C2D855 /* ReviewNoteTableViewCell.swift */,
+				B7B2CDC828B51AFE00C2D855 /* ReviewNoteTableViewCell.xib */,
 			);
 			path = Send;
 			sourceTree = "<group>";
@@ -587,6 +593,7 @@
 				B7117028283B836500FF985A /* MyQRCode.xib in Resources */,
 				B72FDEB42833978A00748D13 /* Wallet.storyboard in Resources */,
 				B73D9820286E0F3900D6ECA8 /* SendVerifyTableViewCell.xib in Resources */,
+				B7B2CDCA28B51AFE00C2D855 /* ReviewNoteTableViewCell.xib in Resources */,
 				B767A76C2845D8E200E4381F /* OtherChainQRCode.xib in Resources */,
 				B72FDEDA2833B6E000748D13 /* BannerTableViewCell.xib in Resources */,
 			);
@@ -655,6 +662,7 @@
 				B72FDEF42833C4F800748D13 /* SelectPageViewModel.swift in Sources */,
 				B73D9810286E003C00D6ECA8 /* SendAuthViewController.swift in Sources */,
 				B767A76E2845D90A00E4381F /* OtherChainQRCode.swift in Sources */,
+				B7B2CDC928B51AFE00C2D855 /* ReviewNoteTableViewCell.swift in Sources */,
 				B767A7692845CE3F00E4381F /* MemoTableViewCell.swift in Sources */,
 				B7031558286D9A2A0070493B /* SendToTableViewCell.swift in Sources */,
 				B792AA30286C3DC500014352 /* SendWalletViewController.swift in Sources */,
