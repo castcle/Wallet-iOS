@@ -28,6 +28,7 @@
 import UIKit
 import Core
 import Networking
+import UITextView_Placeholder
 
 protocol SendToTableViewCellDelegate: AnyObject {
     func didSelectWalletsRecent(_ sendToTableViewCell: SendToTableViewCell, walletsRecent: WalletsRecent)
@@ -37,7 +38,7 @@ protocol SendToTableViewCellDelegate: AnyObject {
     func didScanTextSuccess(_ sendToTableViewCell: SendToTableViewCell, text: String)
 }
 
-class SendToTableViewCell: UITableViewCell, UITextFieldDelegate {
+class SendToTableViewCell: UITableViewCell, UITextFieldDelegate, UITextViewDelegate {
 
     @IBOutlet weak var sendToTitle: UILabel!
     @IBOutlet weak var memoTitle: UILabel!
@@ -51,7 +52,7 @@ class SendToTableViewCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet weak var sendToTextField: UITextField!
     @IBOutlet weak var memoTextField: UITextField!
     @IBOutlet weak var amountTextField: UITextField!
-    @IBOutlet weak var noteTextField: UITextField!
+    @IBOutlet var noteTextView: UITextView!
     @IBOutlet weak var scanSendToButton: UIButton!
     @IBOutlet weak var scanMemoButton: UIButton!
     @IBOutlet weak var maxButton: UIButton!
@@ -78,12 +79,12 @@ class SendToTableViewCell: UITableViewCell, UITextFieldDelegate {
         self.memoTextField.textColor = UIColor.Asset.white
         self.amountTextField.font = UIFont.asset(.regular, fontSize: .overline)
         self.amountTextField.textColor = UIColor.Asset.white
-        self.noteTextField.font = UIFont.asset(.regular, fontSize: .overline)
-        self.noteTextField.textColor = UIColor.Asset.white
+        self.noteTextView.font = UIFont.asset(.regular, fontSize: .body)
+        self.noteTextView.textColor = UIColor.Asset.white
         self.sendToView.capsule(color: UIColor.Asset.cellBackground)
         self.memoView.capsule(color: UIColor.Asset.cellBackground)
         self.amountView.capsule(color: UIColor.Asset.cellBackground)
-        self.noteView.capsule(color: UIColor.Asset.cellBackground)
+        self.noteView.custom(color: UIColor.Asset.cellBackground, cornerRadius: 10, borderWidth: 1, borderColor: UIColor.Asset.black)
         self.maxButton.titleLabel?.font = UIFont.asset(.regular, fontSize: .overline)
         self.maxButton.setTitleColor(UIColor.Asset.lightBlue, for: .normal)
         self.scanSendToButton.setImage(UIImage.init(icon: .castcle(.qrCode), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.white).withRenderingMode(.alwaysOriginal), for: .normal)
@@ -96,9 +97,8 @@ class SendToTableViewCell: UITableViewCell, UITextFieldDelegate {
         self.amountTextField.delegate = self
         self.amountTextField.tag = 2
         self.amountTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
-        self.noteTextField.delegate = self
-        self.noteTextField.tag = 3
-        self.noteTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
+        self.noteTextView.delegate = self
+        self.noteTextView.placeholder = ""
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -123,8 +123,6 @@ class SendToTableViewCell: UITableViewCell, UITextFieldDelegate {
             self.memoTextField.becomeFirstResponder()
         } else if textField.tag == 1 {
             self.amountTextField.becomeFirstResponder()
-        } else if textField.tag == 2 {
-            self.noteTextField.becomeFirstResponder()
         } else {
             textField.resignFirstResponder()
         }
@@ -144,8 +142,14 @@ class SendToTableViewCell: UITableViewCell, UITextFieldDelegate {
             textField.text = amount
             self.delegate?.didAmountChange(self, amount: amount)
         } else if textField.tag != 0 {
-            self.delegate?.didValueChange(self, memo: self.memoTextField.text ?? "", note: self.noteTextField.text ?? "")
+            self.delegate?.didValueChange(self, memo: self.memoTextField.text ?? "", note: self.noteTextView.text ?? "")
         }
+    }
+
+    func textViewDidChange(_ textView: UITextView) {
+        let note = (textView.text ?? "").substringWithRange(range: 280)
+        textView.text = note
+        self.delegate?.didValueChange(self, memo: self.memoTextField.text ?? "", note: note)
     }
 
     @IBAction func resendAction(_ sender: Any) {

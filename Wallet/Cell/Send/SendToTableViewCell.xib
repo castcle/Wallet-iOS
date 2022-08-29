@@ -11,11 +11,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="395" id="KGk-i7-Jjw" customClass="SendToTableViewCell" customModule="Wallet" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="395"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="475" id="KGk-i7-Jjw" customClass="SendToTableViewCell" customModule="Wallet" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="475"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="395"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="475"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ghy-p0-957">
@@ -155,21 +155,23 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K6l-Sq-6ai">
-                        <rect key="frame" x="20" y="335" width="280" height="40"/>
+                        <rect key="frame" x="20" y="335" width="280" height="120"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y9b-CT-9yf">
-                                <rect key="frame" x="15" y="5" width="250" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
-                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="AS4-KW-5pg">
+                                <rect key="frame" x="15" y="5" width="250" height="105"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Y9b-CT-9yf" firstAttribute="top" secondItem="K6l-Sq-6ai" secondAttribute="top" constant="5" id="5v2-GY-1yq"/>
-                            <constraint firstAttribute="height" constant="40" id="G05-Tp-FbX"/>
-                            <constraint firstAttribute="trailing" secondItem="Y9b-CT-9yf" secondAttribute="trailing" constant="15" id="Gss-Rq-gpr"/>
-                            <constraint firstItem="Y9b-CT-9yf" firstAttribute="leading" secondItem="K6l-Sq-6ai" secondAttribute="leading" constant="15" id="k9I-hm-yrS"/>
-                            <constraint firstAttribute="bottom" secondItem="Y9b-CT-9yf" secondAttribute="bottom" constant="5" id="zv7-9d-1Hy"/>
+                            <constraint firstAttribute="bottom" secondItem="AS4-KW-5pg" secondAttribute="bottom" constant="10" id="HXD-xz-N8d"/>
+                            <constraint firstAttribute="trailing" secondItem="AS4-KW-5pg" secondAttribute="trailing" constant="15" id="Sdq-qL-J8I"/>
+                            <constraint firstAttribute="height" constant="120" id="h91-zT-Aov"/>
+                            <constraint firstItem="AS4-KW-5pg" firstAttribute="top" secondItem="K6l-Sq-6ai" secondAttribute="top" constant="5" id="n94-gh-nax"/>
+                            <constraint firstItem="AS4-KW-5pg" firstAttribute="leading" secondItem="K6l-Sq-6ai" secondAttribute="leading" constant="15" id="xUX-eC-bmj"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -181,7 +183,6 @@
                     <constraint firstAttribute="trailing" secondItem="QdM-bn-RHy" secondAttribute="trailing" constant="20" id="9ap-tt-2Ma"/>
                     <constraint firstItem="K6l-Sq-6ai" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="BfS-JT-QxO"/>
                     <constraint firstItem="ghy-p0-957" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="LdN-ND-OZn"/>
-                    <constraint firstAttribute="bottom" secondItem="K6l-Sq-6ai" secondAttribute="bottom" constant="20" id="Mge-Ih-89D"/>
                     <constraint firstItem="TT2-SM-LXI" firstAttribute="top" secondItem="c46-XH-AlV" secondAttribute="bottom" constant="20" id="RP0-w0-TsW"/>
                     <constraint firstItem="9Kx-Cz-joI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="RXe-hT-hBr"/>
                     <constraint firstAttribute="trailing" secondItem="K6l-Sq-6ai" secondAttribute="trailing" constant="20" id="Rw3-tg-BVn"/>
@@ -189,6 +190,7 @@
                     <constraint firstItem="QdM-bn-RHy" firstAttribute="top" secondItem="IRf-Hw-Bcn" secondAttribute="bottom" constant="10" id="V3T-wu-cGc"/>
                     <constraint firstItem="QdM-bn-RHy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="V9n-ln-swX"/>
                     <constraint firstAttribute="trailing" secondItem="r1P-sw-Fpb" secondAttribute="trailing" constant="20" id="VSl-8H-QDa"/>
+                    <constraint firstAttribute="bottom" secondItem="K6l-Sq-6ai" secondAttribute="bottom" constant="20" id="WOG-iN-W0a"/>
                     <constraint firstItem="r1P-sw-Fpb" firstAttribute="top" secondItem="ghy-p0-957" secondAttribute="bottom" constant="10" id="c04-G9-2ur"/>
                     <constraint firstItem="K6l-Sq-6ai" firstAttribute="top" secondItem="TT2-SM-LXI" secondAttribute="bottom" constant="10" id="eHv-1j-rRf"/>
                     <constraint firstItem="WeO-Rf-gEm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="g27-JX-2A7"/>
@@ -213,7 +215,7 @@
                 <outlet property="memoTextField" destination="c0x-lT-t55" id="85X-0T-GVL"/>
                 <outlet property="memoTitle" destination="9Kx-Cz-joI" id="vqN-jg-JnI"/>
                 <outlet property="memoView" destination="WeO-Rf-gEm" id="bQI-Aj-Qc8"/>
-                <outlet property="noteTextField" destination="Y9b-CT-9yf" id="CXA-r4-IEO"/>
+                <outlet property="noteTextView" destination="AS4-KW-5pg" id="7W4-Dj-YaI"/>
                 <outlet property="noteTitle" destination="TT2-SM-LXI" id="e4H-hl-3Pb"/>
                 <outlet property="noteView" destination="K6l-Sq-6ai" id="lFb-1s-JJg"/>
                 <outlet property="scanMemoButton" destination="KdA-gl-nP0" id="uvB-h0-e6u"/>
@@ -222,10 +224,13 @@
                 <outlet property="sendToTitle" destination="ghy-p0-957" id="WY0-Uu-5bT"/>
                 <outlet property="sendToView" destination="r1P-sw-Fpb" id="S9k-Y3-eYM"/>
             </connections>
-            <point key="canvasLocation" x="137.68115942028987" y="215.29017857142856"/>
+            <point key="canvasLocation" x="137.68115942028987" y="246.09375"/>
         </tableViewCell>
     </objects>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
