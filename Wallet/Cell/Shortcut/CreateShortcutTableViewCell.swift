@@ -79,7 +79,12 @@ class CreateShortcutTableViewCell: UITableViewCell {
         }
         self.viewModel.didCreateShortcutFinish = {
             CCLoading.shared.dismiss()
-            Utility.currentViewController().navigationController?.popViewController(animated: true)
+            let alert = UIAlertController(title: "", message: "Shortcut successfully added", preferredStyle: .alert)
+            let closeAction = UIAlertAction(title: "Close", style: .default) { _ in
+                Utility.currentViewController().navigationController?.popViewController(animated: true)
+            }
+            alert.addAction(closeAction)
+            Utility.currentViewController().present(alert, animated: true)
         }
         self.viewModel.didUpdateShortcutFinish = {
             CCLoading.shared.dismiss()
