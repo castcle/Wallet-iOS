@@ -79,6 +79,27 @@ class WalletHistoryTableViewCell: UITableViewCell {
             self.amountLabel.text = "\(walletHistory.value) CAST"
             self.statusLabel.text = walletHistory.status.display
             self.transactionIcon.image = UIImage.init(icon: .castcle(.airdropBalloon), size: CGSize(width: 50, height: 50), textColor: UIColor.Asset.white)
+        } else if walletHistory.type == .farming {
+            self.transactionIcon.image = UIImage.init(icon: .castcle(.farm), size: CGSize(width: 50, height: 50), textColor: UIColor.Asset.lightBlue)
+            self.typeLabel.text = walletHistory.type.display
+            self.dateLabel.text = "\(walletHistory.transactionDate.dateToString()) \(walletHistory.transactionDate.timeToString())"
+            self.amountLabel.text = " - \(walletHistory.value)"
+            self.statusLabel.text = ""
+            self.amountLabel.textColor = UIColor.Asset.denger
+        } else if walletHistory.type == .unfarming {
+            self.transactionIcon.image = UIImage.init(icon: .castcle(.farm), size: CGSize(width: 50, height: 50), textColor: UIColor.Asset.denger)
+            self.typeLabel.text = walletHistory.type.display
+            self.dateLabel.text = "\(walletHistory.transactionDate.dateToString()) \(walletHistory.transactionDate.timeToString())"
+            self.amountLabel.text = "\(walletHistory.value)"
+            self.statusLabel.text = ""
+            self.amountLabel.textColor = UIColor.Asset.lightBlue
+        } else if walletHistory.type == .farmed {
+            self.transactionIcon.image = UIImage.init(icon: .castcle(.farm), size: CGSize(width: 50, height: 50), textColor: UIColor.Asset.white)
+            self.typeLabel.text = walletHistory.type.display
+            self.dateLabel.text = "\(walletHistory.transactionDate.dateToString()) \(walletHistory.transactionDate.timeToString())"
+            self.amountLabel.text = "\(walletHistory.value)"
+            self.statusLabel.text = ""
+            self.amountLabel.textColor = UIColor.Asset.lightBlue
         } else {
             self.transactionIcon.image = UIImage()
             self.typeLabel.text = ""

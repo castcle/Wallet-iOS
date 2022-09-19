@@ -41,7 +41,7 @@ class SelectPageViewController: UIViewController {
 
     var delegate: SelectPageViewControllerDelegate?
     var viewModel = SelectPageViewModel()
-    var maxHeight = (UIScreen.main.bounds.height - 365)
+    var maxHeight = (UIScreen.main.bounds.height - 380)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +58,7 @@ class SelectPageViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.register(UINib(nibName: WalletNibVars.TableViewCell.displayName, bundle: ConfigBundle.wallet), forCellReuseIdentifier: WalletNibVars.TableViewCell.displayName)
+        self.tableView.register(UINib(nibName: WalletNibVars.TableViewCell.pageCancel, bundle: ConfigBundle.wallet), forCellReuseIdentifier: WalletNibVars.TableViewCell.pageCancel)
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 100
     }
@@ -65,7 +66,7 @@ class SelectPageViewController: UIViewController {
 
 extension SelectPageViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return self.viewModel.pages.count
+        return self.viewModel.pages.count + (self.viewModel.enableCancel ? 1 : 0)
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -73,16 +74,22 @@ extension SelectPageViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.displayName, for: indexPath as IndexPath) as? DisplayNameTableViewCell
-        let page = self.viewModel.pages[indexPath.section]
-        cell?.configCell(page: page, isDisplayOnly: true)
-        cell?.backgroundColor = UIColor.Asset.cellBackground
-        if page.castcleId == self.viewModel.selectPage.castcleId {
-            cell?.iconImage.isHidden = false
+        if indexPath.section == self.viewModel.pages.count {
+            let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.pageCancel, for: indexPath as IndexPath) as? PageCancelTableViewCell
+            cell?.backgroundColor = UIColor.Asset.cellBackground
+            return cell ?? PageCancelTableViewCell()
         } else {
-            cell?.iconImage.isHidden = true
+            let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.displayName, for: indexPath as IndexPath) as? DisplayNameTableViewCell
+            let page = self.viewModel.pages[indexPath.section]
+            cell?.configCell(page: page, isDisplayOnly: true)
+            cell?.backgroundColor = UIColor.Asset.cellBackground
+            if page.castcleId == self.viewModel.selectPage.castcleId {
+                cell?.iconImage.isHidden = false
+            } else {
+                cell?.iconImage.isHidden = true
+            }
+            return cell ?? DisplayNameTableViewCell()
         }
-        return cell ?? DisplayNameTableViewCell()
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -96,7 +103,9 @@ extension SelectPageViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.delegate?.didChoosePage(self, page: self.viewModel.pages[indexPath.section])
+        if indexPath.section != self.viewModel.pages.count {
+            self.delegate?.didChoosePage(self, page: self.viewModel.pages[indexPath.section])
+        }
         self.dismiss(animated: true)
     }
 }

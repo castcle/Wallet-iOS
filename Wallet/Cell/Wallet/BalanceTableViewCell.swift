@@ -35,6 +35,7 @@ class BalanceTableViewCell: UITableViewCell {
     @IBOutlet weak var barView: GTProgressBar!
     @IBOutlet weak var totalBalanceTitle: UILabel!
     @IBOutlet weak var totalBalance: UILabel!
+    @IBOutlet weak var moreIcon: UIImageView!
     @IBOutlet weak var farmBalanceTitle: UILabel!
     @IBOutlet weak var farmBalance: UILabel!
     @IBOutlet weak var availBalanceTitle: UILabel!
@@ -66,6 +67,7 @@ class BalanceTableViewCell: UITableViewCell {
         self.availBalanceTitle.textColor = UIColor.Asset.white
         self.farmView.backgroundColor = UIColor.Asset.lightBlue
         self.availView.backgroundColor = UIColor.Asset.veryLightBlue
+        self.moreIcon.image = UIImage.init(icon: .castcle(.aboutUs), size: CGSize(width: 15, height: 15), textColor: UIColor.Asset.white)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

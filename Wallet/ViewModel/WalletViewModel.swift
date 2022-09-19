@@ -65,7 +65,7 @@ public final class WalletViewModel {
         }
     }
 
-    private func getWalletHistory() {
+    func getWalletHistory() {
         self.state = .getWalletHistory
         self.walletRepository.getWalletHistory(userId: self.page.id, walletRequest: self.walletRequest) { (success, response, isRefreshToken) in
             if success {

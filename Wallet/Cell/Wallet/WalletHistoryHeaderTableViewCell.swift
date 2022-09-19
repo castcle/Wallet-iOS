@@ -59,27 +59,27 @@ class WalletHistoryHeaderTableViewCell: UITableViewCell {
 
     @IBAction func filterAction(_ sender: Any) {
         let actionSheet = CCActionSheet()
-        let walletButton = CCAction(title: WalletHistoryType.walletBalance.display, color: (self.walletHistoryType == .walletBalance ? UIColor.Asset.lightBlue : UIColor.Asset.white)) {
+        let walletButton = CCAction(title: WalletHistoryType.walletBalance.display, color: (self.walletHistoryType == .walletBalance ? UIColor.Asset.lightBlue : UIColor.Asset.white), isSelect: self.walletHistoryType == .walletBalance) {
             actionSheet.dismissActionSheet()
             self.filterLabel.text =  WalletHistoryType.walletBalance.rawValue
             self.delegate?.didChooseFilter(self, type: .walletBalance)
         }
-        let farmingButton = CCAction(title: WalletHistoryType.contentFarming.display, color: (self.walletHistoryType == .contentFarming ? UIColor.Asset.lightBlue : UIColor.Asset.white)) {
+        let farmingButton = CCAction(title: WalletHistoryType.contentFarming.display, color: (self.walletHistoryType == .contentFarming ? UIColor.Asset.lightBlue : UIColor.Asset.white), isSelect: self.walletHistoryType == .contentFarming) {
             actionSheet.dismissActionSheet()
             self.filterLabel.text =  WalletHistoryType.contentFarming.rawValue
             self.delegate?.didChooseFilter(self, type: .contentFarming)
         }
-        let socialButton = CCAction(title: WalletHistoryType.socialRewards.display, color: (self.walletHistoryType == .socialRewards ? UIColor.Asset.lightBlue : UIColor.Asset.white)) {
+        let socialButton = CCAction(title: WalletHistoryType.socialRewards.display, color: (self.walletHistoryType == .socialRewards ? UIColor.Asset.lightBlue : UIColor.Asset.white), isSelect: self.walletHistoryType == .socialRewards) {
             actionSheet.dismissActionSheet()
             self.filterLabel.text =  WalletHistoryType.socialRewards.rawValue
             self.delegate?.didChooseFilter(self, type: .socialRewards)
         }
-        let transactionButton = CCAction(title: WalletHistoryType.depositSend.display, color: (self.walletHistoryType == .depositSend ? UIColor.Asset.lightBlue : UIColor.Asset.white)) {
+        let transactionButton = CCAction(title: WalletHistoryType.depositSend.display, color: (self.walletHistoryType == .depositSend ? UIColor.Asset.lightBlue : UIColor.Asset.white), isSelect: self.walletHistoryType == .depositSend) {
             actionSheet.dismissActionSheet()
             self.filterLabel.text =  WalletHistoryType.depositSend.rawValue
             self.delegate?.didChooseFilter(self, type: .depositSend)
         }
-        let airdropButton = CCAction(title: WalletHistoryType.airdropReferral.display, color: (self.walletHistoryType == .airdropReferral ? UIColor.Asset.lightBlue : UIColor.Asset.white)) {
+        let airdropButton = CCAction(title: WalletHistoryType.airdropReferral.display, color: (self.walletHistoryType == .airdropReferral ? UIColor.Asset.lightBlue : UIColor.Asset.white), isSelect: self.walletHistoryType == .airdropReferral) {
             actionSheet.dismissActionSheet()
             self.filterLabel.text =  WalletHistoryType.airdropReferral.rawValue
             self.delegate?.didChooseFilter(self, type: .airdropReferral)

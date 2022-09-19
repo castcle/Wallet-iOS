@@ -52,6 +52,8 @@
 		B73D981C286E0B0B00D6ECA8 /* SendConfiemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73D981A286E0B0B00D6ECA8 /* SendConfiemTableViewCell.xib */; };
 		B73D981F286E0F3900D6ECA8 /* SendVerifyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73D981D286E0F3900D6ECA8 /* SendVerifyTableViewCell.swift */; };
 		B73D9820286E0F3900D6ECA8 /* SendVerifyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73D981E286E0F3900D6ECA8 /* SendVerifyTableViewCell.xib */; };
+		B741AC5628D88F82007875E4 /* PageCancelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B741AC5428D88F82007875E4 /* PageCancelTableViewCell.swift */; };
+		B741AC5728D88F82007875E4 /* PageCancelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B741AC5528D88F82007875E4 /* PageCancelTableViewCell.xib */; };
 		B744AC342877E78100378924 /* SendWalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B744AC332877E78100378924 /* SendWalletViewModel.swift */; };
 		B744AC38287809D800378924 /* ManageShortcutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B744AC37287809D800378924 /* ManageShortcutsViewController.swift */; };
 		B744AC3B2878190300378924 /* ManageShortcutHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B744AC392878190300378924 /* ManageShortcutHeaderTableViewCell.swift */; };
@@ -158,6 +160,8 @@
 		B73D981A286E0B0B00D6ECA8 /* SendConfiemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendConfiemTableViewCell.xib; sourceTree = "<group>"; };
 		B73D981D286E0F3900D6ECA8 /* SendVerifyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendVerifyTableViewCell.swift; sourceTree = "<group>"; };
 		B73D981E286E0F3900D6ECA8 /* SendVerifyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendVerifyTableViewCell.xib; sourceTree = "<group>"; };
+		B741AC5428D88F82007875E4 /* PageCancelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCancelTableViewCell.swift; sourceTree = "<group>"; };
+		B741AC5528D88F82007875E4 /* PageCancelTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PageCancelTableViewCell.xib; sourceTree = "<group>"; };
 		B744AC332877E78100378924 /* SendWalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendWalletViewModel.swift; sourceTree = "<group>"; };
 		B744AC37287809D800378924 /* ManageShortcutsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageShortcutsViewController.swift; sourceTree = "<group>"; };
 		B744AC392878190300378924 /* ManageShortcutHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageShortcutHeaderTableViewCell.swift; sourceTree = "<group>"; };
@@ -287,6 +291,8 @@
 				B7A5B53D286E28CE00FB92D1 /* VerifyAccountTableViewCell.xib */,
 				B7A5B540286E2DEB00FB92D1 /* NoticeTableViewCell.swift */,
 				B7A5B541286E2DEC00FB92D1 /* NoticeTableViewCell.xib */,
+				B741AC5428D88F82007875E4 /* PageCancelTableViewCell.swift */,
+				B741AC5528D88F82007875E4 /* PageCancelTableViewCell.xib */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -567,6 +573,7 @@
 				B744AC3C2878190300378924 /* ManageShortcutHeaderTableViewCell.xib in Resources */,
 				B72FDEF22833C47F00748D13 /* SelectPageTableViewCell.xib in Resources */,
 				B7963492286E4EB3003F2E9C /* EmptyDataTableViewCell.xib in Resources */,
+				B741AC5728D88F82007875E4 /* PageCancelTableViewCell.xib in Resources */,
 				B73D9814286E054700D6ECA8 /* ReviewSendTableViewCell.xib in Resources */,
 				B72FDEDE2833BA9300748D13 /* WalletNoDataTableViewCell.xib in Resources */,
 				B7A5B543286E2DEE00FB92D1 /* NoticeTableViewCell.xib in Resources */,
@@ -674,6 +681,7 @@
 				B7A5B542286E2DEE00FB92D1 /* NoticeTableViewCell.swift in Sources */,
 				B7471241287BFC0600C3C7EE /* RecentViewModel.swift in Sources */,
 				B73D9813286E054700D6ECA8 /* ReviewSendTableViewCell.swift in Sources */,
+				B741AC5628D88F82007875E4 /* PageCancelTableViewCell.swift in Sources */,
 				B767A7652845CE2C00E4381F /* OtherChainTableViewCell.swift in Sources */,
 				B72FDECE28339FC500748D13 /* WalletViewModel.swift in Sources */,
 				B744AC342877E78100378924 /* SendWalletViewModel.swift in Sources */,

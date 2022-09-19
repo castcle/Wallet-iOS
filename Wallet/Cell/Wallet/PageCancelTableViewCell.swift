@@ -19,28 +19,26 @@
 //  Thailand 10160, or visit www.castcle.com if you need additional information
 //  or have any questions.
 //
-//  SelectPageViewModel.swift
+//  PageCancelTableViewCell.swift
 //  Wallet
 //
-//  Created by Castcle Co., Ltd. on 17/5/2565 BE.
+//  Created by Castcle Co., Ltd. on 19/9/2565 BE.
 //
 
+import UIKit
 import Core
-import RealmSwift
 
-public final class SelectPageViewModel {
-    var pages: [PageRealm] = []
-    var selectPage: PageRealm = PageRealm()
-    var enableCancel: Bool = false
+class PageCancelTableViewCell: UITableViewCell {
 
-    public init(selectPage: PageRealm = PageRealm(), enableCancel: Bool = false) {
-        self.selectPage = selectPage
-        self.enableCancel = enableCancel
-        self.pages.append(PageRealm().initCustom(id: UserManager.shared.id, displayName: UserManager.shared.displayName, castcleId: UserManager.shared.castcleId, avatar: UserManager.shared.avatar, cover: UserManager.shared.cover, overview: UserManager.shared.overview, official: UserManager.shared.official))
-        do {
-            let realm = try Realm()
-            let pageLocal = realm.objects(PageRealm.self).sorted(byKeyPath: "id")
-            self.pages.append(contentsOf: pageLocal)
-        } catch {}
+    @IBOutlet weak var cancelLabel: UILabel!
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.cancelLabel.font = UIFont.asset(.regular, fontSize: .body)
+        self.cancelLabel.textColor = UIColor.Asset.denger
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
     }
 }

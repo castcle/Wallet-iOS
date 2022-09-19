@@ -121,7 +121,7 @@ extension ManageShortcutsViewController: UITableViewDelegate, UITableViewDataSou
         case ManageShortcutsViewControllerSection.myAccount.rawValue:
             return (tableView.isEditing ? 0 : self.viewModel.accounts.count)
         case ManageShortcutsViewControllerSection.shortcutHeader.rawValue:
-            return 1
+            return (tableView.isEditing ? 0 : 1)
         case ManageShortcutsViewControllerSection.shortcut.rawValue:
             return self.viewModel.shortcuts.count
         default:
@@ -196,6 +196,30 @@ extension ManageShortcutsViewController: UITableViewDelegate, UITableViewDataSou
         let tempShortcut = self.viewModel.shortcuts[sourceIndexPath.row]
         self.viewModel.shortcuts.remove(at: sourceIndexPath.row)
         self.viewModel.shortcuts.insert(tempShortcut, at: destinationIndexPath.row)
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if tableView.isEditing && (section == ManageShortcutsViewControllerSection.shortcut.rawValue) {
+            return 60
+        } else {
+            return 0
+        }
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 60))
+        let label = UILabel()
+        label.frame = CGRect.init(x: 20, y: 0, width: headerView.frame.width - 40, height: 60)
+        label.font = UIFont.asset(.bold, fontSize: .body)
+        label.textColor = UIColor.Asset.white
+        if section == ManageShortcutsViewControllerSection.shortcut.rawValue {
+            label.text = "Shortcut list"
+        } else {
+            label.text = ""
+        }
+        headerView.addSubview(label)
+        headerView.backgroundColor = UIColor.Asset.darkGraphiteBlue
+        return headerView
     }
 }
 

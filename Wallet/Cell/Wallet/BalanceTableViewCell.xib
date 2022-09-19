@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -31,6 +31,13 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iQe-Q4-2SW">
+                        <rect key="frame" x="122" y="47.5" width="15" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="15" id="03w-jf-7hu"/>
+                            <constraint firstAttribute="height" constant="15" id="p2F-T3-ei7"/>
+                        </constraints>
+                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00000000 CAST" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rN2-6j-fgH">
                         <rect key="frame" x="163.5" y="45" width="136.5" height="19.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -92,14 +99,16 @@
                     <constraint firstItem="IRq-ic-0AJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Ut5-GT-wJw"/>
                     <constraint firstItem="IRq-ic-0AJ" firstAttribute="top" secondItem="040-GC-1uj" secondAttribute="bottom" constant="20" id="VKX-0t-op0"/>
                     <constraint firstItem="040-GC-1uj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="XRj-iw-Pac"/>
+                    <constraint firstItem="iQe-Q4-2SW" firstAttribute="centerY" secondItem="IRq-ic-0AJ" secondAttribute="centerY" id="Xm2-kX-Qfe"/>
                     <constraint firstItem="zKK-uV-hYx" firstAttribute="top" secondItem="IRq-ic-0AJ" secondAttribute="bottom" constant="20" id="b3K-Fv-PHY"/>
                     <constraint firstItem="8rh-op-Meb" firstAttribute="centerY" secondItem="Dkf-hl-R6j" secondAttribute="centerY" id="bs1-VR-9FY"/>
                     <constraint firstItem="Dkf-hl-R6j" firstAttribute="top" secondItem="zKK-uV-hYx" secondAttribute="bottom" constant="15" id="dJ8-rs-qO8"/>
                     <constraint firstItem="rN2-6j-fgH" firstAttribute="centerY" secondItem="IRq-ic-0AJ" secondAttribute="centerY" id="h2T-oV-WPS"/>
+                    <constraint firstItem="rN2-6j-fgH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iQe-Q4-2SW" secondAttribute="trailing" constant="10" id="hIE-l5-XE5"/>
                     <constraint firstItem="kit-LN-gi2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="zKK-uV-hYx" secondAttribute="trailing" constant="10" id="hh2-MH-bG6"/>
-                    <constraint firstItem="rN2-6j-fgH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="IRq-ic-0AJ" secondAttribute="trailing" constant="10" id="iC5-Nm-N6n"/>
                     <constraint firstItem="9ai-Mx-2K7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="iQt-Zp-mmW"/>
                     <constraint firstAttribute="trailing" secondItem="kit-LN-gi2" secondAttribute="trailing" constant="20" id="ibi-d6-QpV"/>
+                    <constraint firstItem="iQe-Q4-2SW" firstAttribute="leading" secondItem="IRq-ic-0AJ" secondAttribute="trailing" constant="5" id="kgT-Ry-0qs"/>
                     <constraint firstItem="040-GC-1uj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="mj7-Ax-34i"/>
                     <constraint firstAttribute="bottom" secondItem="Dkf-hl-R6j" secondAttribute="bottom" constant="20" id="nE0-dS-Pxm"/>
                 </constraints>
@@ -113,6 +122,7 @@
                 <outlet property="farmBalance" destination="kit-LN-gi2" id="Ycu-Yn-h9B"/>
                 <outlet property="farmBalanceTitle" destination="zKK-uV-hYx" id="Z8t-fX-Frr"/>
                 <outlet property="farmView" destination="bJt-gr-Zo1" id="GzX-ys-OUG"/>
+                <outlet property="moreIcon" destination="iQe-Q4-2SW" id="HJ1-5h-poG"/>
                 <outlet property="totalBalance" destination="rN2-6j-fgH" id="KP7-Cc-m8D"/>
                 <outlet property="totalBalanceTitle" destination="IRq-ic-0AJ" id="fpu-5r-s3F"/>
             </connections>

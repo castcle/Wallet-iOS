@@ -132,7 +132,7 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
                 return 0
             }
         case WalletViewControllerSection.history.rawValue:
-            if self.viewModel.walletRequest.filter == .walletBalance && !self.viewModel.history.isEmpty {
+            if !self.viewModel.history.isEmpty {
                 return self.viewModel.history.count
             } else {
                 return 1
@@ -171,7 +171,7 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
             cell?.delegate = self
             return cell ?? WalletHistoryHeaderTableViewCell()
         case WalletViewControllerSection.history.rawValue:
-            if self.viewModel.walletRequest.filter == .walletBalance && !self.viewModel.history.isEmpty {
+            if !self.viewModel.history.isEmpty {
                 let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.walletHistory, for: indexPath as IndexPath) as? WalletHistoryTableViewCell
                 cell?.backgroundColor = UIColor.Asset.cellBackground
                 cell?.configCell(walletHistory: self.viewModel.history[indexPath.row])
@@ -190,7 +190,7 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension WalletViewController: DisplayNameTableViewCellDelegate {
     func didChoosePage(_ cell: DisplayNameTableViewCell) {
-        let viewController = WalletOpener.open(.selectPage(SelectPageViewModel(selectPage: self.viewModel.page))) as? SelectPageViewController
+        let viewController = WalletOpener.open(.selectPage(SelectPageViewModel(selectPage: self.viewModel.page, enableCancel: true))) as? SelectPageViewController
         viewController?.delegate = self
         Utility.currentViewController().presentPanModal(viewController ?? SelectPageViewController())
     }
@@ -198,8 +198,12 @@ extension WalletViewController: DisplayNameTableViewCellDelegate {
 
 extension WalletViewController: WalletHistoryHeaderTableViewCellDelegate {
     func didChooseFilter(_ cell: WalletHistoryHeaderTableViewCell, type: WalletHistoryType) {
-        self.viewModel.walletRequest.filter = type
-        self.tableView.reloadData()
+        if type != self.viewModel.walletRequest.filter {
+            self.viewModel.walletRequest.filter = type
+            self.tableView.reloadData()
+            CCLoading.shared.show(text: "Loading")
+            self.viewModel.getWalletHistory()
+        }
     }
 }
 
