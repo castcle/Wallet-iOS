@@ -100,6 +100,10 @@
 		B7B2CDC928B51AFE00C2D855 /* ReviewNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B2CDC728B51AFD00C2D855 /* ReviewNoteTableViewCell.swift */; };
 		B7B2CDCA28B51AFE00C2D855 /* ReviewNoteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7B2CDC828B51AFE00C2D855 /* ReviewNoteTableViewCell.xib */; };
 		B7DF047B287C639A005D2026 /* ScanQrCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DF047A287C639A005D2026 /* ScanQrCodeViewModel.swift */; };
+		B7DFA77A28DE9F5A00A11562 /* SendSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DFA77928DE9F5A00A11562 /* SendSuccessViewController.swift */; };
+		B7DFA77C28DE9FFD00A11562 /* SendSuccessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DFA77B28DE9FFD00A11562 /* SendSuccessViewModel.swift */; };
+		B7DFA77F28DEAE3800A11562 /* AddShotcutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DFA77D28DEAE3800A11562 /* AddShotcutTableViewCell.swift */; };
+		B7DFA78028DEAE3800A11562 /* AddShotcutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7DFA77E28DEAE3800A11562 /* AddShotcutTableViewCell.xib */; };
 		B7F0D318282B5C9900BA9764 /* Wallet.h in Headers */ = {isa = PBXBuildFile; fileRef = B7F0D317282B5C9900BA9764 /* Wallet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B7F0D327282B5FAF00BA9764 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F0D326282B5FAE00BA9764 /* Core.framework */; };
 		B7F0D32B282B5FB600BA9764 /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F0D32A282B5FB600BA9764 /* Networking.framework */; };
@@ -208,6 +212,10 @@
 		B7B2CDC728B51AFD00C2D855 /* ReviewNoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewNoteTableViewCell.swift; sourceTree = "<group>"; };
 		B7B2CDC828B51AFE00C2D855 /* ReviewNoteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewNoteTableViewCell.xib; sourceTree = "<group>"; };
 		B7DF047A287C639A005D2026 /* ScanQrCodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQrCodeViewModel.swift; sourceTree = "<group>"; };
+		B7DFA77928DE9F5A00A11562 /* SendSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendSuccessViewController.swift; sourceTree = "<group>"; };
+		B7DFA77B28DE9FFD00A11562 /* SendSuccessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendSuccessViewModel.swift; sourceTree = "<group>"; };
+		B7DFA77D28DEAE3800A11562 /* AddShotcutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddShotcutTableViewCell.swift; sourceTree = "<group>"; };
+		B7DFA77E28DEAE3800A11562 /* AddShotcutTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddShotcutTableViewCell.xib; sourceTree = "<group>"; };
 		B7F0D314282B5C9900BA9764 /* Wallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Wallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7F0D317282B5C9900BA9764 /* Wallet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Wallet.h; sourceTree = "<group>"; };
 		B7F0D326282B5FAE00BA9764 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -350,6 +358,7 @@
 				B7471240287BFC0600C3C7EE /* RecentViewModel.swift */,
 				B7DF047A287C639A005D2026 /* ScanQrCodeViewModel.swift */,
 				B75E416E2890DFBB0037B388 /* SendReviewViewModel.swift */,
+				B7DFA77B28DE9FFD00A11562 /* SendSuccessViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -414,6 +423,7 @@
 				B792AA2F286C3DC500014352 /* SendWalletViewController.swift */,
 				B73D980D286E001600D6ECA8 /* SendReviewViewController.swift */,
 				B73D980F286E003C00D6ECA8 /* SendAuthViewController.swift */,
+				B7DFA77928DE9F5A00A11562 /* SendSuccessViewController.swift */,
 			);
 			path = Send;
 			sourceTree = "<group>";
@@ -433,6 +443,8 @@
 				B73D9816286E056800D6ECA8 /* ReviewDataTableViewCell.xib */,
 				B73D9819286E0B0B00D6ECA8 /* SendConfiemTableViewCell.swift */,
 				B73D981A286E0B0B00D6ECA8 /* SendConfiemTableViewCell.xib */,
+				B7DFA77D28DEAE3800A11562 /* AddShotcutTableViewCell.swift */,
+				B7DFA77E28DEAE3800A11562 /* AddShotcutTableViewCell.xib */,
 				B73D981D286E0F3900D6ECA8 /* SendVerifyTableViewCell.swift */,
 				B73D981E286E0F3900D6ECA8 /* SendVerifyTableViewCell.xib */,
 				B7B2CDC728B51AFD00C2D855 /* ReviewNoteTableViewCell.swift */,
@@ -598,6 +610,7 @@
 				B7F53762288028E80050114A /* EditShortcutListTableViewCell.xib in Resources */,
 				B73D9818286E056800D6ECA8 /* ReviewDataTableViewCell.xib in Resources */,
 				B7117028283B836500FF985A /* MyQRCode.xib in Resources */,
+				B7DFA78028DEAE3800A11562 /* AddShotcutTableViewCell.xib in Resources */,
 				B72FDEB42833978A00748D13 /* Wallet.storyboard in Resources */,
 				B73D9820286E0F3900D6ECA8 /* SendVerifyTableViewCell.xib in Resources */,
 				B7B2CDCA28B51AFE00C2D855 /* ReviewNoteTableViewCell.xib in Resources */,
@@ -651,9 +664,11 @@
 				B72FDEF12833C47F00748D13 /* SelectPageTableViewCell.swift in Sources */,
 				B744AC3B2878190300378924 /* ManageShortcutHeaderTableViewCell.swift in Sources */,
 				B728FE5C2844B17C00CF03DA /* CastcleQrCodeTableViewCell.swift in Sources */,
+				B7DFA77C28DE9FFD00A11562 /* SendSuccessViewModel.swift in Sources */,
 				B75AFE4C28918B110036AC36 /* WalletHistoryTableViewCell.swift in Sources */,
 				B71170572840AD7700FF985A /* ScanQrCodeViewController.swift in Sources */,
 				B72FDED52833B38200748D13 /* TransactionTableViewCell.swift in Sources */,
+				B7DFA77A28DE9F5A00A11562 /* SendSuccessViewController.swift in Sources */,
 				B747123C287A835600C3C7EE /* CreateShortcutTableViewCell.swift in Sources */,
 				B7A5B53B286E239E00FB92D1 /* WalletVerifyAccountViewModel.swift in Sources */,
 				B727FDF52851ECD100BA50C7 /* CastcleQrCodeViewModel.swift in Sources */,
@@ -682,6 +697,7 @@
 				B7471241287BFC0600C3C7EE /* RecentViewModel.swift in Sources */,
 				B73D9813286E054700D6ECA8 /* ReviewSendTableViewCell.swift in Sources */,
 				B741AC5628D88F82007875E4 /* PageCancelTableViewCell.swift in Sources */,
+				B7DFA77F28DEAE3800A11562 /* AddShotcutTableViewCell.swift in Sources */,
 				B767A7652845CE2C00E4381F /* OtherChainTableViewCell.swift in Sources */,
 				B72FDECE28339FC500748D13 /* WalletViewModel.swift in Sources */,
 				B744AC342877E78100378924 /* SendWalletViewModel.swift in Sources */,

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="111" id="KGk-i7-Jjw" customClass="AddShotcutTableViewCell" customModule="Wallet" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="111"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="111"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ikl-Tg-yeD">
+                        <rect key="frame" x="20" y="20" width="31.5" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2II-4M-3AP">
+                        <rect key="frame" x="260" y="20" width="40" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1wU-WC-pBO">
+                        <rect key="frame" x="146" y="55" width="154" height="35"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add to shortcut" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PeX-1L-EF6">
+                                <rect key="frame" x="50" y="10" width="89" height="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add-to-shortcut" translatesAutoresizingMaskIntoConstraints="NO" id="vFR-Vk-S6v">
+                                <rect key="frame" x="15" y="7.5" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="YD3-ka-anp"/>
+                                    <constraint firstAttribute="width" constant="20" id="t0U-wJ-fXG"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2NQ-uX-h6r">
+                                <rect key="frame" x="0.0" y="0.0" width="154" height="35"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <connections>
+                                    <action selector="addShortcut:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="4br-UL-hqD"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="2NQ-uX-h6r" firstAttribute="top" secondItem="1wU-WC-pBO" secondAttribute="top" id="64d-B8-s3l"/>
+                            <constraint firstAttribute="height" constant="35" id="GZq-8i-OqS"/>
+                            <constraint firstItem="PeX-1L-EF6" firstAttribute="centerY" secondItem="1wU-WC-pBO" secondAttribute="centerY" id="UEr-3P-twf"/>
+                            <constraint firstItem="2NQ-uX-h6r" firstAttribute="leading" secondItem="1wU-WC-pBO" secondAttribute="leading" id="Wsy-Du-2vk"/>
+                            <constraint firstAttribute="trailing" secondItem="PeX-1L-EF6" secondAttribute="trailing" constant="15" id="YwP-Sd-kWc"/>
+                            <constraint firstItem="PeX-1L-EF6" firstAttribute="centerY" secondItem="1wU-WC-pBO" secondAttribute="centerY" id="deM-LO-MaF"/>
+                            <constraint firstItem="vFR-Vk-S6v" firstAttribute="centerY" secondItem="1wU-WC-pBO" secondAttribute="centerY" id="es5-HT-lMz"/>
+                            <constraint firstItem="vFR-Vk-S6v" firstAttribute="leading" secondItem="1wU-WC-pBO" secondAttribute="leading" constant="15" id="faR-db-XJL"/>
+                            <constraint firstAttribute="bottom" secondItem="2NQ-uX-h6r" secondAttribute="bottom" id="iwT-FR-iYC"/>
+                            <constraint firstItem="PeX-1L-EF6" firstAttribute="leading" secondItem="vFR-Vk-S6v" secondAttribute="trailing" constant="15" id="nu2-cN-bow"/>
+                            <constraint firstAttribute="trailing" secondItem="2NQ-uX-h6r" secondAttribute="trailing" id="q8R-GO-aq4"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zLu-jW-9aK">
+                        <rect key="frame" x="0.0" y="110" width="320" height="1"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="iwK-HU-Zrw"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="zLu-jW-9aK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="BF3-fN-vSq"/>
+                    <constraint firstItem="zLu-jW-9aK" firstAttribute="top" secondItem="1wU-WC-pBO" secondAttribute="bottom" constant="20" id="BIN-HN-I02"/>
+                    <constraint firstItem="1wU-WC-pBO" firstAttribute="top" secondItem="2II-4M-3AP" secondAttribute="bottom" constant="15" id="PW7-jJ-AzX"/>
+                    <constraint firstItem="2II-4M-3AP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="Q7z-0b-XXS"/>
+                    <constraint firstAttribute="trailing" secondItem="zLu-jW-9aK" secondAttribute="trailing" id="ZQI-Em-brj"/>
+                    <constraint firstItem="ikl-Tg-yeD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="hR3-4S-eXY"/>
+                    <constraint firstAttribute="bottom" secondItem="zLu-jW-9aK" secondAttribute="bottom" id="icS-kL-L90"/>
+                    <constraint firstAttribute="trailing" secondItem="2II-4M-3AP" secondAttribute="trailing" constant="20" id="jrW-er-Pev"/>
+                    <constraint firstItem="ikl-Tg-yeD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="mqj-GD-y8V"/>
+                    <constraint firstItem="2II-4M-3AP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ikl-Tg-yeD" secondAttribute="trailing" constant="10" id="q7J-8A-LFL"/>
+                    <constraint firstAttribute="trailing" secondItem="1wU-WC-pBO" secondAttribute="trailing" constant="20" id="t2K-H3-DMn"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="addShortcutLabel" destination="PeX-1L-EF6" id="GCk-s6-zvh"/>
+                <outlet property="addShortcutView" destination="1wU-WC-pBO" id="g1b-Dr-nei"/>
+                <outlet property="lineView" destination="zLu-jW-9aK" id="8Yd-pg-h06"/>
+                <outlet property="titleLabel" destination="ikl-Tg-yeD" id="gyA-vD-n2G"/>
+                <outlet property="valueLabel" destination="2II-4M-3AP" id="cSG-ab-khN"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="148.32589285714286"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="add-to-shortcut" width="16.5" height="22"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

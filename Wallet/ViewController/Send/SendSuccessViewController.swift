@@ -19,10 +19,10 @@
 //  Thailand 10160, or visit www.castcle.com if you need additional information
 //  or have any questions.
 //
-//  SendReviewViewController.swift
+//  SendSuccessViewController.swift
 //  Wallet
 //
-//  Created by Castcle Co., Ltd. on 30/6/2565 BE.
+//  Created by Castcle Co., Ltd. on 24/9/2565 BE.
 //
 
 import UIKit
@@ -30,13 +30,13 @@ import Core
 import Component
 import Defaults
 
-class SendReviewViewController: UIViewController {
+class SendSuccessViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
 
-    var viewModel = SendReviewViewModel()
+    var viewModel = SendSuccessViewModel()
 
-    enum SendReviewViewControllerSection: Int, CaseIterable {
+    enum SendSuccessViewControllerSection: Int, CaseIterable {
         case data = 0
         case note
         case confirm
@@ -45,12 +45,11 @@ class SendReviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.Asset.darkGraphiteBlue
+        self.navigationItem.setHidesBackButton(true, animated: true)
         self.configureTableView()
-        self.viewModel.didRequestOtpFinish = {
-            if self.viewModel.isSendEmailOtp && self.viewModel.isSendMobileOtp {
-                CCLoading.shared.dismiss()
-                Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.sendAuth(self.viewModel)), animated: true)
-            }
+        self.viewModel.didManageShortcutsFinish = {
+            CCLoading.shared.dismiss()
+            self.tableView.reloadData()
         }
         self.viewModel.didError = {
             CCLoading.shared.dismiss()
@@ -64,7 +63,7 @@ class SendReviewViewController: UIViewController {
     }
 
     func setupNavBar() {
-        self.customNavigationBar(.secondary, title: "Send")
+        self.customNavigationBar(.primary, title: "")
     }
 
     func configureTableView() {
@@ -74,21 +73,22 @@ class SendReviewViewController: UIViewController {
         self.tableView.register(UINib(nibName: WalletNibVars.TableViewCell.reviewData, bundle: ConfigBundle.wallet), forCellReuseIdentifier: WalletNibVars.TableViewCell.reviewData)
         self.tableView.register(UINib(nibName: WalletNibVars.TableViewCell.reviewNote, bundle: ConfigBundle.wallet), forCellReuseIdentifier: WalletNibVars.TableViewCell.reviewNote)
         self.tableView.register(UINib(nibName: WalletNibVars.TableViewCell.sendConfiem, bundle: ConfigBundle.wallet), forCellReuseIdentifier: WalletNibVars.TableViewCell.sendConfiem)
+        self.tableView.register(UINib(nibName: WalletNibVars.TableViewCell.addShotcut, bundle: ConfigBundle.wallet), forCellReuseIdentifier: WalletNibVars.TableViewCell.addShotcut)
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 100
     }
 }
 
-extension SendReviewViewController: UITableViewDelegate, UITableViewDataSource {
+extension SendSuccessViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return SendReviewViewControllerSection.allCases.count
+        return SendSuccessViewControllerSection.allCases.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case SendReviewViewControllerSection.data.rawValue:
-            return self.viewModel.sendReview.count
-        case SendReviewViewControllerSection.note.rawValue:
+        case SendSuccessViewControllerSection.data.rawValue:
+            return self.viewModel.sendSuccess.count
+        case SendSuccessViewControllerSection.note.rawValue:
             return (self.viewModel.walletRequest.note.isEmpty ? 0 : 1)
         default:
             return 1
@@ -97,28 +97,35 @@ extension SendReviewViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
-        case SendReviewViewControllerSection.data.rawValue:
+        case SendSuccessViewControllerSection.data.rawValue:
             if indexPath.row == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.reviewSend, for: indexPath as IndexPath) as? ReviewSendTableViewCell
                 cell?.backgroundColor = UIColor.clear
-                cell?.configCell(title: "Review Send", totalAmount: self.viewModel.walletRequest.amount)
+                cell?.configCell(title: "Transaction Complated", totalAmount: self.viewModel.walletRequest.amount)
                 return cell ?? ReviewSendTableViewCell()
+            } else if indexPath.row == 3 && !self.viewModel.isShortcut {
+                let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.addShotcut, for: indexPath as IndexPath) as? AddShotcutTableViewCell
+                cell?.backgroundColor = UIColor.clear
+                let data = self.viewModel.sendSuccess[indexPath.row]
+                cell?.configCell(title: data.title, value: data.value)
+                cell?.delegate = self
+                return cell ?? AddShotcutTableViewCell()
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.reviewData, for: indexPath as IndexPath) as? ReviewDataTableViewCell
                 cell?.backgroundColor = UIColor.clear
-                let data = self.viewModel.sendReview[indexPath.row]
+                let data = self.viewModel.sendSuccess[indexPath.row]
                 cell?.configCell(title: data.title, value: data.value)
                 return cell ?? ReviewDataTableViewCell()
             }
-        case SendReviewViewControllerSection.note.rawValue:
+        case SendSuccessViewControllerSection.note.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.reviewNote, for: indexPath as IndexPath) as? ReviewNoteTableViewCell
             cell?.backgroundColor = UIColor.clear
             cell?.configCell(note: self.viewModel.walletRequest.note)
             return cell ?? ReviewNoteTableViewCell()
-        case SendReviewViewControllerSection.confirm.rawValue:
+        case SendSuccessViewControllerSection.confirm.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.sendConfiem, for: indexPath as IndexPath) as? SendConfiemTableViewCell
             cell?.backgroundColor = UIColor.clear
-            cell?.configCell(isActive: true, isConfirm: true)
+            cell?.configCell(isActive: true, isConfirm: false)
             cell?.delegate = self
             return cell ?? SendConfiemTableViewCell()
         default:
@@ -127,14 +134,16 @@ extension SendReviewViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension SendReviewViewController: SendConfiemTableViewCellDelegate {
+extension SendSuccessViewController: SendConfiemTableViewCellDelegate {
     func didConfirm(_ sendConfiemTableViewCell: SendConfiemTableViewCell) {
-        self.viewModel.authenRequest.objective = AuthenObjective.sendToken
-        self.viewModel.authenRequest.email = UserManager.shared.email
-        self.viewModel.authenRequest.countryCode = UserManager.shared.countryCode
-        self.viewModel.authenRequest.mobileNumber = UserManager.shared.mobile
-        CCLoading.shared.show(text: "Sending")
-        self.viewModel.requestOtpWithEmail()
-        self.viewModel.requestOtpWithMobile()
+        let viewControllers: [UIViewController] = Utility.currentViewController().navigationController!.viewControllers as [UIViewController]
+        Utility.currentViewController().navigationController!.popToViewController(viewControllers[viewControllers.count - 5], animated: true)
+    }
+}
+
+extension SendSuccessViewController: AddShotcutTableViewCellDelegate {
+    func didAddShortcut(_ addShotcutTableViewCell: AddShotcutTableViewCell) {
+        CCLoading.shared.show(text: "Creating")
+        self.viewModel.createShortcutCastcle()
     }
 }

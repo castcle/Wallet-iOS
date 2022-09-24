@@ -40,6 +40,7 @@ public final class SendReviewViewModel {
     private var authenticationRepository: AuthenticationRepository = AuthenticationRepositoryImpl()
     let tokenHelper: TokenHelper = TokenHelper()
     var page: PageRealm = PageRealm()
+    var myShortcut: [Shortcut] = []
     var walletRequest: WalletRequest = WalletRequest()
     var authenRequest: AuthenRequest = AuthenRequest()
     private var state: State = .none
@@ -47,10 +48,11 @@ public final class SendReviewViewModel {
     var isSendEmailOtp: Bool = false
     var isSendMobileOtp: Bool = false
 
-    public init(walletRequest: WalletRequest = WalletRequest(), page: PageRealm = PageRealm()) {
+    public init(walletRequest: WalletRequest = WalletRequest(), page: PageRealm = PageRealm(), shortcuts: [Shortcut] = []) {
         self.tokenHelper.delegate = self
         self.walletRequest = walletRequest
         self.page = page
+        self.myShortcut = shortcuts
         self.mappingUi()
     }
 

@@ -54,8 +54,7 @@ class SendAuthViewController: UIViewController {
         self.configureTableView()
         self.viewModel.didSendTokenFinish = {
             CCLoading.shared.dismiss()
-            let viewControllers: [UIViewController] = Utility.currentViewController().navigationController!.viewControllers as [UIViewController]
-            Utility.currentViewController().navigationController!.popToViewController(viewControllers[viewControllers.count - 4], animated: true)
+            Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.sendSuccess(SendSuccessViewModel(walletRequest: self.viewModel.walletRequest, page: self.viewModel.page, shortcuts: self.viewModel.myShortcut))), animated: true)
         }
         self.viewModel.didRequestOtpFinish = {
             CCLoading.shared.dismiss()
@@ -104,7 +103,7 @@ extension SendAuthViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: WalletNibVars.TableViewCell.sendConfiem, for: indexPath as IndexPath) as? SendConfiemTableViewCell
             cell?.backgroundColor = UIColor.clear
-            cell?.configCell(isActive: self.isAvtive)
+            cell?.configCell(isActive: self.isAvtive, isConfirm: true)
             cell?.delegate = self
             return cell ?? SendConfiemTableViewCell()
         }

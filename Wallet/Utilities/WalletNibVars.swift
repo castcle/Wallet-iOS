@@ -37,6 +37,7 @@ public struct WalletNibVars {
         public static let selectNetwork = "SelectNetworkViewController"
         public static let sendWallet = "SendWalletViewController"
         public static let sendReview = "SendReviewViewController"
+        public static let sendSuccess = "SendSuccessViewController"
         public static let sendAuth = "SendAuthViewController"
         public static let verifyAccount = "WalletVerifyAccountViewController"
         public static let resend = "ResendViewController"
@@ -85,6 +86,7 @@ public struct WalletNibVars {
         public static let createShortcut = "CreateShortcutTableViewCell"
         public static let editShortcutList = "EditShortcutListTableViewCell"
         public static let pageCancel = "PageCancelTableViewCell"
+        public static let addShotcut = "AddShotcutTableViewCell"
     }
 
     // MARK: - CollectionViewCell

@@ -71,7 +71,7 @@ class SendWalletViewController: UIViewController {
         }
         self.viewModel.didReviewSendTokenFinish = {
             CCLoading.shared.dismiss()
-            Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.sendReview(SendReviewViewModel(walletRequest: self.viewModel.walletRequest, page: self.viewModel.page))), animated: true)
+            Utility.currentViewController().navigationController?.pushViewController(WalletOpener.open(.sendReview(SendReviewViewModel(walletRequest: self.viewModel.walletRequest, page: self.viewModel.page, shortcuts: self.viewModel.myShortcut))), animated: true)
         }
         self.viewModel.didError = {
             CCLoading.shared.dismiss()
@@ -140,6 +140,7 @@ extension SendWalletViewController: UITableViewDelegate, UITableViewDataSource {
 extension SendWalletViewController: SendShortcutTableViewCellDelegate {
     func didSelectShortcut(_ sendShortcutTableViewCell: SendShortcutTableViewCell, shortcut: Shortcut) {
         self.viewModel.walletRequest.address = shortcut.userId
+        self.viewModel.walletRequest.userId = shortcut.userId
         self.viewModel.walletRequest.castcleId = shortcut.castcleId
         self.sendButton.activeButton(isActive: self.isAvtive, fontSize: .overline)
         self.tableView.reloadData()
@@ -153,6 +154,7 @@ extension SendWalletViewController: SendShortcutTableViewCellDelegate {
 extension SendWalletViewController: SendToTableViewCellDelegate {
     func didSelectWalletsRecent(_ sendToTableViewCell: SendToTableViewCell, walletsRecent: WalletsRecent) {
         self.viewModel.walletRequest.address = walletsRecent.id
+        self.viewModel.walletRequest.userId = walletsRecent.userId
         self.viewModel.walletRequest.castcleId = walletsRecent.castcleId
         self.sendButton.activeButton(isActive: self.isAvtive, fontSize: .overline)
     }
@@ -172,6 +174,7 @@ extension SendWalletViewController: SendToTableViewCellDelegate {
     func didScanWalletSuccess(_ sendToTableViewCell: SendToTableViewCell, chainId: String, userId: String, castcleId: String) {
         self.viewModel.walletRequest.chainId = chainId
         self.viewModel.walletRequest.address = userId
+        self.viewModel.walletRequest.userId = userId
         self.viewModel.walletRequest.castcleId = castcleId
         self.sendButton.activeButton(isActive: self.isAvtive, fontSize: .overline)
     }

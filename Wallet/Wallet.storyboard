@@ -753,6 +753,36 @@
             </objects>
             <point key="canvasLocation" x="765" y="3539"/>
         </scene>
+        <!--Send Success View Controller-->
+        <scene sceneID="MW5-5b-XmN">
+            <objects>
+                <viewController storyboardIdentifier="SendSuccessViewController" hidesBottomBarWhenPushed="YES" id="mDX-kq-JA8" customClass="SendSuccessViewController" customModule="Wallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xdA-jd-42C">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TYg-Or-5Fe">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="wzq-7S-JBK"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="TYg-Or-5Fe" secondAttribute="bottom" id="29w-4p-C8o"/>
+                            <constraint firstAttribute="trailing" secondItem="TYg-Or-5Fe" secondAttribute="trailing" id="SMU-7g-Tra"/>
+                            <constraint firstItem="TYg-Or-5Fe" firstAttribute="top" secondItem="xdA-jd-42C" secondAttribute="top" id="Tf8-EC-EPU"/>
+                            <constraint firstItem="TYg-Or-5Fe" firstAttribute="leading" secondItem="xdA-jd-42C" secondAttribute="leading" id="W9Z-Yo-J6z"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="TYg-Or-5Fe" id="Z5s-xy-zls"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A39-2f-B4h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2147" y="1462"/>
+        </scene>
     </scenes>
     <resources>
         <image name="overlay" width="4.5" height="4.5"/>

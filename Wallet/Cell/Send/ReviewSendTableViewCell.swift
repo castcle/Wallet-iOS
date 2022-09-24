@@ -45,7 +45,8 @@ class ReviewSendTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    func configCell(totalAmount: String) {
+    func configCell(title: String, totalAmount: String) {
+        self.reviewSendLabel.text = title
         self.castLabel.text = "\(totalAmount) CAST"
     }
 }
